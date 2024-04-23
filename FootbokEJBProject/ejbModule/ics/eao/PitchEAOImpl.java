@@ -12,7 +12,7 @@ import jakarta.persistence.TypedQuery;
  * Session Bean implementation class PitchEAOImpl
  */
 @Stateless
-public class PitchEAOImpl implements PitchEAOImplLocal {
+public class PitchEAOImpl implements PitchEAOLocal {
 	@PersistenceContext(unitName = "FootBookEJBSql")
 	private EntityManager em;
 
