@@ -1,19 +1,9 @@
 package ics.ejb;
 
-import jakarta.ejb.Stateless;
-
-/**
- * Session Bean implementation class Match
- */
-@Stateless
-public class Match implements MatchLocal {
-
+public class Match {
+	
 	private String matchId;
 	
-    public Match() {
-        // TODO Auto-generated constructor stub
-    }
-
 	public String getMatchId() {
 		return matchId;
 	}
@@ -21,5 +11,4 @@ public class Match implements MatchLocal {
 	public void setMatchId(String matchId) {
 		this.matchId = matchId;
 	}
-
 }
