@@ -9,4 +9,14 @@
     <welcome-file>default.jsp</welcome-file>
     <welcome-file>default.htm</welcome-file>
   </welcome-file-list>
+  <servlet>
+    <description></description>
+    <display-name>FootBookServlet</display-name>
+    <servlet-name>FootBookServlet</servlet-name>
+    <servlet-class>ics.ejb.servlet.FootBookServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>FootBookServlet</servlet-name>
+    <url-pattern>/FootBookServlet</url-pattern>
+  </servlet-mapping>
 </web-app>
