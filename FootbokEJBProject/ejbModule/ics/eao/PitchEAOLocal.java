@@ -6,7 +6,7 @@ import ics.ejb.Pitch;
 import jakarta.ejb.Local;
 
 @Local
-public interface PitchEAOImplLocal {
+public interface PitchEAOLocal {
 	public Pitch findByPitchId(String pitchId);
 	public Pitch createPitch(Pitch p);
 	public Pitch updatePitch(Pitch p);
