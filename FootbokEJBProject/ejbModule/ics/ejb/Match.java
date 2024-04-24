@@ -6,9 +6,12 @@ import java.util.Date;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.NamedQuery;
 import jakarta.persistence.Table;
 
 @Entity
+@NamedQuery(name="Match.findAll",
+query="SELECT m FROM Match m")
 @Table(name="Match")
 public class Match implements Serializable {
 	private static final long serialVersionUID = 1L;
