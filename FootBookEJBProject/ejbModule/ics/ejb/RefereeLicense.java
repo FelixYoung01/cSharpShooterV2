@@ -18,31 +18,18 @@ import jakarta.persistence.Table;
 @Table(name = "RefereeLicense")
 public class RefereeLicense implements Serializable {
 	private static final long serialVersionUID = 1L;
-	private String refereeLicenseId;
-	private String refereeLicenseType;
+	private String licenseId;
 	
-	@OneToMany(mappedBy = "refereeLicense", fetch = FetchType.LAZY)
-	private Set<Referee> referees;
-
 	@OneToMany(mappedBy = "refereeLicense", fetch = FetchType.LAZY)
 	private Set<Referee> referees;
 
 	@Id
 	@Column(name = "refereeLicenseId")
 	public String getRefereeLicenseId() {
-		return refereeLicenseId;
+		return licenseId;
 	}
 
 	public void setRefereeLicenseId(String refereeLicenseId) {
-		this.refereeLicenseId = refereeLicenseId;
-	}
-
-	@Column(name = "refereeLicenseType")
-	public String getRefereeLicenseType() {
-		return refereeLicenseType;
-	}
-
-	public void setRefereeLicenseType(String refereeLicenseType) {
-		this.refereeLicenseType = refereeLicenseType;
+		this.licenseId = refereeLicenseId;
 	}
 }
