@@ -20,7 +20,7 @@ import jakarta.persistence.Table;
 public class Referee extends User implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private String refereeId;
-	private String refereeType;
+	private String name;
 	
 	@OneToMany(mappedBy = "referee", fetch = FetchType.LAZY)
 	private Set<Match> matchesRefereeing;
@@ -30,18 +30,14 @@ public class Referee extends User implements Serializable {
 	public String getRefereeId() {
 		return refereeId;
 	}
+	
+	@Column(name = "name")
+	public String getName() {
+		return name;
+	}
 
 	public void setRefereeId(String refereeId) {
 		this.refereeId = refereeId;
-	}
-
-	@Column(name = "refereeType")
-	public String getRefereeType() {
-		return refereeType;
-	}
-
-	public void setRefereeType(String refereeType) {
-		this.refereeType = refereeType;
 	}
 	
 	public Set<Match> getMatchesRefereeing() {

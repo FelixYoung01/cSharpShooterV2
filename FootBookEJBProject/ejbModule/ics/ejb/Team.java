@@ -27,13 +27,6 @@ public class Team implements Serializable {
 	
 	@OneToMany(mappedBy = "team", fetch = FetchType.LAZY)
 	private Set<Player> teamPlayers;
-	
-
-	@ManyToMany(mappedBy = "team", fetch = FetchType.LAZY)
-	private Set<Match> matches;
-
-	@OneToMany(mappedBy = "team", fetch = FetchType.LAZY)
-	private Set<Player> teamPlayers;
 
 	@Id
 	@Column(name = "teamId")
