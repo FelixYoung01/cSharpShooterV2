@@ -2,24 +2,43 @@ package ics.ejb;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Set;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.NamedQueries;
 import jakarta.persistence.NamedQuery;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
-@NamedQuery(name="Match.findAll",
-query="SELECT m FROM Match m")
+@NamedQueries({
+	@NamedQuery(name="Match.findAll",
+			query="SELECT * FROM Match m"),
+	@NamedQuery(name="Match.findMatchByPitch",
+            query="SELECT * FROM Match m WHERE m.pitch = :pitch")
+})
 @Table(name="Match")
 public class Match implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private String matchId;
 	private Date date;
-	private String matchReferee;
-	private String matchHomeTeam;
-	private String matchAwayTeam;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "pitchId")
+	private Pitch pitch;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "refereeId")
+	private Referee referee;
+	
+	@OneToMany(fetch = FetchType.LAZY)
+    @JoinColumn(name = "teamId")
+    private Set<Team> teams;
 	
 	@Id
 	@Column(name="matchId")
@@ -40,29 +59,22 @@ public class Match implements Serializable {
 		this.date = date;
 	}
 	
-	@Column(name="matchReferee")
-	public String getMatchReferee() {
-		return matchReferee;
+	public Referee getMatchReferee() {
+		return referee;
 	}
 	
-	public void setMatchReferee(String matchReferee) {
-		this.matchReferee = matchReferee;
+	public void setMatchReferee(Referee referee) {
+		this.referee = referee;
 	}
 	
-	@Column(name="matchHomeTeam")
-	public String getMatchHomeTeam() {
-		return matchHomeTeam;
+	public Set<Team> getTeams() {
+		return teams;
 	}
 	
-	public void setMatchHomeTeam(String matchHomeTeam) {
-		this.matchHomeTeam = matchHomeTeam;
-	}
-	
-	@Column(name="matchAwayTeam")
-	public String getMatchAwayTeam() {
-		return matchAwayTeam;
-	}
-	public void setMatchAwayTeam(String matchAwayTeam) {
-		this.matchAwayTeam = matchAwayTeam;
-	}
+	public void setTeams(Set<Team> teams) {
+		if (teams.size() != 2) {
+			throw new IllegalArgumentException("A match must have exactly two teams!");
+		}
+        this.teams = teams;
+    }
 }

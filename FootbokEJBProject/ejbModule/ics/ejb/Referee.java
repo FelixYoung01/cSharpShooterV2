@@ -1,10 +1,13 @@
 package ics.ejb;
 
 import java.io.Serializable;
+import java.util.Set;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -14,6 +17,9 @@ public class Referee implements Serializable {
 	private String refereeId;
 	private String refereeName;
 	private String refereeType;
+	
+	@OneToMany(mappedBy = "referee", fetch = FetchType.LAZY)
+	private Set<Match> matchesRefereeing;
 
 	@Id
 	@Column(name = "refereeId")
@@ -41,5 +47,17 @@ public class Referee implements Serializable {
 
 	public void setRefereeType(String refereeType) {
 		this.refereeType = refereeType;
+	}
+	
+	public Set<Match> getMatchesRefereeing() {
+		return matchesRefereeing;
+	}
+	
+	public void AddMatchRefereeing(Match match) {
+		matchesRefereeing.add(match);
+	}
+	
+	public void RemoveMatchRefereeing(Match match) {
+		matchesRefereeing.remove(match);
 	}
 }

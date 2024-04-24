@@ -3,6 +3,7 @@ package ics.eao;
 import java.util.List;
 
 import ics.ejb.Match;
+import ics.ejb.Pitch;
 import jakarta.ejb.Local;
 
 @Local
@@ -17,5 +18,5 @@ public interface MatchEAOLocal {
 
 	public List<Match> findAll();
 
-	public List<Match> findByPitchId(String pitchId);
+	public List<Match> findByPitch(Pitch pitch);
 }

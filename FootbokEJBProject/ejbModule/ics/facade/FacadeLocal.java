@@ -21,7 +21,7 @@ public interface FacadeLocal {
 	
 	public List<Match> findAll();
 
-	public List<Match> findMatchByPitchId(String pitchId);
+	public List<Match> findMatchByPitch(Pitch pitch);
 	
 	public Pitch findByPitchId(String pitchId);
 	
