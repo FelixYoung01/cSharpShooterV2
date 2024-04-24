@@ -5,9 +5,12 @@ import java.util.Set;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.NamedQueries;
 import jakarta.persistence.NamedQuery;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -20,6 +23,13 @@ public class Team implements Serializable {
 	private String teamId;
 	private String teamName;
 	private Set<String> players;
+	
+	@ManyToMany(mappedBy = "team", fetch = FetchType.LAZY)
+	private Set<Match> matches;
+	
+	@OneToMany(mappedBy = "team", fetch = FetchType.LAZY)
+	private Set<Player> teamPlayers;
+	
 
 	@Id
 	@Column(name = "teamId")
