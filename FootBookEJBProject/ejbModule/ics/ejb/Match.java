@@ -16,4 +16,73 @@ import jakarta.persistence.NamedQuery;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
+@Entity
+@NamedQueries({ @NamedQuery(name = "Match.findAll", query = "SELECT m FROM Match m") })
+@Table(name = "Match")
 
+public class Match implements Serializable {
+	
+	
+	private static final long serialVersionUID = 1L;
+    private String matchId;
+    private int date;
+    private int time;
+    
+    
+    
+   /* @ManyToOne 
+    @JoinColumn(name="pitchId")
+    public Set<Pitch> getPitch() {
+		return pitch;
+	}*/
+
+	/*@ManyToOne
+	    @JoinColumn(name="refereeId")
+	    public Set<Referee> getReferee() {
+		return referee;
+	}*/
+	
+	
+	
+
+    @Id
+    @Column(name = "matchId")
+    public String getMatchId() {
+    	return matchId;
+    }
+    
+    public void setMatchId(String matchId) {
+    	this.matchId = matchId;
+    }
+    
+    @Column(name = "date")
+	public int getDate() {
+		return date;
+	}
+    
+    public void setDate(int date) {
+    	this.date = date;
+    }
+    
+    @Column(name = "time")
+        public int getTime() {
+    	            return time;
+        }
+    
+    public void setTime(int time) {
+    	this.time = time;
+    }
+    
+	/*public void setPitch(Set<Pitch> pitch) {
+		this.pitch = pitch;
+	}*/
+	
+	/*public void setReferee(Set<Referee> referee) {
+		this.referee = referee;
+    }*/
+	
+	
+	}
+    
+ 
+    
