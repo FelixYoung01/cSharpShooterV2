@@ -17,10 +17,9 @@ import jakarta.persistence.Table;
 	@NamedQuery(name="Referee.findAll", query= "SELECT r FROM Referee r")})
 
 @Table(name="Referee")
-public class Referee implements Serializable {
+public class Referee extends User implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private String refereeId;
-	private String refereeName;
 	private String refereeType;
 	
 	@OneToMany(mappedBy = "referee", fetch = FetchType.LAZY)
@@ -34,15 +33,6 @@ public class Referee implements Serializable {
 
 	public void setRefereeId(String refereeId) {
 		this.refereeId = refereeId;
-	}
-
-	@Column(name = "refereeName")
-	public String getRefereeName() {
-		return refereeName;
-	}
-
-	public void setRefereeName(String refereeName) {
-		this.refereeName = refereeName;
 	}
 
 	@Column(name = "refereeType")
