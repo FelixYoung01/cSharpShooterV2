@@ -18,9 +18,9 @@ import jakarta.persistence.Table;
 @Entity
 @NamedQueries({
 	@NamedQuery(name="Match.findAll",
-			query="SELECT * FROM Match m"),
+			query="SELECT m FROM Match m"),
 	@NamedQuery(name="Match.findMatchByPitch",
-            query="SELECT * FROM Match m WHERE m.pitch = :pitch")
+            query="SELECT m FROM Match m WHERE m.pitch = :pitch")
 })
 @Table(name="Match")
 public class Match implements Serializable {

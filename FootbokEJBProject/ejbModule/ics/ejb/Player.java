@@ -5,9 +5,14 @@ import java.io.Serializable;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.NamedQueries;
+import jakarta.persistence.NamedQuery;
 import jakarta.persistence.Table;
 
 @Entity
+@NamedQueries({
+	@NamedQuery(name = "Player.findAll", query = "SELECT p FROM Player p")
+})
 @Table(name = "Player")
 public class Player implements Serializable {
 	private static final long serialVersionUID = 1L;
