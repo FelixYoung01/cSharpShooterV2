@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 import jakarta.persistence.NamedQueries;
 import jakarta.persistence.NamedQuery;
 import jakarta.persistence.Table;
@@ -12,10 +13,23 @@ import jakarta.persistence.Table;
 @NamedQueries({ @NamedQuery(name = "User.findAll", query = "SELECT u FROM User u") })
 @Table(name = "User")
 public class User implements Serializable {
+	private static final long serialVersionUID = 1L;
+	private String userId;
 	private String name;
 	private String email;
-	private String password;
-	private String age;
+	private int Age;
+	private String Gender;
+	
+	@Id
+	@Column(name = "userId")
+	public String getUserId() {
+		return userId;
+	}
+	
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
+	
 
 	@Column(name = "playerName")
 	public String getPlayerName() {
@@ -44,23 +58,17 @@ public class User implements Serializable {
 		this.email = email;
 	}
 
-	@Column(name = "password")
-	public String getPassword() {
-		return password;
+	@Column(name = "Age")
+	public int getAge() {
+		return Age;
 	}
-
-	public void setPassword(String password) {
-		this.password = password;
+	
+	public void setAge(int age) {
+		this.Age = age;
 	}
-
-	@Column(name = "age")
-	public String getAge() {
-		return age;
-	}
-
-	public void setAge(String age) {
-		this.age = age;
-	}
+	
+	
+	
 
 
 }

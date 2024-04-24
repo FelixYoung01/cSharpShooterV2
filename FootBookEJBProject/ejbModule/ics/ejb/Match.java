@@ -9,6 +9,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.NamedQueries;
 import jakarta.persistence.NamedQuery;
@@ -26,7 +27,8 @@ import jakarta.persistence.Table;
 public class Match implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private String matchId;
-	private Date date;
+	private int date;
+	private int time;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "pitchId")
@@ -36,9 +38,8 @@ public class Match implements Serializable {
 	@JoinColumn(name = "refereeId")
 	private Referee referee;
 	
-	@OneToMany(fetch = FetchType.LAZY)
-    @JoinColumn(name = "teamId")
-    private Set<Team> teams;
+	@ManyToMany(mappedBy = "matches", fetch = FetchType.LAZY)
+	private Set<User> users;
 	
 	@Id
 	@Column(name="matchId")
@@ -51,30 +52,22 @@ public class Match implements Serializable {
 	}
 	
 	@Column(name="date")
-	public Date getDate() {
+	public int getDate() {
 		return date;
 	}
 	
-	public void setDate(Date date) {
+	public void setDate(int date) {
 		this.date = date;
 	}
 	
-	public Referee getMatchReferee() {
-		return referee;
+	@Column(name="time")
+	public int getTime() {
+		return time;
 	}
 	
-	public void setMatchReferee(Referee referee) {
-		this.referee = referee;
+	public void setTime(int time) {
+		this.time = time;
 	}
 	
-	public Set<Team> getTeams() {
-		return teams;
-	}
 	
-	public void setTeams(Set<Team> teams) {
-		if (teams.size() != 2) {
-			throw new IllegalArgumentException("A match must have exactly two teams!");
-		}
-        this.teams = teams;
-    }
 }
