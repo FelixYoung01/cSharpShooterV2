@@ -18,12 +18,10 @@ import jakarta.persistence.Table;
 public class Pitch implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private String pitchId;
-	private String pitchName;
-	private String pitchLocation;
-	private String pitchType;
+	private String name;
 
 	@OneToMany(mappedBy = "pitch", fetch = FetchType.LAZY)
-	private Set<Match> matches;
+	private Set<Match> getMatches;
 
 	@Id
 	@Column(name = "pitchId")
@@ -35,30 +33,13 @@ public class Pitch implements Serializable {
 		this.pitchId = pitchId;
 	}
 
-	@Column(name = "pitchName")
-	public String getPitchName() {
-		return pitchName;
+	@Column(name = "name")
+	public String getName() {
+		return name;
 	}
 
-	public void setPitchName(String pitchName) {
-		this.pitchName = pitchName;
+	public void setName(String name) {
+		this.name = name;
 	}
 
-	@Column(name = "pitchLocation")
-	public String getPitchLocation() {
-		return pitchLocation;
-	}
-
-	public void setPitchLocation(String pitchLocation) {
-		this.pitchLocation = pitchLocation;
-	}
-
-	@Column(name = "pitchType")
-	public String getPitchType() {
-		return pitchType;
-	}
-
-	public void setPitchType(String pitchType) {
-		this.pitchType = pitchType;
-	}
 }
