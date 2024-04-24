@@ -9,6 +9,7 @@ import jakarta.persistence.NamedQueries;
 import jakarta.persistence.NamedQuery;
 import jakarta.persistence.Table;
 
+
 @Entity
 @NamedQueries({ @NamedQuery(name = "User.findAll", query = "SELECT u FROM User u") })
 @Table(name = "User")
@@ -29,25 +30,6 @@ public class User implements Serializable {
 	public void setUserId(String userId) {
 		this.userId = userId;
 	}
-	
-
-	@Column(name = "playerName")
-	public String getPlayerName() {
-		return name;
-	}
-
-	public void setPlayerName(String playerName) {
-		this.name = playerName;
-	}
-
-	@Column(name = "refereeName")
-	public String getRefereeName() {
-		return name;
-	}
-
-	public void setRefereeName(String refereeName) {
-		this.name = refereeName;
-	}
 
 	@Column(name = "email")
 	public String getEmail() {
@@ -66,6 +48,24 @@ public class User implements Serializable {
 	public void setAge(int age) {
 		this.Age = age;
 	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getGender() {
+		return Gender;
+	}
+
+	public void setGender(String gender) {
+		Gender = gender;
+	}
+	
+	
 	
 	
 	
