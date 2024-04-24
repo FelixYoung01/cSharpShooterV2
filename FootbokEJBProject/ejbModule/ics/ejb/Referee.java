@@ -8,9 +8,14 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.NamedQueries;
+import jakarta.persistence.NamedQuery;
 import jakarta.persistence.Table;
 
 @Entity
+@NamedQueries({
+	@NamedQuery(name="Referee.findAll", query= "SELECT r FROM Referee r")})
+
 @Table(name="Referee")
 public class Referee implements Serializable {
 	private static final long serialVersionUID = 1L;
