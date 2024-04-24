@@ -55,8 +55,8 @@ public class Facade implements FacadeLocal {
 		return matchEAO.findAll();
 	}
 
-	public List<Match> findMatchByPitchId(String pitchId) {
-		return matchEAO.findByPitchId(pitchId);
+	public List<Match> findMatchByPitch(Pitch pitch) {
+		return matchEAO.findByPitch(pitch);
 	}
 	
 	public Pitch findByPitchId(String pitchId) {

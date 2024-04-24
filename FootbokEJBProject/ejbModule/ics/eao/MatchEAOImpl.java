@@ -3,6 +3,7 @@ package ics.eao;
 import java.util.List;
 
 import ics.ejb.Match;
+import ics.ejb.Pitch;
 import jakarta.ejb.Stateless;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
@@ -47,9 +48,9 @@ public class MatchEAOImpl implements MatchEAOLocal {
 		return results;
 	}
 
-	public List<Match> findByPitchId(String pitchId) {
+	public List<Match> findByPitch(Pitch pitch) {
 		TypedQuery<Match> query = em.createNamedQuery("Match.findByPitchId", Match.class);
-		query.setParameter("pitchId", pitchId);
+		query.setParameter("pitchId", pitch.getPitchId());
 		List<Match> results = query.getResultList();
 		return results;
 	}

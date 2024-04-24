@@ -1,10 +1,13 @@
 package ics.ejb;
 
 import java.io.Serializable;
+import java.util.Set;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -15,6 +18,9 @@ public class Pitch implements Serializable {
 	private String pitchName;
 	private String pitchLocation;
 	private String pitchType;
+	
+	@OneToMany(mappedBy="pitch", fetch=FetchType.LAZY)
+	private Set<Match> matches;
 	
 	@Id
 	@Column(name="pitchId")
