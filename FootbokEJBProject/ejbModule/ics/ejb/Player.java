@@ -1,12 +1,15 @@
 package ics.ejb;
 
 import java.io.Serializable;
+import java.util.Set;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
 import jakarta.persistence.NamedQueries;
 import jakarta.persistence.NamedQuery;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -14,13 +17,17 @@ import jakarta.persistence.Table;
 	@NamedQuery(name = "Player.findAll", query = "SELECT p FROM Player p")
 })
 @Table(name = "Player")
-public class Player implements Serializable {
+public class Player extends User implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private String playerId;
-	private String playerName;
-	private String playerPosition;
+	private PlayerPosition playerPosition;
 	private String playerTeam;
-
+	
+	@OneToOne(mappedBy = "player", fetch = FetchType.LAZY)
+	private Set<Team> team;
+	
+	
+	
 	@Id
 	@Column(name = "playerId")
 	public String getPlayerId() {
@@ -31,21 +38,13 @@ public class Player implements Serializable {
 		this.playerId = playerId;
 	}
 
-	@Column(name = "playerName")
-	public String getPlayerName() {
-		return playerName;
-	}
-
-	public void setPlayerName(String playerName) {
-		this.playerName = playerName;
-	}
 	
 	@Column(name = "playerPosition")
 	public String getPlayerPosition() {
-		return playerPosition;
+		return playerPosition.name();
 	}
 
-	public void setPlayerPosition(String playerPosition) {
+	public void setPlayerPosition(PlayerPosition playerPosition) {
 		this.playerPosition = playerPosition;
 	}
 	
