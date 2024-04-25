@@ -19,20 +19,11 @@ import jakarta.persistence.Table;
 public class User implements Serializable{
 	private static final long serialVersionUID = 1L;
 
-    @Id
-    @Column(name="userId")
+    
     private String userId;
-    
-    @Column(name="age")
     private int age;
-    
-    @Column(name="Email")
     private String email;
-    
-    @Column(name="Gender")
     private String gender;
-    
-    @Column(name="Name")
     private String name;
     
     //many to one relationship with Match
@@ -47,6 +38,8 @@ public class User implements Serializable{
 	}
 	*/
     
+    @Id
+    @Column(name="userId")
 	public String getUserId() {
 		return userId;
 	}
@@ -55,6 +48,7 @@ public class User implements Serializable{
 		this.userId = userId;
 	}
 	
+	@Column(name="age")
 	public int getAge() {
 		return age;
 	}
@@ -63,6 +57,7 @@ public class User implements Serializable{
 		this.age = age;
 	}
 	
+	@Column(name="Email")
 	public String getEmail() {
 		return email;
 	}
@@ -71,6 +66,7 @@ public class User implements Serializable{
 		this.email = email;
 	}
 	
+	@Column(name="Gender")
 	public String getGender() {
         return gender;
         }
@@ -79,6 +75,7 @@ public class User implements Serializable{
 		this.gender = gender;
 	}
 	
+	@Column(name="Name")
 	public String getName() {
 		return name;
 	}
