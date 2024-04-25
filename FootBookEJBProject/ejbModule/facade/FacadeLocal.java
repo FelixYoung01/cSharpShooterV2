@@ -2,6 +2,7 @@ package facade;
 
 import java.util.List;
 
+import ics.ejb.RefereeLicense;
 //import ics.ejb.Match;
 //import ics.ejb.Pitch;
 //import ics.ejb.Player;
@@ -9,3 +10,9 @@ import java.util.List;
 //import ics.ejb.Team;
 import jakarta.ejb.Local;
 
+@Local
+public interface FacadeLocal{
+
+	public RefereeLicense findRefereeLicense(String string);
+	
+}
