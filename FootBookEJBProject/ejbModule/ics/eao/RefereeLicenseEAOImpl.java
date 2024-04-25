@@ -12,7 +12,6 @@ import jakarta.persistence.TypedQuery;
 import ics.ejb.RefereeLicense;
 
 @Stateless
-
 public class RefereeLicenseEAOImpl implements RefereeLicenseEAOLocal {
 	@PersistenceContext(unitName = "FootBookEJBSql")
 	private EntityManager em;
