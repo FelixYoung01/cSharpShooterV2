@@ -8,11 +8,15 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.ejb.EJB;
+import facade.FacadeLocal;
 
 
-
+@WebServlet("/FootBookServlet")
 public class FootBookServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	
+	@EJB
+	private FacadeLocal facade;
        
     public FootBookServlet() {
         super();
@@ -28,6 +32,22 @@ public class FootBookServlet extends HttpServlet {
 		out.println("<meta charset=\"ISO-8859-1\"></head>");
 		out.println("<body>");
 		out.println("ISPROJEKT SERVLET fungerar!");
-		out.println("</body></html>");	}
+		
+		RefereeLicense rl = facade.findRefereeLicense("L1");
+		
+		if (rl == null) {
+			out.println("RefereeLicense not found");
+			return;
+		}
+		else {
+		out.println("<h3>RefereeLicense</h3>");
+		out.println("LicenseId: " + rl.getLicenseId());
+		out.println("</body></html>");	
+		}
+	}
+		
+		
+		
+		
 
 }

@@ -2,16 +2,19 @@ package facade;
 
 import java.util.List;
 
-/*import ics.eao.MatchEAOLocal;
-import ics.eao.PitchEAOLocal;
-//import ics.eao.PlayerEAOLocal;
-import ics.eao.RefereeEAOLocal;
-//import ics.eao.TeamEAOLocal;
-import ics.ejb.Match;
-import ics.ejb.Pitch;
-//import ics.ejb.Player;
-import ics.ejb.Referee;
-//import ics.ejb.Team;
+import ics.eao.RefereeLicenseEAOLocal;
+import ics.ejb.RefereeLicense;
 import jakarta.ejb.EJB;
-import jakarta.ejb.Stateless;*/
+import jakarta.ejb.Stateless;
 
+@Stateless
+public class Facade implements FacadeLocal{
+	
+	@EJB
+	private RefereeLicenseEAOLocal refereeLicenseEAO;
+	
+	public RefereeLicense findRefereeLicense(String string) {
+		return refereeLicenseEAO.findRefereeLicenseById(string);
+	};
+	
+}
