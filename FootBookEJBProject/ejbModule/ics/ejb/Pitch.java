@@ -28,13 +28,17 @@ import jakarta.persistence.GenerationType;
 public class Pitch implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
+	private String pitchId;
+	private String name;
+  private Set<Match> matches; // One pitch can host many matches
+  
+	public Pitch(String pitchId, String name) {
+		this.pitchId = pitchId;
+		this.name = name;
+	}
+
 	@Id
 	@Column(name = "pitchId")
-	private String pitchId;
-	
-	@Column(name = "name")
-	private String name;
-	
 	public String getPitchId() {
 		return pitchId;
 	}
@@ -43,6 +47,7 @@ public class Pitch implements Serializable {
 		this.pitchId = pitchId;
 	}
 	
+	@Column(name = "name")
 	public String getName() {
 		return name;
 	}
@@ -52,7 +57,6 @@ public class Pitch implements Serializable {
 	}
 	
 	@OneToMany(mappedBy = "pitch", fetch = FetchType.LAZY)
-	private Set<Match> matches; // One pitch can host many matches
 	
 	public Set<Match> getMatches() {
 		return matches;

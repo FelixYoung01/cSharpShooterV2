@@ -1,6 +1,9 @@
 package ics.ejb;
 
 import java.io.Serializable;
+import java.sql.Time;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Date;
 import java.util.Set;
 
@@ -24,11 +27,28 @@ public class Match implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	private String matchId;
-	private Date date;
+  private Date date;
 	private int time;
 	private Referee referee; //  match has exactly one referee
 	private Pitch pitch; // Pitch where the match will be played
 	private Set<User> users; // Users participating in the match
+
+	/*
+	 * @ManyToOne
+	 * 
+	 * @JoinColumn(name="refereeId") public Set<Referee> getReferee() { return
+	 * referee; }
+	 */
+	public Match() {
+	}
+	
+	public Match(String matchId, Pitch pitch, LocalDate date2, LocalTime time2) {
+		this.matchId = matchId;
+		this.pitch = pitch;
+		this.date = date2;
+		this.time = time2;
+	}
+
 
 	@Id
 	@Column(name = "matchId")
@@ -41,20 +61,20 @@ public class Match implements Serializable {
 	}
 
 	@Column(name = "date")
-	public Date getDate() {
+	public LocalDate getDate() {
 		return date;
 	}
 
-	public void setDate(Date date) {
+	public void setDate(LocalDate date) {
 		this.date = date;
 	}
 
 	@Column(name = "time")
-	public int getTime() {
+	public LocalTime getTime() {
 		return time;
 	}
 
-	public void setTime(int time) {
+	public void setTime(LocalTime time) {
 		this.time = time;
 	}
 	

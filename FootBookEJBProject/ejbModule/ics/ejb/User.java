@@ -31,10 +31,18 @@ public class User implements Serializable{
     private String email;
     private String gender;
     private String name;
+
     private Match match; // Each user participates in exactly one match
     
+	public User(String userId, int age, String email, String gender, String name) {
+    	this.userId = userId;
+    	this.age = age;
+    	this.email = email;
+    	this.name = name;
+	}
+    
     @Id
-    @Column(name="userId")
+    @Column(name="UserId")
 	public String getUserId() {
 		return userId;
 	}
@@ -43,7 +51,7 @@ public class User implements Serializable{
 		this.userId = userId;
 	}
 	
-	@Column(name="age")
+	@Column(name="Age")
 	public int getAge() {
 		return age;
 	}
@@ -82,13 +90,13 @@ public class User implements Serializable{
 	public void setName(String name) {
 		this.name = name;
 	}
-	
+
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="matchId", nullable=true) // This allows a User to exist without being linked to a Match. Useful for users who have not yet chosen a match or for non-participant roles	
 	public Match getMatch() {
 		return match;
 	}
-	
+
 	public void setMatch(Match match) {
 		this.match = match;
 	}
