@@ -25,21 +25,18 @@ public class User implements Serializable{
     private String email;
     private String gender;
     private String name;
+    private Match match;
     
-    //many to one relationship with Match
-   /* @ManyToOne
-    @JoinColumn(name="matchId")
-	public set<Match> getMatch() {
-		return match;
+	public User(String userId, int age, String email, String gender, String name) {
+    	this.userId = userId;
+    	this.age = age;
+    	this.email = email;
+    	this.name = name;
 	}
-
-	public void setMatch(Set<Match> match) {
-		this.match = match;
-	}
-	*/
+    	
     
     @Id
-    @Column(name="userId")
+    @Column(name="UserId")
 	public String getUserId() {
 		return userId;
 	}
@@ -48,7 +45,7 @@ public class User implements Serializable{
 		this.userId = userId;
 	}
 	
-	@Column(name="age")
+	@Column(name="Age")
 	public int getAge() {
 		return age;
 	}
@@ -82,6 +79,16 @@ public class User implements Serializable{
 	
 	public void setName(String name) {
 		this.name = name;
+	}
+	
+    @ManyToOne
+    @JoinColumn(name="matchId")
+	public Match getMatch() {
+		return match;
+	}
+
+	public void setMatch(Match match) {
+		this.match = match;
 	}
 	
 	
