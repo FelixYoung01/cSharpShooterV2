@@ -24,7 +24,7 @@ public class Match implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	private String matchId;
-	private Set<Pitch> pitch;
+	//private Set<Pitch> pitch;
 	private Date date;
 	private int time;
 
@@ -45,15 +45,15 @@ public class Match implements Serializable {
 		this.matchId = matchId;
 	}
 
-	@ManyToOne
+	/*@ManyToOne
 	@JoinColumn(name = "pitchId")
 	public Set<Pitch> getPitch() {
 		return pitch;
-	}
+	}*/
 
-	public void setPitch(Set<Pitch> pitch) {
+	/*public void setPitch(Set<Pitch> pitch) {
 		this.pitch = pitch;
-	}
+	}*/
 
 	@Column(name = "date")
 	public Date getDate() {
