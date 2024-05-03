@@ -27,9 +27,11 @@ public class Match implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	private String matchId;
-	private Pitch pitch;
-	private LocalDate date;
-	private LocalTime time;
+  private Date date;
+	private int time;
+	private Referee referee; //  match has exactly one referee
+	private Pitch pitch; // Pitch where the match will be played
+	private Set<User> users; // Users participating in the match
 
 	/*
 	 * @ManyToOne
@@ -47,6 +49,7 @@ public class Match implements Serializable {
 		this.time = time2;
 	}
 
+
 	@Id
 	@Column(name = "matchId")
 	public String getMatchId() {
@@ -55,16 +58,6 @@ public class Match implements Serializable {
 
 	public void setMatchId(String matchId) {
 		this.matchId = matchId;
-	}
-
-	@ManyToOne
-	@JoinColumn(name = "pitchId")
-	public Pitch getPitch() {
-		return pitch;
-	}
-
-	public void setPitch(Pitch pitch) {
-		this.pitch = pitch;
 	}
 
 	@Column(name = "date")
@@ -84,13 +77,35 @@ public class Match implements Serializable {
 	public void setTime(LocalTime time) {
 		this.time = time;
 	}
+	
+	@ManyToOne(fetch = FetchType.LAZY) // Many matches can be played in one pitch
+	@JoinColumn(name = "pitchId")
+	public Pitch getPitch() {
+		return pitch;
+	}
+	
+	public void setPitch(Pitch pitch) {
+		this.pitch = pitch;
+	}
 
-	/*
-	 * public void setPitch(Set<Pitch> pitch) { this.pitch = pitch; }
-	 */
-
-	/*
-	 * public void setReferee(Set<Referee> referee) { this.referee = referee; }
-	 */
-
+	@OneToMany(mappedBy = "match", fetch = FetchType.LAZY)// Many users can participate in one match
+	public Set<User> getUsers() {
+		return users;
+	}
+	
+	public void setUsers(Set<User> users) {
+		this.users = users;
+	}
+	
+	@ManyToOne(fetch = FetchType.LAZY) // Many matches can be officiated by one referee
+	@JoinColumn(name = "refereeId")
+	public Referee getReferee() {
+		return referee;
+	}
+	
+	public void setReferee(Referee referee) {
+		this.referee = referee;
+	}
+	
+	
 }
