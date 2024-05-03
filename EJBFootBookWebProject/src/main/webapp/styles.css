@@ -6,7 +6,7 @@
 }
 
 body {
-    font-family: Arial, sans-serif;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
     background-color: #f4f4f4;
 }
 
@@ -15,12 +15,14 @@ header {
     color: #fff;
     padding: 20px;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
 }
 
 nav ul {
     list-style: none;
+    display: flex;
+    justify-content: center;
 }
 
 nav ul li {
@@ -39,6 +41,56 @@ nav ul li a {
     margin-right: auto;
 	width: 50%;
 }
+
+.logo:hover {
+    animation: wiggle 0.5s ease-in-out;
+}
+
+@keyframes wiggle {
+    0% {
+        transform: rotate(0deg);
+    }
+    25% {
+        transform: rotate(5deg);
+    }
+    50% {
+        transform: rotate(-5deg);
+    }
+    75% {
+        transform: rotate(5deg);
+    }
+    100% {
+        transform: rotate(0deg);
+    }
+}
+
+.arsenal {
+    display: block;
+    float: right;
+    width: 2%;
+    opacity: 0.1;
+    transition: opacity 0.3s ease;
+}
+
+.arsenal:hover {
+    opacity: 1;
+}
+.arsenal:hover {
+    animation: popOut 0.5s ease-in-out;
+}
+
+@keyframes popOut {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.2);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
 
 .hero {
     text-align: center;
@@ -75,6 +127,10 @@ nav ul li a {
 
 .pitch button:hover {
     background-color: #555;
+    background-image: url('Images/bouncingball.gif');
+    background-repeat: repeat;
+    background-position: center;
+    background-size: cover;
 }
 
 footer {
