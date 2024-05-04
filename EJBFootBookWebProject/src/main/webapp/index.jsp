@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,26 +24,27 @@
         <img src="Images/Arsenal_FC.svg.webp" alt="Arsenal Logo" class="arsenal">
     </header>
 
-    <section class="box">
+    <div class="box">
         <h2>Welcome to <span class="highlight">FootBook</span>!</h2>
         <p>Book your football match on your favorite pitches!</p>
-    </section>
+    </div>
 
     <section class="pitches">
         <h2>Available Pitches</h2>
         <div class="pitch">
             <h3>Pitch 1</h3>
-            <form action="/EJBFootBookWebProject/FootBookServlet" method="get">
-				<button type="submit" name="action" value="fetchPitchData">Book Now</button>
+            <form action="" method="post">
+				<button type="submit" name="displayText" value="true">Book Now</button>
             </form>
         </div>
-        <div class="pitch">
-            <h3>Pitch 2</h3>
-            <form action="/EJBFootBookWebProject/FootBookServlet" method="get">
-				<button type="submit" name="action" value="fetchPitchDataTwo">Book Now</button>
-            </form>
-        </div>
-        {{fetching_data}}
+    <% 
+    	String displayTextParam = request.getParameter("displayText");
+    	if (displayTextParam != null && !displayTextParam.isEmpty()) {
+	%>
+    <p>COYG</p>
+	<%
+		}
+	%>
     </section>
 
     <footer>
