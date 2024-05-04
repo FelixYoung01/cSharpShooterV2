@@ -1,15 +1,21 @@
 package ics.ejb;
 
 import java.io.Serializable;
+import java.util.Set;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.NamedQueries;
 import jakarta.persistence.NamedQuery;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 @Entity
 @NamedQueries({
@@ -25,21 +31,18 @@ public class User implements Serializable{
     private String email;
     private String gender;
     private String name;
-    
-    //many to one relationship with Match
-   /* @ManyToOne
-    @JoinColumn(name="matchId")
-	public set<Match> getMatch() {
-		return match;
-	}
 
-	public void setMatch(Set<Match> match) {
-		this.match = match;
+    private Match match; // Each user participates in exactly one match
+    
+	public User(String userId, int age, String email, String gender, String name) {
+    	this.userId = userId;
+    	this.age = age;
+    	this.email = email;
+    	this.name = name;
 	}
-	*/
     
     @Id
-    @Column(name="userId")
+    @Column(name="UserId")
 	public String getUserId() {
 		return userId;
 	}
@@ -48,7 +51,7 @@ public class User implements Serializable{
 		this.userId = userId;
 	}
 	
-	@Column(name="age")
+	@Column(name="Age")
 	public int getAge() {
 		return age;
 	}
@@ -57,6 +60,7 @@ public class User implements Serializable{
 		this.age = age;
 	}
 	
+	@Email // Validates the email format
 	@Column(name="Email")
 	public String getEmail() {
 		return email;
@@ -75,6 +79,9 @@ public class User implements Serializable{
 		this.gender = gender;
 	}
 	
+	
+	@NotNull // Name should not be null
+	@Size(min=1, max=100) // Name should be between 1 and 100 characters)	
 	@Column(name="Name")
 	public String getName() {
 		return name;
@@ -83,8 +90,16 @@ public class User implements Serializable{
 	public void setName(String name) {
 		this.name = name;
 	}
-	
-	
+
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="matchId", nullable=true) // This allows a User to exist without being linked to a Match. Useful for users who have not yet chosen a match or for non-participant roles	
+	public Match getMatch() {
+		return match;
+	}
+
+	public void setMatch(Match match) {
+		this.match = match;
+	}
 }
 
 
