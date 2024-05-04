@@ -28,6 +28,7 @@ public class RefereeLicense implements Serializable {
 		this.licenseId = licenseId;
 	}
 
+
 	@Id
 	@Column(name = "LicenseId")
 	public String getLicenseId() {

@@ -26,6 +26,7 @@ public class Referee implements Serializable {
 	private String refereeId;
 	private String refereeName;
 	private Set<Match> matches;
+	private RefereeLicense refereeLicense; // Each referee has exactly one referee license
 	
 	public Referee(String refereeId, String refereeName) {
 		this.refereeId = refereeId;
@@ -62,6 +63,18 @@ public class Referee implements Serializable {
 	public void setMatches(Set<Match> matches) {
 		this.matches = matches;
 	}
+
+	@ManyToOne(fetch = FetchType.LAZY) // Many referees can have one referee license
+	@JoinColumn(name = "LicenseId") // Foreign key column
+	public RefereeLicense getRefereeLicense() {
+		return refereeLicense;
+	}
+	
+	public void setRefereeLicense(RefereeLicense refereeLicense) {
+		this.refereeLicense = refereeLicense;
+	}
+	
+	
 	
 	
 	

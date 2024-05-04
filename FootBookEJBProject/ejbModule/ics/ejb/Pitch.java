@@ -30,9 +30,8 @@ public class Pitch implements Serializable {
 	
 	private String pitchId;
 	private String name;
-	private Set<Match> matches;
-	// One to many relationship with Match
-	
+  private Set<Match> matches; // One pitch can host many matches
+  
 	public Pitch(String pitchId, String name) {
 		this.pitchId = pitchId;
 		this.name = name;
@@ -58,6 +57,7 @@ public class Pitch implements Serializable {
 	}
 	
 	@OneToMany(mappedBy = "pitch", fetch = FetchType.LAZY)
+	
 	public Set<Match> getMatches() {
 		return matches;
 	}
