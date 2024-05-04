@@ -22,29 +22,30 @@ public class RefereeLicense implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	private String licenseId;
+	private Set<Referee> referees;
 	
+	public RefereeLicense(String licenseId) {
+		this.licenseId = licenseId;
+	}
+
+
 	@Id
 	@Column(name = "LicenseId")
 	public String getLicenseId() {
-        return licenseId;
-    }
-	
+		return licenseId;
+	}
+
 	public void setLicenseId(String licenseId) {
 		this.licenseId = licenseId;
-    }
-	
-	@OneToMany(mappedBy="refereeLicense", fetch=FetchType.LAZY)
-	private Set<Referee> referee; // One referee license can be held by many referees
-	
-	public Set<Referee> getReferee() {
-		return referee;
 	}
-	
-	public void setReferee(Set<Referee> referee) {
-		this.referee = referee;
+
+	@OneToMany(mappedBy = "RefereeLicense", fetch = FetchType.LAZY)
+	public Set<Referee> getReferees() {
+		return referees;
 	}
-	
-	
-	
-	
+
+	public void setReferees(Set<Referee> referees) {
+		this.referees = referees;
 	}
+
+}

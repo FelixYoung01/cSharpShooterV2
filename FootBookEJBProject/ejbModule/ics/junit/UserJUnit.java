@@ -41,8 +41,11 @@ class UserJUnit {
 		gender = "M";
 		match = new Match();
 		
-		User user1 = new User(userId, age, email, gender, name);
-		User user2 = new User();
+		user1 = new User(userId, age, email, gender, name);
+		user2 = new User("U2", 22, "insh@gmail.com", "M", "Insh");
+		
+		
+
 	}
 
 	@AfterEach
@@ -51,62 +54,71 @@ class UserJUnit {
 
 	@Test
 	final void testGetUserId() {
-		fail("Not yet implemented"); // TODO
+		assertEquals("U1", user1.getUserId());
 	}
 
 	@Test
 	final void testSetUserId() {
-		fail("Not yet implemented"); // TODO
+		user1.setUserId("U3");
+		assertEquals("U3", user1.getUserId());
 	}
 
 	@Test
 	final void testGetAge() {
-		fail("Not yet implemented"); // TODO
+		assertEquals(21, user1.getAge());
 	}
 
 	@Test
 	final void testSetAge() {
-		fail("Not yet implemented"); // TODO
+		user1.setAge(32);
+		assertEquals(32, user1.getAge());
 	}
-
+	
 	@Test
 	final void testGetEmail() {
-		fail("Not yet implemented"); // TODO
+		assertEquals("alex@gmail.com", user1.getEmail());
 	}
 
 	@Test
 	final void testSetEmail() {
-		fail("Not yet implemented"); // TODO
+		user2.setEmail(email);
+		assertEquals(user1.getEmail(), user2.getEmail());
 	}
 
 	@Test
 	final void testGetGender() {
-		fail("Not yet implemented"); // TODO
+		assertEquals("M", user1.getGender());
 	}
 
 	@Test
 	final void testSetGender() {
-		fail("Not yet implemented"); // TODO
+		user1.setGender("F");
+		assertEquals("F", user1.getGender());
 	}
 
 	@Test
 	final void testGetName() {
-		fail("Not yet implemented"); // TODO
+		assertEquals("alex", user1.getName());
 	}
 
 	@Test
 	final void testSetName() {
-		fail("Not yet implemented"); // TODO
+		user1.setName("H-bahh");
+		assertEquals("H-bahh", user1.getName());
 	}
 
 	@Test
 	final void testGetMatch() {
-		fail("Not yet implemented"); // TODO
+		assertEquals(null, user1.getMatch());
+		assertEquals(null, user2.getMatch());
 	}
 
 	@Test
 	final void testSetMatch() {
-		fail("Not yet implemented"); // TODO
+		user1.setMatch(match);
+		user2.setMatch(match);
+		assertEquals(match, user1.getMatch());
+		assertEquals(match, user2.getMatch());
 	}
 
 }

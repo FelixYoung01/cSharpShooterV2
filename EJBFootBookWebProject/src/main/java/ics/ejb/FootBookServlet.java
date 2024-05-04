@@ -25,7 +25,9 @@ public class FootBookServlet extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
 
+
     protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    	request.getRequestDispatcher("/index.jsp").forward(request, response);
+    	request.getRequestDispatcher("/home.jsp").forward(request, response);
     }
+
 }
