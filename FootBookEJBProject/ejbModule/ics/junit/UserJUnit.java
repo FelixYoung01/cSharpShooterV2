@@ -42,7 +42,7 @@ class UserJUnit {
 		match = new Match();
 		
 		User user1 = new User(userId, age, email, gender, name);
-		User user2 = new User();
+		//User user2 = new User();
 	}
 
 	@AfterEach
