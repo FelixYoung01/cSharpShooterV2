@@ -27,7 +27,6 @@ public class Match implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	private String matchId;
-  private Date date;
 	private int time;
 	private Referee referee; //  match has exactly one referee
 	private Pitch pitch; // Pitch where the match will be played
