@@ -35,6 +35,9 @@ public class FootBookServlet extends HttpServlet {
 		
 		RefereeLicense rl = facade.findRefereeLicense("L1");
 		
+		Match m = facade.findMatch("M01");
+		
+		
 		if (rl == null) {
 			out.println("RefereeLicense not found");
 			return;
@@ -42,7 +45,16 @@ public class FootBookServlet extends HttpServlet {
 		else {
 		out.println("<h3>RefereeLicense</h3>");
 		out.println("LicenseId: " + rl.getLicenseId());
-		out.println("</body></html>");	
+		
+		out.println("<br>");
+        out.println("Matchen hittades: " + m.getMatchId());
+        out.println("<br>");
+        out.println("Matchen spelas: " + m.getDate() + " klockan: " + m.getTime());
+        out.println("<br>");
+        out.println("Matchen spelas på: " + m.getPitch().getPitchId() + " " + m.getPitch().getName());
+        out.println("<br>");
+        
+        out.println("</body></html>");	
 		}
 	}
 		

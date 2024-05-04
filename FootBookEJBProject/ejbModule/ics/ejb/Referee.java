@@ -25,16 +25,15 @@ public class Referee implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private String refereeId;
 	private String refereeName;
+	private Set<Match> matches;
 	
-	/*@OneToMany(mappedBy="referee", fetch=FetchType.EAGER)
-	private Set<Match> match;
+	public Referee(String refereeId, String refereeName) {
+		this.refereeId = refereeId;
+		this.refereeName = refereeName;
+	}
 	
-	
-	@ManyToOne
-	@JoinColumn(name="RefereeLicense")
-	public Set<Match> getMatch() {
-        return match;
-    }*/
+	public Referee() {
+	}
 	
 	@Id
 	@Column(name = "RefereeId")
@@ -47,7 +46,6 @@ public class Referee implements Serializable {
 	}
 	
 	@Column(name = "RefereeName")
-	
 	public String getRefereeName() {
 		return refereeName;
 	}
@@ -55,7 +53,15 @@ public class Referee implements Serializable {
 	public void setRefereeName(String refereeName) {
 		this.refereeName = refereeName;
 	}
+
+	@OneToMany(mappedBy = "Referee", fetch = FetchType.LAZY)
+	public Set<Match> getMatches() {
+        return matches;
+    }
 	
+	public void setMatches(Set<Match> matches) {
+		this.matches = matches;
+	}
 	
 	
 	
