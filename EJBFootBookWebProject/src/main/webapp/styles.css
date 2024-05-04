@@ -18,7 +18,7 @@ body {
     background: url('Images/background.jpg') no-repeat center center fixed; 
     background-size: cover;
     filter: brightness(50%) blur(10px) grayscale(100%);
-    z-index: -1;
+    z-index: -10;
 }
 
 .content {
@@ -68,6 +68,20 @@ nav ul li {
 nav ul li a {
     color: #fff;
     text-decoration: none;
+}
+
+.weather {
+ 	display: block;
+ 	float: right;
+ 	width: 2%;
+ 	margin-right: 10px;
+ 	margin-top: 10px;
+ 	transition: opacity 0.3s ease;
+ 	z-index: -1;
+ }
+ 
+ .weather:hover {
+	animation: popOut 0.5s ease-in-out;
 }
 
 .logo {
@@ -151,31 +165,30 @@ nav ul li a {
     background-position-y: center;
     border: 1px solid #ccc;
     border-radius: 5px;
-    padding: 20px;
     margin-bottom: 20px;
     filter: drop-shadow(0 0 5px #000);
+    z-index: 2;
 }
 
 .pitch h3 {
+	padding: 20px;
     margin-bottom: 10px;
 }
 
 .pitch button {
-    background-color: #333;
-    color: #fff;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
+    background-color: transparent;
+    padding: 14px 28px;
+    font-size: 16px;
     cursor: pointer;
+    text-align: center;
     transition: background-color 0.3s ease;
-}
-
-.pitch button:hover {
-    background-color: #555;
-    background-image: url('Images/bouncingball.gif');
-    background-repeat: repeat;
-    background-position: center;
-    background-size: cover;
+    z-index: 1;
 }
 
 footer {
