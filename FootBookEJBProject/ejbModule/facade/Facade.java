@@ -1,6 +1,9 @@
 package facade;
 
 import java.util.List;
+import java.util.Set;
+
+import org.junit.jupiter.migrationsupport.EnableJUnit4MigrationSupport;
 
 import ics.eao.MatchEAOLocal;
 import ics.eao.PitchEAOLocal;
@@ -12,13 +15,16 @@ import jakarta.ejb.EJB;
 import jakarta.ejb.Stateless;
 
 @Stateless
-public class Facade implements FacadeLocal{
+public class Facade implements FacadeLocal {
 	
 	@EJB
 	private RefereeLicenseEAOLocal refereeLicenseEAO;
 	
 	@EJB 
 	private MatchEAOLocal matchEAO;
+
+	@EJB
+	private PitchEAOLocal pitchEAO;
 	
 	@EJB
 	private PitchEAOLocal pitchEAO;
@@ -31,8 +37,7 @@ public class Facade implements FacadeLocal{
 		return matchEAO.findMatchById(string);
 	};
 	
-	public List<Pitch> findAllPitches() {
+	public Set<Pitch> getAllPitches() {
 		return pitchEAO.getAllPitches();
 	};
-	
 }

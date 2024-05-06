@@ -1,6 +1,8 @@
 package ics.eao;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import ics.ejb.Pitch;
 import jakarta.ejb.Stateless;
@@ -36,10 +38,13 @@ public class PitchEAOImpl implements PitchEAOLocal {
 			em.remove(pitch);
 		}
 	}
-	
-	public List<Pitch> getAllPitches() {
+
+	public Set<Pitch> getAllPitches() {
 		TypedQuery<Pitch> query = em.createNamedQuery("Pitch.findAll", Pitch.class);
-		List<Pitch> results = query.getResultList();
-		return results;
+		return new HashSet<Pitch>(query.getResultList());
+	}
+
+	public void deletePitch(Pitch pitch) {
+		// TODO Auto-generated method stub
 	}
 }
