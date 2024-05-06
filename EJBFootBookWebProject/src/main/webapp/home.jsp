@@ -14,12 +14,11 @@
 	<div class="content">
 		<img src="Images/weather.webp" alt="Weather Icon" class="weather">
 		<img src="Images/footbooklogo.png" alt="FootBook Logo" class="logo">
-		<header>
+		<header class="pattern-background">
 			<nav>
 				<ul>
 					<li><a href="<%=request.getContextPath()%>/home" class=button>Home</a></li>
-					<li><a href="<%=request.getContextPath()%>/register"
-						class=button>Register</a></li>
+					<li><a href="<%=request.getContextPath()%>/register" class=button>Register</a></li>
 					<li><a href="<%=request.getContextPath()%>/about" class=button>About</a></li>
 					<li><a href="#">Need Help?</a></li>
 				</ul>
@@ -27,18 +26,16 @@
 			<img src="Images/Arsenal_FC.svg.webp" alt="Arsenal Logo"
 				class="arsenal">
 		</header>
-
-		<div class="box">
+		<div class="box pattern-background">
 			<h2>
 				Welcome to <span class="highlight">FootBook</span>!
 			</h2>
 			<p>Book your football match on your favorite pitches!</p>
 		</div>
 
-		<section class="box">
+		<section class="box pattern-background">
 			<h2>STATISTICS HERE</h2>
 		</section>
-
 		<section class="pitches">
 			<h2>Book from one of these available pitches</h2>
 			<%
