@@ -8,6 +8,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-<a href="<%=request.getContextPath()%>/FootBookServlet" class=button >HomePage</a>
+<a href="<%=request.getContextPath()%>/home" class=button >HomePage</a>
 </body>
 </html>
