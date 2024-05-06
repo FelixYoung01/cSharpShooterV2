@@ -39,7 +39,7 @@ public class RefereeLicense implements Serializable {
 		this.licenseId = licenseId;
 	}
 
-	@OneToMany(mappedBy = "RefereeLicense", fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "refereeLicense", fetch = FetchType.LAZY)
 	public Set<Referee> getReferees() {
 		return referees;
 	}
