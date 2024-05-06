@@ -16,8 +16,6 @@ public interface PitchEAOLocal {
 	public void deletePitch(String pitch);
 
 	public Pitch findPitchById(String pitchId);
-	
-	public List<Pitch> getAllPitches();
 
 	public Set<Pitch> getAllPitches();
 }
