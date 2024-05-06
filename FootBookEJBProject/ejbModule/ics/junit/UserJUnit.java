@@ -45,6 +45,7 @@ class UserJUnit {
 		user2 = new User("U2", 22, "insh@gmail.com", "M", "Insh");
 		
 		
+
 	}
 
 	@AfterEach

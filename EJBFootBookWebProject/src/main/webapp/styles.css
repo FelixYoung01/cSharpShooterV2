@@ -1,0 +1,202 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    color: white;
+}
+
+.background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('Images/background.jpg') no-repeat center center fixed; 
+    background-size: cover;
+    filter: brightness(50%) blur(10px) grayscale(100%);
+    z-index: -10;
+}
+
+.content {
+    position: relative;
+}
+
+.highlight {
+    font-size: larger;
+    color: red;
+    animation: blink 1s infinite;
+}
+
+@keyframes blink {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+header {
+    background-color: #333;
+    color: #fff;
+    border: 1px solid #ccc;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    filter: drop-shadow(0 0 5px #000);
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+}
+
+nav ul li {
+    display: inline-block;
+    margin-right: 20px;
+}
+
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.weather {
+ 	display: block;
+ 	float: right;
+ 	width: 2%;
+ 	margin-right: 10px;
+ 	margin-top: 10px;
+ 	transition: opacity 0.3s ease;
+ 	z-index: -1;
+ }
+ 
+ .weather:hover {
+	animation: popOut 0.5s ease-in-out;
+}
+
+.logo {
+	display: block;
+    margin-left: auto;
+    margin-right: auto;
+	width: 50%;
+	filter: drop-shadow(0 0 5px #000);
+}
+
+.logo:hover {
+    animation: wiggle 0.5s ease-in-out;
+}
+
+@keyframes wiggle {
+    0% {
+        transform: rotate(0deg);
+    }
+    25% {
+        transform: rotate(5deg);
+    }
+    50% {
+        transform: rotate(-5deg);
+    }
+    75% {
+        transform: rotate(5deg);
+    }
+    100% {
+        transform: rotate(0deg);
+    }
+}
+
+.arsenal {
+    display: block;
+    float: right;
+    width: 2%;
+    opacity: 0.1;
+    transition: opacity 0.3s ease;
+}
+
+.arsenal:hover {
+    opacity: 1;
+}
+.arsenal:hover {
+    animation: popOut 0.5s ease-in-out;
+}
+
+@keyframes popOut {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.2);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+.box {
+    background-color: #333;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    filter: drop-shadow(0 0 5px #000);
+    text-align: center;
+    max-width: 500px;
+    margin: 20px auto;
+}
+
+.pitches {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.pitch {
+    color: white;
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('Images/Emirates.webp');
+    background-size: cover;
+    background-position-y: center;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    filter: drop-shadow(0 0 5px #000);
+    z-index: 2;
+}
+
+.pitch h3 {
+	padding: 20px;
+    margin-bottom: 10px;
+}
+
+.pitch button {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+    background-color: transparent;
+    padding: 14px 28px;
+    font-size: 16px;
+    cursor: pointer;
+    text-align: center;
+    transition: background-color 0.3s ease;
+    z-index: 1;
+}
+
+footer {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 20px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
