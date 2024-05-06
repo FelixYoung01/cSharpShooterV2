@@ -10,7 +10,7 @@ import jakarta.persistence.TypedQuery;
 
 
 @Stateless
-public class PitchEAOImpl {
+public class PitchEAOImpl implements PitchEAOLocal {
 	@PersistenceContext(unitName = "FootBookEJBSql")
 	private EntityManager em;
 
@@ -35,5 +35,11 @@ public class PitchEAOImpl {
 		if (pitch != null) {
 			em.remove(pitch);
 		}
+	}
+	
+	public List<Pitch> getAllPitches() {
+		TypedQuery<Pitch> query = em.createNamedQuery("Pitch.findAll", Pitch.class);
+		List<Pitch> results = query.getResultList();
+		return results;
 	}
 }
