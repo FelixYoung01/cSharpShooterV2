@@ -37,7 +37,7 @@
 			<h2>STATISTICS HERE</h2>
 		</section>
 		<section class="pitches">
-			<h2>Book from one of these available pitches</h2>
+			<h2>Book from one of these available pitches!</h2>
 			<%
 			Set<Pitch> pitches = (Set<Pitch>) request.getAttribute("pitches");
 			if (pitches != null && !pitches.isEmpty()) {
