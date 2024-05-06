@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Set;
 
 import ics.ejb.Match;
+import ics.ejb.Pitch;
 import ics.ejb.RefereeLicense;
 import ics.ejb.Pitch;
 //import ics.ejb.Player;

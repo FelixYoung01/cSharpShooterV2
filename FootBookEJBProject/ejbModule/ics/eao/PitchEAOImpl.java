@@ -46,6 +46,5 @@ public class PitchEAOImpl implements PitchEAOLocal {
 
 	public void deletePitch(Pitch pitch) {
 		// TODO Auto-generated method stub
-		
 	}
 }

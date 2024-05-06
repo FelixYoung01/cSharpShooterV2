@@ -11,6 +11,8 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 import jakarta.ejb.EJB;
 import facade.FacadeLocal;
@@ -20,13 +22,22 @@ import facade.FacadeLocal;
 public class FootBookServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static final String FOOT_BOOK_SERVLET_PATH = "/home";
-    private static final String REGISTER_PATH = "/register";
-    private static final String PITCH_INFO_PATH = "/pitchInfo";
+  private static final String REGISTER_PATH = "/register";
+  private static final String PITCH_INFO_PATH = "/pitchInfo";
+  private static final String ABOUT_PATH = "/about";
+	
+  @EJB
+	private FacadeLocal facade;
+       
+  public FootBookServlet() {
+        super();
+        // TODO Auto-generated constructor stub
+  }
 
 	@EJB
 	private FacadeLocal facade;
-
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+  
+  protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String path = request.getContextPath();
         String URI = request.getRequestURI();
         String pathInfo = URI.substring(path.length());
@@ -55,6 +66,11 @@ public class FootBookServlet extends HttpServlet {
             case PITCH_INFO_PATH:
 	            RequestDispatcher r3 = request.getRequestDispatcher("/pitchInfo.jsp");
 	            r3.forward(request, response);
+	            break;
+            
+            case ABOUT_PATH:
+              RequestDispatcher r4 = request.getRequestDispatcher("/about.jsp");
+	            r4.forward(request, response);
 	            break;
 	        
             default:

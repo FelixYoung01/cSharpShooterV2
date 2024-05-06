@@ -30,7 +30,7 @@ public class Pitch implements Serializable {
 	
 	private String pitchId;
 	private String name;
-  	private Set<Match> matches; // One pitch can host many matches
+  private Set<Match> matches; // One pitch can host many matches
   
 	public Pitch(String pitchId, String name) {
 		this.pitchId = pitchId;
@@ -67,9 +67,5 @@ public class Pitch implements Serializable {
 	
 	public void setMatches(Set<Match> matches) {
 		this.matches = matches;
-	}
-	
-	
-	
-	
+	}	
 }
