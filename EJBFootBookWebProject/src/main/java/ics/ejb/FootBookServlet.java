@@ -1,5 +1,6 @@
 package ics.ejb;
 
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -27,7 +28,29 @@ public class FootBookServlet extends HttpServlet {
 
 
     protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    	request.getRequestDispatcher("/home.jsp").forward(request, response);
+    	
+    	String path = request.getContextPath();
+    	String URI = request.getRequestURI();
+    	String pathInfo = URI.substring(path.length());
+    	
+    	System.out.println("URI: "+ URI);
+    	System.out.println("ContextPath: " + path);
+    	System.out.println("Path: " + pathInfo);
+    	
+    	switch (pathInfo) {
+		case "/FootBookServlet":
+			RequestDispatcher rd = request.getRequestDispatcher("/home.jsp");
+			rd.forward(request, response);
+			break;
+    	
+		case "/register":
+			RequestDispatcher rq = request.getRequestDispatcher("/register.jsp");
+			rq.forward(request, response);
+			break;
+    	}
+    	
+    	
+    	
     }
 
 }

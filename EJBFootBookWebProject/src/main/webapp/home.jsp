@@ -17,7 +17,7 @@
         <nav>
             <ul>
                 <li><a href="#">Home</a></li>
-                <li><a href="#">Register</a></li>
+                <li><a href="<%=request.getContextPath()%>/register" class=button >register</a></li>
                 <li><a href="#">About</a></li>
                 <li><a href="#">Need Help?</a></li>
             </ul>
