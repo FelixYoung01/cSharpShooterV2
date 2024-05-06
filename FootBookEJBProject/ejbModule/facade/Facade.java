@@ -26,8 +26,6 @@ public class Facade implements FacadeLocal {
 	@EJB
 	private PitchEAOLocal pitchEAO;
 	
-	@EJB
-	private PitchEAOLocal pitchEAO;
 	
 	public RefereeLicense findRefereeLicense(String string) {
 		return refereeLicenseEAO.findRefereeLicenseById(string);
