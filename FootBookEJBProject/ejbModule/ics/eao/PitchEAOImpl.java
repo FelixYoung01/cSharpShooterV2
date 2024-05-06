@@ -1,6 +1,8 @@
 package ics.eao;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import ics.ejb.Pitch;
 import jakarta.ejb.Stateless;
@@ -10,7 +12,7 @@ import jakarta.persistence.TypedQuery;
 
 
 @Stateless
-public class PitchEAOImpl {
+public class PitchEAOImpl implements PitchEAOLocal {
 	@PersistenceContext(unitName = "FootBookEJBSql")
 	private EntityManager em;
 
@@ -35,5 +37,15 @@ public class PitchEAOImpl {
 		if (pitch != null) {
 			em.remove(pitch);
 		}
+	}
+
+	public Set<Pitch> getAllPitches() {
+		TypedQuery<Pitch> query = em.createNamedQuery("Pitch.findAll", Pitch.class);
+		return new HashSet<Pitch>(query.getResultList());
+	}
+
+	public void deletePitch(Pitch pitch) {
+		// TODO Auto-generated method stub
+		
 	}
 }
