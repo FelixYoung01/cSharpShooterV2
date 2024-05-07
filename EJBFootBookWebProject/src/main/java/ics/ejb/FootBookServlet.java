@@ -49,6 +49,8 @@ public class FootBookServlet extends HttpServlet {
 		// Set the data as a request attribute
 		request.setAttribute("pitches", pitches);
 
+			
+		// Kanske ändra till strategy design pattern för att hantera olika paths.
 		switch (pathInfo) {
 		case FOOT_BOOK_SERVLET_PATH:
 			RequestDispatcher r1 = request.getRequestDispatcher("/home.jsp");
@@ -61,6 +63,12 @@ public class FootBookServlet extends HttpServlet {
 			break;
 
 		case PITCH_INFO_PATH:
+			
+			String pitchId = request.getParameter("pitchId");
+			Pitch pitch = facade.findPitch(pitchId);
+			
+			request.setAttribute("pitch", pitch);
+			
 			RequestDispatcher r3 = request.getRequestDispatcher("/pitchInfo.jsp");
 			r3.forward(request, response);
 			break;

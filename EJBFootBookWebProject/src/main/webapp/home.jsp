@@ -18,7 +18,8 @@
 			<nav>
 				<ul>
 					<li><a href="<%=request.getContextPath()%>/home" class=button>Home</a></li>
-					<li><a href="<%=request.getContextPath()%>/register" class=button>Register</a></li>
+					<li><a href="<%=request.getContextPath()%>/register"
+						class=button>Register</a></li>
 					<li><a href="<%=request.getContextPath()%>/about" class=button>About</a></li>
 					<li><a href="#">Need Help?</a></li>
 				</ul>
@@ -42,12 +43,13 @@
 			Set<Pitch> pitches = (Set<Pitch>) request.getAttribute("pitches");
 			if (pitches != null && !pitches.isEmpty()) {
 				for (Pitch pitch : pitches) {
+					String pitchId = pitch.getPitchId();
 			%>
 			<div class="pitch">
 				<h3><%=pitch.getName()%></h3>
-				<form action="<%=request.getContextPath()%>/pitchInfo" method="post">
-					<button type="submit" name="displayText" value="true"></button>
-				</form>
+				<a
+					href="<%=request.getContextPath()%>/pitchInfo?pitchId=<%=pitchId%>" class=button>
+				</a>
 			</div>
 			<%
 			}

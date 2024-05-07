@@ -38,4 +38,8 @@ public class Facade implements FacadeLocal {
 	public Set<Pitch> getAllPitches() {
 		return pitchEAO.getAllPitches();
 	};
+	
+	public Pitch findPitch(String pitchId) {
+        return pitchEAO.findPitchById(pitchId);
+	}
 }
