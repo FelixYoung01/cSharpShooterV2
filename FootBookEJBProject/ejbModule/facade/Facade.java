@@ -55,8 +55,6 @@ public class Facade implements FacadeLocal {
 		matchEAO.deleteMatch(id);
 	}
 	
-	
-
 	public int getUserCount() {
 		return userEAO.getUserCount();
 	}
@@ -72,6 +70,5 @@ public class Facade implements FacadeLocal {
 	public Pitch findPitch(String pitchId) {
         return pitchEAO.findPitchById(pitchId);
 	}
-
 
 }

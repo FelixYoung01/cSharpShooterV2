@@ -51,11 +51,10 @@ public class MatchEAOImpl implements MatchEAOLocal {
 	}
 	
 
-	
-	
 	public long getMatchCount() {
 		return em.createNamedQuery("Match.countAllMatches", Long.class).getSingleResult();
 	}
+
 
 	
 
