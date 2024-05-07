@@ -56,7 +56,8 @@ public class Facade implements FacadeLocal {
 		return matchEAO.getMatchCount();
 	}
 	
-	
-		
+	public Pitch findPitch(String pitchId) {
+        return pitchEAO.findPitchById(pitchId);
+	}
 
 }

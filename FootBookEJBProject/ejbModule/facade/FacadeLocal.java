@@ -28,4 +28,6 @@ public interface FacadeLocal {
 	public long getMatchCount();
 	
 	
+	public Pitch findPitch(String pitchId);
+
 }
