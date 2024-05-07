@@ -20,7 +20,9 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
-@NamedQueries({ @NamedQuery(name = "Match.findAll", query = "SELECT m FROM Match m") })
+@NamedQueries({ @NamedQuery(name = "Match.findAll", query = "SELECT m FROM Match m"), 
+				@NamedQuery(name = "Match.countAllMatches", query = "SELECT COUNT(m) FROM Match M") //Query for statistic of how many matches are registered
+})
 @Table(name = "Match")
 
 public class Match implements Serializable {

@@ -44,12 +44,16 @@ public class Facade implements FacadeLocal {
 		return pitchEAO.getAllPitches();
 	};
 	
-	public int getAllUsers() {
+	public int getUserCount() {
 		return userEAO.getUserCount();
 	}
 	
-	public int getUsersWithMatch() {
+	public int getUsersOnMatchesCount() {
 		return userEAO.getUsersOnMatchesCount();
+	}
+	
+	public long getMatchCount() {
+		return matchEAO.getMatchCount();
 	}
 	
 	
