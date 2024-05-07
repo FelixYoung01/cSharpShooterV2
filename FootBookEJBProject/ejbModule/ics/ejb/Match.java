@@ -21,7 +21,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @NamedQueries({ @NamedQuery(name = "Match.findAll", query = "SELECT m FROM Match m") })
-@Table(name = "Matches")
+@Table(name = "Match")
 
 public class Match implements Serializable {
 
