@@ -22,4 +22,6 @@ public interface FacadeLocal {
 	public Set<Pitch> getAllPitches();
 	
 	public Pitch findPitch(String pitchId);
+	
+	public Set<Match> getMatchesOnPitch(String pitchId);
 }

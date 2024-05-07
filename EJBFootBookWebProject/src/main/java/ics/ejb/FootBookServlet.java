@@ -24,6 +24,7 @@ public class FootBookServlet extends HttpServlet {
 	private static final String REGISTER_PATH = "/register";
 	private static final String PITCH_INFO_PATH = "/pitchInfo";
 	private static final String ABOUT_PATH = "/about";
+	private static final String MATCH_INFO_PATH = "/matchId";
 
 	@EJB
 	private FacadeLocal facade;
@@ -43,16 +44,16 @@ public class FootBookServlet extends HttpServlet {
 		System.out.println("$ContextPath: " + path);
 		System.out.println("$Path: " + pathInfo);
 
-		// Call the facade method to get the data
-		Set<Pitch> pitches = facade.getAllPitches();
-
-		// Set the data as a request attribute
-		request.setAttribute("pitches", pitches);
+		
 
 			
-		// Kanske ändra till strategy design pattern för att hantera olika paths.
+		// Kanske ändra till strategy design pattern för att hantera olika paths. mats gillar inte switch cases.
 		switch (pathInfo) {
 		case FOOT_BOOK_SERVLET_PATH:
+			// Call the facade method to get the data
+			Set<Pitch> pitches = facade.getAllPitches();
+			// Set the data as a request attribute
+			request.setAttribute("pitches", pitches);
 			RequestDispatcher r1 = request.getRequestDispatcher("/home.jsp");
 			r1.forward(request, response);
 			break;
@@ -63,10 +64,12 @@ public class FootBookServlet extends HttpServlet {
 			break;
 
 		case PITCH_INFO_PATH:
-			
 			String pitchId = request.getParameter("pitchId");
 			Pitch pitch = facade.findPitch(pitchId);
 			
+			Set<Match> matchesOnPitch = facade.getMatchesOnPitch(pitchId);
+			
+			request.setAttribute("matchesOnPitch", matchesOnPitch);
 			request.setAttribute("pitch", pitch);
 			
 			RequestDispatcher r3 = request.getRequestDispatcher("/pitchInfo.jsp");
@@ -76,6 +79,15 @@ public class FootBookServlet extends HttpServlet {
 		case ABOUT_PATH:
 			RequestDispatcher r4 = request.getRequestDispatcher("/about.jsp");
 			r4.forward(request, response);
+			break;
+			
+		case MATCH_INFO_PATH:
+			String matchId = request.getParameter("matchId");
+			Match match = facade.findMatch(matchId);
+			
+			request.setAttribute("match", match);
+			RequestDispatcher r5 = request.getRequestDispatcher("/matchInfo.jsp");
+			r5.forward(request, response);
 			break;
 
 		default:
