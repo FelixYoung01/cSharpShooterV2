@@ -36,6 +36,9 @@ public class Pitch implements Serializable {
 		this.pitchId = pitchId;
 		this.name = name;
 	}
+	
+	public Pitch() {
+	}
 
 	@Id
 	@Column(name = "pitchId")
@@ -64,9 +67,5 @@ public class Pitch implements Serializable {
 	
 	public void setMatches(Set<Match> matches) {
 		this.matches = matches;
-	}
-	
-	
-	
-	
+	}	
 }

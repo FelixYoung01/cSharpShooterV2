@@ -1,6 +1,7 @@
 package ics.eao;
 
 import java.util.List;
+import java.util.Set;
 
 import ics.ejb.Pitch;
 import jakarta.ejb.Local;
@@ -12,8 +13,9 @@ public interface PitchEAOLocal {
 
 	public void updatePitch(Pitch pitch);
 
-	public void deletePitch(Pitch pitch);
+	public void deletePitch(String pitch);
 
 	public Pitch findPitchById(String pitchId);
 
+	public Set<Pitch> getAllPitches();
 }
