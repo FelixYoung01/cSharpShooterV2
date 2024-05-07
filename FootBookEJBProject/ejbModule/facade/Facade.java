@@ -31,11 +31,23 @@ public class Facade implements FacadeLocal {
 		return refereeLicenseEAO.findRefereeLicenseById(string);
 	};
 	
+	public Set<Pitch> getAllPitches() {
+		return pitchEAO.getAllPitches();
+	}
+
+	
+	//MATCH METHODS
 	public Match findMatch(String string) {
 		return matchEAO.findMatchById(string);
 	};
-	
-	public Set<Pitch> getAllPitches() {
-		return pitchEAO.getAllPitches();
+
+	public List<Match> findAllMatches() {
+		return matchEAO.findAllMatches();
 	};
+	
+	public void deleteMatch(String id) {
+		matchEAO.deleteMatch(id);
+	}
+	
+	
 }

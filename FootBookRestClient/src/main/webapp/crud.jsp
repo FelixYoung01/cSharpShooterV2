@@ -3,10 +3,10 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="ISO-8859-1">
-    <link rel="stylesheet" type="text/css" href="css/FootBook.css">
+    <link rel="stylesheet" type="text/css" href="css/FootBook.css"> <%-- Here we link our style sheet (CSS) to the JSP page --%>
     <title>FootBook RestClient</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-    <script src="js/FootBook.js"></script>
+    <script src="js/FootBook.js"></script><%-- Here we link the FootBook.js file to the JSP page --%>
 </head>
 <body>
     <header>
@@ -15,7 +15,7 @@
     <section id="row">
         <nav>
             <ul>
-                <li class="active"><a>User Management</a></li>
+                <li class="active"><a>Match</a></li>
                 <li><a>Team Settings</a></li>
                 <li><a>Match Reports</a></li>
             </ul>
@@ -40,13 +40,13 @@
             <section id="content">
                 <article>
                     <fieldset id="PersonalFS">
-                        <legend>User:</legend>
-                        UserId:<br>
-                        <input type="text" name="userId" id="userId" value=""><br>
-                        Name:<br>
-                        <input type="text" name="name" id="name" value=""><br>
-                        Email:<br>
-                        <input type="text" name="email" id="email" value=""><br><br>
+                        <legend>Match:</legend>
+                        Match ID:<br>
+						<input type="text" name="matchId" id="id" value=""><br>
+                        Date:<br>
+						<input type="text" name="date" id="date" value=""><br>
+                        Time:<br>
+						<input type="text" name="time" id="time" value=""><br><br>
                         <input type="button" name="submitBtn" value="Find" id="FindBtn">
                         <input type="button" name="submitBtn" value="Add" id="AddBtn">
                         <input type="button" name="submitBtn" value="Delete" id="DeleteBtn">

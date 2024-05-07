@@ -20,4 +20,9 @@ public interface FacadeLocal {
 	public Match findMatch(String string);
 	
 	public Set<Pitch> getAllPitches();
+
+	public List<Match> findAllMatches();
+
+	public void deleteMatch(String id);
+	
 }

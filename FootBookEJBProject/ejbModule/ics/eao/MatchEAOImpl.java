@@ -32,9 +32,25 @@ public class MatchEAOImpl implements MatchEAOLocal {
 		}
 	}
 	public Match findMatchById(String matchId) {
+		//Match match = em.find(Match.class, matchId);
+		//return match;
+		
 		Match match = em.find(Match.class, matchId);
-		return match;
+	    if (match == null) {
+	        System.err.println("Match not found for ID: " + matchId);
+	    } else {
+	        System.out.println("Match found: " + match.getMatchId());
+	    }
+	    return match;
 	}
+	
+	public List<Match> findAllMatches() {
+		TypedQuery<Match> query = em.createNamedQuery("Match.findAll", Match.class);
+		List<Match> results = query.getResultList();
+		return results;
+	}
+	
+
 	
 	
 

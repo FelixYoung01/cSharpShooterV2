@@ -19,4 +19,6 @@ public interface MatchEAOLocal {
 	public void deleteMatch(String matchId);
 
 	public Match findMatchById(String matchId);
+
+	public List<Match> findAllMatches();
 }

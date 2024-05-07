@@ -20,7 +20,7 @@ import jakarta.validation.constraints.Size;
 @Entity
 @NamedQueries({
 	@NamedQuery(name="User.findAll", query="SELECT u FROM User u")})
-@Table(name="Users")
+@Table(name="User")
 
 public class User implements Serializable{
 	private static final long serialVersionUID = 1L;
