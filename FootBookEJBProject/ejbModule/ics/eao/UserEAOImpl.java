@@ -6,7 +6,7 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 
 @Stateless
-public class UserEAOImpl {
+public class UserEAOImpl implements UserEAOLocal{
 	@PersistenceContext(unitName="FootBookEJBSql")
 	private EntityManager em;
 	

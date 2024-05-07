@@ -4,9 +4,51 @@
     box-sizing: border-box;
 }
 
+:root {
+  --main-color: #8bc34a;
+}
+
 body {
     font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-    color: white;
+    color: black;;
+}
+
+img {
+  -webkit-filter: drop-shadow(2px 1px 0 black)
+                  drop-shadow(-1px -1px 0 black);
+  filter: drop-shadow(2px 1px 0 black) 
+          drop-shadow(-1px -1px 0 black);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	color: white;
+	-webkit-text-stroke-width: 1px;
+ 	-webkit-text-stroke-color: black;
+}
+
+.pattern-background {
+    position: relative;
+    overflow: hidden;
+}
+
+.pattern-background::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: url('Images/background.jpg');
+    background-size: 20%;
+    background-repeat: repeat;
+    mix-blend-mode: overlay;
+    opacity: 0.5;
+    z-index: -1;
 }
 
 .background {
@@ -17,7 +59,8 @@ body {
     height: 100%;
     background: url('Images/background.jpg') no-repeat center center fixed; 
     background-size: cover;
-    filter: brightness(50%) blur(10px) grayscale(100%);
+    filter: blur(10px) grayscale(100%);
+    -webkit-filter: blur(10px) grayscale(100%);
     z-index: -10;
 }
 
@@ -27,7 +70,6 @@ body {
 
 .highlight {
     font-size: larger;
-    color: red;
     animation: blink 1s infinite;
 }
 
@@ -44,14 +86,14 @@ body {
 }
 
 header {
-    background-color: #333;
-    color: #fff;
-    border: 1px solid #ccc;
+    background-color: var(--main-color);
+    border: 1px solid black;
     padding: 20px;
     display: flex;
     justify-content: center;
     align-items: center;
     filter: drop-shadow(0 0 5px #000);
+    -webkit-filter: drop-shadow(0 0 5px #000);
 }
 
 nav ul {
@@ -66,8 +108,11 @@ nav ul li {
 }
 
 nav ul li a {
-    color: #fff;
+	color: black;
     text-decoration: none;
+    font-size: 20px;
+    font-weight: bold;
+    filter: none;
 }
 
 .weather {
@@ -89,7 +134,6 @@ nav ul li a {
     margin-left: auto;
     margin-right: auto;
 	width: 50%;
-	filter: drop-shadow(0 0 5px #000);
 }
 
 .logo:hover {
@@ -142,14 +186,15 @@ nav ul li a {
 }
 
 .box {
-    background-color: #333;
+    background-color: var(--main-color);
     padding: 20px;
-    border: 1px solid #ccc;
+    border: 1px solid black;
     border-radius: 5px;
-    filter: drop-shadow(0 0 5px #000);
     text-align: center;
     max-width: 500px;
     margin: 20px auto;
+  	filter: drop-shadow(0 0 5px #000);
+  	-webkit-filter: drop-shadow(0 0 5px #000);
 }
 
 .pitches {
@@ -158,16 +203,33 @@ nav ul li a {
     padding: 20px;
 }
 
+.pitches h2 {
+ 	text-align: center;
+ 	color: black;
+ 	-webkit-text-stroke-width: 0px;
+ 	background-color: white;
+ 	border: 1px solid black;
+ 	border-radius: 50px;
+ 	padding: 10px;
+ 	margin-bottom: 20px;
+ }
+
 .pitch {
-    color: white;
     background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('Images/Emirates.webp');
     background-size: cover;
     background-position-y: center;
-    border: 1px solid #ccc;
+    border: 1px solid black;
     border-radius: 5px;
     margin-bottom: 20px;
     filter: drop-shadow(0 0 5px #000);
+    -webkit-filter: drop-shadow(0 0 5px #000);
     z-index: 2;
+    transition: filter 0.3s ease, transform 0.3s ease;
+}
+
+.pitch:hover {
+    filter: brightness(150%);
+    transform: scale(1.1);
 }
 
 .pitch h3 {
