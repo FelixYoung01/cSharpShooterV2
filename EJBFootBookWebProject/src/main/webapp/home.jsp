@@ -28,13 +28,9 @@
 		</header>
 
 		<div class="box">
-			<h2>Welcome to <span class="highlight">FootBook</span>!</h2>
+			<h2>Welcome to FootBook!</h2>
 			<p>Book your football match on your favorite pitches!</p>
 		</div>
-
-		<section class="box">
-			<h2>STATISTICS HERE</h2>
-		</section>
 
 		<section class="pitches">
 			<h2>Book from one of these available pitches!</h2>
@@ -58,7 +54,11 @@
 			<% } %>
 		</section>
 
-		<div style="margin-bottom: 50px;"></div>
+		<section class="box">
+			<h2>STATISTICS HERE</h2>
+		</section>
+
+		<div style="margin-bottom: 100px;"></div>
 
 		<footer>
 			<p>&copy; 2024 FootBook. All rights reserved.</p>
