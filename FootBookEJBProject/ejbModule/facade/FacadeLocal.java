@@ -25,4 +25,14 @@ public interface FacadeLocal {
 
 	public void deleteMatch(String id);
 	
+	
+	public int getUserCount();
+	
+	public int getUsersOnMatchesCount();
+	
+	public long getMatchCount();
+	
+	
+	public Pitch findPitch(String pitchId);
+
 }

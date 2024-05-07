@@ -44,7 +44,4 @@ public class PitchEAOImpl implements PitchEAOLocal {
 		return new HashSet<Pitch>(query.getResultList());
 	}
 
-	public void deletePitch(Pitch pitch) {
-		// TODO Auto-generated method stub
-	}
 }
