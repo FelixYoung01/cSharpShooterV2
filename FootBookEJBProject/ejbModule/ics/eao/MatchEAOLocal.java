@@ -21,4 +21,7 @@ public interface MatchEAOLocal {
 	public Match findMatchById(String matchId);
 
 	public List<Match> findAllMatches();
+	
+	public long getMatchCount();
+
 }
