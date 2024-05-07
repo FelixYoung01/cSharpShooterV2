@@ -20,4 +20,17 @@ public interface FacadeLocal {
 	public Match findMatch(String string);
 	
 	public Set<Pitch> getAllPitches();
+	
+	public int getUserCount();
+	
+	public int getUsersOnMatchesCount();
+	
+	public long getMatchCount();
+	
+	
+	public Pitch findPitch(String pitchId);
+
+	
+	public Set<Match> getMatchesOnPitch(String pitchId);
+
 }

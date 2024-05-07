@@ -36,7 +36,9 @@ public class MatchEAOImpl implements MatchEAOLocal {
 		return match;
 	}
 	
-	
+	public long getMatchCount() {
+		return em.createNamedQuery("Match.countAllMatches", Long.class).getSingleResult();
+	}
 
 	
 
