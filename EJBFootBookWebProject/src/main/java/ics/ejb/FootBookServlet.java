@@ -45,9 +45,10 @@ public class FootBookServlet extends HttpServlet {
 
 		// Call the facade method to get the data
 		Set<Pitch> pitches = facade.getAllPitches();
-
+		long matchCount = facade.getMatchCount();
 		// Set the data as a request attribute
 		request.setAttribute("pitches", pitches);
+		request.setAttribute("matchCount", matchCount);
 
 			
 		// Kanske ändra till strategy design pattern för att hantera olika paths.

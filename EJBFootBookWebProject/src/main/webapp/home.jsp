@@ -34,7 +34,8 @@
 		</div>
 
 		<section class="box">
-			<h2>STATISTICS HERE</h2>
+			<h2>Some of our amazing statistics</h2>
+    		<p>Matches Registered: ${matchCount}</p>
 		</section>
 
 		<section class="pitches">
