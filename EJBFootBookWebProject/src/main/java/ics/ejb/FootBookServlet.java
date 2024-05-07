@@ -44,7 +44,8 @@ public class FootBookServlet extends HttpServlet {
 		System.out.println("$ContextPath: " + path);
 		System.out.println("$Path: " + pathInfo);
 
-		
+
+		request.setAttribute("matchCount", matchCount);
 
 			
 		// Kanske ändra till strategy design pattern för att hantera olika paths. mats gillar inte switch cases.
