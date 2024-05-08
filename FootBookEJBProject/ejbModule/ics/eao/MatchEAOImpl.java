@@ -19,10 +19,12 @@ public class MatchEAOImpl implements MatchEAOLocal {
 
 	public void addMatch(Match match) {
 		em.persist(match);
+		
 	}
 	
-	public void updateMatch(Match match) {
+	public Match updateMatch(Match match) {
 		em.merge(match);
+		return match;
 	}
 	
 	public void deleteMatch(String matchId) {
@@ -54,6 +56,14 @@ public class MatchEAOImpl implements MatchEAOLocal {
 	public long getMatchCount() {
 		return em.createNamedQuery("Match.countAllMatches", Long.class).getSingleResult();
 	}
+	
+	// Inside your data access class or EAO
+	public List<String> findAllMatchIds() {
+	    // JPA TypedQuery for retrieving only match IDs
+	    TypedQuery<String> query = em.createQuery("SELECT m.matchId FROM Match m", String.class);
+	    return query.getResultList();
+	}
+
 
 
 	

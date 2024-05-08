@@ -50,11 +50,26 @@ public class Facade implements FacadeLocal {
 		return matchEAO.findAllMatches();
 	};
 	
+	public Match createMatch(Match match) {
+		matchEAO.addMatch(match);
+		return match;
+	}
 
 	public void deleteMatch(String id) {
 		matchEAO.deleteMatch(id);
 	}
 	
+	public Match updateMatch(Match match) {
+		return matchEAO.updateMatch(match);
+	}
+	
+	@Override
+	public List<String> findAllMatchIds() {
+		return matchEAO.findAllMatchIds();
+	}
+	
+	
+	//USER METHODS
 	public int getUserCount() {
 		return userEAO.getUserCount();
 	}
@@ -75,5 +90,7 @@ public class Facade implements FacadeLocal {
 	public Set<Match> getMatchesOnPitch(String pitchId) {
 		return pitchEAO.findPitchById(pitchId).getMatches();
 	}
+
+	
 
 }

@@ -14,27 +14,46 @@ import jakarta.ejb.Local;
 
 @Local
 public interface FacadeLocal {
+	
+	//RefereeLicense Methods
 
 	public RefereeLicense findRefereeLicense(String string);
 	
+	
+	
+	//Match Methods
+	
 	public Match findMatch(String string);
 	
-	public Set<Pitch> getAllPitches();
+	public Match createMatch(Match match);
+	
+	public Match updateMatch(Match match);
 
 	public List<Match> findAllMatches();
 
 	public void deleteMatch(String id);
 	
+	public long getMatchCount();
+	
+	List<String> findAllMatchIds();
+	
+	
+	//User Methods	
+	
 	public int getUserCount();
 	
 	public int getUsersOnMatchesCount();
+
 	
-	public long getMatchCount();
-	
+	//Pitch Methods
 	
 	public Pitch findPitch(String pitchId);
+	
+	public Set<Pitch> getAllPitches();
 
 	
 	public Set<Match> getMatchesOnPitch(String pitchId);
+
+
 
 }
