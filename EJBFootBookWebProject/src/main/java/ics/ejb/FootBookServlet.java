@@ -30,11 +30,13 @@ public class FootBookServlet extends HttpServlet {
 
 	public FootBookServlet() {
 		super();
+
 		handlerMap.put("/home", new HomeHandler());
 		handlerMap.put("/register", new RegisterHandler());
 		handlerMap.put("/pitchInfo", new PitchInfoHandler());
 		handlerMap.put("/about", new AboutHandler());
 		handlerMap.put("/matchInfo", new MatchInfoHandler());
+		handlerMap.put("/needHelp", new NeedHelpHandler());
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)

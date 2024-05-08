@@ -9,6 +9,7 @@
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <jsp:include page="header.jsp" />
 	<%
 	Match match = (Match) request.getAttribute("match");
 	String matchId = match.getMatchId();

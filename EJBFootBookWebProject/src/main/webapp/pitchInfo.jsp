@@ -10,6 +10,7 @@
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+<jsp:include page="header.jsp" />
 	<%
 	Pitch pitch = (Pitch) request.getAttribute("pitch");
 	String pitchId = pitch.getPitchId();
