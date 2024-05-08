@@ -60,4 +60,9 @@ public class Facade implements FacadeLocal {
         return pitchEAO.findPitchById(pitchId);
 	}
 
+	
+	public Set<Match> getMatchesOnPitch(String pitchId) {
+		return pitchEAO.findPitchById(pitchId).getMatches();
+	}
+
 }

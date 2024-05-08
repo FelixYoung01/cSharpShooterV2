@@ -30,4 +30,7 @@ public interface FacadeLocal {
 	
 	public Pitch findPitch(String pitchId);
 
+	
+	public Set<Match> getMatchesOnPitch(String pitchId);
+
 }
