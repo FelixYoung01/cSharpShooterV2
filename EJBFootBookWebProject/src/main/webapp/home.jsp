@@ -10,23 +10,7 @@
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-
-	<button id="dark-mode-toggle" class="icon-button">
-		<img src="Images/sun.png" alt="Sun Icon" class="sun-icon">
-	</button>
-	<h1 class="logo">FootBook</h1>
-	<header>
-		<nav>
-			<ul>
-				<li><a href="<%=request.getContextPath()%>/home" class="button">Home</a></li>
-				<li><a href="<%=request.getContextPath()%>/register" class="button">Register</a></li>
-				<li><a href="<%=request.getContextPath()%>/about" class="button">About</a></li>
-				<li><a href="<%=request.getContextPath()%>/needHelp" class="button">Need Help?</a></li>
-			</ul>
-		</nav>
-		<img src="Images/Arsenal_FC.svg.webp" alt="Arsenal Logo"
-			class="arsenal">
-	</header>
+	<jsp:include page="header.jsp" />
 
 	<div class="box">
 		<h2>Welcome to FootBook!</h2>
