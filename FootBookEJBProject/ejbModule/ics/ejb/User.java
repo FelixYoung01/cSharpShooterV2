@@ -24,7 +24,7 @@ import jakarta.validation.constraints.Size;
 	@NamedQuery(name="User.countAll", query="SELECT COUNT(u) FROM User u"), //Namedquery for the stats of users registered
 	@NamedQuery(name="User.countRegisteredOnMatches", query="SELECT COUNT(u) FROM User u WHERE u.match IS NOT NULL") // Namedquery for counting amount of users registered on matches
 })
-@Table(name="User")
+@Table(name="[User]")
 
 public class User implements Serializable{
 	private static final long serialVersionUID = 1L;
@@ -44,6 +44,9 @@ public class User implements Serializable{
     	this.email = email;
     	this.gender = gender;
     	this.name = name;
+	}
+	
+	public User() {
 	}
     
     @Id

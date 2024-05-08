@@ -55,6 +55,7 @@
 	<section class="box">
 		<h2>Some of our amazing statistics</h2>
 		<p>Matches Registered: ${matchCount}</p>
+		<p>Session Count: ${sessionCount}</p>
 	</section>
 
 	<div style="margin-bottom: 100px;"></div>

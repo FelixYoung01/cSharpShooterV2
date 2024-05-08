@@ -10,7 +10,7 @@
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-<jsp:include page="header.jsp" />
+	<jsp:include page="header.jsp" />
 	<%
 	Pitch pitch = (Pitch) request.getAttribute("pitch");
 	String pitchId = pitch.getPitchId();
@@ -32,7 +32,7 @@
 		<div class="match">
 			<h3><%=match.getMatchId()%></h3>
 			<a
-				href="<%=request.getContextPath()%>/pitchInfo?pitchId=<%=pitchId%>&matchId=<%=match.getMatchId()%>">
+				href="<%=request.getContextPath()%>/matchInfo?matchId=<%=match.getMatchId()%>">
 			</a>
 			<p>
 				Match Date:
@@ -40,10 +40,11 @@
 			<p>
 				Match Time:
 				<%=match.getTime()%></p>
-			<%
-			}
-			%>
+
 		</div>
+		<%
+		}
+		%>
 	</section>
 	<script src="Darkmode.js"></script>
 </body>

@@ -14,6 +14,7 @@
     <display-name>FootBookServlet</display-name>
     <servlet-name>FootBookServlet</servlet-name>
     <servlet-class>ics.ejb.FootBookServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
   </servlet>
   <servlet-mapping>
     <servlet-name>FootBookServlet</servlet-name>
@@ -32,6 +33,10 @@
 	<url-pattern>/pitchInfo</url-pattern>
 	</servlet-mapping> 
 	    <servlet-mapping>
+	    <servlet-name>FootBookServlet</servlet-name>
+	    <url-pattern>/matchInfo</url-pattern>
+        	    </servlet-mapping>
+         <servlet-mapping>
 	    <servlet-name>FootBookServlet</servlet-name>
 	    <url-pattern>/needHelp</url-pattern>
 	    </servlet-mapping>

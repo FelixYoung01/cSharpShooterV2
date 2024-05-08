@@ -7,6 +7,7 @@ import ics.ejb.Match;
 import ics.ejb.Pitch;
 import ics.ejb.Referee;
 import ics.ejb.RefereeLicense;
+import ics.ejb.User;
 import ics.ejb.Pitch;
 //import ics.ejb.Player;
 //import ics.ejb.Referee;
@@ -33,13 +34,10 @@ public interface FacadeLocal {
 
 	
 	public Set<Match> getMatchesOnPitch(String pitchId);
-
-<<<<<<< Updated upstream
-=======
-	public Set<User> getUsersOnMatch(String matchId);
 	
 	public Set<User> getAllUsers();
 	
 	public Set<Referee> getAllReferees();
->>>>>>> Stashed changes
+
+	public Set<User> getUsersOnMatch(String matchId);
 }

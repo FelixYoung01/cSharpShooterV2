@@ -69,9 +69,6 @@ public class Facade implements FacadeLocal {
 	public Set<Match> getMatchesOnPitch(String pitchId) {
 		return pitchEAO.findPitchById(pitchId).getMatches();
 	}
-<<<<<<< Updated upstream
-
-=======
 	
 	public Set<User> getUsersOnMatch(String matchId) {
 		return matchEAO.findMatchById(matchId).getUsers();
@@ -84,5 +81,4 @@ public class Facade implements FacadeLocal {
 	public Set<Referee> getAllReferees() {
 		return refereeEAO.getAllReferees();
 	}
->>>>>>> Stashed changes
 }
