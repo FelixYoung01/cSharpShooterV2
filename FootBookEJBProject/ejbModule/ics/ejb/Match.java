@@ -92,7 +92,7 @@ public class Match implements Serializable {
 		this.pitch = pitch;
 	}
 
-	@OneToMany(mappedBy = "match", fetch = FetchType.LAZY)// Many users can participate in one match
+	@OneToMany(mappedBy = "match", fetch = FetchType.EAGER)// Many users can participate in one match
 	public Set<User> getUsers() {
 		return users;
 	}

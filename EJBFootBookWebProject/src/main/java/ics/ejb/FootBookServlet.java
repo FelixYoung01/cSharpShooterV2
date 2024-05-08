@@ -54,4 +54,9 @@ public class FootBookServlet extends HttpServlet {
 		RequestDispatcher requestDispatcher = handler.handleRequestDispatcher(request, response, facade);
 		requestDispatcher.forward(request, response);
 	}
+	
+	public void init() throws ServletException{
+        getServletContext().setAttribute("sessionCount", 0);
+
+	}
 }
