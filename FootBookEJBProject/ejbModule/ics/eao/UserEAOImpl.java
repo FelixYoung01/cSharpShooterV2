@@ -1,9 +1,13 @@
 package ics.eao;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import ics.ejb.User;
 import jakarta.ejb.Stateless;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
+import jakarta.persistence.TypedQuery;
 
 @Stateless
 public class UserEAOImpl implements UserEAOLocal{
@@ -40,6 +44,9 @@ public class UserEAOImpl implements UserEAOLocal{
 	public int getUsersOnMatchesCount() {
 		return em.createNamedQuery("User.countRegisteredOnMatches", Integer.class).getSingleResult();
 	}
-
 	
+	public Set<User> getAllUsers() {
+		TypedQuery<User> query = em.createNamedQuery("User.findAll", User.class);
+		return new HashSet<User>(query.getResultList());
+	}
 }

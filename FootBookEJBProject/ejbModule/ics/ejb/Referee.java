@@ -73,10 +73,5 @@ public class Referee implements Serializable {
 	public void setRefereeLicense(RefereeLicense refereeLicense) {
 		this.refereeLicense = refereeLicense;
 	}
-	
-	
-	
-	
-	
 }
 

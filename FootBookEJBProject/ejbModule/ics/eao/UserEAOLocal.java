@@ -1,5 +1,7 @@
 package ics.eao;
 
+import java.util.Set;
+
 import ics.ejb.User;
 import jakarta.ejb.Local;
 
@@ -12,7 +14,5 @@ public interface UserEAOLocal {
 	public User findUserById(String userId);
 	public int getUserCount(); // For statistics of how many users are registered
 	public int getUsersOnMatchesCount(); //Stats on how many users are registered on matches
-	
-	
-	
+	public Set<User> getAllUsers();
 }
