@@ -30,6 +30,35 @@ body {
     box-sizing: border-box;
 }
 
+h2 {
+    text-align: center;
+}
+
+table, table td, table th {
+    border-collapse: separate;
+    border-spacing: 20px 0;
+    text-align: left;
+}
+
+button {
+    cursor: pointer;
+    background-color: var(--main-color);
+    padding: 5px;
+    border: 5px solid var(--text-color);
+    border-radius: 5px;
+    text-align: center;
+    margin: 10px auto;
+    color: var(--text-color);
+}
+
+button:hover {
+    animation: popOut 0.5s ease-in-out;
+}
+
+table button {
+    min-width: 100px;
+}
+
 .pattern-background {
     position: relative;
     overflow: hidden;
@@ -135,10 +164,6 @@ nav ul li:hover {
     -webkit-filter: var(--sun-filter);
 }
 
-.icon-button:hover {
-    animation: popOut 0.5s ease-in-out;
-}
-
 .logo {
     font-size: 8vw;
     text-transform: uppercase;
@@ -197,7 +222,6 @@ nav ul li:hover {
     border: 5px solid var(--text-color);
     border-radius: 5px;
     text-align: center;
-    max-width: 500px;
     margin: 10px auto;
 }
 

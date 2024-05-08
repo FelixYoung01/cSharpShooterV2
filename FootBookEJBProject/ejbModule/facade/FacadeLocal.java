@@ -5,6 +5,7 @@ import java.util.Set;
 
 import ics.ejb.Match;
 import ics.ejb.Pitch;
+import ics.ejb.Referee;
 import ics.ejb.RefereeLicense;
 import ics.ejb.Pitch;
 //import ics.ejb.Player;
@@ -33,4 +34,12 @@ public interface FacadeLocal {
 	
 	public Set<Match> getMatchesOnPitch(String pitchId);
 
+<<<<<<< Updated upstream
+=======
+	public Set<User> getUsersOnMatch(String matchId);
+	
+	public Set<User> getAllUsers();
+	
+	public Set<Referee> getAllReferees();
+>>>>>>> Stashed changes
 }
