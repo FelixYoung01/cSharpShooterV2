@@ -10,6 +10,7 @@
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+
 	<button id="dark-mode-toggle" class="icon-button">
 		<img src="Images/sun.png" alt="Sun Icon" class="sun-icon">
 	</button>
@@ -23,7 +24,8 @@
 				<li><a href="<%=request.getContextPath()%>/about"
 					class="button">About</a></li>
 
-				<li><a href="#">Need Help?</a></li>
+				<li><a href="<%=request.getContextPath()%>/needHelp" class="button">Need Help?</a></li>
+
 			</ul>
 		</nav>
 		<img src="Images/Arsenal_FC.svg.webp" alt="Arsenal Logo"
