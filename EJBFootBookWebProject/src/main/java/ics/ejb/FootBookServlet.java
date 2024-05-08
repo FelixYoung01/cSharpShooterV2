@@ -30,6 +30,7 @@ public class FootBookServlet extends HttpServlet {
 	private static final String PITCH_INFO_PATH = "/pitchInfo";
 	private static final String ABOUT_PATH = "/about";
 	private static final String MATCH_INFO_PATH = "/matchId";
+	private static final String NEED_HELP_PATH = "/needHelp";
 
 	@EJB
 	private FacadeLocal facade;
@@ -41,6 +42,7 @@ public class FootBookServlet extends HttpServlet {
 		handlerMap.put(PITCH_INFO_PATH, new PitchInfoHandler());
 		handlerMap.put(ABOUT_PATH, new AboutHandler());
 		handlerMap.put(MATCH_INFO_PATH, new MatchInfoHandler());
+		handlerMap.put(NEED_HELP_PATH, new NeedHelpHandler());
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
