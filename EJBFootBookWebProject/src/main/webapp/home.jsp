@@ -11,7 +11,7 @@
 </head>
 <body>
 	<button id="dark-mode-toggle" class="icon-button">
-		<img src="Images/weather.webp" alt="Weather Icon" class="weather-icon">
+		<img src="Images/sun.png" alt="Sun Icon" class="sun-icon">
 	</button>
 	<h1 class="logo">FootBook</h1>
 	<header>
