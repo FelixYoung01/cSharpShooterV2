@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-
 <button id="dark-mode-toggle" class="icon-button">
     <img src="Images/sun.png" alt="Sun Icon" class="sun-icon">
 </button>
