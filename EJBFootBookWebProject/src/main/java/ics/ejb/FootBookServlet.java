@@ -24,6 +24,7 @@ public class FootBookServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	private final Map<String, IPathHandler> handlerMap = new HashMap<>();
+
 	
 	private static final String FOOT_BOOK_SERVLET_PATH = "/home";
 	private static final String REGISTER_PATH = "/register";
@@ -32,17 +33,20 @@ public class FootBookServlet extends HttpServlet {
 	private static final String MATCH_INFO_PATH = "/matchId";
 	private static final String NEED_HELP_PATH = "/needHelp";
 
+
 	@EJB
 	private FacadeLocal facade;
 
 	public FootBookServlet() {
 		super();
+
 		handlerMap.put(FOOT_BOOK_SERVLET_PATH, new HomeHandler());
 		handlerMap.put(REGISTER_PATH, new RegisterHandler());
 		handlerMap.put(PITCH_INFO_PATH, new PitchInfoHandler());
 		handlerMap.put(ABOUT_PATH, new AboutHandler());
 		handlerMap.put(MATCH_INFO_PATH, new MatchInfoHandler());
 		handlerMap.put(NEED_HELP_PATH, new NeedHelpHandler());
+
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)

@@ -1,6 +1,6 @@
 <%@page import="ics.ejb.Match"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,9 +13,9 @@
 	Match match = (Match) request.getAttribute("match");
 	%>
 	<div class="match">
-			<p><%= match.getDate()%></p>
-			<p><%= match.getTime()%></p>
-		</div>
-		
+		<p><%=match.getDate()%></p>
+		<p><%=match.getTime()%></p>
+	</div>
+	<script src="Darkmode.js"></script>
 </body>
 </html>
