@@ -14,6 +14,7 @@ public class PitchInfoHandler implements IPathHandler {
 	@Override
 	public RequestDispatcher handleRequestDispatcher(HttpServletRequest request, HttpServletResponse response,
 			FacadeLocal facade) throws ServletException, IOException {
+		
 		String pitchId = request.getParameter("pitchId");
 		Pitch pitch = facade.findPitch(pitchId);
 		

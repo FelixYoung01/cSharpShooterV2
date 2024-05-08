@@ -32,7 +32,7 @@
 		<div class="match">
 			<h3><%=match.getMatchId()%></h3>
 			<a
-				href="<%=request.getContextPath()%>/pitchInfo?pitchId=<%=pitchId%>&matchId=<%=match.getMatchId()%>">
+				href="<%=request.getContextPath()%>/matchInfo?matchId=<%=match.getMatchId()%>">
 			</a>
 			<p>
 				Match Date:

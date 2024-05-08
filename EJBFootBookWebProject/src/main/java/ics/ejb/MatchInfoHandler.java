@@ -17,6 +17,12 @@ public class MatchInfoHandler implements IPathHandler {
 		String matchId = request.getParameter("matchId");
 		Match match = facade.findMatch(matchId);
 		
+		if (match == null) {
+			return request.getRequestDispatcher("Match not found.");
+		}
+		
+		System.out.println(matchId);
+		
 		request.setAttribute("match", match);
 		return request.getRequestDispatcher("/matchInfo.jsp");
 	}
