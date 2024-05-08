@@ -12,7 +12,9 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.Set;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import jakarta.ejb.EJB;
 import facade.FacadeLocal;
@@ -20,6 +22,9 @@ import facade.FacadeLocal;
 @WebServlet("/home")
 public class FootBookServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	
+	private final Map<String, IPathHandler> handlerMap = new HashMap<>();
+	
 	private static final String FOOT_BOOK_SERVLET_PATH = "/home";
 	private static final String REGISTER_PATH = "/register";
 	private static final String PITCH_INFO_PATH = "/pitchInfo";
@@ -31,7 +36,11 @@ public class FootBookServlet extends HttpServlet {
 
 	public FootBookServlet() {
 		super();
-		// TODO Auto-generated constructor stub
+		handlerMap.put(FOOT_BOOK_SERVLET_PATH, new HomeHandler());
+		handlerMap.put(REGISTER_PATH, new RegisterHandler());
+		handlerMap.put(PITCH_INFO_PATH, new PitchInfoHandler());
+		handlerMap.put(ABOUT_PATH, new AboutHandler());
+		handlerMap.put(MATCH_INFO_PATH, new MatchInfoHandler());
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -44,60 +53,9 @@ public class FootBookServlet extends HttpServlet {
 		System.out.println("$ContextPath: " + path);
 		System.out.println("$Path: " + pathInfo);
 
-
-		request.setAttribute("matchCount", matchCount);
-
 			
-		// Kanske ändra till strategy design pattern för att hantera olika paths. mats gillar inte switch cases.
-		switch (pathInfo) {
-		case FOOT_BOOK_SERVLET_PATH:
-			// Call the facade method to get the data
-			Set<Pitch> pitches = facade.getAllPitches();
-			// Set the data as a request attribute
-			request.setAttribute("pitches", pitches);
-			RequestDispatcher r1 = request.getRequestDispatcher("/home.jsp");
-			r1.forward(request, response);
-			break;
-
-		case REGISTER_PATH:
-			RequestDispatcher r2 = request.getRequestDispatcher("/register.jsp");
-			r2.forward(request, response);
-			break;
-
-		case PITCH_INFO_PATH:
-			String pitchId = request.getParameter("pitchId");
-			Pitch pitch = facade.findPitch(pitchId);
-			
-			Set<Match> matchesOnPitch = facade.getMatchesOnPitch(pitchId);
-			
-			request.setAttribute("matchesOnPitch", matchesOnPitch);
-			request.setAttribute("pitch", pitch);
-			
-			RequestDispatcher r3 = request.getRequestDispatcher("/pitchInfo.jsp");
-			r3.forward(request, response);
-			break;
-
-		case ABOUT_PATH:
-			RequestDispatcher r4 = request.getRequestDispatcher("/about.jsp");
-			r4.forward(request, response);
-			break;
-			
-		case MATCH_INFO_PATH:
-			String matchId = request.getParameter("matchId");
-			Match match = facade.findMatch(matchId);
-			
-			request.setAttribute("match", match);
-			RequestDispatcher r5 = request.getRequestDispatcher("/matchInfo.jsp");
-			r5.forward(request, response);
-			break;
-
-		default:
-			System.out.println("Invalid path: " + pathInfo);
-			// Optionally forward to an error page
-			// RequestDispatcher errorDispatcher =
-			// request.getRequestDispatcher("/error.jsp");
-			// errorDispatcher.forward(request, response);
-			break;
-		}
+		IPathHandler handler = handlerMap.get(pathInfo);
+		RequestDispatcher requestDispatcher = handler.handleRequestDispatcher(request, response, facade);
+		requestDispatcher.forward(request, response);
 	}
 }
