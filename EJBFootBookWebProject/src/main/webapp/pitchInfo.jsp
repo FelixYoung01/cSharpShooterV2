@@ -10,6 +10,7 @@
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+	<jsp:include page="header.jsp" />
 	<%
 	Pitch pitch = (Pitch) request.getAttribute("pitch");
 	String pitchId = pitch.getPitchId();
@@ -21,20 +22,30 @@
 			<%=pitch.getName()%></h3>
 		<p>
 			Pitch ID:
-			<%= pitchId %></p>
+			<%=pitchId%></p>
 	</div>
 	<section class="Matches">
-	<% Set<Match> matches = (Set<Match>) request.getAttribute("matchesOnPitch");
-		for (Match match : matches) { %>
-	<div class="match">
-		<h3><%= match.getMatchId() %></h3>
-		<a href="<%= request.getContextPath()%>/pitchInfo?pitchId=<%=pitchId %>&matchId=<%= match.getMatchId() %>"> </a>
-		<p>Match Date: <%= match.getDate() %></p>
-		<p>Match Time: <%= match.getTime() %></p>
-			<%
-			}
-			%>
+		<%
+		Set<Match> matches = (Set<Match>) request.getAttribute("matchesOnPitch");
+		for (Match match : matches) {
+		%>
+		<div class="match">
+			<h3><%=match.getMatchId()%></h3>
+			<a
+				href="<%=request.getContextPath()%>/matchInfo?matchId=<%=match.getMatchId()%>">
+			</a>
+			<p>
+				Match Date:
+				<%=match.getDate()%></p>
+			<p>
+				Match Time:
+				<%=match.getTime()%></p>
+
 		</div>
-		</section>
+		<%
+		}
+		%>
+	</section>
+	<script src="Darkmode.js"></script>
 </body>
 </html>

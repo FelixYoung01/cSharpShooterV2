@@ -24,23 +24,19 @@ public class FootBookServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	private final Map<String, IPathHandler> handlerMap = new HashMap<>();
-	
-	private static final String FOOT_BOOK_SERVLET_PATH = "/home";
-	private static final String REGISTER_PATH = "/register";
-	private static final String PITCH_INFO_PATH = "/pitchInfo";
-	private static final String ABOUT_PATH = "/about";
-	private static final String MATCH_INFO_PATH = "/matchId";
 
 	@EJB
 	private FacadeLocal facade;
 
 	public FootBookServlet() {
 		super();
-		handlerMap.put(FOOT_BOOK_SERVLET_PATH, new HomeHandler());
-		handlerMap.put(REGISTER_PATH, new RegisterHandler());
-		handlerMap.put(PITCH_INFO_PATH, new PitchInfoHandler());
-		handlerMap.put(ABOUT_PATH, new AboutHandler());
-		handlerMap.put(MATCH_INFO_PATH, new MatchInfoHandler());
+
+		handlerMap.put("/home", new HomeHandler());
+		handlerMap.put("/register", new RegisterHandler());
+		handlerMap.put("/pitchInfo", new PitchInfoHandler());
+		handlerMap.put("/about", new AboutHandler());
+		handlerMap.put("/matchInfo", new MatchInfoHandler());
+		handlerMap.put("/needHelp", new NeedHelpHandler());
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -57,5 +53,10 @@ public class FootBookServlet extends HttpServlet {
 		IPathHandler handler = handlerMap.get(pathInfo);
 		RequestDispatcher requestDispatcher = handler.handleRequestDispatcher(request, response, facade);
 		requestDispatcher.forward(request, response);
+	}
+	
+	public void init() throws ServletException{
+        getServletContext().setAttribute("sessionCount", 0);
+
 	}
 }
