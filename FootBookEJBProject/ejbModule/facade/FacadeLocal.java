@@ -6,6 +6,7 @@ import java.util.Set;
 import ics.ejb.Match;
 import ics.ejb.Pitch;
 import ics.ejb.RefereeLicense;
+import ics.ejb.User;
 import ics.ejb.Pitch;
 //import ics.ejb.Player;
 //import ics.ejb.Referee;
@@ -32,5 +33,7 @@ public interface FacadeLocal {
 
 	
 	public Set<Match> getMatchesOnPitch(String pitchId);
+
+	public Set<User> getUsersOnMatch(String matchId);
 
 }
