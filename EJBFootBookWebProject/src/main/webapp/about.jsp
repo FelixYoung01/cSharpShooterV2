@@ -21,7 +21,7 @@
 					class="button">Register</a></li>
 				<li><a href="<%=request.getContextPath()%>/about"
 					class="button">About</a></li>
-				<li><a href="#">Need Help?</a></li>
+				<li><a href="<%=request.getContextPath()%>/needHelp" class="button">Need Help?</a></li>
 			</ul>
 		</nav>
 		<img src="Images/Arsenal_FC.svg.webp" alt="Arsenal Logo"
