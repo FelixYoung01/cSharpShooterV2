@@ -19,13 +19,9 @@
 		<nav>
 			<ul>
 				<li><a href="<%=request.getContextPath()%>/home" class="button">Home</a></li>
-				<li><a href="<%=request.getContextPath()%>/register"
-					class="button">Register</a></li>
-				<li><a href="<%=request.getContextPath()%>/about"
-					class="button">About</a></li>
-
+				<li><a href="<%=request.getContextPath()%>/register" class="button">Register</a></li>
+				<li><a href="<%=request.getContextPath()%>/about" class="button">About</a></li>
 				<li><a href="<%=request.getContextPath()%>/needHelp" class="button">Need Help?</a></li>
-
 			</ul>
 		</nav>
 		<img src="Images/Arsenal_FC.svg.webp" alt="Arsenal Logo"
