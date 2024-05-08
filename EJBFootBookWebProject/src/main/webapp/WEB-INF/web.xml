@@ -31,4 +31,8 @@
 	<servlet-name>FootBookServlet</servlet-name>
 	<url-pattern>/pitchInfo</url-pattern>
 	</servlet-mapping> 
+	    <servlet-mapping>
+	    <servlet-name>FootBookServlet</servlet-name>
+	    <url-pattern>/matchInfo</url-pattern>
+	    </servlet-mapping>
 </web-app>

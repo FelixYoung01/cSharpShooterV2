@@ -11,6 +11,7 @@
 <body>
 	<%
 	Match match = (Match) request.getAttribute("match");
+	String matchId = match.getMatchId();
 	%>
 	<div class="match">
 		<p><%=match.getDate()%></p>
