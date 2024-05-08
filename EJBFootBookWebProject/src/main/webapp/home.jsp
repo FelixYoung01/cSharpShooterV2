@@ -1,19 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ page import="ics.ejb.Pitch, java.util.Set, java.util.ArrayList"%>
-<%
-HttpSession sessions = request.getSession(false); //Hämtar nuvarande session utan att skapa en ny om den inte redan finns
-
-
-//Code for session tracking
-if (sessions != null && sessions.getAttribute("visited") == null) { //Kolla ifall session finns och ifall den redan har besökt sidan
-	
-	ServletContext applications = request.getServletContext(); //Hämtar applikationens attributer
-	int visitorCount = (int) applications.getAttribute("sessionCount"); //Hämtar antalet besökare från context
-	applications.setAttribute("sessionCount", visitorCount + 1); //Ökar antalet besökare med 1
-	sessions.setAttribute("visited", true); //Sätter visited till true för att visa att sessionen nu har besökt sidan
-}
-%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
