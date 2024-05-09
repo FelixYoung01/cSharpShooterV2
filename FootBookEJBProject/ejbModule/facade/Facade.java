@@ -118,4 +118,9 @@ public class Facade implements FacadeLocal {
 		return refereeEAO.getAllReferees();
 	}
 
+	
+	public void createUser(User user) {
+		userEAO.createUser(user);
+	}
+
 }
