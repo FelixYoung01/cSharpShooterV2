@@ -285,8 +285,8 @@ footer {
     width: 200px;
 }
 
-.team-member-info {
-    text-align: center;
+.team-member-info p {
+    text-align: left;
 }
 
 .profilepic {
