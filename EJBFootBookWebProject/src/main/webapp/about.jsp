@@ -11,7 +11,7 @@
 <body>
     <%@ include file="header.jsp" %>
 
-    <section class="box">
+    <section class="box" style="width: 800px">
         <h2>About Us</h2>
         <p>Welcome to FootBook! We are your go-to platform for booking football matches on your favorite pitches. Whether you're organizing a friendly match or looking to join a league, FootBook has you covered.</p>
         <p>Our mission is to make the process of booking pitches and organizing games as seamless and enjoyable as possible. Get started today and experience the thrill of playing football like never before!</p>
