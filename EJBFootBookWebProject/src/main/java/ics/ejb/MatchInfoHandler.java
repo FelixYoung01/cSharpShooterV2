@@ -12,7 +12,7 @@ import jakarta.servlet.http.HttpServletResponse;
 public class MatchInfoHandler implements IPathHandler {
 
 	@Override
-	public RequestDispatcher handleRequestDispatcher(HttpServletRequest request, HttpServletResponse response,
+	public RequestDispatcher handleRequestDispatcherGet(HttpServletRequest request, HttpServletResponse response,
 			FacadeLocal facade) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		String matchId = request.getParameter("matchId");
@@ -26,5 +26,12 @@ public class MatchInfoHandler implements IPathHandler {
 		request.setAttribute("match", match);
 		return request.getRequestDispatcher("/matchInfo.jsp");
 	}
-
+	
+	@Override
+	public RequestDispatcher handleRequestDispatcherPost(HttpServletRequest request, HttpServletResponse response,
+            FacadeLocal facade) throws ServletException, IOException {
+        return request.getRequestDispatcher("/matchInfo.jsp");
+    }
 }
+
+

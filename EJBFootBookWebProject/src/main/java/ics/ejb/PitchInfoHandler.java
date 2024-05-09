@@ -12,7 +12,7 @@ import jakarta.servlet.http.HttpServletResponse;
 public class PitchInfoHandler implements IPathHandler {
 
 	@Override
-	public RequestDispatcher handleRequestDispatcher(HttpServletRequest request, HttpServletResponse response,
+	public RequestDispatcher handleRequestDispatcherPost(HttpServletRequest request, HttpServletResponse response,
 			FacadeLocal facade) throws ServletException, IOException {
 		
 		String pitchId = request.getParameter("pitchId");
@@ -25,5 +25,11 @@ public class PitchInfoHandler implements IPathHandler {
 		
 		return request.getRequestDispatcher("/pitchInfo.jsp");
 	}
+	
+	@Override
+	public RequestDispatcher handleRequestDispatcherGet(HttpServletRequest request, HttpServletResponse response,
+            FacadeLocal facade) throws ServletException, IOException {
+        return request.getRequestDispatcher("/pitchInfo.jsp");
+    }
 	
 }

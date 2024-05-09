@@ -10,5 +10,9 @@ import jakarta.servlet.http.HttpServletResponse;
 
 public interface IPathHandler {
 	
-	public RequestDispatcher handleRequestDispatcher(HttpServletRequest request, HttpServletResponse response, FacadeLocal facade) throws ServletException, IOException;
+	public RequestDispatcher handleRequestDispatcherGet(HttpServletRequest request, HttpServletResponse response, FacadeLocal facade) throws ServletException, IOException;
+
+	public RequestDispatcher handleRequestDispatcherPost(HttpServletRequest request, HttpServletResponse response, FacadeLocal facade) throws ServletException, IOException;
+
+	
 }
