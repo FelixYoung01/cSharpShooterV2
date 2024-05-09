@@ -50,9 +50,42 @@
             </div>
         </div>
 
-        <div class="spacer"></div>
-    </section>
+			<div class="box team-member">
+				<!-- Mert -->
+				<img src="Images/junco.png" alt="Junco" class="profilepic">
+				<div class="team-member-info">
+					<h3>Junco</h3>
+					<p>Junco is the technical genius behind FootBook. With expertise
+						in software development, he ensures that the platform is secure,
+						reliable, and scalable.</p>
+				</div>
+				</div>
+				
+				<div class="box team-member">
+				<!-- Mert -->
+				<img src="Images/felix.png" alt="Felix" class="profilepic">
+				<div class="team-member-info">
+					<h3>Felix</h3>
+					<p>Felix is the marketing guru at FootBook. With a passion for
+						digital marketing, he ensures that the platform reaches a wide
+						audience and continues to grow at a steady pace.</p>
+				</div>
+				</div>
+				
+				<div class="box team-member">
+				<!-- Mert -->
+				<img src="Images/oskar.png" alt="Oskar" class="profilepic">
+				<div class="team-member-info">
+					<h3>Oskar</h3>
+					<p>Oskar is the operations expert at FootBook. With a background
+						in project management, he ensures that the platform runs smoothly. He has a passion for football and technology.</p>
+						
+
+					<div class="spacer"></div></section>
 	</section>
+	
+		<div style="margin-bottom: 50px;"></div>
+	
 
     <script src="Darkmode.js"></script>
 </body>
