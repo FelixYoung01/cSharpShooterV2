@@ -50,7 +50,6 @@
             </div>
         </div>
 
-        <div class="spacer"></div>
     </section>
 	</section>
 
