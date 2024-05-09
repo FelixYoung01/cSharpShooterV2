@@ -12,10 +12,8 @@
 <body>
 	<jsp:include page="header.jsp" />
 
-	<div class="box">
-		<h2>Welcome to FootBook!</h2>
-		<p>Book your football match on your favorite pitches!</p>
-	</div>
+	<h2>Welcome to FootBook!</h2>
+	<p>Book your football match on your favorite pitches!</p>
 
 	<section class="pitches">
 		<h2>Book from one of these available pitches!</h2>
@@ -58,11 +56,6 @@
 		<p>Session Count: ${sessionCount}</p>
 	</section>
 
-	<div style="margin-bottom: 100px;"></div>
-
-	<footer>
-		<p>&copy; 2024 FootBook. All rights reserved.</p>
-	</footer>
 	<script src="Darkmode.js"></script>
 </body>
 </html>

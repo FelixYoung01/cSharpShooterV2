@@ -14,11 +14,16 @@ public interface MatchEAOLocal {
 
 	public void addMatch(Match match);
 
-	public void updateMatch(Match match);
+	public Match updateMatch(Match match);
 
 	public void deleteMatch(String matchId);
 
 	public Match findMatchById(String matchId);
+
+	public List<Match> findAllMatches();
 	
 	public long getMatchCount();
+
+	public List<String> findAllMatchIds();
+	
 }

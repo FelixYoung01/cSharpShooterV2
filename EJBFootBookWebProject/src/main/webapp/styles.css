@@ -27,7 +27,7 @@ body {
     align-items: center;
     justify-content: center;
     width: 100%;
-    box-sizing: border-box;
+    padding-bottom: 100px;
 }
 
 h2 {
@@ -222,7 +222,82 @@ nav ul li:hover {
     border: 5px solid var(--text-color);
     border-radius: 5px;
     text-align: center;
+    margin: 10px;
+}
+
+footer {
+    background-color: var(--main-color);
+    color: var(--text-color);
+    text-align: center;
+    padding: 20px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    border-top: 5px solid var(--text-color);
+    z-index: 10;
+}
+
+.upperleftball {
+    position: fixed;
+    top: -20vw;
+    left: -10vw;
+    width: 50vw;
+    height: 50vw;
+    opacity: 0.1;
+   
+    z-index: -1;
+    user-select: none;
+}
+
+.lowerrightball {
+    position: fixed;
+    bottom: -20vw;
+    right: -10vw;
+    width: 50vw;
+    height: 50vw;
+    opacity: 0.1;
+   
+    z-index: -1;
+    user-select: none;
+}
+
+@keyframes rotate {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.about-section {
+    width: 800px;
+}
+
+.team-members {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.team-member {
+    width: 200px;
+}
+
+.team-member-info p {
+    text-align: left;
+}
+
+.profilepic {
+    width: 100px;
+    height: 100px;
+    border: 5px solid var(--text-color);
+    border-radius: 50%;
     margin: 10px auto;
+    display: block;
+    overflow: hidden;
+    object-fit: cover;
 }
 
 .pitches {
@@ -251,10 +326,10 @@ nav ul li:hover {
     -webkit-filter: hue-rotate(90deg);
     z-index: 2;
     transition: filter 0.3s ease, transform 0.3s ease;
-    color: white;
-    text-shadow: 2px 2px 4px black;
+    font-weight: bold;
+    color: var(--background-color);
     -webkit-text-stroke-width: 1px;
-    -webkit-text-stroke-color: black;
+    -webkit-text-stroke-color: var(--text-color);
 }
 
 .pitch:hover {
@@ -264,7 +339,7 @@ nav ul li:hover {
 }
 
 .pitch h3 {
-    font-size: x-large;
+    font-size: xx-large;
     padding: 20px;
     margin-bottom: 10px;
 }
@@ -280,6 +355,7 @@ nav ul li:hover {
 }
 
 .pitch button {
+    position: absolute;
     top: 0;
     left: 0;
     width: 100%;
@@ -294,38 +370,36 @@ nav ul li:hover {
     z-index: 1;
 }
 
-footer {
-    background-color: #333;
-    color: #fff;
-    text-align: center;
+.matches {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
     padding: 20px;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
 }
 
 .match {
+    flex: 0 0 auto;
+    width: 300px;
+    height: 400px;
+    margin-right: 20px;
     background-color: var(--background-color);
     background-size: cover;
     background-position-y: center;
     border: 5px solid var(--text-color);
     border-radius: 5px;
-    margin-bottom: 20px;
-    filter: hue-rotate(90deg);
-    -webkit-filter: hue-rotate(90deg);
-    z-index: 2;
+    padding: 20px;
+    filter: blur(0px);
     transition: filter 0.3s ease, transform 0.3s ease;
 }
 
 .match:hover {
     filter: none;
-    -webkit-filter: none;
     transform: scale(1.1);
 }
 
 .match h3 {
     font-size: x-large;
-    padding: 20px;
     margin-bottom: 10px;
 }
 
@@ -340,6 +414,7 @@ footer {
 }
 
 .match button {
+    position: absolute;
     top: 0;
     left: 0;
     width: 100%;
@@ -390,6 +465,7 @@ footer {
 }
 
 .user button {
+    position: absolute;
     top: 0;
     left: 0;
     width: 100%;
@@ -402,32 +478,5 @@ footer {
     text-align: center;
     transition: background-color 0.3s ease;
     z-index: 1;
+
 }
-
-
-.popUp {
-    position: fixed; /* Fixed position to keep it centered */
-    top: 50%; /* Center vertically */
-    left: 50%; /* Center horizontally */
-    transform: translate(-50%, -50%); /* Center the pop-up */
-    z-index: 9999; /* Set the z-index to ensure it's on top */
-    background-color: #fff; /* Background color */
-    border: 2px solid #000; /* Border style */
-    padding: 20px; /* Padding inside the pop-up */
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Box shadow for a 3D effect */
-}
-
-/* Style for the form inside the pop-up */
-.popUp form {
-    margin: 0; /* Reset margin */
-}
-
-/* Style for the h2 heading */
-.popUp h2 {
-    margin-top: 0; /* Remove top margin */
-    margin-bottom: 20px; /* Add bottom margin */
-}
-
-
-
-

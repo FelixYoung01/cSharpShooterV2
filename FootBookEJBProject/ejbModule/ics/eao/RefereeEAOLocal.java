@@ -18,5 +18,7 @@ public interface RefereeEAOLocal {
 	public void deleteReferee(String refereeId);
 
 	public Referee findRefereeById(String refereeId);
+
+	public List<String> findAllRefereeIds();
 }
 
