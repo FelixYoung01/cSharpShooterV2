@@ -8,14 +8,14 @@
     --main-color: #c3f071;
     --background-color: white;
     --text-color: black;
-    --sun-filter: filter: none;
+    --sun-filter: none;
 }
 
 .dark-mode {
     --main-color: #277a00;
     --background-color: #333;
     --text-color: #fff;
-    --sun-filter: filter: invert(1);
+    --sun-filter: invert(1);
 }
 
 body {
@@ -280,7 +280,6 @@ nav ul li:hover {
 }
 
 .pitch button {
-    position: absolute;
     top: 0;
     left: 0;
     width: 100%;
@@ -341,7 +340,6 @@ footer {
 }
 
 .match button {
-    position: absolute;
     top: 0;
     left: 0;
     width: 100%;
@@ -392,7 +390,6 @@ footer {
 }
 
 .user button {
-    position: absolute;
     top: 0;
     left: 0;
     width: 100%;
