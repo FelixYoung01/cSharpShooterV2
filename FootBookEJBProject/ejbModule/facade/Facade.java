@@ -36,9 +36,6 @@ public class Facade implements FacadeLocal {
 	@EJB
 	private UserEAOLocal userEAO;
 	
-	@EJB
-	private RefereeEAOLocal refereeEAO;
-	
 	//REFEREE LICENSE METHODS
 	public RefereeLicense findRefereeLicense(String string) {
 		return refereeLicenseEAO.findRefereeLicenseById(string);

@@ -4,26 +4,34 @@ $(document).ready(function() {
 		console.log("Ajax Error:", status, error);
 	}
 
-	// Fetch location and weather data using external APIs
-	$.ajax({
-		method: "GET",
-		url: "http://api.ipstack.com/check?access_key=38aefa001ae87173e457410cf4342079",
-		error: logAjaxError,
-		success: ParseJsonFile
-	});
+	// Geolocation functions
+	function getLocation() {
+		if (navigator.geolocation) {
+			navigator.geolocation.getCurrentPosition(showPosition, handleGeolocationError);
+		} else {
+			alert("Geolocation is not supported by this browser.");
+		}
+	}
 
-	function ParseJsonFile(result) {
-		var lat = result.latitude;
-		var long = result.longitude;
-		var city = result.city;
-		var ipNbr = result.ip;
-		$("#city").text(city);
-		$("#ipNbr").text(ipNbr);
+	function showPosition(position) {
+		// Call ParseJsonFile with the obtained coordinates
+		ParseJsonFile(position);
+	}
 
+	function handleGeolocationError(error) {
+		console.warn(`Geolocation error (${error.code}): ${error.message}`);
+	}
+
+	// Fetch and process weather data using OpenWeatherMap API
+	function ParseJsonFile(position) {
+		var lat = position.coords.latitude;
+		var long = position.coords.longitude;
+
+		// Make the AJAX request to the OpenWeatherMap API
 		$.ajax({
 			method: "GET",
-			url: `http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&units=metric&APPID=ce3e097846c8e55864481f37b93db22f`,
-			error: logAjaxError,
+			url: `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&units=metric&APPID=ce3e097846c8e55864481f37b93db22f`, // Replace with your new API key
+			error: ajaxWeatherReturn_Error,
 			success: ajaxWeatherReturn_Success
 		});
 	}
@@ -32,15 +40,34 @@ $(document).ready(function() {
 		var sunrise = result.sys.sunrise;
 		var sunset = result.sys.sunset;
 		var sunriseDate = new Date(sunrise * 1000);
-		var timeStrSunrise = sunriseDate.toLocaleTimeString("sv-SE");
 		var sunsetDate = new Date(sunset * 1000);
+		var timeStrSunrise = sunriseDate.toLocaleTimeString("sv-SE");
 		var timeStrSunset = sunsetDate.toLocaleTimeString("sv-SE");
+		var city = result.name;
+
+		$("#city").text(city);
 		$("#sunrise").text("Sunrise: " + timeStrSunrise);
 		$("#sunset").text("Sunset: " + timeStrSunset);
 		$("#weather").text(result.weather[0].main);
 		$("#degree").text(result.main.temp + " \u2103");
 	}
 
+	function ajaxWeatherReturn_Error(result, status, xhr) {
+		alert("Error in OpenWeatherMap Ajax");
+		console.log("Ajax-find weather: " + status);
+	}
+	
+ // Function to fetch and display the IP address using the ipinfo API
+    function fetchIPAddress() {
+        $.ajax({
+            method: "GET",
+            url: `https://ipinfo.io/?token=7b10316367bd0b`,
+            error: logAjaxError,
+            success: function(result) {
+                $("#ipNbr").text(result.ip);
+            }
+        });
+    }
 	$("#UpdateBtn").click(function() {
 		// Retrieve the selected Match ID
 		var selectedMatchId = $("#findMatchIdSelect").val();
@@ -299,4 +326,9 @@ $(document).ready(function() {
 	populatePitchIds();
 	populateRefereeIds();
 	populateMatchIds();
+
+	// Fetch the location and weather data when the page loads
+	getLocation();
+	fetchIPAddress();
+
 });
