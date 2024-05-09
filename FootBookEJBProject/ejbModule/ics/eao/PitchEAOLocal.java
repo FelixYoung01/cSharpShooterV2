@@ -18,4 +18,6 @@ public interface PitchEAOLocal {
 	public Pitch findPitchById(String pitchId);
 
 	public Set<Pitch> getAllPitches();
+
+	public List<String> findAllPitchIds();
 }

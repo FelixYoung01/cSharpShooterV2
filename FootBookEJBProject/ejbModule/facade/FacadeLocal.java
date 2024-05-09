@@ -20,6 +20,10 @@ public interface FacadeLocal {
 
 	public RefereeLicense findRefereeLicense(String string);
 	
+	//Referee Methods
+	
+	public List<String> findAllRefereeIds();
+	
 	
 	
 	//Match Methods
@@ -56,6 +60,8 @@ public interface FacadeLocal {
 	public Set<Match> getMatchesOnPitch(String pitchId);
 
 	public Set<User> getUsersOnMatch(String matchId);
+
+	public List<String> findAllPitchIds();
 
 
 }

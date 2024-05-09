@@ -42,4 +42,10 @@ public class RefereeEAOImpl implements RefereeEAOLocal {
 		Referee referee = em.find(Referee.class, refereeId);
 		return referee;
 	}
+	
+	public List<String> findAllRefereeIds() {
+	    TypedQuery<String> query = em.createQuery("SELECT r.refereeId FROM Referee r", String.class);
+	    return query.getResultList();
+	}
+
 }

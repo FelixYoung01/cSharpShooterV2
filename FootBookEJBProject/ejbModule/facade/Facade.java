@@ -7,6 +7,7 @@ import org.junit.jupiter.migrationsupport.EnableJUnit4MigrationSupport;
 
 import ics.eao.MatchEAOLocal;
 import ics.eao.PitchEAOLocal;
+import ics.eao.RefereeEAOLocal;
 import ics.eao.RefereeLicenseEAOLocal;
 import ics.eao.UserEAOLocal;
 import ics.ejb.Match;
@@ -31,13 +32,27 @@ public class Facade implements FacadeLocal {
 	@EJB
 	private UserEAOLocal userEAO;
 	
+	@EJB
+	private RefereeEAOLocal refereeEAO;
 	
+	//REFEREE LICENSE METHODS
 	public RefereeLicense findRefereeLicense(String string) {
 		return refereeLicenseEAO.findRefereeLicenseById(string);
 	};
 	
+	//REFEREE METHODS
+	
+	public List<String> findAllRefereeIds() {
+		return refereeEAO.findAllRefereeIds();
+	}
+
+	//PITCH METHODS
 	public Set<Pitch> getAllPitches() {
 		return pitchEAO.getAllPitches();
+	}
+	
+	public List<String> findAllPitchIds() {
+		return pitchEAO.findAllPitchIds();
 	}
 
 	
@@ -63,7 +78,6 @@ public class Facade implements FacadeLocal {
 		return matchEAO.updateMatch(match);
 	}
 	
-	@Override
 	public List<String> findAllMatchIds() {
 		return matchEAO.findAllMatchIds();
 	}
@@ -94,7 +108,6 @@ public class Facade implements FacadeLocal {
 	public Set<User> getUsersOnMatch(String matchId) {
 		return matchEAO.findMatchById(matchId).getUsers();
 	}
-
 	
 
 }

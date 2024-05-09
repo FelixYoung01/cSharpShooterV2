@@ -11,6 +11,23 @@
 <!-- jQuery -->
 <script src="js/FootBook.js"></script>
 <!-- JavaScript file -->
+<style>
+/* Flex container to hold the find/update form and display box side by side */
+#FindUpdateSection {
+	display: flex;
+	justify-content: space-between;
+}
+
+#FindUpdateFS, #matchDisplayBox {
+	width: 45%;
+	box-sizing: border-box;
+}
+
+#matchDisplayBox {
+	border: 1px solid #000;
+	padding: 10px;
+}
+</style>
 </head>
 <body>
 	<header>
@@ -54,16 +71,16 @@
 							id="refereeIdSelect"><option value="">Select
 								Referee ID</option></select><br> Date:<br> <input type="date"
 							name="date" id="date" value=""><br> Time:<br> <input
-							type="time" name="time" id="time" value=""><br>
-						<br> <input type="button" name="submitBtn" value="Add"
-							id="AddBtn">
+							type="time" name="time" id="time" value=""><br> <br>
+						<input type="button" name="submitBtn" value="Add" id="AddBtn">
 					</fieldset>
 				</article>
 			</section>
 
-			<!-- Second Section: Find, Update, and Delete Matches -->
+			<!-- Second Section: Find, Update, and Delete Matches with Display -->
 			<section id="content">
-				<article>
+				<div id="FindUpdateSection">
+					<!-- Find, Update, and Delete -->
 					<fieldset id="FindUpdateFS">
 						<legend>Find, Update, and Delete:</legend>
 						Match ID:<br> <select id="findMatchIdSelect"><option
@@ -79,7 +96,17 @@
 							value="Delete" id="DeleteBtn"> <input type="button"
 							name="submitBtn" value="Update" id="UpdateBtn">
 					</fieldset>
-				</article>
+
+					<!-- Display Box for Match Details -->
+					<fieldset id="matchDisplayBox">
+						<legend>Match Details:</legend>
+						<p id="displayMatchId">Match ID:</p>
+						<p id="displayPitchId">Pitch ID:</p>
+						<p id="displayRefereeId">Referee ID:</p>
+						<p id="displayMatchDate">Date:</p>
+						<p id="displayMatchTime">Time:</p>
+					</fieldset>
+				</div>
 			</section>
 		</section>
 	</section>
