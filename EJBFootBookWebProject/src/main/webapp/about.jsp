@@ -50,6 +50,7 @@
             </div>
         </div>
 
+<<<<<<< HEAD
 			<div class="box team-member">
 				<!-- Mert -->
 				<img src="Images/junco.png" alt="Junco" class="profilepic">
@@ -82,6 +83,9 @@
 						
 
 					<div class="spacer"></div></section>
+=======
+    </section>
+>>>>>>> main
 	</section>
 	
 		<div style="margin-bottom: 50px;"></div>

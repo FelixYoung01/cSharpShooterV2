@@ -27,6 +27,7 @@ body {
     align-items: center;
     justify-content: center;
     width: 100%;
+    padding-bottom: 100px;
 }
 
 h2 {
@@ -245,6 +246,7 @@ footer {
     opacity: 0.1;
    
     z-index: -1;
+    user-select: none;
 }
 
 .lowerrightball {
@@ -256,6 +258,7 @@ footer {
     opacity: 0.1;
    
     z-index: -1;
+    user-select: none;
 }
 
 @keyframes rotate {
@@ -284,10 +287,6 @@ footer {
 
 .team-member-info {
     text-align: center;
-}
-
-.spacer {
-    margin-bottom: 50px;
 }
 
 .profilepic {
@@ -327,10 +326,10 @@ footer {
     -webkit-filter: hue-rotate(90deg);
     z-index: 2;
     transition: filter 0.3s ease, transform 0.3s ease;
-    color: white;
-    text-shadow: 2px 2px 4px black;
+    font-weight: bold;
+    color: var(--background-color);
     -webkit-text-stroke-width: 1px;
-    -webkit-text-stroke-color: black;
+    -webkit-text-stroke-color: var(--text-color);
 }
 
 .pitch:hover {
@@ -340,7 +339,7 @@ footer {
 }
 
 .pitch h3 {
-    font-size: x-large;
+    font-size: xx-large;
     padding: 20px;
     margin-bottom: 10px;
 }
