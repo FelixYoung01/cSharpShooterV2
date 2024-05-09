@@ -24,6 +24,9 @@ public class RefereeLicense implements Serializable {
 	private String licenseId;
 	private Set<Referee> referees;
 	
+	public RefereeLicense() {
+	}
+	
 	public RefereeLicense(String licenseId) {
 		this.licenseId = licenseId;
 	}
