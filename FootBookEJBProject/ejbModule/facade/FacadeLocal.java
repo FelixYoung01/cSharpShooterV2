@@ -25,6 +25,10 @@ public interface FacadeLocal {
 	
 	public List<String> findAllRefereeIds();
 	
+	public Set<Referee> getAllReferees();
+	
+	public Referee findRefereeById(String refereeId);
+	
 	
 	
 	//Match Methods
@@ -51,6 +55,8 @@ public interface FacadeLocal {
 	public int getUsersOnMatchesCount();
   
   public void createUser(User user);
+  
+  public Set<User> getAllUsers();
 
 	
 	//Pitch Methods
@@ -58,13 +64,8 @@ public interface FacadeLocal {
 	public Pitch findPitch(String pitchId);
 	
 	public Set<Pitch> getAllPitches();
-
 	
 	public Set<Match> getMatchesOnPitch(String pitchId);
-	
-	public Set<User> getAllUsers();
-	
-	public Set<Referee> getAllReferees();
 
 	public Set<User> getUsersOnMatch(String matchId);
 
