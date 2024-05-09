@@ -27,7 +27,6 @@ body {
     align-items: center;
     justify-content: center;
     width: 100%;
-    box-sizing: border-box;
 }
 
 h2 {
@@ -304,28 +303,36 @@ footer {
     width: 100%;
 }
 
+.matches {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    padding: 20px;
+}
+
 .match {
+    flex: 0 0 auto;
+    width: 300px;
+    height: 400px;
+    margin-right: 20px;
     background-color: var(--background-color);
     background-size: cover;
     background-position-y: center;
     border: 5px solid var(--text-color);
     border-radius: 5px;
-    margin-bottom: 20px;
-    filter: hue-rotate(90deg);
-    -webkit-filter: hue-rotate(90deg);
-    z-index: 2;
+    padding: 20px;
+    filter: blur(0px);
     transition: filter 0.3s ease, transform 0.3s ease;
 }
 
 .match:hover {
     filter: none;
-    -webkit-filter: none;
     transform: scale(1.1);
 }
 
 .match h3 {
     font-size: x-large;
-    padding: 20px;
     margin-bottom: 10px;
 }
 
