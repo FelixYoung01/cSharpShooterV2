@@ -49,6 +49,8 @@ public interface FacadeLocal {
 	public int getUserCount();
 	
 	public int getUsersOnMatchesCount();
+  
+  public void createUser(User user);
 
 	
 	//Pitch Methods
@@ -65,7 +67,6 @@ public interface FacadeLocal {
 	public Set<Referee> getAllReferees();
 
 	public Set<User> getUsersOnMatch(String matchId);
-
 
 	public List<String> findAllPitchIds();
 

@@ -49,4 +49,5 @@ public class UserEAOImpl implements UserEAOLocal{
 		TypedQuery<User> query = em.createNamedQuery("User.findAll", User.class);
 		return new HashSet<User>(query.getResultList());
 	}
+	
 }
