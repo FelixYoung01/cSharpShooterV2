@@ -22,3 +22,4 @@
 	class="upperleftball" />
 <img src="Images/footballpattern.png" alt="Football"
 	class="lowerrightball" />
+<footer>&copy; 2024 FootBook. All rights reserved.</footer>

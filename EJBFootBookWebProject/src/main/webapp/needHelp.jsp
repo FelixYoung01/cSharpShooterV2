@@ -16,9 +16,6 @@
 		<!-- Add contact information or support details here -->
 	</section>
 
-	<footer>
-		<p>&copy; 2024 FootBook. All rights reserved.</p>
-	</footer>
 	<script src="Darkmode.js"></script>
 </body>
 </html>

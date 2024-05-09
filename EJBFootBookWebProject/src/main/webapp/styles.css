@@ -232,6 +232,7 @@ footer {
     position: fixed;
     bottom: 0;
     width: 100%;
+    border-top: 5px solid var(--text-color);
 }
 
 .upperleftball {
