@@ -31,10 +31,6 @@ public class RefereeLicense implements Serializable {
 		this.licenseId = licenseId;
 	}
 	
-	public RefereeLicense() {
-	}
-
-
 	@Id
 	@Column(name = "LicenseId")
 	public String getLicenseId() {
