@@ -40,4 +40,6 @@ public interface FacadeLocal {
 	public Set<Referee> getAllReferees();
 
 	public Set<User> getUsersOnMatch(String matchId);
+
+	public void createUser(User user);
 }

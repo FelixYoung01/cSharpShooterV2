@@ -41,17 +41,31 @@ public class FootBookServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		String pathInfo = request.getRequestURI().substring(request.getContextPath().length());
+
+		if (pathInfo.equals("/home")) {
+			IPathHandler handler = handlerMap.get(pathInfo);
+			RequestDispatcher requestDispatcher = handler.handleRequestDispatcherGet(request, response, facade);
+			requestDispatcher.forward(request, response);
+		}
+		else {
+			doPost(request, response);
+		}
+		
+	}
+	
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
 		String path = request.getContextPath();
 		String URI = request.getRequestURI();
 		String pathInfo = URI.substring(path.length());
 
 		System.out.println("$URI: " + URI);
 		System.out.println("$ContextPath: " + path);
-		System.out.println("$Path: " + pathInfo);
-
-			
+		System.out.println("$doPostPath: " + pathInfo);
+		
 		IPathHandler handler = handlerMap.get(pathInfo);
-		RequestDispatcher requestDispatcher = handler.handleRequestDispatcher(request, response, facade);
+		RequestDispatcher requestDispatcher = handler.handleRequestDispatcherPost(request, response, facade);
 		requestDispatcher.forward(request, response);
 	}
 	

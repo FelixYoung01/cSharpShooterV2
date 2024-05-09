@@ -405,4 +405,29 @@ footer {
 }
 
 
+.popUp {
+    position: fixed; /* Fixed position to keep it centered */
+    top: 50%; /* Center vertically */
+    left: 50%; /* Center horizontally */
+    transform: translate(-50%, -50%); /* Center the pop-up */
+    z-index: 9999; /* Set the z-index to ensure it's on top */
+    background-color: #fff; /* Background color */
+    border: 2px solid #000; /* Border style */
+    padding: 20px; /* Padding inside the pop-up */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Box shadow for a 3D effect */
+}
+
+/* Style for the form inside the pop-up */
+.popUp form {
+    margin: 0; /* Reset margin */
+}
+
+/* Style for the h2 heading */
+.popUp h2 {
+    margin-top: 0; /* Remove top margin */
+    margin-bottom: 20px; /* Add bottom margin */
+}
+
+
+
 

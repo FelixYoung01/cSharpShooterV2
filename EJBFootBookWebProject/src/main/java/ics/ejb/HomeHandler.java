@@ -14,8 +14,14 @@ import jakarta.servlet.http.HttpSession;
 public class HomeHandler implements IPathHandler {
 
 	@Override
-	public RequestDispatcher handleRequestDispatcher(HttpServletRequest request, HttpServletResponse response,
+	public RequestDispatcher handleRequestDispatcherPost(HttpServletRequest request, HttpServletResponse response,
 			FacadeLocal facade) throws ServletException, IOException {
+		return request.getRequestDispatcher("/home.jsp");
+	}
+	
+	@Override
+	public RequestDispatcher handleRequestDispatcherGet(HttpServletRequest request, HttpServletResponse response,
+            FacadeLocal facade) throws ServletException, IOException {
 
 		Set<Pitch> pitches = facade.getAllPitches();
 
@@ -40,5 +46,6 @@ public class HomeHandler implements IPathHandler {
 		}
 
 		return request.getRequestDispatcher("/home.jsp");
-	}
+        
+    }
 }

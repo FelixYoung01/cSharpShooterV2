@@ -81,4 +81,8 @@ public class Facade implements FacadeLocal {
 	public Set<Referee> getAllReferees() {
 		return refereeEAO.getAllReferees();
 	}
+	
+	public void createUser(User user) {
+		userEAO.createUser(user);
+	}
 }
