@@ -86,7 +86,6 @@
 			document.getElementById("message").value = "";
 		}
 	</script>
-	<div style="margin-bottom: 50px;"></div>
 
 	<script src="Darkmode.js"></script>
 </body>
