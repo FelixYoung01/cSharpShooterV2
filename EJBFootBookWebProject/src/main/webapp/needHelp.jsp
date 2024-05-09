@@ -85,9 +85,6 @@ function showSuccess() {
 </script>
     </section>
 	<div style="margin-bottom: 50px;"></div>
-    <footer>
-        <p>&copy; 2024 FootBook. All rights reserved.</p>
-    </footer>
 
     <script src="Darkmode.js"></script>
 </body>
