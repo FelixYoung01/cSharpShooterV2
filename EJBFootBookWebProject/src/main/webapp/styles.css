@@ -224,6 +224,47 @@ nav ul li:hover {
     margin: 10px auto;
 }
 
+footer {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 20px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+.upperleftball {
+    position: fixed;
+    top: -20vw;
+    left: -10vw;
+    width: 50vw;
+    height: 50vw;
+    opacity: 0.1;
+    animation: rotate 45s linear infinite;
+    z-index: -1;
+}
+
+.lowerrightball {
+    position: fixed;
+    bottom: -20vw;
+    right: -10vw;
+    width: 50vw;
+    height: 50vw;
+    opacity: 0.1;
+    animation: rotate 45s linear infinite;
+    z-index: -1;
+}
+
+@keyframes rotate {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
 .pitches {
     max-width: 800px;
     margin: 0 auto;
@@ -291,16 +332,6 @@ nav ul li:hover {
     text-align: center;
     transition: background-color 0.3s ease;
     z-index: 1;
-}
-
-footer {
-    background-color: #333;
-    color: #fff;
-    text-align: center;
-    padding: 20px;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
 }
 
 .matches {
@@ -410,6 +441,3 @@ footer {
     transition: background-color 0.3s ease;
     z-index: 1;
 }
-
-
-
