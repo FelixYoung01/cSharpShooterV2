@@ -243,7 +243,7 @@ footer {
     width: 50vw;
     height: 50vw;
     opacity: 0.1;
-    animation: rotate 45s linear infinite;
+   
     z-index: -1;
 }
 
@@ -254,7 +254,7 @@ footer {
     width: 50vw;
     height: 50vw;
     opacity: 0.1;
-    animation: rotate 45s linear infinite;
+   
     z-index: -1;
 }
 
