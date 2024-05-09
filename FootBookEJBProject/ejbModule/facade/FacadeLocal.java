@@ -5,6 +5,7 @@ import java.util.Set;
 
 import ics.ejb.Match;
 import ics.ejb.Pitch;
+import ics.ejb.Referee;
 import ics.ejb.RefereeLicense;
 import ics.ejb.User;
 import ics.ejb.Pitch;
@@ -58,10 +59,14 @@ public interface FacadeLocal {
 
 	
 	public Set<Match> getMatchesOnPitch(String pitchId);
+	
+	public Set<User> getAllUsers();
+	
+	public Set<Referee> getAllReferees();
 
 	public Set<User> getUsersOnMatch(String matchId);
 
-	public List<String> findAllPitchIds();
 
+	public List<String> findAllPitchIds();
 
 }

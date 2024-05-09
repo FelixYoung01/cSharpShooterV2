@@ -1,7 +1,9 @@
 
 package ics.eao;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import ics.ejb.Referee;
 import jakarta.ejb.Stateless;
@@ -14,11 +16,9 @@ public class RefereeEAOImpl implements RefereeEAOLocal {
 	@PersistenceContext(unitName = "FootBookEJBSql")
 	private EntityManager em;
 
-	@Override
-	public List<Referee> getAllReferees() {
+	public Set<Referee> getAllReferees() {
 		TypedQuery<Referee> query = em.createNamedQuery("Referee.findAll", Referee.class);
-		List<Referee> referees = query.getResultList();
-		return referees;
+		return new HashSet<Referee>(query.getResultList());
 	}
 
 	public void addReferee(Referee referee) {

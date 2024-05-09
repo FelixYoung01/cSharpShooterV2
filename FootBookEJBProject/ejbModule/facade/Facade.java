@@ -12,6 +12,7 @@ import ics.eao.RefereeLicenseEAOLocal;
 import ics.eao.UserEAOLocal;
 import ics.ejb.Match;
 import ics.ejb.Pitch;
+import ics.ejb.Referee;
 import ics.ejb.RefereeLicense;
 import ics.ejb.User;
 import jakarta.ejb.EJB;
@@ -19,6 +20,9 @@ import jakarta.ejb.Stateless;
 
 @Stateless
 public class Facade implements FacadeLocal {
+	
+	@EJB
+	private RefereeEAOLocal refereeEAO;
 	
 	@EJB
 	private RefereeLicenseEAOLocal refereeLicenseEAO;
@@ -109,5 +113,12 @@ public class Facade implements FacadeLocal {
 		return matchEAO.findMatchById(matchId).getUsers();
 	}
 	
+	public Set<User> getAllUsers() {
+		return userEAO.getAllUsers();
+	}
+	
+	public Set<Referee> getAllReferees() {
+		return refereeEAO.getAllReferees();
+	}
 
 }
