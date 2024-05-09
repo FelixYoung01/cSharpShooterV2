@@ -49,8 +49,6 @@
                     aspect of the platform is intuitive and enjoyable for users.</p>
             </div>
         </div>
-
-<<<<<<< HEAD
 			<div class="box team-member">
 				<!-- Mert -->
 				<img src="Images/junco.png" alt="Junco" class="profilepic">
@@ -83,12 +81,9 @@
 						
 
 					<div class="spacer"></div></section>
-=======
-    </section>
->>>>>>> main
-	</section>
+
 	
-		<div style="margin-bottom: 50px;"></div>
+		<div style="margin-bottom: 100px;"></div>
 	
 
     <script src="Darkmode.js"></script>
