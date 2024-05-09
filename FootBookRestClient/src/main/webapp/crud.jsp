@@ -48,12 +48,12 @@
 					<th>IP: <span id="ipNbr"></span></th>
 				</tr>
 				<tr>
-					<td>Sunrise: <span id="sunrise"></span></td>
-					<td>Sunset: <span id="sunset"></span></td>
+					<td> <span id="sunrise"></span></td>
+					<td> <span id="sunset"></span></td>
 				</tr>
 				<tr>
 					<td>Weather: <span id="weather"></span></td>
-					<td>Temperature: <span id="degree"></span>°C
+					<td>Temperature: <span id="degree"></span>
 					</td>
 				</tr>
 			</table>
