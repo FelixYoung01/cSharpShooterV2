@@ -36,19 +36,58 @@ public class Facade implements FacadeLocal {
 	@EJB
 	private UserEAOLocal userEAO;
 	
+	@EJB
+	private RefereeEAOLocal refereeEAO;
 	
+	//REFEREE LICENSE METHODS
 	public RefereeLicense findRefereeLicense(String string) {
 		return refereeLicenseEAO.findRefereeLicenseById(string);
 	};
 	
+	//REFEREE METHODS
+	
+	public List<String> findAllRefereeIds() {
+		return refereeEAO.findAllRefereeIds();
+	}
+
+	//PITCH METHODS
+	public Set<Pitch> getAllPitches() {
+		return pitchEAO.getAllPitches();
+	}
+	
+	public List<String> findAllPitchIds() {
+		return pitchEAO.findAllPitchIds();
+	}
+
+	
+	//MATCH METHODS
 	public Match findMatch(String string) {
 		return matchEAO.findMatchById(string);
 	};
-	
-	public Set<Pitch> getAllPitches() {
-		return pitchEAO.getAllPitches();
+
+	public List<Match> findAllMatches() {
+		return matchEAO.findAllMatches();
 	};
 	
+	public Match createMatch(Match match) {
+		matchEAO.addMatch(match);
+		return match;
+	}
+
+	public void deleteMatch(String id) {
+		matchEAO.deleteMatch(id);
+	}
+	
+	public Match updateMatch(Match match) {
+		return matchEAO.updateMatch(match);
+	}
+	
+	public List<String> findAllMatchIds() {
+		return matchEAO.findAllMatchIds();
+	}
+	
+	
+	//USER METHODS
 	public int getUserCount() {
 		return userEAO.getUserCount();
 	}
@@ -81,4 +120,5 @@ public class Facade implements FacadeLocal {
 	public Set<Referee> getAllReferees() {
 		return refereeEAO.getAllReferees();
 	}
+
 }

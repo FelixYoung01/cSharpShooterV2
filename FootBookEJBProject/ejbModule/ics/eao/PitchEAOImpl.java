@@ -43,5 +43,10 @@ public class PitchEAOImpl implements PitchEAOLocal {
 		TypedQuery<Pitch> query = em.createNamedQuery("Pitch.findAll", Pitch.class);
 		return new HashSet<Pitch>(query.getResultList());
 	}
+	
+	public List<String> findAllPitchIds() {
+	    TypedQuery<String> query = em.createQuery("SELECT p.pitchId FROM Pitch p", String.class);
+	    return query.getResultList();
+	}
 
 }

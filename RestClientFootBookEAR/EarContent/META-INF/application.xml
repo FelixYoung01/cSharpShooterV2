@@ -7,4 +7,7 @@
       <context-root>FootBookRestClient</context-root>
     </web>
   </module>
+  <module>
+    <ejb>FootBookEJBProject.jar</ejb>
+  </module>
 </application>
