@@ -3,9 +3,11 @@ package ics.ejb;
 import java.io.Serializable;
 import java.sql.Time;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.Date;
 import java.util.Set;
+import java.util.logging.Logger;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -17,26 +19,34 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.NamedQueries;
 import jakarta.persistence.NamedQuery;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.PrePersist;
+import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
 
 @Entity
 
-
-@NamedQueries({ @NamedQuery(name = "Match.findAll", query = "SELECT m FROM Match m"), 
-				@NamedQuery(name = "Match.countAllMatches", query = "SELECT COUNT(m) FROM Match M") //Query for statistic of how many matches are registered
+@NamedQueries({ @NamedQuery(name = "Match.findAll", query = "SELECT m FROM Match m"),
+		@NamedQuery(name = "Match.countAllMatches", query = "SELECT COUNT(m) FROM Match M") // Query for statistic of
+																							// how many matches are
+																							// registered
 })
 
 @Table(name = "Match")
 
 public class Match implements Serializable {
 
+    private static final Logger logger = Logger.getLogger(Match.class.getName());
+
 	private static final long serialVersionUID = 1L;
 	private String matchId;
 	private LocalDate date;
 	private LocalTime time;
-	private Referee referee; //  match has exactly one referee
+	private Referee referee; // match has exactly one referee
 	private Pitch pitch; // Pitch where the match will be played
 	private Set<User> users; // Users participating in the match
+	// Entity CallBack Methods
+	private LocalDateTime createdDate;
+	private LocalDateTime lastUpdatedDate;
 
 	/*
 	 * @ManyToOne
@@ -46,14 +56,13 @@ public class Match implements Serializable {
 	 */
 	public Match() {
 	}
-	
+
 	public Match(String matchId, Pitch pitch, LocalDate date2, LocalTime time2) {
 		this.matchId = matchId;
 		this.pitch = pitch;
 		this.date = date2;
 		this.time = time2;
 	}
-
 
 	@Id
 	@Column(name = "matchId")
@@ -82,35 +91,76 @@ public class Match implements Serializable {
 	public void setTime(LocalTime time) {
 		this.time = time;
 	}
-	
+
 	@ManyToOne(fetch = FetchType.LAZY) // Many matches can be played in one pitch
 	@JoinColumn(name = "pitchId")
 	public Pitch getPitch() {
 		return pitch;
 	}
-	
+
 	public void setPitch(Pitch pitch) {
 		this.pitch = pitch;
 	}
 
-	@OneToMany(mappedBy = "match", fetch = FetchType.EAGER)// Many users can participate in one match
+	@OneToMany(mappedBy = "match", fetch = FetchType.EAGER) // Many users can participate in one match
 	public Set<User> getUsers() {
 		return users;
 	}
-	
+
 	public void setUsers(Set<User> users) {
 		this.users = users;
 	}
-	
+
 	@ManyToOne(fetch = FetchType.LAZY) // Many matches can be officiated by one referee
 	@JoinColumn(name = "refereeId")
 	public Referee getReferee() {
 		return referee;
 	}
-	
+
 	public void setReferee(Referee referee) {
 		this.referee = referee;
 	}
-	
-	
+
+	// New fields for auditing purposes
+
+	// Tracks when the match entity was first created
+	@Column(name = "createdDate", updatable = false)
+	public LocalDateTime getCreatedDate() {
+		return createdDate;
+	}
+
+	public void setCreatedDate(LocalDateTime createdDate) {
+		this.createdDate = createdDate;
+	}
+
+	// Tracks when the match entity was last updated
+	@Column(name = "lastUpdatedDate")
+	public LocalDateTime getLastUpdatedDate() {
+		return lastUpdatedDate;
+	}
+
+	public void setLastUpdatedDate(LocalDateTime lastUpdatedDate) {
+		this.lastUpdatedDate = lastUpdatedDate;
+	}
+
+	// Callback method to set createdDate before the entity is persisted
+
+	@PrePersist // Sets the creation timestamp when the entity is first saved to the database
+	public void onCreate() {
+		createdDate = LocalDateTime.now();
+		this.lastUpdatedDate = LocalDateTime.now();
+	    //System.out.println("Creating new Match (ID: " + matchId + ") - createdDate: " + this.createdDate);
+        logger.info("Creating new Match (ID: " + matchId + ") - createdDate: " + this.createdDate);
+
+	}
+
+	// Callback method to set lastUpdatedDate before the entity is updated
+	@PreUpdate // Updates the last modified timestamp when the entity is updated
+	public void onUpdate() {
+		lastUpdatedDate = LocalDateTime.now();
+	   // System.out.println("Updating Match (ID: " + matchId + ") - lastUpdatedDate: " + this.lastUpdatedDate);
+		logger.info("Updating Match (ID: " + matchId + ") - lastUpdatedDate: " + this.lastUpdatedDate);
+
+	}
+
 }

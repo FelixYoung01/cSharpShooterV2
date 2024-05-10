@@ -1,7 +1,9 @@
 package ics.ejb;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.Set;
+import java.util.logging.Logger;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -30,6 +32,9 @@ import jakarta.validation.constraints.Size;
 
 
 public class User implements Serializable{
+	
+    private static final Logger logger = Logger.getLogger(Match.class.getName());
+
 	private static final long serialVersionUID = 1L;
 
     
@@ -38,6 +43,7 @@ public class User implements Serializable{
     private String email;
     private String gender;
     private String name;
+    private LocalDateTime joined;
 
     private Match match; // Each user participates in exactly one match
     
@@ -116,6 +122,16 @@ public class User implements Serializable{
 
 	public void setMatch(Match match) {
 		this.match = match;
+	}
+	
+	//New fields for auditing purposes
+	@Column(name="joined", updatable=false)
+	public LocalDateTime getJoined() {
+		return joined;
+	}
+	
+	public void setJoined(LocalDateTime joined) {
+		this.joined = joined;
 	}
 }
 
