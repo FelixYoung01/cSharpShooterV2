@@ -39,7 +39,11 @@ public class Facade implements FacadeLocal {
 	//REFEREE LICENSE METHODS
 	public RefereeLicense findRefereeLicense(String string) {
 		return refereeLicenseEAO.findRefereeLicenseById(string);
-	};
+	}
+	
+	public List<RefereeLicense> getAllRefereeLicenses() {
+		return refereeLicenseEAO.getAllRefereeLicenses();
+	}
 	
 	//REFEREE METHODS
 	
@@ -49,6 +53,10 @@ public class Facade implements FacadeLocal {
 	
 	public Referee findRefereeById(String refereeId) {
 		return refereeEAO.findRefereeById(refereeId);
+	}
+	
+	public void createReferee(Referee referee) {
+		refereeEAO.addReferee(referee);
 	}
 
 	//PITCH METHODS

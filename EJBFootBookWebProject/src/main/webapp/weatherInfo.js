@@ -8,7 +8,9 @@ $(document).ready(function() {
     $.ajax({
         method: "GET",
 
+
       //  url: "https://ipinfo.io/?token=7b10316367bd0b", // Replace with your token
+
 
         error: logAjaxError,
         success: function(result) {
@@ -26,7 +28,9 @@ $(document).ready(function() {
             $.ajax({
                 method: "GET",
 
+
             //    url: `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&APPID=ce3e097846c8e55864481f37b93db22f`,
+
 
                 error: logAjaxError,
                 success: function(weatherResult) {

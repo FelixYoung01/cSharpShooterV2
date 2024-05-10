@@ -13,6 +13,7 @@ import org.junit.jupiter.api.Test;
 
 import ics.ejb.Match;
 import ics.ejb.Referee;
+import ics.ejb.RefereeLicense;
 
 class RefereeJUnit {
 	
@@ -25,6 +26,9 @@ class RefereeJUnit {
 	
 	private Referee referee1;
 	private Referee referee2;
+	
+	private RefereeLicense refereeLicense;
+	private RefereeLicense refereeLicense2;
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
@@ -37,11 +41,14 @@ class RefereeJUnit {
 	@BeforeEach
 	void setUp() throws Exception {
 		
-		refereeId = "R1";
+		
 		refereeName = "haren";
+		
+		refereeLicense = new RefereeLicense();
+		refereeLicense2 = new RefereeLicense();
 
-		referee1 = new Referee(refereeId, refereeName);
-		referee2 = new Referee("R2", "berra");
+		referee1 = new Referee(refereeName, refereeLicense);
+		referee2 = new Referee("berra", refereeLicense2);
 		
 		match1 = new Match();
 		match2 = new Match();
@@ -93,6 +100,17 @@ class RefereeJUnit {
 		matches.add(match3);
 		referee1.setMatches(matches);
 		assertEquals(matches, referee1.getMatches());
+	}
+	
+	@Test
+	final void testGetRefereeLicense() {
+		assertEquals(refereeLicense, referee1.getRefereeLicense());
+	}
+	
+	@Test
+	final void testSetRefereeLicense() {
+		referee1.setRefereeLicense(refereeLicense2);
+		assertEquals(refereeLicense2, referee1.getRefereeLicense());
 	}
 
 }
