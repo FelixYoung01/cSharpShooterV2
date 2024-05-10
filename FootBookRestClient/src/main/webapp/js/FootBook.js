@@ -30,7 +30,7 @@ $(document).ready(function() {
 		// Make the AJAX request to the OpenWeatherMap API
 		$.ajax({
 			method: "GET",
-			url: `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&units=metric&APPID=ce3e097846c8e55864481f37b93db22f`, // Replace with your new API key
+			//url: `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&units=metric&APPID=ce3e097846c8e55864481f37b93db22f`, // Replace with your new API key
 			error: ajaxWeatherReturn_Error,
 			success: ajaxWeatherReturn_Success
 		});
@@ -61,7 +61,7 @@ $(document).ready(function() {
 	function fetchIPAddress() {
 		$.ajax({
 			method: "GET",
-			url: `https://ipinfo.io/?token=7b10316367bd0b`,
+			//url: `https://ipinfo.io/?token=7b10316367bd0b`,
 			error: logAjaxError,
 			success: function(result) {
 				$("#ipNbr").text(result.ip);
