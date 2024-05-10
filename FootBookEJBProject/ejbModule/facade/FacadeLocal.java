@@ -57,8 +57,10 @@ public interface FacadeLocal {
   public void createUser(User user);
   
   public Set<User> getAllUsers();
-
-	
+  
+  public void deleteUser(String userId);
+  
+  
 	//Pitch Methods
 	
 	public Pitch findPitch(String pitchId);

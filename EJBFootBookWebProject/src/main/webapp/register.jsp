@@ -27,7 +27,7 @@
 				<tbody>
 					<%
 					Set<User> users = (Set<User>) request.getAttribute("users");
-					for (User user : users) {
+								for (User user : users) {
 					%>
 					<tr>
 						<td><%=user.getUserId()%></td>
@@ -35,8 +35,17 @@
 						<td><%=user.getEmail()%></td>
 						<td>
 							<button>Edit</button>
-							<button>Remove</button>
+
+						<td>
+    <button onclick="removeUser('<%=user.getUserId()%>')">Remove</button>
+</td>
+							
+							
+							
+							
+							
 						</td>
+						
 					</tr>
 					<%
 					}
@@ -120,6 +129,9 @@
 						<td>
 							<button>Edit</button>
 							<button>Remove</button>
+							
+							
+							
 						</td>
 					</tr>
 					<%
