@@ -46,6 +46,10 @@ public class Facade implements FacadeLocal {
 	public List<String> findAllRefereeIds() {
 		return refereeEAO.findAllRefereeIds();
 	}
+	
+	public Referee findRefereeById(String refereeId) {
+		return refereeEAO.findRefereeById(refereeId);
+	}
 
 	//PITCH METHODS
 	public Set<Pitch> getAllPitches() {
@@ -122,5 +126,6 @@ public class Facade implements FacadeLocal {
 	public void createUser(User user) {
 		userEAO.createUser(user);
 	}
+
 
 }

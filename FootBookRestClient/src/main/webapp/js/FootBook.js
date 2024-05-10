@@ -56,18 +56,18 @@ $(document).ready(function() {
 		alert("Error in OpenWeatherMap Ajax");
 		console.log("Ajax-find weather: " + status);
 	}
-	
- // Function to fetch and display the IP address using the ipinfo API
-    function fetchIPAddress() {
-        $.ajax({
-            method: "GET",
-            url: `https://ipinfo.io/?token=7b10316367bd0b`,
-            error: logAjaxError,
-            success: function(result) {
-                $("#ipNbr").text(result.ip);
-            }
-        });
-    }
+
+	// Function to fetch and display the IP address using the ipinfo API
+	function fetchIPAddress() {
+		$.ajax({
+			method: "GET",
+			url: `https://ipinfo.io/?token=7b10316367bd0b`,
+			error: logAjaxError,
+			success: function(result) {
+				$("#ipNbr").text(result.ip);
+			}
+		});
+	}
 	$("#UpdateBtn").click(function() {
 		// Retrieve the selected Match ID
 		var selectedMatchId = $("#findMatchIdSelect").val();
@@ -75,36 +75,21 @@ $(document).ready(function() {
 			// Retrieve updated data from section two
 			var pitchId = $("#findPitchIdSelect").val();
 			var refereeId = $("#findRefereeIdSelect").val();
-			var dateValue = $("#findDate").val(); // Expected to be in `yyyy-mm-dd` or `dd/mm/yyyy` format
-			var timeValue = $("#findTime").val(); // Expected format: HH:MM
+			var dateValue = $("#findDate").val(); // In the format DD/MM/YYYY
+			var timeValue = $("#findTime").val(); // In the format HH:MM
 
-			// Convert date to the desired format (yyyy-mm-dd)
-			var formattedDate = "";
-			if (dateValue) {
-				if (dateValue.includes("/")) {
-					// If it's in dd/mm/yyyy format
-					let dateParts = dateValue.split("/");
-					formattedDate = `${dateParts[2]}-${dateParts[1]}-${dateParts[0]}`; // Convert to yyyy-mm-dd
-				} else {
-					formattedDate = dateValue; // Already in the correct format
-				}
-			}
-
-			// Create the updated match object, including only fields that are provided
+			// Create the object for updating
 			var matchObj = { "Match ID": selectedMatchId };
 
-			if (formattedDate) {
+			// Check if each field has a value and add it to the object only if non-empty
+			if (pitchId !== "") matchObj["Pitch ID"] = pitchId;
+			if (refereeId !== "") matchObj["Referee ID"] = refereeId;
+			if (dateValue !== "") {
+				let dateParts = dateValue.split("/");
+				let formattedDate = `${dateParts[2]}-${dateParts[1]}-${dateParts[0]}`; // Convert to YYYY-MM-DD
 				matchObj["Match Date"] = formattedDate;
 			}
-			if (timeValue) {
-				matchObj["Match Time"] = timeValue;
-			}
-			if (pitchId) {
-				matchObj["Pitch ID"] = pitchId;
-			}
-			if (refereeId) {
-				matchObj["Referee ID"] = refereeId;
-			}
+			if (timeValue !== "") matchObj["Match Time"] = timeValue;
 
 			// Convert to JSON string
 			var jsonString = JSON.stringify(matchObj);
@@ -116,31 +101,53 @@ $(document).ready(function() {
 				data: jsonString,
 				contentType: "application/json",
 				error: function(xhr, status, error) {
-					if (xhr.status === 400) {
-						alert("Bad Request: The server couldn't process your request. Please ensure the data format is correct and try again.");
-					} else {
-						console.log("Error updating match:", error);
-						alert("Error updating match: " + error);
-					}
+					console.log("Error updating match:", error);
+					alert("Error updating match: " + error);
 				},
 				success: function(result, status, xhr) {
 					alert(`Match ID: ${selectedMatchId} updated successfully.`);
 
-					// Update the right-side display with the updated match information
-					let matchDate = result["Match Date"] ? result["Match Date"].split("-") : null;
-					let formattedDate = matchDate ? `${matchDate[2]}/${matchDate[1]}/${matchDate[0]}` : "N/A";
+					// Clear and refresh section two
+					clearAndRefreshSectionTwo();
 
-					$("#displayMatchId").text("Match ID: " + result["Match ID"]);
-					$("#displayPitchId").text("Pitch ID: " + (result["Pitch ID"] || "N/A"));
-					$("#displayRefereeId").text("Referee ID: " + (result["Referee ID"] || "N/A"));
-					$("#displayMatchDate").text("Date: " + (formattedDate || "N/A"));
-					$("#displayMatchTime").text("Time: " + (result["Match Time"] || "N/A"));
+					// Fetch and display the updated match details
+					$.ajax({
+						method: "GET",
+						url: `http://localhost:8080/FootBookRestClient/Matches/${selectedMatchId}`,
+						error: logAjaxError,
+						success: function(result) {
+							// Adjust date format (from yyyy-mm-dd to dd/mm/yyyy)
+							let matchDate = result["Match Date"].split("-");
+							let formattedDate = `${matchDate[2]}/${matchDate[1]}/${matchDate[0]}`;
+
+							// Update the display with all the current match details
+							$("#displayMatchId").text("Match ID: " + result["Match ID"]);
+							$("#displayPitchId").text("Pitch ID: " + result["Pitch ID"]);
+							$("#displayRefereeId").text("Referee ID: " + result["Referee ID"]);
+							$("#displayMatchDate").text("Date: " + formattedDate);
+							$("#displayMatchTime").text("Time: " + result["Match Time"]);
+						}
+					});
 				}
 			});
 		} else {
 			alert("Please select a valid Match ID to update.");
 		}
 	});
+
+	function clearAndRefreshSectionTwo() {
+		// Clear all dropdowns and inputs in section two
+		$("#findMatchIdSelect").val("");
+		$("#findPitchIdSelect").val("");
+		$("#findRefereeIdSelect").val("");
+		$("#findDate").val("");
+		$("#findTime").val("");
+
+		// Repopulate the dropdowns with the latest data
+		populatePitchIds();
+		populateRefereeIds();
+		populateMatchIds();
+	}
 
 
 

@@ -114,7 +114,8 @@ public class Matches extends HttpServlet {
 		}
 	}
 
-	// Connected to the PUT method, this method updates an existing match with new data
+	// Connected to the PUT method, this method updates an existing match with new
+	// data
 	protected void doPut(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String pathInfo = request.getPathInfo();
@@ -148,20 +149,56 @@ public class Matches extends HttpServlet {
 		}
 
 		// Parse the JSON data from the request
-		BufferedReader reader = request.getReader();
-		Match updatedData = parseJsonMatch(reader, response);
+		BufferedReader reader = request.getReader(); 
+		JsonReader jsonReader = Json.createReader(reader);
+		JsonObject jsonRoot = jsonReader.readObject();
 
-		// Verify that parsing succeeded
-		if (updatedData == null) {
-			response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid JSON data");
-			return;
+		// Update the existing match fields only if present in the JSON
+		if (jsonRoot.containsKey("Match Date")) {
+			String dateString = jsonRoot.getString("Match Date");
+			DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+			try {
+				LocalDate matchDate = LocalDate.parse(dateString, dateFormatter);
+				existingMatch.setDate(matchDate);
+			} catch (DateTimeParseException e) {
+				response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid date format: " + e.getMessage());
+				return;
+			}
 		}
 
-		// Update the existing match fields
-		existingMatch.setDate(updatedData.getDate());
-		existingMatch.setTime(updatedData.getTime());
-		existingMatch.setPitch(updatedData.getPitch());
-		existingMatch.setReferee(updatedData.getReferee());
+		if (jsonRoot.containsKey("Match Time")) {
+			String timeString = jsonRoot.getString("Match Time");
+			DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
+			try {
+				LocalTime matchTime = LocalTime.parse(timeString, timeFormatter);
+				existingMatch.setTime(matchTime);
+			} catch (DateTimeParseException e) {
+				response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid time format: " + e.getMessage());
+				return;
+			}
+		}
+
+		if (jsonRoot.containsKey("Pitch ID")) {
+			String pitchId = jsonRoot.getString("Pitch ID");
+			Pitch pitch = facade.findPitch(pitchId);
+			if (pitch != null) {
+				existingMatch.setPitch(pitch);
+			} else {
+				response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Pitch not found for ID: " + pitchId);
+				return;
+			}
+		}
+
+		if (jsonRoot.containsKey("Referee ID")) {
+			String refereeId = jsonRoot.getString("Referee ID");
+			Referee referee = facade.findRefereeById(refereeId);
+			if (referee != null) {
+				existingMatch.setReferee(referee);
+			} else {
+				response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Referee not found for ID: " + refereeId);
+				return;
+			}
+		}
 
 		// Persist the changes
 		try {
@@ -256,91 +293,92 @@ public class Matches extends HttpServlet {
 		out.flush();
 	}
 
-	// Connected to the POST method, this method parses a JSON match object from the request. 
+	// Connected to the POST method, this method parses a JSON match object from the
+	// request.
 	private Match parseJsonMatch(BufferedReader bufferReader, HttpServletResponse response) throws IOException {
-	    JsonReader jsonReader = Json.createReader(bufferReader);
-	    JsonObject jsonRoot = jsonReader.readObject();
+		JsonReader jsonReader = Json.createReader(bufferReader);
+		JsonObject jsonRoot = jsonReader.readObject();
 
-	    System.out.println("JSON Root: " + jsonRoot);
+		System.out.println("JSON Root: " + jsonRoot);
 
-	    // Create a new Match object to be populated and returned
-	    Match match = new Match();
+		// Create a new Match object to be populated and returned
+		Match match = new Match();
 
-	    // Check for "Match ID"
-	    if (jsonRoot.containsKey("Match ID")) {
-	        match.setMatchId(jsonRoot.getString("Match ID"));
-	    } else {
-	        sendJsonError(response, "Missing 'Match ID' in JSON");
-	        return null;
-	    }
+		// Check for "Match ID"
+		if (jsonRoot.containsKey("Match ID")) {
+			match.setMatchId(jsonRoot.getString("Match ID"));
+		} else {
+			sendJsonError(response, "Missing 'Match ID' in JSON");
+			return null;
+		}
 
-	    // Check and parse the date
-	    if (jsonRoot.containsKey("Match Date")) {
-	        String dateString = jsonRoot.getString("Match Date");
-	        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-	        try {
-	            LocalDate matchDate = LocalDate.parse(dateString, dateFormatter);
-	            match.setDate(matchDate);
-	        } catch (DateTimeParseException e) {
-	            sendJsonError(response, "Invalid date format: " + e.getMessage());
-	            return null;
-	        }
-	    } else {
-	        sendJsonError(response, "Missing 'Match Date' in JSON");
-	        return null;
-	    }
+		// Check and parse the date
+		if (jsonRoot.containsKey("Match Date")) {
+			String dateString = jsonRoot.getString("Match Date");
+			DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+			try {
+				LocalDate matchDate = LocalDate.parse(dateString, dateFormatter);
+				match.setDate(matchDate);
+			} catch (DateTimeParseException e) {
+				sendJsonError(response, "Invalid date format: " + e.getMessage());
+				return null;
+			}
+		} else {
+			sendJsonError(response, "Missing 'Match Date' in JSON");
+			return null;
+		}
 
-	    // Check and parse the time
-	    if (jsonRoot.containsKey("Match Time")) {
-	        String timeString = jsonRoot.getString("Match Time");
-	        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
-	        try {
-	            LocalTime matchTime = LocalTime.parse(timeString, timeFormatter);
-	            match.setTime(matchTime);
-	        } catch (DateTimeParseException e) {
-	            sendJsonError(response, "Invalid time format: " + e.getMessage());
-	            return null;
-	        }
-	    } else {
-	        sendJsonError(response, "Missing 'Match Time' in JSON");
-	        return null;
-	    }
+		// Check and parse the time
+		if (jsonRoot.containsKey("Match Time")) {
+			String timeString = jsonRoot.getString("Match Time");
+			DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
+			try {
+				LocalTime matchTime = LocalTime.parse(timeString, timeFormatter);
+				match.setTime(matchTime);
+			} catch (DateTimeParseException e) {
+				sendJsonError(response, "Invalid time format: " + e.getMessage());
+				return null;
+			}
+		} else {
+			sendJsonError(response, "Missing 'Match Time' in JSON");
+			return null;
+		}
 
-	    // Retrieve and set the Pitch object using the Pitch ID
-	    if (jsonRoot.containsKey("Pitch ID")) {
-	        String pitchId = jsonRoot.getString("Pitch ID");
-	        Pitch pitch = pitchEAO.findPitchById(pitchId);
-	        if (pitch != null) {
-	            match.setPitch(pitch);
-	        } else {
-	            sendJsonError(response, "Pitch not found for ID: " + pitchId);
-	            return null;
-	        }
-	    } else {
-	        sendJsonError(response, "Missing 'Pitch ID' in JSON");
-	        return null;
-	    }
+		// Retrieve and set the Pitch object using the Pitch ID
+		if (jsonRoot.containsKey("Pitch ID")) {
+			String pitchId = jsonRoot.getString("Pitch ID");
+			Pitch pitch = pitchEAO.findPitchById(pitchId);
+			if (pitch != null) {
+				match.setPitch(pitch);
+			} else {
+				sendJsonError(response, "Pitch not found for ID: " + pitchId);
+				return null;
+			}
+		} else {
+			sendJsonError(response, "Missing 'Pitch ID' in JSON");
+			return null;
+		}
 
-	    // Retrieve and set the Referee object using the Referee ID
-	    if (jsonRoot.containsKey("Referee ID")) {
-	        String refereeId = jsonRoot.getString("Referee ID");
-	        Referee referee = refereeEAO.findRefereeById(refereeId);
-	        if (referee != null) {
-	            match.setReferee(referee);
-	        } else {
-	            sendJsonError(response, "Referee not found for ID: " + refereeId);
-	            return null;
-	        }
-	    } else {
-	        sendJsonError(response, "Missing 'Referee ID' in JSON");
-	        return null;
-	    }
+		// Retrieve and set the Referee object using the Referee ID
+		if (jsonRoot.containsKey("Referee ID")) {
+			String refereeId = jsonRoot.getString("Referee ID");
+			Referee referee = refereeEAO.findRefereeById(refereeId);
+			if (referee != null) {
+				match.setReferee(referee);
+			} else {
+				sendJsonError(response, "Referee not found for ID: " + refereeId);
+				return null;
+			}
+		} else {
+			sendJsonError(response, "Missing 'Referee ID' in JSON");
+			return null;
+		}
 
-	    return match;
+		return match;
 	}
 
 	private void sendJsonError(HttpServletResponse response, String string) {
 		// TODO Auto-generated method stub
-		
+
 	}
 }
