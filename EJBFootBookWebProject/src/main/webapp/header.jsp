@@ -4,6 +4,27 @@
 	<img src="Images/sun.png" alt="Sun Icon" class="sun-icon">
 </button>
 <h1 class="logo">FootBook</h1>
+<div class="box" id="weatherBox">
+	<h3>Weather Information</h3>
+	<p>
+		City: <span id="city"></span>
+	</p>
+	<p>
+		IP: <span id="ipNbr"></span>
+	</p>
+	<p>
+		 <span id="sunrise"></span>
+	</p>
+	<p>
+		 <span id="sunset"></span>
+	</p>
+	<p>
+		Weather: <span id="weather"></span>
+	</p>
+	<p>
+		Temperature: <span id="degree"></span>
+	</p>
+</div>
 <header>
 	<nav>
 		<ul>

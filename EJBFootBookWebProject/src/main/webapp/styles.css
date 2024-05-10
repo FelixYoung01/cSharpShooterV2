@@ -225,6 +225,14 @@ nav ul li:hover {
     margin: 10px;
 }
 
+#weatherBox {
+	position: absolute;
+	top: 10px;
+	left: 10px;
+	z-index: 999;
+    text-align: left;
+}
+
 footer {
     background-color: var(--main-color);
     color: var(--text-color);
@@ -278,11 +286,11 @@ footer {
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: space-between;
 }
 
 .team-member {
     width: 200px;
+    height: 420px;
 }
 
 .team-member-info p {
@@ -478,5 +486,9 @@ footer {
     text-align: center;
     transition: background-color 0.3s ease;
     z-index: 1;
+}
 
+#contactForm {
+    justify-content: left;
+    width: 800px;
 }

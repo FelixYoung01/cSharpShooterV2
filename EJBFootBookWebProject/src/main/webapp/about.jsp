@@ -78,13 +78,6 @@
 					<h3>Oskar</h3>
 					<p>Oskar is the operations expert at FootBook. With a background
 						in project management, he ensures that the platform runs smoothly. He has a passion for football and technology.</p>
-						
-
-					<div class="spacer"></div></section>
-
-	
-		<div style="margin-bottom: 100px;"></div>
-	
 
     <script src="Darkmode.js"></script>
 </body>
