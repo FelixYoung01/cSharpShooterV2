@@ -15,9 +15,15 @@ public class HomeHandler implements IPathHandler {
 	public RequestDispatcher handleRequestDispatcher(HttpServletRequest request, HttpServletResponse response,
 			FacadeLocal facade) throws ServletException, IOException {
 		Set<Pitch> pitches = facade.getAllPitches();
+		long matchCount = facade.getMatchCount();
+		long userCount = facade.getUserCount();
+		long userOnMatchesCount = facade.getUsersOnMatchesCount();
 		
 		request.setAttribute("pitches", pitches);
-		request.setAttribute("matchCount", facade.getMatchCount());
+		request.setAttribute("matchCount", matchCount);
+		request.setAttribute("userCount", userCount);
+		request.setAttribute("userOnMatchesCount", userOnMatchesCount);
+
 		
 		return request.getRequestDispatcher("/home.jsp");
 	}

@@ -33,12 +33,12 @@ public class UserEAOImpl implements UserEAOLocal{
 		}
 	}
 	
-	public int getUserCount() {
-		return em.createNamedQuery("User.countAll", Integer.class).getSingleResult();
+	public long getUserCount() {
+		return em.createNamedQuery("User.countAll", Long.class).getSingleResult();
 	}
 	
-	public int getUsersOnMatchesCount() {
-		return em.createNamedQuery("User.countRegisteredOnMatches", Integer.class).getSingleResult();
+	public long getUsersOnMatchesCount() {
+		return em.createNamedQuery("User.countRegisteredOnMatches", Long.class).getSingleResult();
 	}
 
 	

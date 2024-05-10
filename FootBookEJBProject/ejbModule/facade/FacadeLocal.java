@@ -21,9 +21,9 @@ public interface FacadeLocal {
 	
 	public Set<Pitch> getAllPitches();
 	
-	public int getUserCount();
+	public long getUserCount();
 	
-	public int getUsersOnMatchesCount();
+	public long getUsersOnMatchesCount();
 	
 	public long getMatchCount();
 	
