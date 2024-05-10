@@ -39,18 +39,22 @@
 
 
 	<!-- Contact Form -->
-	<section class="box" style="width: 600px">
+	<section class="box">
 		<h2>Contact Us</h2>
-		<form id="contactForm">
-			<label for="name">Name:</label> <input type="text" id="name"
-				name="name" required><br>
-			<br> <label for="email">Email:</label> <input type="email"
-				id="email" name="email" required><br>
-			<br> <label for="message">Message:</label><br>
-			<textarea id="message" name="message" rows="4" cols="50" required></textarea>
-			<br>
-			<br> <input type="button" value="Send"
-				onclick="validateAndSubmit()">
+		<form>
+			<div style="margin-top: 5px">
+				<label for="name">Name:</label><br>
+				<input class="box" style="padding: 5px" type="text" id="name" name="name" required>
+			</div>
+			<div style="margin-top: 2.5px">
+				<label for="email">Email:</label><br>
+				<input class="box" style="padding: 5px" type="email" id="email" name="email" required>
+			</div>
+				<label for="message">Message:</label><br>
+				<textarea class="box" style="padding: 5px" id="message" name="message" rows="4" cols="100" required></textarea>
+			<div style="margin-top: 2.5px">
+				<button value="Send" onclick="validateAndSubmit()">Send</button>
+			</div>
 		</form>
 	</section>
 
