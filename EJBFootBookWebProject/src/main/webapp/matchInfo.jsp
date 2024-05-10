@@ -12,7 +12,8 @@
 	<jsp:include page="header.jsp" />
 	<%
 	Match match = (Match) request.getAttribute("match");
-	String matchId = match.getMatchId();
+	
+
 	Set<User> users = (Set<User>) request.getAttribute("usersOnMatch");
 	%>
 	<div class="match">

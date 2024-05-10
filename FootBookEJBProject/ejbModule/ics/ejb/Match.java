@@ -56,7 +56,7 @@ public class Match implements Serializable {
 
 
 	@Id
-	@Column(name = "matchId")
+	@Column(name = "MatchId")
 	public String getMatchId() {
 		return matchId;
 	}
@@ -65,7 +65,7 @@ public class Match implements Serializable {
 		this.matchId = matchId;
 	}
 
-	@Column(name = "date")
+	@Column(name = "Date")
 	public LocalDate getDate() {
 		return date;
 	}
@@ -74,7 +74,7 @@ public class Match implements Serializable {
 		this.date = date;
 	}
 
-	@Column(name = "time")
+	@Column(name = "Time")
 	public LocalTime getTime() {
 		return time;
 	}
