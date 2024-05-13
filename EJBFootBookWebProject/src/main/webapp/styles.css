@@ -293,12 +293,12 @@ footer {
 .team-members {
     display: flex;
     flex-direction: row;
-    align-items: center;
+    align-items: stretch;
 }
 
 .team-member {
-    width: 200px;
-    height: 420px;
+    width: 300px;
+    flex-grow: 1;
 }
 
 .team-member-info p {
