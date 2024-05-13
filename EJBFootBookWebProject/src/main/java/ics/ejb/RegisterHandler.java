@@ -60,14 +60,13 @@ public class RegisterHandler implements IPathHandler {
 			String newAge = request.getParameter("userAge");
 			String newEmail = request.getParameter("userEmail");
 			String newGender = request.getParameter("userGender");
-			
-			// Log received parameters to verify that they are correct
-		    System.out.println("Received Update for UserID: " + userId);
-		    System.out.println("New Name: " + newName);
-		    System.out.println("New Age: " + newAge);
-		    System.out.println("New Email: " + newEmail);
-		    System.out.println("New Gender: " + newGender);
 
+			// Log received parameters to verify that they are correct
+			System.out.println("Received Update for UserID: " + userId);
+			System.out.println("New Name: " + newName);
+			System.out.println("New Age: " + newAge);
+			System.out.println("New Email: " + newEmail);
+			System.out.println("New Gender: " + newGender);
 
 			User userToUpdate = facade.findUserById(userId);
 
@@ -78,25 +77,24 @@ public class RegisterHandler implements IPathHandler {
 				userToUpdate.setAge(age);
 				userToUpdate.setEmail(newEmail);
 				userToUpdate.setGender(newGender);
-				
-				User updateSuccessful = facade.updateUser(userToUpdate);
-				
-				System.out.println("Update result: " + updateSuccessful); //Debugging
 
-				if(updateSuccessful!=null) {
+				User updateSuccessful = facade.updateUser(userToUpdate);
+
+				System.out.println("Update result: " + updateSuccessful); // Debugging
+
+				if (updateSuccessful != null) {
 					System.out.println("User successfully updated.");
 					response.sendRedirect(request.getRequestURI());
 
-		        } else {
-		            System.out.println("User update failed.");	
-		            response.getWriter().write("Update failed");
+				} else {
+					System.out.println("User update failed.");
+					response.getWriter().write("Update failed");
 					response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
 
-
 				}
-				
-			}  
-			
+
+			}
+
 		} else if ("removeUser".equals(action)) {
 			String userId = request.getParameter("userId");
 			User user = facade.findUser(userId);
@@ -108,10 +106,49 @@ public class RegisterHandler implements IPathHandler {
 				System.out.println("User not found: " + userId);
 			}
 
-
 			response.sendRedirect(request.getRequestURI());
 		}
 
+		else if ("editReferee".equals(action)) {
+			String refereeId = request.getParameter("refereeId");
+			String newRefereeName = request.getParameter("refereeName");
+			String newLicenseId = request.getParameter("licenseId");
+
+			// Log received parameters to verify correctness
+			System.out.println("Received Update for RefereeID: " + refereeId);
+			System.out.println("New Referee Name: " + newRefereeName);
+			System.out.println("New License ID: " + newLicenseId);
+
+			Referee refereeToUpdate = facade.findRefereeById(refereeId);
+			RefereeLicense license = facade.findRefereeLicense(newLicenseId); // Fetch the license
+
+			if (refereeToUpdate != null && license != null) {
+				System.out.println("Referee and License found, updating...");
+				refereeToUpdate.setRefereeName(newRefereeName);
+				refereeToUpdate.setRefereeLicense(license); // Set the fetched license
+
+				Referee updateSuccessful = facade.updateReferee(refereeToUpdate);
+				if (updateSuccessful != null) {
+					System.out.println("Referee successfully updated.");
+					response.sendRedirect(request.getRequestURI()); // Redirect to refresh the page
+				} else {
+					System.out.println("Referee update failed.");
+					response.getWriter().write("Update failed");
+					response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+				}
+			} else {
+				if (refereeToUpdate == null) {
+					System.out.println("Referee not found with ID: " + refereeId);
+					response.getWriter().write("Referee not found");
+					response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+				}
+				if (license == null) {
+					System.out.println("License ID not found: " + newLicenseId);
+					response.getWriter().write("License not found");
+					response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+				}
+			}
+		}
 
 		return request.getRequestDispatcher("/register.jsp");
 	}
