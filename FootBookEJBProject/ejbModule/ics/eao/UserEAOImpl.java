@@ -28,6 +28,7 @@ public class UserEAOImpl implements UserEAOLocal{
 	
 	public User updateUser(User user) {
 		em.merge(user);
+		em.flush();
 		return user;
 	}
 	

@@ -1,7 +1,8 @@
 
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	import="ics.ejb.Pitch" import="java.util.Set" import="ics.ejb.Match"
-	pageEncoding="ISO-8859-1"%>
+    import="ics.ejb.Pitch, java.util.Set, ics.ejb.Match"
+    pageEncoding="ISO-8859-1"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,7 +25,7 @@
 			<p>
 				Pitch ID:
 				<%=pitchId%></p>
-			<img src="Images/<%=pitch.getImageName()%>" alt="Pitch Image" class="bordered-image" style="width: 800px;"/><br
+			<img src="Images/<%=pitch.getImageName()%>" alt="Pitch Image" class="bordered-image" style="width: 800px;"/>
 		</div>
 		<h1>Matches on this pitch</h1>
 		<section class="matches">
