@@ -62,7 +62,11 @@ public interface FacadeLocal {
 
 	public Set<User> getAllUsers();
   
-  public void deleteUser(String userId);
+	public void deleteUser(String userId);
+	
+	public User findUserById(String userId);
+	
+	public User updateUser(User userToUpdate);
   
   
 	//Pitch Methods
@@ -76,5 +80,6 @@ public interface FacadeLocal {
 	public Set<User> getUsersOnMatch(String matchId);
 
 	public List<String> findAllPitchIds();
+
 
 }

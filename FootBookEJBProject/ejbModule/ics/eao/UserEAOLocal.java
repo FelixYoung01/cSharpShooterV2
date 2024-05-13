@@ -9,7 +9,7 @@ import jakarta.ejb.Local;
 public interface UserEAOLocal {
 	
 	public void createUser(User user);
-	public void updateUser(User user);
+	public User updateUser(User user);
 	public void deleteUser(String userId);
 	public User findUserById(String userId);
 	public int getUserCount(); // For statistics of how many users are registered

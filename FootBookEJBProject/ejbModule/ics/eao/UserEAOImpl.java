@@ -26,8 +26,9 @@ public class UserEAOImpl implements UserEAOLocal{
 		em.persist(user);
 	}
 	
-	public void updateUser(User user) {
+	public User updateUser(User user) {
 		em.merge(user);
+		return user;
 	}
 	
 	public void deleteUser(String userId) {

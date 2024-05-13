@@ -29,25 +29,24 @@
 				<tbody>
 					<%
 					Set<User> users = (Set<User>) request.getAttribute("users");
-								for (User user : users) {
+					for (User user : users) {
 					%>
 					<tr>
 						<td><%=user.getUserId()%></td>
 						<td><%=user.getName()%></td>
 						<td><%=user.getEmail()%></td>
 						<td>
-							<button>Edit</button>
-
+							<button id="editUserButton">UserEdit</button>
 						<td>
-    <button onclick="removeUser('<%=user.getUserId()%>')">Remove</button>
-</td>
-							
-							
-							
-							
-							
+							<button onclick="removeUser('<%=user.getUserId()%>')">Remove</button>
 						</td>
-						
+
+
+
+
+
+						</td>
+
 					</tr>
 					<%
 					}
@@ -57,34 +56,85 @@
 			<button id="addUserButton">Add</button>
 			<div id="addUserForm" class="popUp" style="display: none;">
 				<h2>Add User</h2>
-				<form id="addingUserForm" action="/EJBFootBookWebProject/register" name="userFormType"
-					method="post">
+				<form id="addingUserForm" action="/EJBFootBookWebProject/register"
+					name="userFormType" method="post">
 					<label for="userId">User ID will be auto-generated!</label> <br>
 
 					<!-- Field for Name -->
-					<label for="userName">Name:</label> <input type="text" id="userName"
-						name="userName" required><br>
+					<label for="userName">Name:</label> <input type="text"
+						id="userName" name="userName" required><br>
 
 					<!-- Field for Age -->
 					<label for="userAge">Age:</label> <input type="number" id="userAge"
 						name="userAge" required><br>
 
 					<!-- Field for Email -->
-					<label for="userEmail">Email:</label> <input type="email" id="userEmail"
-						name="userEmail" required><br>
+					<label for="userEmail">Email:</label> <input type="email"
+						id="userEmail" name="userEmail" required><br>
 
 					<!-- Field for Gender -->
 					<label for="userGender">Gender:</label> <select id="userGender"
 						name="userGender" required>
 						<option value="M">Male</option>
 						<option value="F">Female</option>
-					</select><br>
-					<input type="hidden" name="formType" value="addUser">
+					</select><br> <input type="hidden" name="formType" value="addUser">
 					<button type="submit">Add User</button>
 
 				</form>
-
 			</div>
+			<div id="editUserForm" class="popUp" style="display: none;">
+				<h2>Edit User</h2>
+				<form id="editingUserForm" action="/EJBFootBookWebProject/register"
+					method="post">
+					<!-- Hidden Field for Form Type -->
+					<input type="hidden" name="formType" value="editUser">
+
+					<!-- Hidden Field for User ID (non-editable) -->
+					<input type="hidden" id="editUserId" name="userId" required>
+
+					<!-- Display User ID (non-editable) -->
+					<div>
+						<label>User ID:</label> <span id="displayUserId"></span>
+					</div>
+
+					<!-- Field for Name -->
+					<label for="editUserName">Name:</label> <input type="text"
+						id="editUserName" name="userName" required><br>
+
+					<!-- Field for Age -->
+					<label for="editUserAge">Age:</label> <input type="number"
+						id="editUserAge" name="userAge" required><br>
+
+					<!-- Field for Email -->
+					<label for="editUserEmail">Email:</label> <input type="email"
+						id="editUserEmail" name="userEmail" required><br>
+
+					<!-- Field for Gender -->
+					<label for="editUserGender">Gender:</label> <select
+						id="editUserGender" name="userGender" required>
+						<option value="M">Male</option>
+						<option value="F">Female</option>
+					</select><br>
+
+					<button type="submit">Update User</button>
+				</form>
+			</div>
+
+
+			<script>
+				// Function to update the user details
+				function editUser(userId, name, age, email, gender) {
+					document.getElementById('editUserId').value = userId;
+					document.getElementById('displayUserId').innerText = userId; // Display user ID but not editable
+					document.getElementById('editUserName').value = name;
+					document.getElementById('editUserAge').value = age;
+					document.getElementById('editUserEmail').value = email;
+					document.getElementById('editUserGender').value = gender;
+
+					document.getElementById('editUserForm').style.display = 'block';
+				}
+			</script>
+
 			<script>
 				//lägger till eventlistener för att visa formuläret när användaren klickar på add
 				document
@@ -104,7 +154,6 @@
 								function(event) {
 
 									//hindrar standardbeteendet för formuläret
-									
 
 									//Gömmer formuläret igen
 									document.getElementById("addUserForm").style.display = "none";
@@ -133,11 +182,11 @@
 						<td><%=referee.getRefereeName()%></td>
 						<td><%=referee.getRefereeLicense().getLicenseId()%></td>
 						<td>
-							<button>Edit</button>
+							<button>RefEdit</button>
 							<button>Remove</button>
-							
-							
-							
+
+
+
 						</td>
 					</tr>
 					<%
@@ -145,36 +194,34 @@
 					%>
 				</tbody>
 			</table>
-			<button id="addRefereeButton">Add</button>
 			<div id="addRefereeForm" class="popUp" style="display: none;">
 				<h2>Add Referee</h2>
-				<form id="addingRefereeForm" action="/EJBFootBookWebProject/register" name="refereeFormType" 
+				<form id="addingRefereeForm"
+					action="/EJBFootBookWebProject/register" name="refereeFormType"
 					method="post">
 					<label for="RefereeId">RefereeId kommer!</label> <br>
 
 					<!-- Field for Name -->
-					<label for="refereeName">Name:</label> <input type="text" id="refereeName"
-						name="refereeName" required><br> 
-						
-						<label for="licenseId">Licence:</label>
-					<select id="licenseId" name="licenseId" required>
+					<label for="refereeName">Name:</label> <input type="text"
+						id="refereeName" name="refereeName" required><br> <label
+						for="licenseId">Licence:</label> <select id="licenseId"
+						name="licenseId" required>
 						<option value="">Select Licence</option>
 
 						<%
 						List<RefereeLicense> licences = (List<RefereeLicense>) request.getAttribute("licenses");
-						
-						if (licences == null){
+
+						if (licences == null) {
 							System.out.println("licences is null");
-						}
-						else {
-						for (RefereeLicense licence : licences) {
+						} else {
+							for (RefereeLicense licence : licences) {
 						%>
 						<option value="<%=licence.getLicenseId()%>"><%=licence.getLicenseId()%></option>
 						<%
-						}}
+						}
+						}
 						%>
-					</select><br>
-					<input type="hidden" name="formType" value="addReferee">
+					</select><br> <input type="hidden" name="formType" value="addReferee">
 					<button type="submit">Submit</button>
 				</form>
 
@@ -198,7 +245,6 @@
 								function(event) {
 
 									//hindrar standardbeteendet för formuläret
-									
 
 									//Gömmer formuläret igen
 									document.getElementById("addRefereeForm").style.display = "none";

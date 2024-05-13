@@ -1,4 +1,4 @@
-$(document).ready(function() {
+$(document).ready(function() { //When this runs, it reads the DOM tree and then runs the function
     // General AJAX error logging function
     function logAjaxError(xhr, status, error) {
         console.error(`Ajax Error: ${status}, ${error}`);

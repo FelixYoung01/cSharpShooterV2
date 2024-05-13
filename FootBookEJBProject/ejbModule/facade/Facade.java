@@ -112,6 +112,15 @@ public class Facade implements FacadeLocal {
 	public Pitch findPitch(String pitchId) {
         return pitchEAO.findPitchById(pitchId);
 	}
+	
+	public User updateUser(User userToUpdate) {
+		return userEAO.updateUser(userToUpdate);
+		
+	}
+
+	public User findUserById(String userId) {
+		return null;
+	}
 
 	
 	public Set<Match> getMatchesOnPitch(String pitchId) {
