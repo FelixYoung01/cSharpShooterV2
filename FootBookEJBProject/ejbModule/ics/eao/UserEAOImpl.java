@@ -26,8 +26,9 @@ public class UserEAOImpl implements UserEAOLocal{
 		em.persist(user);
 	}
 	
-	public void updateUser(User user) {
+	public User updateUser(User user) {
 		em.merge(user);
+		return user;
 	}
 	
 	public void deleteUser(String userId) {
@@ -37,16 +38,21 @@ public class UserEAOImpl implements UserEAOLocal{
 		}
 	}
 	
-	public int getUserCount() {
-		return em.createNamedQuery("User.countAll", Integer.class).getSingleResult();
+	public long getUserCount() {
+		return em.createNamedQuery("User.countAll", Long.class).getSingleResult();
 	}
 	
-	public int getUsersOnMatchesCount() {
-		return em.createNamedQuery("User.countRegisteredOnMatches", Integer.class).getSingleResult();
+	public long getUsersOnMatchesCount() {
+		return em.createNamedQuery("User.countRegisteredOnMatches", Long.class).getSingleResult();
 	}
 	
 	public Set<User> getAllUsers() {
 		TypedQuery<User> query = em.createNamedQuery("User.findAll", User.class);
+		return new HashSet<User>(query.getResultList());
+	}
+	
+	public Set<User> getAvailableUsers() {
+		TypedQuery<User> query = em.createNamedQuery("User.availableUsers", User.class);
 		return new HashSet<User>(query.getResultList());
 	}
 	

@@ -149,7 +149,7 @@ public class Matches extends HttpServlet {
 		}
 
 		// Parse the JSON data from the request
-		BufferedReader reader = request.getReader(); 
+		BufferedReader reader = request.getReader();
 		JsonReader jsonReader = Json.createReader(reader);
 		JsonObject jsonRoot = jsonReader.readObject();
 

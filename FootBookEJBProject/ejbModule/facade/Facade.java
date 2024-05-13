@@ -71,6 +71,10 @@ public class Facade implements FacadeLocal {
 	
 	//MATCH METHODS
 	public Match findMatch(String string) {
+		
+		if (string == null) {
+			System.out.println("Match not found for ID: " + string);
+		}
 		return matchEAO.findMatchById(string);
 	};
 
@@ -97,12 +101,25 @@ public class Facade implements FacadeLocal {
 	
 	
 	//USER METHODS
-	public int getUserCount() {
+	
+	public User findUser(String userId) {
+		return userEAO.findUserById(userId);
+	}
+	
+	public void updateUser(User user) {
+		userEAO.updateUser(user);
+	}
+	
+	public long getUserCount() {
 		return userEAO.getUserCount();
 	}
 	
-	public int getUsersOnMatchesCount() {
+	public long getUsersOnMatchesCount() {
 		return userEAO.getUsersOnMatchesCount();
+	}
+	
+	public Set<User> getAvailableUsers() {
+		return userEAO.getAvailableUsers();
 	}
 	
 	public long getMatchCount() {
@@ -111,6 +128,15 @@ public class Facade implements FacadeLocal {
 	
 	public Pitch findPitch(String pitchId) {
         return pitchEAO.findPitchById(pitchId);
+	}
+	
+	public User updateUser(User userToUpdate) {
+		return userEAO.updateUser(userToUpdate);
+		
+	}
+
+	public User findUserById(String userId) {
+		return null;
 	}
 
 	

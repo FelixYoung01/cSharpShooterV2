@@ -1,4 +1,4 @@
-$(document).ready(function() {
+$(document).ready(function() { //When this runs, it reads the DOM tree and then runs the function
     // General AJAX error logging function
     function logAjaxError(xhr, status, error) {
         console.error(`Ajax Error: ${status}, ${error}`);
@@ -27,6 +27,7 @@ $(document).ready(function() {
             // Fetch weather information based on geolocation
             $.ajax({
                 method: "GET",
+
 
 
             //    url: `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&APPID=ce3e097846c8e55864481f37b93db22f`,
