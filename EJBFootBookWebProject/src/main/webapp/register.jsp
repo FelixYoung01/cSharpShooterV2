@@ -228,15 +228,8 @@ $(document).ready(function() {
 						<td><%=referee.getRefereeId()%></td>
 						<td><%=referee.getRefereeName()%></td>
 						<td><%=referee.getRefereeLicense().getLicenseId()%></td>
-						<td>
-<td>
-    <button onclick="editReferee('<%=referee.getRefereeId()%>', '<%=referee.getRefereeName()%>', '<%=referee.getRefereeLicense().getLicenseId()%>')">Edit</button>
-    
-    <button>Remove</button>
-</td>
-
-
-
+						<td><button onclick="editReferee('<%=referee.getRefereeId()%>', '<%=referee.getRefereeName()%>', '<%=referee.getRefereeLicense().getLicenseId()%>')">Edit</button></td>
+						<td><button>Remove</button></td>
 						
 					</tr>
 					<%
@@ -301,7 +294,7 @@ $(document).ready(function() {
 
 					<!-- Field for License -->
 					<label for="editRefereeLicense">License:</label> <select
-						id="editRefereeLicense" name="refereeLicenseId" required>
+						id="editRefereeLicense" name="licenseId" required>
 						<%
 						for (RefereeLicense license : licenses) {
 						%>
