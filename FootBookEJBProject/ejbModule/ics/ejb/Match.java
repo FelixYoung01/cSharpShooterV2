@@ -26,7 +26,7 @@ import jakarta.persistence.Table;
 @Entity
 
 @NamedQueries({ @NamedQuery(name = "Match.findAll", query = "SELECT m FROM Match m"),
-		@NamedQuery(name = "Match.countAllMatches", query = "SELECT COUNT(m) FROM Match M") // Query for statistic of
+		@NamedQuery(name = "Match.countAllMatches", query = "SELECT COUNT(m) FROM Match m") // Query for statistic of
 																							// how many matches are
 																							// registered
 })

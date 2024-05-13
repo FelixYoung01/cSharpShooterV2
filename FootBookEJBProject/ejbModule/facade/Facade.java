@@ -59,6 +59,15 @@ public class Facade implements FacadeLocal {
 	public void createReferee(Referee referee) {
 		refereeEAO.addReferee(referee);
 	}
+	
+	public Set<Referee> getAllReferees() {
+		return refereeEAO.getAllReferees();
+	}
+	
+	public void deleteReferee(String refereeId) {
+		refereeEAO.deleteReferee(refereeId);
+	}
+
 
 	public Referee updateReferee(Referee refereeToUpdate) {
 		return refereeEAO.updateReferee(refereeToUpdate);
@@ -72,6 +81,15 @@ public class Facade implements FacadeLocal {
 
 	public List<String> findAllPitchIds() {
 		return pitchEAO.findAllPitchIds();
+	}
+	
+	
+	public Pitch findPitch(String pitchId) {
+        return pitchEAO.findPitchById(pitchId);
+	}
+	
+	public Set<Match> getMatchesOnPitch(String pitchId) {
+		return pitchEAO.findPitchById(pitchId).getMatches();
 	}
 
 	// MATCH METHODS
@@ -104,11 +122,21 @@ public class Facade implements FacadeLocal {
 		return matchEAO.findAllMatchIds();
 	}
 
+	
+	public Set<User> getUsersOnMatch(String matchId) {
+		return matchEAO.findMatchById(matchId).getUsers();
+	}
+	
+	public long getMatchCount() {
+		return matchEAO.getMatchCount();
+	}
+
 	// USER METHODS
 
 	public User findUser(String userId) {
 		return userEAO.findUserById(userId);
 	}
+
 
 	public long getUserCount() {
 		return userEAO.getUserCount();
@@ -122,14 +150,6 @@ public class Facade implements FacadeLocal {
 		return userEAO.getAvailableUsers();
 	}
 
-	public long getMatchCount() {
-		return matchEAO.getMatchCount();
-	}
-
-	public Pitch findPitch(String pitchId) {
-		return pitchEAO.findPitchById(pitchId);
-	}
-
 	public User updateUser(User userToUpdate) {
 		return userEAO.updateUser(userToUpdate);
 	}
@@ -138,21 +158,11 @@ public class Facade implements FacadeLocal {
 		return userEAO.findUserById(userId);
 	}
 
-	public Set<Match> getMatchesOnPitch(String pitchId) {
-		return pitchEAO.findPitchById(pitchId).getMatches();
-	}
-
-	public Set<User> getUsersOnMatch(String matchId) {
-		return matchEAO.findMatchById(matchId).getUsers();
-	}
-
 	public Set<User> getAllUsers() {
 		return userEAO.getAllUsers();
 	}
+	
 
-	public Set<Referee> getAllReferees() {
-		return refereeEAO.getAllReferees();
-	}
 
 	public void createUser(User user) {
 		userEAO.createUser(user);

@@ -37,45 +37,20 @@
 						<td><%=user.getUserId()%></td>
 						<td><%=user.getName()%></td>
 						<td><%=user.getEmail()%></td>
-						<td><%=user.getGender() %> </td>
-						<td><%=user.getAge() %> </td>
-						
+						<td><%=user.getGender()%></td>
+						<td><%=user.getAge()%></td>
 						<td>
-    <button onclick="editUser('<%=user.getUserId()%>', '<%=user.getName()%>', '<%=user.getAge()%>', '<%=user.getEmail()%>', '<%=user.getGender()%>')">Edit</button>
-</td>
-<td>
-    <button class="removeButton" data-user-id="<%= user.getUserId() %>">Remove</button>
-</td>
-	
-			                			
-							<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+							<button onclick="editUser('<%=user.getUserId()%>', '<%=user.getName()%>', '<%=user.getAge()%>', '<%=user.getEmail()%>', '<%=user.getGender()%>')">Edit</button>
+							<!-- Remove user form -->
+							<form action="/EJBFootBookWebProject/register" method="post" style="display:inline;">
+							
+							
+	                	 <input type="hidden" name="formType" value="removeUser">
+	               		 <input type="hidden" name="userId" value="<%=user.getUserId()%>">
+	               		 <button type="submit" onclick="return confirm('Are you sure you want to remove this user?')">Remove</button>
+           					 </form>
+						</td>
 
-<script>
-$(document).ready(function() {
-    // Event listener for 'Remove' buttons
-    $('.removeButton').click(function() {
-        var userId = $(this).data('user-id');
-        
-        // Confirm user removal
-        if (confirm('Are you sure you want to remove this user?')) {
-            // AJAX request to servlet for user removal
-            $.post('RegisterHandler', { action: 'removeUser', userId: userId })
-                .done(function(response) {
-                    // Remove the corresponding row from the table
-                    $('tr').has('td:contains("' + userId + '")').remove();
-                    alert('User removed successfully!');
-                })
-                .fail(function(xhr, status, error) {
-                    alert('Failed to remove user. Please try again.');
-                });
-        }
-    });
-});
-</script>
-							
-							
-							
-						
 					</tr>
 					<%
 					}
@@ -85,7 +60,6 @@ $(document).ready(function() {
 			<button id="addUserButton">Add</button>
 			<div id="addUserForm" class="box popUp" style="display: none;">
 				<h2>Add User</h2>
-
 				<form id="addingUserForm" action="/EJBFootBookWebProject/register" name="userFormType" method="post">
 					<label for="userId">User ID will be auto-generated!</label> <br><br>
 			
@@ -100,6 +74,7 @@ $(document).ready(function() {
 					<div style="display: flex; justify-content: center;">
 						<input type="number" class="bordered-input" id="userAge" name="userAge" required>
 					</div>
+
 
 					
 
@@ -159,11 +134,9 @@ $(document).ready(function() {
 
 					<button type="submit">Update User</button>
 				</form>
-        
-			
+
 			</div>
-
-
+			
 			<script>
 				// Function to update the user details
 				function editUser(userId, name, age, email, gender) {
@@ -176,6 +149,19 @@ $(document).ready(function() {
 
 					document.getElementById('editUserForm').style.display = 'block';
 				}
+
+			
+			<script>
+				// Event listener for showing add user form
+				document.getElementById("addUserButton").addEventListener("click", function() {
+					document.getElementById("addUserForm").style.display = "block";
+				});
+
+				// Event listener for hiding add user form after submission
+				document.getElementById("addingUserForm").addEventListener("submit", function(event) {
+					document.getElementById("addUserForm").style.display = "none";
+				});
+
 			</script>
 			
 			
@@ -203,10 +189,7 @@ $(document).ready(function() {
 
 
 									//G�mmer formul�ret igen
-									document.getElementById("addUserForm").style.display = "none";
-								});
-			</script>
-		</div>
+									document.getElementById("
 
 		<div style="margin-left: 20px;">
 			<h2>Referees</h2>
@@ -224,14 +207,22 @@ $(document).ready(function() {
 					Set<Referee> referees = (Set<Referee>) request.getAttribute("referees");
 					for (Referee referee : referees) {
 					%>
-					<tr>
-						<td><%=referee.getRefereeId()%></td>
-						<td><%=referee.getRefereeName()%></td>
-						<td><%=referee.getRefereeLicense().getLicenseId()%></td>
-						<td><button onclick="editReferee('<%=referee.getRefereeId()%>', '<%=referee.getRefereeName()%>', '<%=referee.getRefereeLicense().getLicenseId()%>')">Edit</button></td>
-						<td><button>Remove</button></td>
-						
-					</tr>
+
+						<tr>
+							<td><%=referee.getRefereeId()%></td>
+							<td><%=referee.getRefereeName()%></td>
+							<td><%=referee.getRefereeLicense().getLicenseId()%></td>
+							<td>
+								<button>RefEdit</button>
+								<form action="/EJBFootBookWebProject/register" method="post" style="display:inline;">
+                        <input type="hidden" name="formType" value="removeReferee">
+                        <input type="hidden" name="refereeId" value="<%=referee.getRefereeId()%>">
+                        <button type="submit" onclick="return confirm('Are you sure you want to remove this referee?')">Remove</button>
+                    </form>
+							</td>
+						</tr>
+
+
 					<%
 					}
 					%>
@@ -321,6 +312,17 @@ $(document).ready(function() {
 
 
 			<script>
+
+				// Event listener for showing add referee form
+				document.getElementById("addRefereeButton").addEventListener("click", function() {
+					document.getElementById("addRefereeForm").style.display = "block";
+				});
+
+				// Event listener for hiding add referee form after submission
+				document.getElementById("addingRefereeForm").addEventListener("submit", function(event) {
+					document.getElementById("addRefereeForm").style.display = "none";
+				});
+
 				//l�gger till eventlistener f�r att visa formul�ret n�r anv�ndaren klickar p� add
 				document
 						.getElementById("addRefereeButton")
@@ -344,6 +346,7 @@ $(document).ready(function() {
 									//G�mmer formul�ret igen
 									document.getElementById("addRefereeForm").style.display = "none";
 								});
+
 			</script>
 		</div>
 	</div>

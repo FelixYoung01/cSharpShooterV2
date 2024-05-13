@@ -35,7 +35,11 @@ public interface FacadeLocal {
 
 	public void createReferee(Referee referee);
 	
+
+	public void deleteReferee(String refereeId);
+
 	public Referee updateReferee(Referee refereeToUpdate);
+
 
 
 	// Match Methods

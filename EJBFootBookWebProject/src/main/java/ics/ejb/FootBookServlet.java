@@ -66,7 +66,16 @@ public class FootBookServlet extends HttpServlet {
 		
 		IPathHandler handler = handlerMap.get(pathInfo);
 		RequestDispatcher requestDispatcher = handler.handleRequestDispatcherPost(request, response, facade);
-		requestDispatcher.forward(request, response);
+		//If-sats För att lösa nullpointerexception ifall requestdispatcher är null (Typ när man raderar en referee och sidan uppdateras)
+		if (response.isCommitted()) {
+			return;
+		} 
+		if (requestDispatcher != null) {
+			requestDispatcher.forward(request, response);
+		} else {
+			response.sendError(HttpServletResponse.SC_NOT_FOUND , "Handler not found for path: " + pathInfo);
+		}
+		
 	}
 	
 	public void init() throws ServletException{
