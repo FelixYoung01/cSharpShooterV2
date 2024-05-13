@@ -25,8 +25,14 @@ public class HomeHandler implements IPathHandler {
 
 		Set<Pitch> pitches = facade.getAllPitches();
 
+		long matchCount = facade.getMatchCount();
+		long userCount = facade.getUserCount();
+		long userOnMatchesCount = facade.getUsersOnMatchesCount();
+		
 		request.setAttribute("pitches", pitches);
-		request.setAttribute("matchCount", facade.getMatchCount());
+		request.setAttribute("matchCount", matchCount);
+		request.setAttribute("userCount", userCount);
+		request.setAttribute("userOnMatchesCount", userOnMatchesCount);
 
 		HttpSession sessions = request.getSession(false); // Hämtar nuvarande session utan att skapa en ny om den inte
 															// redan finns

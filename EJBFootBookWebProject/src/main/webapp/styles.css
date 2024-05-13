@@ -57,6 +57,7 @@ button {
     text-align: center;
     margin: 10px;
     color: var(--text-color);
+    box-shadow: 5px 5px 0px rgba(0, 0, 0, 0.5);
 }
 
 button:hover {
@@ -126,14 +127,31 @@ header {
     justify-content: center;
     align-items: center;
     margin-bottom: 10px;
+    box-shadow: 5px 5px 0px rgba(0, 0, 0, 0.5);
+    position: relative;
+}
+
+header::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 50%;
+    height: 2px;
+    background-color: var(--text-color);
+    z-index: 1;
 }
 
 nav ul {
     list-style: none;
+    position: relative;
+    z-index: 2;
+    background-color: var(--main-color);
 }
 
 nav ul li {
     display: inline-block;
+    margin-left: 20px;
     margin-right: 20px;
     transition: transform 0.3s ease;
 }
@@ -174,7 +192,7 @@ nav ul li:hover {
 
 .logo {
     color: black;
-    font-size: 8vw;
+    font-size: 72px;
     text-transform: uppercase;
     text-align: center;
     line-height: 1;
@@ -185,11 +203,25 @@ nav ul li:hover {
     -webkit-filter: var(--sun-filter);
 }
 
-#logoball {
-    background-image: url('Images/footballpattern.png');
-    background-size: 40%;
-    background-position: center 9vh;
-    background-repeat: no-repeat;
+#logo-o {
+    position: relative;
+}
+
+#logo-o img {
+    position: absolute;
+    width: 40%;
+    top: 10%;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    z-index: 2;
+}
+
+#logo-o::after {
+    content: "o";
+    position: absolute;
+    z-index: 1;
 }
 
 @keyframes wiggle {
@@ -242,6 +274,7 @@ nav ul li:hover {
     border-radius: 5px;
     text-align: center;
     margin: 10px;
+    box-shadow: 5px 5px 0px rgba(0, 0, 0, 0.5);
 }
 
 .matchBox {
@@ -325,7 +358,7 @@ footer {
 }
 
 .team-member {
-    width: 300px;
+    width: 15vw;
     flex-grow: 1;
 }
 
@@ -375,6 +408,7 @@ footer {
     color: white;
     -webkit-text-stroke-width: 2px;
     -webkit-text-stroke-color: black;
+    box-shadow: 5px 5px 0px rgba(0, 0, 0, 0.5);
 }
 
 .pitch:hover {

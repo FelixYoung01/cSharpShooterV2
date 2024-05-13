@@ -102,15 +102,21 @@ public class Facade implements FacadeLocal {
 	
 	//USER METHODS
 	
+
+
+	public User findUser(String userId) {
+		return userEAO.findUserById(userId);
+	}
+  
 	public void updateUser(User user) {
 		userEAO.updateUser(user);
 	}
 	
-	public int getUserCount() {
+	public long getUserCount() {
 		return userEAO.getUserCount();
 	}
 	
-	public int getUsersOnMatchesCount() {
+	public long getUsersOnMatchesCount() {
 		return userEAO.getUsersOnMatchesCount();
 	}
 	
@@ -124,6 +130,10 @@ public class Facade implements FacadeLocal {
 	
 	public Pitch findPitch(String pitchId) {
         return pitchEAO.findPitchById(pitchId);
+	}
+
+	public User findUserById(String userId) {
+		return null;
 	}
 
 	
@@ -151,10 +161,4 @@ public class Facade implements FacadeLocal {
 	public void deleteUser(String userId) {
 		userEAO.deleteUser(userId);
 	}
-	
-	public User findUser(String userId) {
-		return userEAO.findUserById(userId);
-	}
-
-
 }

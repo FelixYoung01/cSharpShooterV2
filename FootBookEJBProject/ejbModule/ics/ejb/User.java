@@ -24,11 +24,11 @@ import jakarta.validation.constraints.Size;
 
 	@NamedQuery(name="User.findAll", query="SELECT u FROM User u"),
 	@NamedQuery(name="User.countAll", query="SELECT COUNT(u) FROM User u"), //Namedquery for the stats of users registered
-	@NamedQuery(name="User.countRegisteredOnMatches", query="SELECT COUNT(u) FROM User u WHERE u.match IS NOT NULL"), // Namedquery for counting amount of users registered on matches
-	@NamedQuery(name="User.availableUsers", query="SELECT u FROM User u WHERE u.match IS NULL") // Namedquery for getting all users that are not registered on a match
+
+  @NamedQuery(name="User.availableUsers", query="SELECT u FROM User u WHERE u.match IS NULL"), // Namedquery for getting all users that are not registered on a match
+	@NamedQuery(name="User.countRegisteredOnMatches", query="SELECT COUNT(u.match) FROM User u WHERE u.match IS NOT NULL") // Namedquery for counting amount of users registered on matches
 })
 @Table(name="[User]") // User is a reserved word in SQL, so it needs to be enclosed in square brackets")
-
 
 
 
