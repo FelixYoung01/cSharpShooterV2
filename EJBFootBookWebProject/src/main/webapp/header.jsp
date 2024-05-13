@@ -3,7 +3,7 @@
 <button id="dark-mode-toggle" class="icon-button">
 	<img src="Images/sun.png" alt="Sun Icon" class="sun-icon">
 </button>
-<h1 class="logo">FootBook</h1>
+<h1 class="logo">FootB<span id="logoball">o</span>ok</h1>
 <div class="box" id="weatherBox">
 	<h3>Weather Information</h3>
 	<p>
@@ -36,8 +36,6 @@
 				class="button">Need Help?</a></li>
 		</ul>
 	</nav>
-	<img src="Images/Arsenal_FC.svg.webp" alt="Arsenal Logo"
-		class="arsenal">
 </header>
 <img src="Images/footballpattern.png" alt="Football"
 	class="upperleftball" />

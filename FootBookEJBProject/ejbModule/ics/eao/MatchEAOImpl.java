@@ -38,8 +38,8 @@ public class MatchEAOImpl implements MatchEAOLocal {
 		//return match;
 		
 		Match match = em.find(Match.class, matchId);
-	    if (match == null) {
-	        System.err.println("Match not found for ID: " + matchId);
+	    if (matchId == null) {
+	        System.out.println("Match not found for iD: " + matchId);
 	    } else {
 	        System.out.println("Match found: " + match.getMatchId());
 	    }

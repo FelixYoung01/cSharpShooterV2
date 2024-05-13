@@ -51,4 +51,9 @@ public class UserEAOImpl implements UserEAOLocal{
 		return new HashSet<User>(query.getResultList());
 	}
 	
+	public Set<User> getAvailableUsers() {
+		TypedQuery<User> query = em.createNamedQuery("User.availableUsers", User.class);
+		return new HashSet<User>(query.getResultList());
+	}
+	
 }
