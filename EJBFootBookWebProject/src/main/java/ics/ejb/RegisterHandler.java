@@ -80,6 +80,10 @@ public class RegisterHandler implements IPathHandler {
 			    response.sendRedirect(request.getRequestURI());
 			}
 		
+<<<<<<< HEAD
+=======
+
+>>>>>>> 9c132be34dfb62682e3be07bd045d06cfc73da9f
 		return request.getRequestDispatcher("/register.jsp");
 
 	}
