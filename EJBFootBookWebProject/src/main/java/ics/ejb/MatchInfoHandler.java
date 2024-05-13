@@ -26,6 +26,7 @@ public class MatchInfoHandler implements IPathHandler {
 		request.setAttribute("availableUsers", availableUsers);
 		request.setAttribute("usersOnMatch", usersOnMatch);
 		request.setAttribute("match", match);
+		
 
 		if (request.getParameter("userId") != null) {
 
@@ -33,6 +34,7 @@ public class MatchInfoHandler implements IPathHandler {
 			User user = facade.findUser(userId);
 			user.setMatch(match);
 			facade.updateUser(user);
+			
 		}
 
 		return request.getRequestDispatcher("/matchInfo.jsp");

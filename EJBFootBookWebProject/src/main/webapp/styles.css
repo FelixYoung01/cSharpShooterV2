@@ -57,6 +57,7 @@ button {
     text-align: center;
     margin: 10px;
     color: var(--text-color);
+    box-shadow: 5px 5px 0px rgba(0, 0, 0, 0.5);
 }
 
 button:hover {
@@ -126,14 +127,31 @@ header {
     justify-content: center;
     align-items: center;
     margin-bottom: 10px;
+    box-shadow: 5px 5px 0px rgba(0, 0, 0, 0.5);
+    position: relative;
+}
+
+header::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 50%;
+    height: 2px;
+    background-color: var(--text-color);
+    z-index: 1;
 }
 
 nav ul {
     list-style: none;
+    position: relative;
+    z-index: 2;
+    background-color: var(--main-color);
 }
 
 nav ul li {
     display: inline-block;
+    margin-left: 20px;
     margin-right: 20px;
     transition: transform 0.3s ease;
 }
@@ -155,7 +173,6 @@ nav ul li:hover {
     top: 10px;
     right: 10px;
     border: none;
-    background: none;
     cursor: pointer;
     width: 50px;
     height: 50px;
@@ -174,7 +191,7 @@ nav ul li:hover {
 
 .logo {
     color: black;
-    font-size: 8vw;
+    font-size: 72px;
     text-transform: uppercase;
     text-align: center;
     line-height: 1;
@@ -185,11 +202,25 @@ nav ul li:hover {
     -webkit-filter: var(--sun-filter);
 }
 
-#logoball {
-    background-image: url('Images/footballpattern.png');
-    background-size: 40%;
-    background-position: center 9vh;
-    background-repeat: no-repeat;
+#logo-o {
+    position: relative;
+}
+
+#logo-o img {
+    position: absolute;
+    width: 40%;
+    top: 10%;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    z-index: 2;
+}
+
+#logo-o::after {
+    content: "o";
+    position: absolute;
+    z-index: 1;
 }
 
 @keyframes wiggle {
@@ -242,7 +273,25 @@ nav ul li:hover {
     border-radius: 5px;
     text-align: center;
     margin: 10px;
+    box-shadow: 5px 5px 0px rgba(0, 0, 0, 0.5);
 }
+
+.matchBox {
+    background-color: var(--main-color);
+    padding: 20px;
+    width: 1200px;
+    border: 5px solid var(--text-color);
+    border-radius: 5px;
+    text-align: center;
+    margin: 10px;
+}
+
+.nullText {
+		color: var(--text-color);
+		font-size: 20px;
+		text-align: center;
+	}
+
 
 #weatherBox {
 	position: absolute;
@@ -308,7 +357,7 @@ footer {
 }
 
 .team-member {
-    width: 300px;
+    width: 15vw;
     flex-grow: 1;
 }
 
@@ -341,6 +390,7 @@ footer {
     padding: 10px;
     margin-bottom: 20px;
     background-color: var(--background-color);
+    box-shadow: 5px 5px 0px rgba(0, 0, 0, 0.5);
 }
 
 .pitch {
@@ -358,6 +408,7 @@ footer {
     color: white;
     -webkit-text-stroke-width: 2px;
     -webkit-text-stroke-color: black;
+    box-shadow: 5px 5px 0px rgba(0, 0, 0, 0.5);
 }
 
 .pitch:hover {
@@ -368,7 +419,7 @@ footer {
     font-size: 36px;
     padding: 20px;
     margin-bottom: 10px;
-    filter: var(--sun-filter);
+    filter: drop-shadow(5px 5px 0px rgba(0, 0, 0, 0.5));
 }
 
 .pitch a {
@@ -465,6 +516,19 @@ footer {
     z-index: 1;
 }
 
+.users {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+    justify-content: center;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    max-width: 1200px;
+    margin: auto;
+    padding: 20px;
+}
+
 .user {
     background-color: var(--background-color);
     background-size: cover;
@@ -533,3 +597,6 @@ input {
     background-color: var(--main-color);
     color: var(--text-color);
 }
+
+
+

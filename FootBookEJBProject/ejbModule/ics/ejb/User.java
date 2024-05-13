@@ -31,8 +31,6 @@ import jakarta.validation.constraints.Size;
 @Table(name="[User]") // User is a reserved word in SQL, so it needs to be enclosed in square brackets")
 
 
-	
-
 
 
 public class User implements Serializable{

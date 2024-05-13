@@ -26,7 +26,9 @@
 				Pitch ID:
 				<%=pitchId%></p>
 			<img src="Images/<%=pitch.getImageName()%>" alt="Pitch Image" class="bordered-image" style="width: 800px;"/>
+
 		</div>
+
 		<h1>Matches on this pitch</h1>
 		<section class="matches">
 			<%
