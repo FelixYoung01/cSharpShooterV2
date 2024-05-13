@@ -155,6 +155,10 @@ public class Facade implements FacadeLocal {
 	public void deleteUser(String userId) {
 		userEAO.deleteUser(userId);
 	}
+	
+	public User findUser(String userId) {
+		return userEAO.findUserById(userId);
+	}
 
 
 }

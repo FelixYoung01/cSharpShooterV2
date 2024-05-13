@@ -67,7 +67,10 @@ public interface FacadeLocal {
 	
 	public void updateUser(User user);
 
-	// Pitch Methods
+
+  
+	//Pitch Methods
+  
 	public Pitch findPitch(String pitchId);
 
 	public Set<Pitch> getAllPitches();

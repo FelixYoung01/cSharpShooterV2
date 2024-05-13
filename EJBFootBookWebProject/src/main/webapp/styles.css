@@ -20,6 +20,12 @@
     --sun-filter: invert(1);
 }
 
+.bordered-image {
+    border: 5px solid var(--text-color);
+    border-radius: 5px;
+    margin: 5px;
+}
+
 body {
     background-color: var(--background-color);
     color: var(--text-color);
@@ -44,12 +50,12 @@ table, table td, table th {
 
 button {
     cursor: pointer;
-    background-color: var(--main-color);
+    background-color: var(--secondary-color);
     padding: 5px;
     border: 5px solid var(--text-color);
     border-radius: 5px;
     text-align: center;
-    margin: 10px auto;
+    margin: 10px;
     color: var(--text-color);
 }
 
@@ -167,12 +173,23 @@ nav ul li:hover {
 }
 
 .logo {
+    color: black;
     font-size: 8vw;
     text-transform: uppercase;
     text-align: center;
     line-height: 1;
     margin-bottom: 10px;
     user-select: none;
+    position: relative;
+    filter: var(--sun-filter);
+    -webkit-filter: var(--sun-filter);
+}
+
+#logoball {
+    background-image: url('Images/footballpattern.png');
+    background-size: 40%;
+    background-position: center 9vh;
+    background-repeat: no-repeat;
 }
 
 @keyframes wiggle {
@@ -287,12 +304,12 @@ footer {
 .team-members {
     display: flex;
     flex-direction: row;
-    align-items: center;
+    align-items: stretch;
 }
 
 .team-member {
-    width: 200px;
-    height: 420px;
+    width: 300px;
+    flex-grow: 1;
 }
 
 .team-member-info p {
@@ -327,14 +344,14 @@ footer {
 }
 
 .pitch {
-    background-image: url('Images/Emirates.webp');
+    background-image: url('Images/DefaultPitchImage.jpg');
     background-size: cover;
     background-position-y: center;
     border: 5px solid var(--text-color);
     border-radius: 5px;
     margin-bottom: 20px;
-    filter: hue-rotate(90deg);
-    -webkit-filter: hue-rotate(90deg);
+    filter: brightness(1);
+    -webkit-filter: brightness(1);
     z-index: 2;
     transition: filter 0.3s ease, transform 0.3s ease;
     font-weight: bold;
@@ -344,8 +361,6 @@ footer {
 }
 
 .pitch:hover {
-    filter: none;
-    -webkit-filter: none;
     transform: scale(1.1);
 }
 
@@ -383,18 +398,21 @@ footer {
 }
 
 .matches {
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+    justify-content: center;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
     scroll-behavior: smooth;
+    max-width: 1200px;
+    margin: auto;
     padding: 20px;
 }
 
 .match {
-    flex: 0 0 auto;
-    width: 300px;
-    height: 400px;
-    margin-right: 20px;
+    width: 300px; /* You can remove this line if you want the items to stretch to fill the grid cell */
+    height: 200px;
     background-color: var(--background-color);
     background-size: cover;
     background-position-y: center;
@@ -403,6 +421,12 @@ footer {
     padding: 20px;
     filter: blur(0px);
     transition: filter 0.3s ease, transform 0.3s ease;
+}
+
+@media (max-width: 600px) {
+    .matches {
+        grid-template-columns: 1fr;
+    }
 }
 
 .match:hover {
@@ -490,6 +514,13 @@ footer {
     text-align: center;
     transition: background-color 0.3s ease;
     z-index: 1;
+}
+
+.bordered-input {
+    border: 5px solid var(--text-color);
+    border-radius: 5px;
+    padding: 5px;
+    margin: 10px;
 }
 
 textarea {

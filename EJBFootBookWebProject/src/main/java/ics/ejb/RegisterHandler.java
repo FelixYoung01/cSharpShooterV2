@@ -45,7 +45,7 @@ public class RegisterHandler implements IPathHandler {
 
 			User user = new User(age, email, gender, name);
 			facade.createUser(user);
-			
+
 			System.out.println("User added");
 			response.sendRedirect(request.getRequestURI());
 			
@@ -58,7 +58,7 @@ public class RegisterHandler implements IPathHandler {
 			String licenseId = request.getParameter("licenseId");
 
 			RefereeLicense tempLicense = facade.findRefereeLicense(licenseId);
-        
+
 			Referee referee = new Referee(refName, tempLicense);
 			facade.createReferee(referee);
 			System.out.println("Referee added");
@@ -66,33 +66,25 @@ public class RegisterHandler implements IPathHandler {
 			response.sendRedirect(request.getRequestURI());
 
 			}
-			
-			
 
-			
-			
-		
-//		 if (request.getMethod().equalsIgnoreCase("POST")) {
-//		        String action1 = request.getParameter("action");
-//
-//		        if (action != null && action.equals("remove")) {
-//		            String userIdToDelete = request.getParameter("userId");
-//		            
-//		            if (userIdToDelete != null) {
-//						 facade.deleteUser(userIdToDelete);
-//						 
-//		                if (userIdToDelete != null) {
-//		                    response.getWriter().write("User deleted successfully");
-//		                    return null; // We don't need to forward to any JSP page
-//		                } else {
-//		                    response.getWriter().write("User not found");
-//                        }
-//		            }
-//		        }
-//		    }
+			else if ("removeUser".equals(action)) {
+			    String userId = request.getParameter("userId");
+
+			        User user = facade.findUser(userId);
+			        if (user != null) {
+			            facade.deleteUser(userId);
+			            System.out.println("User removed: " + userId);
+			        }
+					else {
+						System.out.println("User not found: " + userId);
+					}
+			        
+			    response.sendRedirect(request.getRequestURI());
+			}
 
 		return request.getRequestDispatcher("/register.jsp");
 
 	}
+
+
 }
-	
