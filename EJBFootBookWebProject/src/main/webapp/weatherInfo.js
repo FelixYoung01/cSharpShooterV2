@@ -29,6 +29,7 @@ $(document).ready(function() { //When this runs, it reads the DOM tree and then 
                 method: "GET",
 
 
+
             //    url: `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&APPID=ce3e097846c8e55864481f37b93db22f`,
 
 
