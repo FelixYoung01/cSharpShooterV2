@@ -34,7 +34,8 @@ public class RegisterHandler implements IPathHandler {
 
 		String action = request.getParameter("formType");
 		
-			if ("addUser".equals(action)){// Kör kodstycket ifall metoden är POST
+			// Kör kodstycket ifall det är en user som ska läggas till
+			if ("addUser".equals(action)){
 
 			String tempAge = request.getParameter("userAge");
 			String email = request.getParameter("userEmail");
@@ -50,7 +51,7 @@ public class RegisterHandler implements IPathHandler {
 			
 			}
 		
-			// Kör kodstycket ifall metoden är POST
+			// Kör kodstycket ifall det är en dommare som ska läggas till
 			else if ("addReferee".equals(action)){
 				
 			String refName = request.getParameter("refereeName");
@@ -68,25 +69,27 @@ public class RegisterHandler implements IPathHandler {
 			
 			
 
+			
+			
 		
-		
-		 if (request.getMethod().equalsIgnoreCase("POST")) {
-		        String action = request.getParameter("action");
-
-		        if (action != null && action.equals("remove")) {
-		            String userIdToDelete = request.getParameter("userId");
-		            if (userIdToDelete != null) {
-		                
-						 facade.deleteUser(userIdToDelete);
-		                if (userIdToDelete != null) {
-		                    response.getWriter().write("User deleted successfully");
-		                    return null; // We don't need to forward to any JSP page
-		                } else {
-		                    response.getWriter().write("User not found");
-                        }
-		            }
-		        }
-		    }
+//		 if (request.getMethod().equalsIgnoreCase("POST")) {
+//		        String action1 = request.getParameter("action");
+//
+//		        if (action != null && action.equals("remove")) {
+//		            String userIdToDelete = request.getParameter("userId");
+//		            
+//		            if (userIdToDelete != null) {
+//						 facade.deleteUser(userIdToDelete);
+//						 
+//		                if (userIdToDelete != null) {
+//		                    response.getWriter().write("User deleted successfully");
+//		                    return null; // We don't need to forward to any JSP page
+//		                } else {
+//		                    response.getWriter().write("User not found");
+//                        }
+//		            }
+//		        }
+//		    }
 
 		return request.getRequestDispatcher("/register.jsp");
 
