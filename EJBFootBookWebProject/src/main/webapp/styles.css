@@ -244,6 +244,23 @@ nav ul li:hover {
     margin: 10px;
 }
 
+.matchBox {
+    background-color: var(--main-color);
+    padding: 20px;
+    width: 1200px;
+    border: 5px solid var(--text-color);
+    border-radius: 5px;
+    text-align: center;
+    margin: 10px;
+}
+
+.nullText {
+		color: var(--text-color);
+		font-size: 20px;
+		text-align: center;
+	}
+
+
 #weatherBox {
 	position: absolute;
 	top: 10px;
@@ -465,6 +482,19 @@ footer {
     z-index: 1;
 }
 
+.users {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+    justify-content: center;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    max-width: 1200px;
+    margin: auto;
+    padding: 20px;
+}
+
 .user {
     background-color: var(--background-color);
     background-size: cover;
@@ -533,3 +563,6 @@ input {
     background-color: var(--main-color);
     color: var(--text-color);
 }
+
+
+
