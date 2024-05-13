@@ -61,7 +61,7 @@ public interface FacadeLocal {
   
 	public User findUserById(String userId);
 	
-	public void updateUser(User userToUpdate);
+	public User updateUser(User userToUpdate);
 
 	public void deleteUser(String userId);
 
