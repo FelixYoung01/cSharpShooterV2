@@ -230,11 +230,10 @@ $(document).ready(function() {
 						<td><%=referee.getRefereeLicense().getLicenseId()%></td>
 						<td>
 <td>
-    <button onclick="editReferee('<%=referee.getRefereeId()%>', '<%=referee.getRefereeName()%>', '<%=referee.getRefereeLicense().getLicenseId()%>')">RefEdit</button>
+    <button onclick="editReferee('<%=referee.getRefereeId()%>', '<%=referee.getRefereeName()%>', '<%=referee.getRefereeLicense().getLicenseId()%>')">Edit</button>
     
     <button>Remove</button>
 </td>
-							
 
 
 

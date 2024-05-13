@@ -30,7 +30,7 @@
 		</div>
 
 		<h1>Matches on this pitch</h1>
-		<section class="matches">
+		<section class="grid-container">
 			<%
 			Set<Match> matches = (Set<Match>) request.getAttribute("matchesOnPitch");
 			for (Match match : matches) {

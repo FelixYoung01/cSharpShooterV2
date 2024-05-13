@@ -37,6 +37,7 @@ body {
     justify-content: center;
     width: 100%;
     padding-bottom: 100px;
+    text-align: center;
 }
 
 h2 {
@@ -277,14 +278,14 @@ nav ul li:hover {
     box-shadow: 5px 5px 0px rgba(0, 0, 0, 0.5);
 }
 
-.matchBox {
-    background-color: var(--main-color);
+.colored-box {
+    background-color: var(--secondary-color);
     padding: 20px;
-    width: 1200px;
     border: 5px solid var(--text-color);
     border-radius: 5px;
     text-align: center;
     margin: 10px;
+    box-shadow: 5px 5px 0px rgba(0, 0, 0, 0.5);
 }
 
 .nullText {
@@ -404,7 +405,7 @@ footer {
     filter: brightness(1);
     -webkit-filter: brightness(1);
     z-index: 2;
-    transition: filter 0.3s ease, transform 0.3s ease;
+    transition: transform 0.3s ease;
     font-weight: bold;
     color: white;
     -webkit-text-stroke-width: 2px;
@@ -445,13 +446,12 @@ footer {
     font-size: 16px;
     cursor: pointer;
     text-align: center;
-    transition: background-color 0.3s ease;
     z-index: 1;
 }
 
-.matches {
+.grid-container {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     gap: 20px;
     justify-content: center;
     overflow-x: auto;
@@ -473,7 +473,7 @@ footer {
     padding: 20px;
     box-shadow: 5px 5px 0px rgba(0, 0, 0, 0.5);
     filter: blur(0px);
-    transition: filter 0.3s ease, transform 0.3s ease;
+    transition: transform 0.3s ease;
 }
 
 @media (max-width: 600px) {
@@ -483,7 +483,6 @@ footer {
 }
 
 .match:hover {
-    filter: none;
     transform: scale(1.1);
 }
 
@@ -518,36 +517,14 @@ footer {
     z-index: 1;
 }
 
-.users {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 20px;
-    justify-content: center;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    scroll-behavior: smooth;
-    max-width: 1200px;
-    margin: auto;
-    padding: 20px;
-}
-
 .user {
-    background-color: var(--background-color);
-    background-size: cover;
-    background-position-y: center;
-    border: 3px solid var(--text-color);
-    border-radius: 3px;
-    margin-bottom: 20px;
-    filter: hue-rotate(90deg);
-    -webkit-filter: hue-rotate(90deg);
-    z-index: 2;
-    transition: filter 0.3s ease, transform 0.3s ease;
+    width: 500px;
+    transition: transform 0.3s ease;
 }
 
 .user:hover {
-    filter: none;
-    -webkit-filter: none;
     transform: scale(1.1);
+    animation: none;
 }
 
 .user h3 {
@@ -563,22 +540,6 @@ footer {
     width: 100%; 
     height: 100%; 
     text-decoration: none; 
-    z-index: 1;
-}
-
-.user button {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    border: none;
-    background-color: transparent;
-    padding: 14px 28px;
-    font-size: 16px;
-    cursor: pointer;
-    text-align: center;
-    transition: background-color 0.3s ease;
     z-index: 1;
 }
 
