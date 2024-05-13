@@ -55,7 +55,7 @@ button {
     border: 5px solid var(--text-color);
     border-radius: 5px;
     text-align: center;
-    margin: 10px auto;
+    margin: 10px;
     color: var(--text-color);
 }
 
@@ -503,6 +503,13 @@ footer {
     text-align: center;
     transition: background-color 0.3s ease;
     z-index: 1;
+}
+
+.bordered-input {
+    border: 5px solid var(--text-color);
+    border-radius: 5px;
+    padding: 5px;
+    margin: 10px;
 }
 
 textarea {
