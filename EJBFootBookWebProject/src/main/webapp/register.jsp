@@ -50,6 +50,7 @@
 	               		 <button type="submit" onclick="return confirm('Are you sure you want to remove this user?')">Remove</button>
            					 </form>
 						</td>
+
 					</tr>
 					<%
 					}
@@ -73,8 +74,11 @@
 					<div style="display: flex; justify-content: center;">
 						<input type="number" class="bordered-input" id="userAge" name="userAge" required>
 					</div>
+
+
 					
-					<!-- Field for Email -->
+
+				<!-- Field for Email -->
 					<label for="userEmail">Email:</label> 
 					<div style="display: flex; justify-content: center;">
 						<input type="email" class="bordered-input" id="userEmail" name="userEmail" required>
@@ -90,6 +94,7 @@
 					</div><br>
 					<input type="hidden" name="formType" value="addUser">
 					<button type="submit">Submit</button>
+
 				</form>
 			</div>
 
@@ -129,6 +134,7 @@
 
 					<button type="submit">Update User</button>
 				</form>
+
 			</div>
 			
 			<script>
@@ -143,6 +149,7 @@
 
 					document.getElementById('editUserForm').style.display = 'block';
 				}
+
 			
 			<script>
 				// Event listener for showing add user form
@@ -154,8 +161,35 @@
 				document.getElementById("addingUserForm").addEventListener("submit", function(event) {
 					document.getElementById("addUserForm").style.display = "none";
 				});
+
 			</script>
-		</div>
+			
+			
+
+			<script>
+				//l�gger till eventlistener f�r att visa formul�ret n�r anv�ndaren klickar p� add
+				document
+						.getElementById("addUserButton")
+						.addEventListener(
+								"click",
+								function() {
+
+									//G�r formul�ret synligt
+									document.getElementById("addUserForm").style.display = "block";
+								});
+				//l�gger till en eventlistener f�r att skicka formul�ret
+				document
+						.getElementById("userForm")
+						.addEventListener(
+								"submitUser",
+								function(event) {
+
+
+									//hindrar standardbeteendet f�r formul�ret
+
+
+									//G�mmer formul�ret igen
+									document.getElementById("
 
 		<div style="margin-left: 20px;">
 			<h2>Referees</h2>
@@ -173,6 +207,7 @@
 					Set<Referee> referees = (Set<Referee>) request.getAttribute("referees");
 					for (Referee referee : referees) {
 					%>
+
 						<tr>
 							<td><%=referee.getRefereeId()%></td>
 							<td><%=referee.getRefereeName()%></td>
@@ -186,11 +221,14 @@
                     </form>
 							</td>
 						</tr>
+
+
 					<%
 					}
 					%>
 				</tbody>
 			</table>
+
 
 			<button id="addRefereeButton">Add</button>
 			<div id="addRefereeForm" class="box popUp" style="display: none;">
@@ -225,7 +263,56 @@
 					<button type="submit">Submit</button>
 				</form>
 			</div>
+
+
+
+			<div id="editRefereeForm" class="popUp" style="display: none;">
+				<h2>Edit Referee</h2>
+				<form id="editingRefereeForm"
+					action="/EJBFootBookWebProject/register" method="post">
+					<input type="hidden" name="formType" value="editReferee">
+
+					<!-- Hidden Field for Referee ID (non-editable) -->
+					<input type="hidden" id="editRefereeId" name="refereeId" required>
+
+					<!-- Display Referee ID (non-editable) -->
+					<label for="displayRefereeId">Referee ID:</label> <input
+						type="text" id="displayRefereeId" value="" disabled><br>
+
+					<!-- Field for Name -->
+					<label for="editRefereeName">Name:</label> <input type="text"
+						id="editRefereeName" name="refereeName" required><br>
+
+					<!-- Field for License -->
+					<label for="editRefereeLicense">License:</label> <select
+						id="editRefereeLicense" name="licenseId" required>
+						<%
+						for (RefereeLicense license : licenses) {
+						%>
+						<option value="<%=license.getLicenseId()%>"><%=license.getLicenseId()%></option>
+						<%
+						}
+						%>
+					</select><br>
+
+					<button type="submit">Update Referee</button>
+				</form>
+			</div>
+
 			<script>
+				function editReferee(refereeId, refereeName, licenseId) {
+					document.getElementById('editRefereeId').value = refereeId;
+					document.getElementById('displayRefereeId').value = refereeId; // Display referee ID in a disabled input
+					document.getElementById('editRefereeName').value = refereeName;
+					document.getElementById('editRefereeLicense').value = licenseId;
+
+					document.getElementById('editRefereeForm').style.display = 'block';
+				}
+			</script>
+
+
+			<script>
+
 				// Event listener for showing add referee form
 				document.getElementById("addRefereeButton").addEventListener("click", function() {
 					document.getElementById("addRefereeForm").style.display = "block";
@@ -235,6 +322,31 @@
 				document.getElementById("addingRefereeForm").addEventListener("submit", function(event) {
 					document.getElementById("addRefereeForm").style.display = "none";
 				});
+
+				//l�gger till eventlistener f�r att visa formul�ret n�r anv�ndaren klickar p� add
+				document
+						.getElementById("addRefereeButton")
+						.addEventListener(
+								"click",
+								function() {
+
+									//G�r formul�ret synligt
+									document.getElementById("addRefereeForm").style.display = "block";
+								});
+				//l�gger till en eventlistener f�r att skicka formul�ret
+				document
+						.getElementById("addRefereeForm")
+						.addEventListener(
+								"submit",
+								function(event) {
+
+									//hindrar standardbeteendet f�r formul�ret
+
+
+									//G�mmer formul�ret igen
+									document.getElementById("addRefereeForm").style.display = "none";
+								});
+
 			</script>
 		</div>
 	</div>

@@ -13,7 +13,7 @@ public interface RefereeEAOLocal {
 
 	public void addReferee(Referee referee);
 
-	public void updateReferee(Referee referee);
+	public Referee updateReferee(Referee referee);
 
 	public void deleteReferee(String refereeId);
 

@@ -1,7 +1,8 @@
 
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	import="ics.ejb.Pitch" import="java.util.Set" import="ics.ejb.Match"
-	pageEncoding="ISO-8859-1"%>
+    import="ics.ejb.Pitch, java.util.Set, ics.ejb.Match"
+    pageEncoding="ISO-8859-1"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,27 +25,27 @@
 			<p>
 				Pitch ID:
 				<%=pitchId%></p>
-			<img src="Images/<%=pitch.getImageName()%>" alt="Pitch Image" class="bordered-image" style="width: 800px;"/><br
+			<img src="Images/<%=pitch.getImageName()%>" alt="Pitch Image" class="bordered-image" style="width: 800px;"/>
+
 		</div>
+
 		<h1>Matches on this pitch</h1>
-		<section class="matches">
+		<section class="grid-container">
 			<%
 			Set<Match> matches = (Set<Match>) request.getAttribute("matchesOnPitch");
 			for (Match match : matches) {
 			%>
-			<div class="match">
+			<a class="a-button" href="<%=request.getContextPath()%>/matchInfo?matchId=<%=match.getMatchId()%>">
 				<h3><%=match.getMatchId()%></h3>
-				<a
-					href="<%=request.getContextPath()%>/matchInfo?matchId=<%=match.getMatchId()%>">
-				</a>
 				<p>
 					Match Date:
-					<%=match.getDate()%></p>
+					<%=match.getDate()%>
+				</p>
 				<p>
 					Match Time:
-					<%=match.getTime()%></p>
-
-			</div>
+					<%=match.getTime()%>
+				</p>
+			</a>
 			<%
 			}
 			%>
