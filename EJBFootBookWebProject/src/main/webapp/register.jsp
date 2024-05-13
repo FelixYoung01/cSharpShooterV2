@@ -83,9 +83,6 @@ $(document).ready(function() {
 							
 							
 						</td>
-						
-						
-				
 					</tr>
 					<%
 					}
@@ -110,11 +107,29 @@ $(document).ready(function() {
 					<div style="display: flex; justify-content: center;">
 						<input type="number" class="bordered-input" id="userAge" name="userAge" required>
 					</div>
-			
-					
 
 					
+
+				<!-- Field for Email -->
+					<label for="userEmail">Email:</label> 
+					<div style="display: flex; justify-content: center;">
+						<input type="email" class="bordered-input" id="userEmail" name="userEmail" required>
+					</div>
 			
+					<!-- Field for Gender -->
+					<label for="userGender">Gender:</label> 
+					<div style="display: flex; justify-content: center;">
+						<select id="userGender" name="userGender" required>
+							<option value="M">Male</option>
+							<option value="F">Female</option>
+						</select>
+					</div><br>
+					<input type="hidden" name="formType" value="addUser">
+					<button type="submit">Submit</button>
+
+				</form>
+			</div>
+
 			<div id="editUserForm" class="popUp" style="display: none;">
 				<h2>Edit User</h2>
 				<form id="editingUserForm" action="/EJBFootBookWebProject/register"
@@ -204,7 +219,8 @@ $(document).ready(function() {
 								function(event) {
 
 
-									//hindrar standardbeteendet fï¿½r formulï¿½ret
+									//hindrar standardbeteendet för formuläret
+
 
 									//Gï¿½mmer formulï¿½ret igen
 									document.getElementById("addUserForm").style.display = "none";
@@ -245,6 +261,7 @@ $(document).ready(function() {
 					%>
 				</tbody>
 			</table>
+
 
 			<button id="addRefereeButton">Add</button>
 			<div id="addRefereeForm" class="box popUp" style="display: none;">
@@ -298,7 +315,7 @@ $(document).ready(function() {
 								function(event) {
 
 
-									//hindrar standardbeteendet fï¿½r formulï¿½ret
+									//hindrar standardbeteendet för formuläret
 
 
 									//Gï¿½mmer formulï¿½ret igen
