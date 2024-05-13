@@ -231,7 +231,7 @@ $(document).ready(function() {
 						<td><%=referee.getRefereeName()%></td>
 						<td><%=referee.getRefereeLicense().getLicenseId()%></td>
 						<td>
-							<button>RefEdit</button>
+							<button>Edit</button>
 							<button>Remove</button>
 
 
