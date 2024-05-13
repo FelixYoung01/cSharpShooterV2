@@ -10,7 +10,7 @@ public interface UserEAOLocal {
 
 	public void createUser(User user);
 
-	public void updateUser(User user);
+	public User updateUser(User user);
 
 	public void deleteUser(String userId);
 

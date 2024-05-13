@@ -58,6 +58,10 @@ public interface FacadeLocal {
 	public void createUser(User user);
 
 	public Set<User> getAllUsers();
+  
+	public User findUserById(String userId);
+	
+	public User updateUser(User userToUpdate);
 
 	public void deleteUser(String userId);
 
@@ -65,9 +69,6 @@ public interface FacadeLocal {
 
 	public User findUser(String userId);
 	
-	public void updateUser(User user);
-
-
   
 	//Pitch Methods
   
@@ -80,5 +81,6 @@ public interface FacadeLocal {
 	public Set<User> getUsersOnMatch(String matchId);
 
 	public List<String> findAllPitchIds();
+
 
 }

@@ -29,7 +29,7 @@
 				<tbody>
 					<%
 					Set<User> users = (Set<User>) request.getAttribute("users");
-								for (User user : users) {
+					for (User user : users) {
 					%>
 					<tr>
 						<td><%=user.getUserId()%></td>
@@ -39,6 +39,18 @@
 						<td><%=user.getAge() %> </td>
 						
 						<td>
+
+							<button id="editUserButton">UserEdit</button>
+						<td>
+							<button onclick="removeUser('<%=user.getUserId()%>')">Remove</button>
+						</td>
+
+
+
+
+
+						</td>
+
 							<button>Edit</button>
 							
 			                <button class="removeButton" data-userId="<%= user.getUserId() %>">Remove</button>	
@@ -73,7 +85,7 @@ $(document).ready(function() {
 						</td>
 						
 						
-						
+				
 					</tr>
 					<%
 					}
@@ -83,6 +95,7 @@ $(document).ready(function() {
 			<button id="addUserButton">Add</button>
 			<div id="addUserForm" class="box popUp" style="display: none;">
 				<h2>Add User</h2>
+
 				<form id="addingUserForm" action="/EJBFootBookWebProject/register" name="userFormType" method="post">
 					<label for="userId">User ID will be auto-generated!</label> <br><br>
 			
@@ -98,7 +111,47 @@ $(document).ready(function() {
 						<input type="number" class="bordered-input" id="userAge" name="userAge" required>
 					</div>
 			
+					
+
+					
+			
+			<div id="editUserForm" class="popUp" style="display: none;">
+				<h2>Edit User</h2>
+				<form id="editingUserForm" action="/EJBFootBookWebProject/register"
+					method="post">
+					<!-- Hidden Field for Form Type -->
+					<input type="hidden" name="formType" value="editUser">
+
+					<!-- Hidden Field for User ID (non-editable) -->
+					<input type="hidden" id="editUserId" name="userId" required>
+
+					<!-- Display User ID (non-editable) -->
+					<div>
+						<label>User ID:</label> <span id="displayUserId"></span>
+					</div>
+
+					<!-- Field for Name -->
+					<label for="editUserName">Name:</label> <input type="text"
+						id="editUserName" name="userName" required><br>
+
+					<!-- Field for Age -->
+					<label for="editUserAge">Age:</label> <input type="number"
+						id="editUserAge" name="userAge" required><br>
+
 					<!-- Field for Email -->
+					<label for="editUserEmail">Email:</label> <input type="email"
+						id="editUserEmail" name="userEmail" required><br>
+
+					<!-- Field for Gender -->
+					<label for="editUserGender">Gender:</label> <select
+						id="editUserGender" name="userGender" required>
+						<option value="M">Male</option>
+						<option value="F">Female</option>
+					</select><br>
+
+					<button type="submit">Update User</button>
+				</form>
+        <!-- Field for Email -->
 					<label for="userEmail">Email:</label> 
 					<div style="display: flex; justify-content: center;">
 						<input type="email" class="bordered-input" id="userEmail" name="userEmail" required>
@@ -116,6 +169,22 @@ $(document).ready(function() {
 					<button type="submit">Submit</button>
 				</form>
 			</div>
+
+
+			<script>
+				// Function to update the user details
+				function editUser(userId, name, age, email, gender) {
+					document.getElementById('editUserId').value = userId;
+					document.getElementById('displayUserId').innerText = userId; // Display user ID but not editable
+					document.getElementById('editUserName').value = name;
+					document.getElementById('editUserAge').value = age;
+					document.getElementById('editUserEmail').value = email;
+					document.getElementById('editUserGender').value = gender;
+
+					document.getElementById('editUserForm').style.display = 'block';
+				}
+			</script>
+
 			<script>
 				//l�gger till eventlistener f�r att visa formul�ret n�r anv�ndaren klickar p� add
 				document
@@ -133,6 +202,7 @@ $(document).ready(function() {
 						.addEventListener(
 								"submitUser",
 								function(event) {
+
 
 									//hindrar standardbeteendet f�r formul�ret
 
@@ -163,11 +233,11 @@ $(document).ready(function() {
 						<td><%=referee.getRefereeName()%></td>
 						<td><%=referee.getRefereeLicense().getLicenseId()%></td>
 						<td>
-							<button>Edit</button>
+							<button>RefEdit</button>
 							<button>Remove</button>
-							
-							
-							
+
+
+
 						</td>
 					</tr>
 					<%
@@ -175,6 +245,7 @@ $(document).ready(function() {
 					%>
 				</tbody>
 			</table>
+
 			<button id="addRefereeButton">Add</button>
 			<div id="addRefereeForm" class="box popUp" style="display: none;">
 				<h2>Add Referee</h2>
@@ -204,6 +275,7 @@ $(document).ready(function() {
 					</div><br>
 					
 					<input type="hidden" name="formType" value="addReferee">
+
 					<button type="submit">Submit</button>
 				</form>
 			</div>
@@ -225,8 +297,9 @@ $(document).ready(function() {
 								"submit",
 								function(event) {
 
+
 									//hindrar standardbeteendet f�r formul�ret
-									
+
 
 									//G�mmer formul�ret igen
 									document.getElementById("addRefereeForm").style.display = "none";
