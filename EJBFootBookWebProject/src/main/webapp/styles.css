@@ -128,14 +128,30 @@ header {
     align-items: center;
     margin-bottom: 10px;
     box-shadow: 5px 5px 0px rgba(0, 0, 0, 0.5);
+    position: relative;
+}
+
+header::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 50%;
+    height: 2px;
+    background-color: var(--text-color);
+    z-index: 1;
 }
 
 nav ul {
     list-style: none;
+    position: relative;
+    z-index: 2;
+    background-color: var(--main-color);
 }
 
 nav ul li {
     display: inline-block;
+    margin-left: 20px;
     margin-right: 20px;
     transition: transform 0.3s ease;
 }
@@ -176,7 +192,7 @@ nav ul li:hover {
 
 .logo {
     color: black;
-    font-size: 8vw;
+    font-size: 72px;
     text-transform: uppercase;
     text-align: center;
     line-height: 1;
