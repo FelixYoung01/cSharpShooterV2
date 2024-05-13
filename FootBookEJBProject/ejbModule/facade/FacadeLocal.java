@@ -51,9 +51,9 @@ public interface FacadeLocal {
 
 	// User Methods
 
-	public int getUserCount();
+  public long getUserCount();
 
-	public int getUsersOnMatchesCount();
+	public long getUsersOnMatchesCount();
 
 	public void createUser(User user);
 

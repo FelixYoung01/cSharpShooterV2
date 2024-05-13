@@ -54,7 +54,10 @@
 	<section class="box">
 		<h2>Some of our amazing statistics</h2>
 		<p>Matches Registered: ${matchCount}</p>
+		<p>Users Registered: ${userCount}</p>
+		<p>Users Registered in Matches: ${userOnMatchesCount}</p>
 		<p>Session Count: ${sessionCount}</p>
+
 	</section>
 	
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
