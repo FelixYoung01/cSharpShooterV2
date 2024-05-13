@@ -81,57 +81,62 @@ $(document).ready(function() {
 				</tbody>
 			</table>
 			<button id="addUserButton">Add</button>
-			<div id="addUserForm" class="popUp" style="display: none;">
+			<div id="addUserForm" class="box popUp" style="display: none;">
 				<h2>Add User</h2>
-				<form id="addingUserForm" action="/EJBFootBookWebProject/register"
-					name="userFormType" method="post">
-					<label for="userId">User ID will be auto-generated!</label> <br>
-
+				<form id="addingUserForm" action="/EJBFootBookWebProject/register" name="userFormType" method="post">
+					<label for="userId">User ID will be auto-generated!</label> <br><br>
+			
 					<!-- Field for Name -->
-					<label for="userName">Name:</label> <input type="text"
-						id="userName" name="userName" required><br>
-
+					<label for="userName">Name:</label> 
+					<div style="display: flex; justify-content: center;">
+						<input type="text" class="bordered-input" id="userName" name="userName" required>
+					</div>
+			
 					<!-- Field for Age -->
-					<label for="userAge">Age:</label> <input type="number" id="userAge"
-						name="userAge" required><br>
-
+					<label for="userAge">Age:</label> 
+					<div style="display: flex; justify-content: center;">
+						<input type="number" class="bordered-input" id="userAge" name="userAge" required>
+					</div>
+			
 					<!-- Field for Email -->
-					<label for="userEmail">Email:</label> <input type="email"
-						id="userEmail" name="userEmail" required><br>
-
+					<label for="userEmail">Email:</label> 
+					<div style="display: flex; justify-content: center;">
+						<input type="email" class="bordered-input" id="userEmail" name="userEmail" required>
+					</div>
+			
 					<!-- Field for Gender -->
-					<label for="userGender">Gender:</label> <select id="userGender"
-						name="userGender" required>
-						<option value="M">Male</option>
-						<option value="F">Female</option>
-					</select><br>
+					<label for="userGender">Gender:</label> 
+					<div style="display: flex; justify-content: center;">
+						<select id="userGender" name="userGender" required>
+							<option value="M">Male</option>
+							<option value="F">Female</option>
+						</select>
+					</div><br>
 					<input type="hidden" name="formType" value="addUser">
-					<button type="submit">Add User</button>
-
+					<button type="submit">Submit</button>
 				</form>
-
 			</div>
 			<script>
-				//lägger till eventlistener för att visa formuläret när användaren klickar på add
+				//lï¿½gger till eventlistener fï¿½r att visa formulï¿½ret nï¿½r anvï¿½ndaren klickar pï¿½ add
 				document
 						.getElementById("addUserButton")
 						.addEventListener(
 								"click",
 								function() {
 
-									//Gör formuläret synligt
+									//Gï¿½r formulï¿½ret synligt
 									document.getElementById("addUserForm").style.display = "block";
 								});
-				//lägger till en eventlistener för att skicka formuläret
+				//lï¿½gger till en eventlistener fï¿½r att skicka formulï¿½ret
 				document
 						.getElementById("userForm")
 						.addEventListener(
 								"submitUser",
 								function(event) {
 
-									//hindrar standardbeteendet för formuläret
+									//hindrar standardbeteendet fï¿½r formulï¿½ret
 
-									//Gömmer formuläret igen
+									//Gï¿½mmer formulï¿½ret igen
 									document.getElementById("addUserForm").style.display = "none";
 								});
 			</script>
@@ -171,61 +176,59 @@ $(document).ready(function() {
 				</tbody>
 			</table>
 			<button id="addRefereeButton">Add</button>
-			<div id="addRefereeForm" class="popUp" style="display: none;">
+			<div id="addRefereeForm" class="box popUp" style="display: none;">
 				<h2>Add Referee</h2>
-				<form id="addingRefereeForm" action="/EJBFootBookWebProject/register" name="refereeFormType" 
-					method="post">
-					<label for="RefereeId">RefereeId is auto-generated!</label> <br>
+				<form id="addingRefereeForm" action="/EJBFootBookWebProject/register" name="refereeFormType" method="post">
+					<label for="RefereeId">Referee ID will be auto-generated!</label> <br><br>
 
 					<!-- Field for Name -->
-					<label for="refereeName">Name:</label> <input type="text" id="refereeName"
-						name="refereeName" required><br> 
-						
-						<label for="licenseId">Licence:</label>
-					<select id="licenseId" name="licenseId" required>
-						<option value="">Select Licence</option>
-
-						<%
-						List<RefereeLicense> licences = (List<RefereeLicense>) request.getAttribute("licenses");
-						
-						if (licences == null){
-							System.out.println("licences is null");
-						}
-						else {
-						for (RefereeLicense licence : licences) {
-						%>
-						<option value="<%=licence.getLicenseId()%>"><%=licence.getLicenseId()%></option>
-						<%
-						}}
-						%>
-					</select><br>
+					<label for="refereeName">Name:</label> 
+					<div style="display: flex; justify-content: center;">
+						<input type="text" class="bordered-input" id="refereeName" name="refereeName" required>
+					</div>
+					
+					<!-- Field for License -->
+					<label for="licenseId">License:</label>
+					<div style="display: flex; justify-content: center;">
+						<select id="licenseId" name="licenseId" required>
+							<option value="">Select License</option>
+							<% List<RefereeLicense> licenses = (List<RefereeLicense>) request.getAttribute("licenses");
+							if (licenses == null) {
+								System.out.println("licenses is null");
+							} else {
+								for (RefereeLicense license : licenses) {
+							%>
+							<option value="<%=license.getLicenseId()%>"><%=license.getLicenseId()%></option>
+							<% } } %>
+						</select>
+					</div><br>
+					
 					<input type="hidden" name="formType" value="addReferee">
 					<button type="submit">Submit</button>
 				</form>
-
 			</div>
 			<script>
-				//lägger till eventlistener för att visa formuläret när användaren klickar på add
+				//lï¿½gger till eventlistener fï¿½r att visa formulï¿½ret nï¿½r anvï¿½ndaren klickar pï¿½ add
 				document
 						.getElementById("addRefereeButton")
 						.addEventListener(
 								"click",
 								function() {
 
-									//Gör formuläret synligt
+									//Gï¿½r formulï¿½ret synligt
 									document.getElementById("addRefereeForm").style.display = "block";
 								});
-				//lägger till en eventlistener för att skicka formuläret
+				//lï¿½gger till en eventlistener fï¿½r att skicka formulï¿½ret
 				document
 						.getElementById("addRefereeForm")
 						.addEventListener(
 								"submit",
 								function(event) {
 
-									//hindrar standardbeteendet för formuläret
+									//hindrar standardbeteendet fï¿½r formulï¿½ret
 									
 
-									//Gömmer formuläret igen
+									//Gï¿½mmer formulï¿½ret igen
 									document.getElementById("addRefereeForm").style.display = "none";
 								});
 			</script>
