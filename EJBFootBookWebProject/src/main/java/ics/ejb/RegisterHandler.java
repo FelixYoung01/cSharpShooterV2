@@ -89,8 +89,10 @@ public class RegisterHandler implements IPathHandler {
 				System.out.println("User not found: " + userId);
 			}
 
+
 			response.sendRedirect(request.getRequestURI());
 		}
+
 
 		return request.getRequestDispatcher("/register.jsp");
 	}
