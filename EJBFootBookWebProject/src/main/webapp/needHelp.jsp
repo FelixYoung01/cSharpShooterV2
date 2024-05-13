@@ -10,7 +10,7 @@
 
 	<!-- Banner section -->
 	<div class="banner">
-		<h1 style="font-size: 78px; text-align: center;">We're here to
+		<h1 style="font-size: 60px; text-align: center;">We're here to
 			help.</h1>
 		<p style="font-size: 24px;">If you didn't find what you were
 			looking for or need some help, please check the FAQ below or contact

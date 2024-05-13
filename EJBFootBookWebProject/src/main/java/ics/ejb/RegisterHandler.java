@@ -114,6 +114,23 @@ public class RegisterHandler implements IPathHandler {
 			}
 		}
 
+			else if ("removeUser".equals(action)) {
+			    String userId = request.getParameter("userId");
+
+			        User user = facade.findUserById(userId);
+			        if (user != null) {
+			            facade.deleteUser(userId);
+			            System.out.println("User removed: " + userId);
+			        }
+					else {
+						System.out.println("User not found: " + userId);
+					}
+			        
+			    response.sendRedirect(request.getRequestURI());
+			}
+		
+
+
 		return request.getRequestDispatcher("/register.jsp");
 
 	}

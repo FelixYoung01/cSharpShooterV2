@@ -68,6 +68,9 @@ public interface FacadeLocal {
 	
 	public User updateUser(User userToUpdate);
   
+  public User findUser (String UserId);
+  
+  
   
 	//Pitch Methods
   
