@@ -211,7 +211,7 @@ $(document).ready(function() {
 									//Gï¿½r formulï¿½ret synligt
 									document.getElementById("addUserForm").style.display = "block";
 								});
-				//lï¿½gger till en eventlistener fï¿½r att skicka formulï¿½ret
+				//lï¿½gger till en eventlistener fï¿½r att skicka formuläret
 				document
 						.getElementById("userForm")
 						.addEventListener(
