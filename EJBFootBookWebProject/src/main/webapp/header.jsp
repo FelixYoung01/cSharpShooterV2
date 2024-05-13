@@ -3,7 +3,7 @@
 <button id="dark-mode-toggle" class="icon-button">
 	<img src="Images/sun.png" alt="Sun Icon" class="sun-icon">
 </button>
-<h1 class="logo">FootB<span id="logoball">o</span>ok</h1>
+<h1 class="logo">FootB<span id="logo-o"><img src='Images/footballpattern.png'>o</span>ok</h1>
 <div class="box" id="weatherBox">
 	<h3>Weather Information</h3>
 	<p>
