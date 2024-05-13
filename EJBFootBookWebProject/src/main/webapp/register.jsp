@@ -23,7 +23,9 @@
 						<th>ID</th>
 						<th>Name</th>
 						<th>Email</th>
-						<th>Gender and Age</th>
+						<th>Gender</th>
+						<th>Age</th>
+						<th>Actions</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -191,7 +193,7 @@ $(document).ready(function() {
 									//Gï¿½r formulï¿½ret synligt
 									document.getElementById("addUserForm").style.display = "block";
 								});
-				//lï¿½gger till en eventlistener fï¿½r att skicka formuläret
+				//lï¿½gger till en eventlistener fï¿½r att skicka formulï¿½ret
 				document
 						.getElementById("userForm")
 						.addEventListener(
@@ -199,7 +201,7 @@ $(document).ready(function() {
 								function(event) {
 
 
-									//hindrar standardbeteendet för formuläret
+									//hindrar standardbeteendet fï¿½r formulï¿½ret
 
 
 									//Gï¿½mmer formulï¿½ret igen
@@ -295,7 +297,7 @@ $(document).ready(function() {
 								function(event) {
 
 
-									//hindrar standardbeteendet för formuläret
+									//hindrar standardbeteendet fï¿½r formulï¿½ret
 
 
 									//Gï¿½mmer formulï¿½ret igen
