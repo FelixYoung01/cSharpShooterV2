@@ -60,24 +60,43 @@ public class RegisterHandler implements IPathHandler {
 			String newAge = request.getParameter("userAge");
 			String newEmail = request.getParameter("userEmail");
 			String newGender = request.getParameter("userGender");
+			
+			// Log received parameters to verify that they are correct
+		    System.out.println("Received Update for UserID: " + userId);
+		    System.out.println("New Name: " + newName);
+		    System.out.println("New Age: " + newAge);
+		    System.out.println("New Email: " + newEmail);
+		    System.out.println("New Gender: " + newGender);
 
-			User userToUpdate = facade.findUserById(userId); // Assume this is the correct method name
+
+			User userToUpdate = facade.findUserById(userId);
 
 			if (userToUpdate != null) {
-				int age = Integer.parseInt(newAge);
+				System.out.println("User found, updating...");
+				int age = Integer.parseInt(newAge); // No try-catch block
 				userToUpdate.setName(newName);
 				userToUpdate.setAge(age);
 				userToUpdate.setEmail(newEmail);
 				userToUpdate.setGender(newGender);
+				
+				User updateSuccessful = facade.updateUser(userToUpdate);
+				
+				System.out.println("Update result: " + updateSuccessful); //Debugging
 
-				facade.updateUser(userToUpdate);
+				if(updateSuccessful!=null) {
+					System.out.println("User successfully updated.");
+					response.sendRedirect(request.getRequestURI());
 
-				System.out.println("User updated");
-				response.sendRedirect(request.getRequestURI());
-			} else {
-				response.getWriter().write("User not found");
-				response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-			}
+		        } else {
+		            System.out.println("User update failed.");	
+		            response.getWriter().write("Update failed");
+					response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+
+
+				}
+				
+			}  
+			
 		} else if ("removeUser".equals(action)) {
 			String userId = request.getParameter("userId");
 			User user = facade.findUser(userId);

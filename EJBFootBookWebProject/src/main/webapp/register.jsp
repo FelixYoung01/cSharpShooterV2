@@ -23,7 +23,7 @@
 						<th>ID</th>
 						<th>Name</th>
 						<th>Email</th>
-						<th>Actions</th>
+						<th>Gender and Age</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -39,21 +39,12 @@
 						<td><%=user.getAge() %> </td>
 						
 						<td>
-
-							<button id="editUserButton">UserEdit</button>
-						<td>
-							<button onclick="removeUser('<%=user.getUserId()%>')">Remove</button>
-						</td>
-
-
-
-
-
-						</td>
-
-							<button>Edit</button>
-							
-			                <button class="removeButton" data-userId="<%= user.getUserId() %>">Remove</button>	
+    <button onclick="editUser('<%=user.getUserId()%>', '<%=user.getName()%>', '<%=user.getAge()%>', '<%=user.getEmail()%>', '<%=user.getGender()%>')">Edit</button>
+</td>
+<td>
+    <button class="removeButton" data-user-id="<%= user.getUserId() %>">Remove</button>
+</td>
+	
 			                			
 							<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
@@ -82,7 +73,7 @@ $(document).ready(function() {
 							
 							
 							
-						</td>
+						
 					</tr>
 					<%
 					}
@@ -167,22 +158,11 @@ $(document).ready(function() {
 					<button type="submit">Update User</button>
 				</form>
         <!-- Field for Email -->
-					<label for="userEmail">Email:</label> 
-					<div style="display: flex; justify-content: center;">
-						<input type="email" class="bordered-input" id="userEmail" name="userEmail" required>
-					</div>
+					
 			
-					<!-- Field for Gender -->
-					<label for="userGender">Gender:</label> 
-					<div style="display: flex; justify-content: center;">
-						<select id="userGender" name="userGender" required>
-							<option value="M">Male</option>
-							<option value="F">Female</option>
-						</select>
-					</div><br>
-					<input type="hidden" name="formType" value="addUser">
-					<button type="submit">Submit</button>
-				</form>
+					
+					
+	
 			</div>
 
 

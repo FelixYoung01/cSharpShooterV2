@@ -32,6 +32,7 @@ import jakarta.validation.constraints.Size;
 
 
 
+
 public class User implements Serializable{
 	
     private static final Logger logger = Logger.getLogger(Match.class.getName());
