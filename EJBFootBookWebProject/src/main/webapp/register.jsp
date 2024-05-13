@@ -37,16 +37,11 @@
 						<td><%=user.getEmail()%></td>
 						<td>
 							<button>Edit</button>
-
-						<td>
-    <button onclick="removeUser('<%=user.getUserId()%>')">Remove</button>
-</td>
-							
-							
-							
+							<button id = "removeUser" > Remove</button>
 							
 							
 						</td>
+						
 						
 					</tr>
 					<%
@@ -57,21 +52,21 @@
 			<button id="addUserButton">Add</button>
 			<div id="addUserForm" class="popUp" style="display: none;">
 				<h2>Add User</h2>
-				<form id="addingUserForm" action="/EJBFootBookWebProject/register" name="userFormType"
-					method="post">
+				<form id="addingUserForm" action="/EJBFootBookWebProject/register"
+					name="userFormType" method="post">
 					<label for="userId">User ID will be auto-generated!</label> <br>
 
 					<!-- Field for Name -->
-					<label for="userName">Name:</label> <input type="text" id="userName"
-						name="userName" required><br>
+					<label for="userName">Name:</label> <input type="text"
+						id="userName" name="userName" required><br>
 
 					<!-- Field for Age -->
 					<label for="userAge">Age:</label> <input type="number" id="userAge"
 						name="userAge" required><br>
 
 					<!-- Field for Email -->
-					<label for="userEmail">Email:</label> <input type="email" id="userEmail"
-						name="userEmail" required><br>
+					<label for="userEmail">Email:</label> <input type="email"
+						id="userEmail" name="userEmail" required><br>
 
 					<!-- Field for Gender -->
 					<label for="userGender">Gender:</label> <select id="userGender"
@@ -104,7 +99,6 @@
 								function(event) {
 
 									//hindrar standardbeteendet för formuläret
-									
 
 									//Gömmer formuläret igen
 									document.getElementById("addUserForm").style.display = "none";
@@ -150,7 +144,7 @@
 				<h2>Add Referee</h2>
 				<form id="addingRefereeForm" action="/EJBFootBookWebProject/register" name="refereeFormType" 
 					method="post">
-					<label for="RefereeId">RefereeId kommer!</label> <br>
+					<label for="RefereeId">RefereeId is auto-generated!</label> <br>
 
 					<!-- Field for Name -->
 					<label for="refereeName">Name:</label> <input type="text" id="refereeName"
