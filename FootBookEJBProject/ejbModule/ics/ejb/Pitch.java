@@ -35,6 +35,7 @@ public class Pitch implements Serializable {
 	
 	private String pitchId;
 	private String name;
+	private String imageName;
 	private Set<Match> matches; // One pitch can host many matches
 	//Entity CallBack Methods
 	private LocalDateTime founded;
@@ -94,6 +95,15 @@ public class Pitch implements Serializable {
 		founded = LocalDateTime.now();
 		System.out.println("Founded Date: " + this.founded);
 		logger.info("Creating new Pitch (ID: " + pitchId + ") - Founded Date: " + this.founded);
+	}
+	
+	@Column(name = "imageName")
+	public String getImageName() {
+		return imageName;
+	}
+
+	public void setImageName(String imageName) {
+		this.imageName = imageName;
 	}
 	
 }
