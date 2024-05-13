@@ -13,7 +13,7 @@
 <body>
 	<jsp:include page="header.jsp" />
 
-	<h2>Welcome to FootBook!</h2>
+	<h2 style="font-size: 60px">Welcome to FootBook!</h2>
 	<p>Book your football match on your favorite pitches!</p>
 
 	<section class="pitches">
@@ -24,8 +24,9 @@
 		if (pitches != null && !pitches.isEmpty()) {
 			for (Pitch pitch : pitches) {
 				String pitchId = pitch.getPitchId();
+				String imagePath = "Images/" + pitch.getImageName();
 		%>
-		<div class="pitch">
+		<div class="pitch" style="background-image: url(<%=imagePath%>);">
 			<h3><%=pitch.getName()%></h3>
 			<a
 				href="<%=request.getContextPath()%>/pitchInfo?pitchId=<%=pitchId%>"
