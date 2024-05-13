@@ -57,7 +57,7 @@ public class RegisterHandler implements IPathHandler {
 			String licenseId = request.getParameter("licenseId");
 
 			RefereeLicense tempLicense = facade.findRefereeLicense(licenseId);
-
+        
 			Referee referee = new Referee(refName, tempLicense);
 			facade.createReferee(referee);
 			System.out.println("Referee added");
@@ -68,7 +68,7 @@ public class RegisterHandler implements IPathHandler {
 			
 			
 
-		}
+		
 		
 		 if (request.getMethod().equalsIgnoreCase("POST")) {
 		        String action = request.getParameter("action");
@@ -87,8 +87,9 @@ public class RegisterHandler implements IPathHandler {
 		            }
 		        }
 		    }
+
 		return request.getRequestDispatcher("/register.jsp");
 
 	}
-	
+}
 	
