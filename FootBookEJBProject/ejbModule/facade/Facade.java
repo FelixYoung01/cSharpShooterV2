@@ -102,13 +102,13 @@ public class Facade implements FacadeLocal {
 	
 	//USER METHODS
 	
-	public User findUser(String userId) {
+	/*public User findUser(String userId) {
 		return userEAO.findUserById(userId);
 	}
 	
 	public void updateUser(User user) {
 		userEAO.updateUser(user);
-	}
+	}*/
 	
 	public long getUserCount() {
 		return userEAO.getUserCount();
