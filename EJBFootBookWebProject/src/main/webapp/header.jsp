@@ -36,8 +36,6 @@
 				class="button">Need Help?</a></li>
 		</ul>
 	</nav>
-	<img src="Images/Arsenal_FC.svg.webp" alt="Arsenal Logo"
-		class="arsenal">
 </header>
 <img src="Images/footballpattern.png" alt="Football"
 	class="upperleftball" />

@@ -13,7 +13,7 @@
 <body>
 	<jsp:include page="header.jsp" />
 
-	<h2>Welcome to FootBook!</h2>
+	<h2 style="font-size: 60px">Welcome to FootBook!</h2>
 	<p>Book your football match on your favorite pitches!</p>
 
 	<section class="pitches">
