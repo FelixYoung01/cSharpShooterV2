@@ -22,6 +22,8 @@ public interface FacadeLocal {
 	public RefereeLicense findRefereeLicense(String string);
 
 	public List<RefereeLicense> getAllRefereeLicenses();
+	
+
 
 	// Referee Methods
 
@@ -32,6 +34,9 @@ public interface FacadeLocal {
 	public Referee findRefereeById(String refereeId);
 
 	public void createReferee(Referee referee);
+	
+	public Referee updateReferee(Referee refereeToUpdate);
+
 
 	// Match Methods
 
@@ -81,6 +86,8 @@ public interface FacadeLocal {
 	public Set<User> getUsersOnMatch(String matchId);
 
 	public List<String> findAllPitchIds();
+
+
 
 
 }

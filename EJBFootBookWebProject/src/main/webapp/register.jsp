@@ -159,12 +159,8 @@ $(document).ready(function() {
 
 					<button type="submit">Update User</button>
 				</form>
-        <!-- Field for Email -->
-					
+        
 			
-					
-					
-	
 			</div>
 
 
@@ -181,6 +177,8 @@ $(document).ready(function() {
 					document.getElementById('editUserForm').style.display = 'block';
 				}
 			</script>
+			
+			
 
 			<script>
 				//l�gger till eventlistener f�r att visa formul�ret n�r anv�ndaren klickar p� add
@@ -231,12 +229,15 @@ $(document).ready(function() {
 						<td><%=referee.getRefereeName()%></td>
 						<td><%=referee.getRefereeLicense().getLicenseId()%></td>
 						<td>
-							<button>Edit</button>
-							<button>Remove</button>
+<td>
+    <button onclick="editReferee('<%=referee.getRefereeId()%>', '<%=referee.getRefereeName()%>', '<%=referee.getRefereeLicense().getLicenseId()%>')">Edit</button>
+    
+    <button>Remove</button>
+</td>
 
 
 
-						</td>
+						
 					</tr>
 					<%
 					}
@@ -278,6 +279,54 @@ $(document).ready(function() {
 					<button type="submit">Submit</button>
 				</form>
 			</div>
+
+
+
+			<div id="editRefereeForm" class="popUp" style="display: none;">
+				<h2>Edit Referee</h2>
+				<form id="editingRefereeForm"
+					action="/EJBFootBookWebProject/register" method="post">
+					<input type="hidden" name="formType" value="editReferee">
+
+					<!-- Hidden Field for Referee ID (non-editable) -->
+					<input type="hidden" id="editRefereeId" name="refereeId" required>
+
+					<!-- Display Referee ID (non-editable) -->
+					<label for="displayRefereeId">Referee ID:</label> <input
+						type="text" id="displayRefereeId" value="" disabled><br>
+
+					<!-- Field for Name -->
+					<label for="editRefereeName">Name:</label> <input type="text"
+						id="editRefereeName" name="refereeName" required><br>
+
+					<!-- Field for License -->
+					<label for="editRefereeLicense">License:</label> <select
+						id="editRefereeLicense" name="refereeLicenseId" required>
+						<%
+						for (RefereeLicense license : licenses) {
+						%>
+						<option value="<%=license.getLicenseId()%>"><%=license.getLicenseId()%></option>
+						<%
+						}
+						%>
+					</select><br>
+
+					<button type="submit">Update Referee</button>
+				</form>
+			</div>
+
+			<script>
+				function editReferee(refereeId, refereeName, licenseId) {
+					document.getElementById('editRefereeId').value = refereeId;
+					document.getElementById('displayRefereeId').value = refereeId; // Display referee ID in a disabled input
+					document.getElementById('editRefereeName').value = refereeName;
+					document.getElementById('editRefereeLicense').value = licenseId;
+
+					document.getElementById('editRefereeForm').style.display = 'block';
+				}
+			</script>
+
+
 			<script>
 				//l�gger till eventlistener f�r att visa formul�ret n�r anv�ndaren klickar p� add
 				document
@@ -295,7 +344,6 @@ $(document).ready(function() {
 						.addEventListener(
 								"submit",
 								function(event) {
-
 
 									//hindrar standardbeteendet f�r formul�ret
 

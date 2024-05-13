@@ -25,8 +25,10 @@ public class RefereeEAOImpl implements RefereeEAOLocal {
 		em.persist(referee);
 	}
 	
-	public void updateReferee(Referee referee) {
+	public Referee updateReferee(Referee referee) {
 		em.merge(referee);
+		em.flush();
+		return referee;
 	}
 
 

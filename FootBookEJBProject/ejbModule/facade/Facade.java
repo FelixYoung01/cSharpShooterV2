@@ -20,58 +20,63 @@ import jakarta.ejb.Stateless;
 
 @Stateless
 public class Facade implements FacadeLocal {
-	
+
 	@EJB
 	private RefereeEAOLocal refereeEAO;
-	
+
 	@EJB
 	private RefereeLicenseEAOLocal refereeLicenseEAO;
-	
-	@EJB 
+
+	@EJB
 	private MatchEAOLocal matchEAO;
 
 	@EJB
 	private PitchEAOLocal pitchEAO;
-	
+
 	@EJB
 	private UserEAOLocal userEAO;
-	
-	//REFEREE LICENSE METHODS
+
+	// REFEREE LICENSE METHODS
 	public RefereeLicense findRefereeLicense(String string) {
 		return refereeLicenseEAO.findRefereeLicenseById(string);
 	}
-	
+
 	public List<RefereeLicense> getAllRefereeLicenses() {
 		return refereeLicenseEAO.getAllRefereeLicenses();
 	}
 	
-	//REFEREE METHODS
 	
+	// REFEREE METHODS
+
 	public List<String> findAllRefereeIds() {
 		return refereeEAO.findAllRefereeIds();
 	}
-	
+
 	public Referee findRefereeById(String refereeId) {
 		return refereeEAO.findRefereeById(refereeId);
 	}
-	
+
 	public void createReferee(Referee referee) {
 		refereeEAO.addReferee(referee);
 	}
 
-	//PITCH METHODS
+	public Referee updateReferee(Referee refereeToUpdate) {
+		return refereeEAO.updateReferee(refereeToUpdate);
+
+	}
+
+	// PITCH METHODS
 	public Set<Pitch> getAllPitches() {
 		return pitchEAO.getAllPitches();
 	}
-	
+
 	public List<String> findAllPitchIds() {
 		return pitchEAO.findAllPitchIds();
 	}
 
-	
-	//MATCH METHODS
+	// MATCH METHODS
 	public Match findMatch(String string) {
-		
+
 		if (string == null) {
 			System.out.println("Match not found for ID: " + string);
 		}
@@ -81,7 +86,7 @@ public class Facade implements FacadeLocal {
 	public List<Match> findAllMatches() {
 		return matchEAO.findAllMatches();
 	};
-	
+
 	public Match createMatch(Match match) {
 		matchEAO.addMatch(match);
 		return match;
@@ -90,80 +95,73 @@ public class Facade implements FacadeLocal {
 	public void deleteMatch(String id) {
 		matchEAO.deleteMatch(id);
 	}
-	
+
 	public Match updateMatch(Match match) {
 		return matchEAO.updateMatch(match);
 	}
-	
+
 	public List<String> findAllMatchIds() {
 		return matchEAO.findAllMatchIds();
 	}
-	
-	
-	//USER METHODS
-	
 
+	// USER METHODS
 
 	public User findUser(String userId) {
 		return userEAO.findUserById(userId);
 	}
 
-	
 	public long getUserCount() {
 		return userEAO.getUserCount();
 	}
-	
+
 	public long getUsersOnMatchesCount() {
 		return userEAO.getUsersOnMatchesCount();
 	}
-	
+
 	public Set<User> getAvailableUsers() {
 		return userEAO.getAvailableUsers();
 	}
-	
+
 	public long getMatchCount() {
 		return matchEAO.getMatchCount();
 	}
-	
+
 	public Pitch findPitch(String pitchId) {
-        return pitchEAO.findPitchById(pitchId);
+		return pitchEAO.findPitchById(pitchId);
 	}
-	
-	
+
 	public User updateUser(User userToUpdate) {
 		return userEAO.updateUser(userToUpdate);
-		}
-		
-
+	}
 
 	public User findUserById(String userId) {
 		return userEAO.findUserById(userId);
 	}
 
-	
 	public Set<Match> getMatchesOnPitch(String pitchId) {
 		return pitchEAO.findPitchById(pitchId).getMatches();
 	}
-	
+
 	public Set<User> getUsersOnMatch(String matchId) {
 		return matchEAO.findMatchById(matchId).getUsers();
 	}
-	
+
 	public Set<User> getAllUsers() {
 		return userEAO.getAllUsers();
 	}
-	
+
 	public Set<Referee> getAllReferees() {
 		return refereeEAO.getAllReferees();
 	}
 
-	
 	public void createUser(User user) {
 		userEAO.createUser(user);
 	}
-	
+
 	public void deleteUser(String userId) {
 		userEAO.deleteUser(userId);
 	}
+
+	
 
 }
