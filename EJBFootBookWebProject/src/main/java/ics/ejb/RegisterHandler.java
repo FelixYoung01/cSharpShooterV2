@@ -33,8 +33,9 @@ public class RegisterHandler implements IPathHandler {
 		request.setAttribute("licenses", Licenses);
 
 		String action = request.getParameter("formType");
-
-		if ("addUser".equals(action)) {// Kör kodstycket ifall metoden är POST
+		
+			// Kör kodstycket ifall det är en user som ska läggas till
+			if ("addUser".equals(action)){
 
 			String tempAge = request.getParameter("userAge");
 			String email = request.getParameter("userEmail");
@@ -47,12 +48,12 @@ public class RegisterHandler implements IPathHandler {
 
 			System.out.println("User added");
 			response.sendRedirect(request.getRequestURI());
-
-		}
-
-		// Kör kodstycket ifall metoden är POST
-		else if ("addReferee".equals(action)) {
-
+			
+			}
+		
+			// Kör kodstycket ifall det är en dommare som ska läggas till
+			else if ("addReferee".equals(action)){
+				
 			String refName = request.getParameter("refereeName");
 			String licenseId = request.getParameter("licenseId");
 
@@ -63,6 +64,7 @@ public class RegisterHandler implements IPathHandler {
 			System.out.println("Referee added");
 
 			response.sendRedirect(request.getRequestURI());
+
 			}
 
 			else if ("removeUser".equals(action)) {
@@ -79,10 +81,10 @@ public class RegisterHandler implements IPathHandler {
 			        
 			    response.sendRedirect(request.getRequestURI());
 			}
-		
 
 		return request.getRequestDispatcher("/register.jsp");
 
 	}
+
 
 }
