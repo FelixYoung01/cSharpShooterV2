@@ -23,6 +23,7 @@
 .bordered-image {
     border: 5px solid var(--text-color);
     border-radius: 5px;
+    margin: 5px;
 }
 
 body {
@@ -386,21 +387,21 @@ footer {
 }
 
 .matches {
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+    justify-content: center;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
     scroll-behavior: smooth;
-    flex-wrap: wrap;
     max-width: 1200px;
     margin: auto;
-    justify-content: center;
+    padding: 20px;
 }
 
 .match {
-    flex: 0 0 auto;
-    width: 300px;
+    width: 300px; /* You can remove this line if you want the items to stretch to fill the grid cell */
     height: 200px;
-    margin: 10px;
     background-color: var(--background-color);
     background-size: cover;
     background-position-y: center;
@@ -413,7 +414,7 @@ footer {
 
 @media (max-width: 600px) {
     .matches {
-        flex-direction: column;
+        grid-template-columns: 1fr;
     }
 }
 
