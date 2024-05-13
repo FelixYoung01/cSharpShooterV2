@@ -64,6 +64,9 @@ public interface FacadeLocal {
   
   public void deleteUser(String userId);
   
+  public User findUser (String UserId);
+  
+  
   
 	//Pitch Methods
   
