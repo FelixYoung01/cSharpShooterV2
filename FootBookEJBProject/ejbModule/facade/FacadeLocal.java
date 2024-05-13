@@ -32,6 +32,9 @@ public interface FacadeLocal {
 	public Referee findRefereeById(String refereeId);
 
 	public void createReferee(Referee referee);
+	
+	public void deleteReferee(String refereeId);
+
 
 	// Match Methods
 

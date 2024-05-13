@@ -23,6 +23,8 @@
 						<th>ID</th>
 						<th>Name</th>
 						<th>Email</th>
+						<th>Gender</th>
+						<th>Age</th>
 						<th>Actions</th>
 					</tr>
 				</thead>
@@ -35,57 +37,19 @@
 						<td><%=user.getUserId()%></td>
 						<td><%=user.getName()%></td>
 						<td><%=user.getEmail()%></td>
-						<td><%=user.getGender() %> </td>
-						<td><%=user.getAge() %> </td>
-						
+						<td><%=user.getGender()%></td>
+						<td><%=user.getAge()%></td>
 						<td>
-
-							<button id="editUserButton">UserEdit</button>
-						<td>
-							<button onclick="removeUser('<%=user.getUserId()%>')">Remove</button>
+							<button onclick="editUser('<%=user.getUserId()%>', '<%=user.getName()%>', '<%=user.getAge()%>', '<%=user.getEmail()%>', '<%=user.getGender()%>')">Edit</button>
+							<!-- Remove user form -->
+							<form action="/EJBFootBookWebProject/register" method="post" style="display:inline;">
+							
+							
+	                	 <input type="hidden" name="formType" value="removeUser">
+	               		 <input type="hidden" name="userId" value="<%=user.getUserId()%>">
+	               		 <button type="submit" onclick="return confirm('Are you sure you want to remove this user?')">Remove</button>
+           					 </form>
 						</td>
-
-
-
-
-
-						</td>
-
-							<button>Edit</button>
-							
-			                <button class="removeButton" data-userId="<%= user.getUserId() %>">Remove</button>	
-			                			
-							<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-
-<script>
-$(document).ready(function() {
-    // Event listener for 'Remove' buttons
-    $('.removeButton').click(function() {
-        var userId = $(this).data('user-id');
-        
-        // Confirm user removal
-        if (confirm('Are you sure you want to remove this user?')) {
-            // AJAX request to servlet for user removal
-            $.post('RegisterHandler', { action: 'removeUser', userId: userId })
-                .done(function(response) {
-                    // Remove the corresponding row from the table
-                    $('tr').has('td:contains("' + userId + '")').remove();
-                    alert('User removed successfully!');
-                })
-                .fail(function(xhr, status, error) {
-                    alert('Failed to remove user. Please try again.');
-                });
-        }
-    });
-});
-</script>
-							
-							
-							
-						</td>
-						
-						
-				
 					</tr>
 					<%
 					}
@@ -95,7 +59,6 @@ $(document).ready(function() {
 			<button id="addUserButton">Add</button>
 			<div id="addUserForm" class="box popUp" style="display: none;">
 				<h2>Add User</h2>
-
 				<form id="addingUserForm" action="/EJBFootBookWebProject/register" name="userFormType" method="post">
 					<label for="userId">User ID will be auto-generated!</label> <br><br>
 			
@@ -110,11 +73,26 @@ $(document).ready(function() {
 					<div style="display: flex; justify-content: center;">
 						<input type="number" class="bordered-input" id="userAge" name="userAge" required>
 					</div>
-			
 					
+					<!-- Field for Email -->
+					<label for="userEmail">Email:</label> 
+					<div style="display: flex; justify-content: center;">
+						<input type="email" class="bordered-input" id="userEmail" name="userEmail" required>
+					</div>
+			
+					<!-- Field for Gender -->
+					<label for="userGender">Gender:</label> 
+					<div style="display: flex; justify-content: center;">
+						<select id="userGender" name="userGender" required>
+							<option value="M">Male</option>
+							<option value="F">Female</option>
+						</select>
+					</div><br>
+					<input type="hidden" name="formType" value="addUser">
+					<button type="submit">Submit</button>
+				</form>
+			</div>
 
-					
-			
 			<div id="editUserForm" class="popUp" style="display: none;">
 				<h2>Edit User</h2>
 				<form id="editingUserForm" action="/EJBFootBookWebProject/register"
@@ -151,26 +129,8 @@ $(document).ready(function() {
 
 					<button type="submit">Update User</button>
 				</form>
-        <!-- Field for Email -->
-					<label for="userEmail">Email:</label> 
-					<div style="display: flex; justify-content: center;">
-						<input type="email" class="bordered-input" id="userEmail" name="userEmail" required>
-					</div>
-			
-					<!-- Field for Gender -->
-					<label for="userGender">Gender:</label> 
-					<div style="display: flex; justify-content: center;">
-						<select id="userGender" name="userGender" required>
-							<option value="M">Male</option>
-							<option value="F">Female</option>
-						</select>
-					</div><br>
-					<input type="hidden" name="formType" value="addUser">
-					<button type="submit">Submit</button>
-				</form>
 			</div>
-
-
+			
 			<script>
 				// Function to update the user details
 				function editUser(userId, name, age, email, gender) {
@@ -183,32 +143,17 @@ $(document).ready(function() {
 
 					document.getElementById('editUserForm').style.display = 'block';
 				}
-			</script>
-
+			
 			<script>
-				//l�gger till eventlistener f�r att visa formul�ret n�r anv�ndaren klickar p� add
-				document
-						.getElementById("addUserButton")
-						.addEventListener(
-								"click",
-								function() {
+				// Event listener for showing add user form
+				document.getElementById("addUserButton").addEventListener("click", function() {
+					document.getElementById("addUserForm").style.display = "block";
+				});
 
-									//G�r formul�ret synligt
-									document.getElementById("addUserForm").style.display = "block";
-								});
-				//l�gger till en eventlistener f�r att skicka formul�ret
-				document
-						.getElementById("userForm")
-						.addEventListener(
-								"submitUser",
-								function(event) {
-
-
-									//hindrar standardbeteendet f�r formul�ret
-
-									//G�mmer formul�ret igen
-									document.getElementById("addUserForm").style.display = "none";
-								});
+				// Event listener for hiding add user form after submission
+				document.getElementById("addingUserForm").addEventListener("submit", function(event) {
+					document.getElementById("addUserForm").style.display = "none";
+				});
 			</script>
 		</div>
 
@@ -228,18 +173,19 @@ $(document).ready(function() {
 					Set<Referee> referees = (Set<Referee>) request.getAttribute("referees");
 					for (Referee referee : referees) {
 					%>
-					<tr>
-						<td><%=referee.getRefereeId()%></td>
-						<td><%=referee.getRefereeName()%></td>
-						<td><%=referee.getRefereeLicense().getLicenseId()%></td>
-						<td>
-							<button>RefEdit</button>
-							<button>Remove</button>
-
-
-
-						</td>
-					</tr>
+						<tr>
+							<td><%=referee.getRefereeId()%></td>
+							<td><%=referee.getRefereeName()%></td>
+							<td><%=referee.getRefereeLicense().getLicenseId()%></td>
+							<td>
+								<button>RefEdit</button>
+								<form action="/EJBFootBookWebProject/register" method="post" style="display:inline;">
+                        <input type="hidden" name="formType" value="removeReferee">
+                        <input type="hidden" name="refereeId" value="<%=referee.getRefereeId()%>">
+                        <button type="submit" onclick="return confirm('Are you sure you want to remove this referee?')">Remove</button>
+                    </form>
+							</td>
+						</tr>
 					<%
 					}
 					%>
@@ -280,30 +226,15 @@ $(document).ready(function() {
 				</form>
 			</div>
 			<script>
-				//l�gger till eventlistener f�r att visa formul�ret n�r anv�ndaren klickar p� add
-				document
-						.getElementById("addRefereeButton")
-						.addEventListener(
-								"click",
-								function() {
+				// Event listener for showing add referee form
+				document.getElementById("addRefereeButton").addEventListener("click", function() {
+					document.getElementById("addRefereeForm").style.display = "block";
+				});
 
-									//G�r formul�ret synligt
-									document.getElementById("addRefereeForm").style.display = "block";
-								});
-				//l�gger till en eventlistener f�r att skicka formul�ret
-				document
-						.getElementById("addRefereeForm")
-						.addEventListener(
-								"submit",
-								function(event) {
-
-
-									//hindrar standardbeteendet f�r formul�ret
-
-
-									//G�mmer formul�ret igen
-									document.getElementById("addRefereeForm").style.display = "none";
-								});
+				// Event listener for hiding add referee form after submission
+				document.getElementById("addingRefereeForm").addEventListener("submit", function(event) {
+					document.getElementById("addRefereeForm").style.display = "none";
+				});
 			</script>
 		</div>
 	</div>

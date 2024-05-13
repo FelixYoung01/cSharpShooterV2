@@ -16,9 +16,18 @@ public class RegisterHandler implements IPathHandler {
 
 	@Override
 	public RequestDispatcher handleRequestDispatcherGet(HttpServletRequest request, HttpServletResponse response,
-			FacadeLocal facade) throws ServletException, IOException {
-		return request.getRequestDispatcher("/register.jsp");
+	        FacadeLocal facade) throws ServletException, IOException {
+	    Set<User> users = facade.getAllUsers();
+	    Set<Referee> referees = facade.getAllReferees();
+	    List<RefereeLicense> licenses = facade.getAllRefereeLicenses();
+
+	    request.setAttribute("users", users);
+	    request.setAttribute("referees", referees);
+	    request.setAttribute("licenses", licenses);
+
+	    return request.getRequestDispatcher("/register.jsp");
 	}
+	
 
 	@Override
 	public RequestDispatcher handleRequestDispatcherPost(HttpServletRequest request, HttpServletResponse response,
@@ -36,9 +45,7 @@ public class RegisterHandler implements IPathHandler {
 
 
 		
-			// Kör kodstycket ifall det är en user som ska läggas till
-			if ("addUser".equals(action)){
-
+			// Kör kodstycket ifall det är en user som ska läggas till //ADD USER CODE
 
 		if ("addUser".equals(action)) {// Kör kodstycket ifall metoden är POST
 			String tempAge = request.getParameter("userAge");
@@ -55,7 +62,7 @@ public class RegisterHandler implements IPathHandler {
 			
 			}
 		
-			// Kör kodstycket ifall det är en dommare som ska läggas till
+			// Kör kodstycket ifall det är en dommare som ska läggas till //ADD REFEREE CODE
 			else if ("addReferee".equals(action)){
 				
 
@@ -69,7 +76,7 @@ public class RegisterHandler implements IPathHandler {
 			System.out.println("Referee added");
 
 			response.sendRedirect(request.getRequestURI());
-
+			return null;
 		}
 
 		// Kör kodstycket ifall metoden är PUT (UPDATE)
@@ -97,14 +104,15 @@ public class RegisterHandler implements IPathHandler {
 
 				System.out.println("User updated");
 				response.sendRedirect(request.getRequestURI());
+				return null;
 			} else {
 				response.getWriter().write("User not found");
 				response.setStatus(HttpServletResponse.SC_BAD_REQUEST); // Set appropriate status code on failure.
 			}
-
+			return null;
 		}
 
-		if (request.getMethod().equalsIgnoreCase("POST")) {
+	/*	else if (request.getMethod().equalsIgnoreCase("POST")) {
 			String action1 = request.getParameter("action");
 
 			if (action1 != null && action1.equals("remove")) {
@@ -121,28 +129,45 @@ public class RegisterHandler implements IPathHandler {
 				}
 			}
 		}
+*/
 
-
-			}
-
+			
+			//Removing a user
 			else if ("removeUser".equals(action)) {
-			    String userId = request.getParameter("userId");
+		        String userId = request.getParameter("userId");
 
-			        User user = facade.findUser(userId);
-			        if (user != null) {
-			            facade.deleteUser(userId);
-			            System.out.println("User removed: " + userId);
-			        }
-					else {
-						System.out.println("User not found: " + userId);
-					}
-			        
-			    response.sendRedirect(request.getRequestURI());
+		        User user = facade.findUser(userId);
+		        if (user != null) {
+		            facade.deleteUser(userId);
+		            System.out.println("User removed: " + userId);
+		            response.sendRedirect(request.getRequestURI());
+		            return null;
+		        } else {
+		            System.out.println("User not found: " + userId);
+		            response.getWriter().write("User not found");
+		            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+		            return null;
+		        }
 			}
+		       //Removing a referee	
+		        else if ("removeReferee".equals(action)) {
+                    String refereeId = request.getParameter("refereeId");
 
+                    Referee referee = facade.findRefereeById(refereeId);
+                    if (referee != null) {
+                        facade.deleteReferee(refereeId);
+                        System.out.println("Referee removed: " + refereeId);
+                        response.sendRedirect(request.getRequestURI());
+                        return null;
+                    } else {
+                        System.out.println("Referee not found: " + refereeId);
+                        response.getWriter().write("Referee not found");
+                        response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+                        return null;
+                    }
+                }
 
-		return request.getRequestDispatcher("/register.jsp");
-
+			return request.getRequestDispatcher("/register.jsp");
 	}
-
 }
+
