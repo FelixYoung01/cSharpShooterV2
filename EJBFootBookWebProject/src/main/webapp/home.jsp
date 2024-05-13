@@ -24,8 +24,9 @@
 		if (pitches != null && !pitches.isEmpty()) {
 			for (Pitch pitch : pitches) {
 				String pitchId = pitch.getPitchId();
+				String imagePath = "Images/" + pitch.getImageName();
 		%>
-		<div class="pitch">
+		<div class="pitch" style="background-image: url(<%=imagePath%>);">
 			<h3><%=pitch.getName()%></h3>
 			<a
 				href="<%=request.getContextPath()%>/pitchInfo?pitchId=<%=pitchId%>"
