@@ -31,6 +31,7 @@ import jakarta.validation.constraints.Size;
 @Table(name="[User]") // User is a reserved word in SQL, so it needs to be enclosed in square brackets")
 
 
+
 public class User implements Serializable{
 	
     private static final Logger logger = Logger.getLogger(Match.class.getName());
