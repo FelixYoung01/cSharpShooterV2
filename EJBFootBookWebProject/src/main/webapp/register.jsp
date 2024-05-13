@@ -35,12 +35,43 @@
 						<td><%=user.getUserId()%></td>
 						<td><%=user.getName()%></td>
 						<td><%=user.getEmail()%></td>
+						<td><%=user.getGender() %> </td>
+						<td><%=user.getAge() %> </td>
+						
 						<td>
 							<button>Edit</button>
-							<button id = "removeUser" > Remove</button>
+							
+			                <button class="removeButton" data-userId="<%= user.getUserId() %>">Remove</button>	
+			                			
+							<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+<script>
+$(document).ready(function() {
+    // Event listener for 'Remove' buttons
+    $('.removeButton').click(function() {
+        var userId = $(this).data('user-id');
+        
+        // Confirm user removal
+        if (confirm('Are you sure you want to remove this user?')) {
+            // AJAX request to servlet for user removal
+            $.post('RegisterHandler', { action: 'removeUser', userId: userId })
+                .done(function(response) {
+                    // Remove the corresponding row from the table
+                    $('tr').has('td:contains("' + userId + '")').remove();
+                    alert('User removed successfully!');
+                })
+                .fail(function(xhr, status, error) {
+                    alert('Failed to remove user. Please try again.');
+                });
+        }
+    });
+});
+</script>
+							
 							
 							
 						</td>
+						
 						
 						
 					</tr>
