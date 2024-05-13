@@ -35,19 +35,17 @@
 			Set<Match> matches = (Set<Match>) request.getAttribute("matchesOnPitch");
 			for (Match match : matches) {
 			%>
-			<div class="match">
+			<a class="a-button" href="<%=request.getContextPath()%>/matchInfo?matchId=<%=match.getMatchId()%>">
 				<h3><%=match.getMatchId()%></h3>
-				<a
-					href="<%=request.getContextPath()%>/matchInfo?matchId=<%=match.getMatchId()%>">
-				</a>
 				<p>
 					Match Date:
-					<%=match.getDate()%></p>
+					<%=match.getDate()%>
+				</p>
 				<p>
 					Match Time:
-					<%=match.getTime()%></p>
-
-			</div>
+					<%=match.getTime()%>
+				</p>
+			</a>
 			<%
 			}
 			%>

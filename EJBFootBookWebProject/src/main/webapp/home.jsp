@@ -26,12 +26,12 @@
 				String pitchId = pitch.getPitchId();
 				String imagePath = "Images/" + pitch.getImageName();
 		%>
-		<div class="pitch" style="background-image: url(<%=imagePath%>);">
-			<h3><%=pitch.getName()%></h3>
-			<a
-				href="<%=request.getContextPath()%>/pitchInfo?pitchId=<%=pitchId%>"
-				class=button> </a>
-		</div>
+		
+		<a class="a-button" href="<%=request.getContextPath()%>/pitchInfo?pitchId=<%=pitchId%>">
+			<div id="pitch-label"><%=pitch.getName()%></div>
+			<img src="<%=imagePath%>" class="pitch-image" alt="Pitch Image"/>
+		</a>
+
 		<%
 		}
 		} else {

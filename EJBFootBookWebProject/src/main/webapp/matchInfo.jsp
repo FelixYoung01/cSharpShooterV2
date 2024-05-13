@@ -27,69 +27,70 @@
 		%>
 		<p>No users on this match, please add users on this match from the
 			list below</p>
-		<section class="grid-container">
+
+		<div class="grid-container">
 			<%
 			}
 
 			for (User user : users) {
 			%>
-			<div class="colored-box">
+			<button>
 				<h3><%=user.getName()%></h3>
 				<p><%=user.getAge()%></p>
 				<p><%=user.getGender()%></p>
 				<p><%=user.getEmail()%></p>
-			</div>
+			</button>
 			<%
 			}
 			%>
-		</section>
+		</div>
 		<h1>Available Users</h1>
-
-		<%
-		Set<User> availableUsers = (Set<User>) request.getAttribute("availableUsers");
-		String selectedUser = null;
-		if (availableUsers.isEmpty()) {
-		%>
-		<p>No users available to add to this match</p>
-		<%
-		}
-
-		for (User user : availableUsers) {
-		%>
-
-		<form
-			action="/EJBFootBookWebProject/matchInfo?matchId=<%=match.getMatchId()%>"
-			method="post">
-			<input type="hidden" name="userId" value="<%=user.getUserId()%>">
-			<button type="button" class="user"
-				onclick="showButton('<%=user.getUserId()%>')">
-				<p><%=user.getName()%></p>
-				<p><%=user.getAge()%></p>
-				<p><%=user.getGender()%></p>
-				<p><%=user.getEmail()%></p>
-			</button>
-		</form>
-		<%
-		}
-		%>
-		<form id="addUserToMatchForm"
-			action="/EJBFootBookWebProject/matchInfo?matchId=<%=match.getMatchId()%>"
-			method="post" style="display: none;">
-			<input type="hidden" name="userId" id="selectedUserId"> <input
-				type="hidden" name="matchId" value="<%=match.getMatchId()%>">
-			<button type="submit">
-				Add User <span id="userIdDisplay"></span> to Match
-			</button>
-		</form>
-		<script>
-			function showButton(userId) {
-
-				document.getElementById("selectedUserId").value = userId;
-				document.getElementById("userIdDisplay").textContent = document
-						.getElementById("selectedUserId").value;
-				document.getElementById("addUserToMatchForm").style.display = "block";
+		<div class="grid-container">
+			<%
+			Set<User> availableUsers = (Set<User>) request.getAttribute("availableUsers");
+			String selectedUser = null;
+			if (availableUsers.isEmpty()) {
+			%>
+			<p>No users available to add to this match</p>
+			<%
 			}
-		</script>
+
+			for (User user : availableUsers) {
+			%>
+
+			<form
+				action="/EJBFootBookWebProject/matchInfo?matchId=<%=match.getMatchId()%>"
+				method="post">
+				<input type="hidden" name="userId" value="<%=user.getUserId()%>">
+				<button onclick="showButton('<%=user.getUserId()%>')">
+					<p><%=user.getName()%></p>
+					<p><%=user.getAge()%></p>
+					<p><%=user.getGender()%></p>
+					<p><%=user.getEmail()%></p>
+				</button>
+			</form>
+			<%
+			}
+			%>
+			<form id="addUserToMatchForm"
+				action="/EJBFootBookWebProject/matchInfo?matchId=<%=match.getMatchId()%>"
+				method="post" style="display: none;">
+				<input type="hidden" name="userId" id="selectedUserId"> <input
+					type="hidden" name="matchId" value="<%=match.getMatchId()%>">
+				<button type="submit">
+					Add User <span id="userIdDisplay"></span> to Match
+				</button>
+			</form>
+			<script>
+				function showButton(userId) {
+
+					document.getElementById("selectedUserId").value = userId;
+					document.getElementById("userIdDisplay").textContent = document
+							.getElementById("selectedUserId").value;
+					document.getElementById("addUserToMatchForm").style.display = "block";
+				}
+			</script>
+		</div>
 	</section>
 	<script src="Darkmode.js">
 		

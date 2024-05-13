@@ -50,9 +50,11 @@ table, table td, table th {
     text-align: left;
 }
 
-button {
+button, .a-button {
+    display: block;
+    position: relative;
     cursor: pointer;
-    background-color: var(--secondary-color);
+    background-color: var(--background-color);
     padding: 5px;
     border: 5px solid var(--text-color);
     border-radius: 5px;
@@ -60,10 +62,12 @@ button {
     margin: 10px;
     color: var(--text-color);
     box-shadow: 5px 5px 0px rgba(0, 0, 0, 0.5);
+    transition: transform 0.3s ease;
+    text-decoration: none;
 }
 
-button:hover {
-    animation: popOut 0.5s ease-in-out;
+button:hover, .a-button:hover {
+    transform: scale(1.1);
 }
 
 table button {
@@ -395,66 +399,41 @@ footer {
     box-shadow: 5px 5px 0px rgba(0, 0, 0, 0.5);
 }
 
-.pitch {
-    background-image: url('Images/DefaultPitchImage.jpg');
-    background-size: cover;
-    background-position-y: center;
-    border: 5px solid var(--text-color);
-    border-radius: 5px;
-    margin-bottom: 20px;
-    filter: brightness(1);
-    -webkit-filter: brightness(1);
-    z-index: 2;
-    transition: transform 0.3s ease;
-    font-weight: bold;
-    color: white;
-    -webkit-text-stroke-width: 2px;
-    -webkit-text-stroke-color: black;
-    box-shadow: 5px 5px 0px rgba(0, 0, 0, 0.5);
-}
-
-.pitch:hover {
-    transform: scale(1.1);
-}
-
-.pitch h3 {
-    font-size: 36px;
-    padding: 20px;
-    margin-bottom: 10px;
-    filter: drop-shadow(5px 5px 0px rgba(0, 0, 0, 0.5));
-}
-
-.pitch a {
-    position: absolute;
-    top: 0; 
-    left: 0;
-    width: 100%; 
-    height: 100%; 
-    text-decoration: none; 
-    z-index: 1;
-}
-
-.pitch button {
+.pitch-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
     position: absolute;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
-    border: none;
-    background-color: transparent;
-    padding: 14px 28px;
-    font-size: 16px;
-    cursor: pointer;
-    text-align: center;
     z-index: 1;
+    overflow: hidden;
+    filter: brightness(0.5);
+    transition: filter 0.3s ease;
+}
+
+.a-button:hover .pitch-image {
+    filter: brightness(1);
+}
+
+#pitch-label {
+    color: white;
+    font-size: 40px;
+    font-weight: bold;
+    padding: 20px;
+    margin-bottom: 10px;
+    -webkit-text-stroke: 2px black;
+    filter: var(--sun-filter);
+    position: relative;
+    z-index: 2;
 }
 
 .grid-container {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 20px;
+    grid-template-columns: repeat(auto-fill, minmax(10vw, 1fr));
+    gap: 10px;
     justify-content: center;
-    overflow-x: auto;
+    overflow-x: hidden;
     scroll-snap-type: x mandatory;
     scroll-behavior: smooth;
     max-width: 1200px;
@@ -462,59 +441,10 @@ footer {
     padding: 20px;
 }
 
-.match {
-    width: 300px;
-    height: 200px;
-    background-color: var(--background-color);
-    background-size: cover;
-    background-position-y: center;
-    border: 5px solid var(--text-color);
-    border-radius: 5px;
-    padding: 20px;
-    box-shadow: 5px 5px 0px rgba(0, 0, 0, 0.5);
-    filter: blur(0px);
-    transition: transform 0.3s ease;
-}
-
 @media (max-width: 600px) {
-    .matches {
+    .grid-container {
         grid-template-columns: 1fr;
     }
-}
-
-.match:hover {
-    transform: scale(1.1);
-}
-
-.match h3 {
-    font-size: x-large;
-    margin-bottom: 10px;
-}
-
-.match a {
-    position: absolute;
-    top: 0; 
-    left: 0;
-    width: 100%; 
-    height: 100%; 
-    text-decoration: none; 
-    z-index: 1;
-}
-
-.match button {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    border: none;
-    background-color: transparent;
-    padding: 14px 28px;
-    font-size: 16px;
-    cursor: pointer;
-    text-align: center;
-    transition: background-color 0.3s ease;
-    z-index: 1;
 }
 
 .user {
