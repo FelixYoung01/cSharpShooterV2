@@ -8,47 +8,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>FootBook - Football Booking</title>
 <link rel="stylesheet" href="styles.css">
-<style>
-/* Style for the weather information box */
-#weatherBox {
-	position: absolute;
-	/* Keeps the box positioned relative to the top-left corner of the page */
-	top: 10px;
-	left: 10px;
-	padding: 10px;
-	border: 2px solid black;
-	border-radius: 8px;
-	background-color: #f0f0f0; /* Adjust the color as needed */
-	z-index: 999; /* Ensures it's displayed above other content */
-}
-</style>
 
 </head>
 <body>
 	<jsp:include page="header.jsp" />
-
-	<!-- Weather Information Box -->
-	<div id="weatherBox">
-		<h3>Weather Information</h3>
-		<p>
-			City: <span id="city"></span>
-		</p>
-		<p>
-			IP: <span id="ipNbr"></span>
-		</p>
-		<p>
-			 <span id="sunrise"></span>
-		</p>
-		<p>
-			 <span id="sunset"></span>
-		</p>
-		<p>
-			Weather: <span id="weather"></span>
-		</p>
-		<p>
-			Temperature: <span id="degree"></span>
-		</p>
-	</div>
 
 	<h2>Welcome to FootBook!</h2>
 	<p>Book your football match on your favorite pitches!</p>

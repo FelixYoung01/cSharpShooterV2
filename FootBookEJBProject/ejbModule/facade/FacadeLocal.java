@@ -50,21 +50,23 @@ public interface FacadeLocal {
 	public long getMatchCount();
 
 	List<String> findAllMatchIds();
+
 	
-
-	// User Methods
-
+	//User Methods	
+	
 	public int getUserCount();
-
-	public int getUsersOnMatchesCount();
-
-	public void createUser(User user);
-
-	public Set<User> getAllUsers();
 	
-
-	// Pitch Methods
-
+	public int getUsersOnMatchesCount();
+  
+  public void createUser(User user);
+  
+  public Set<User> getAllUsers();
+  
+  public void deleteUser(String userId);
+  
+  
+	//Pitch Methods
+	
 	public Pitch findPitch(String pitchId);
 
 	public Set<Pitch> getAllPitches();

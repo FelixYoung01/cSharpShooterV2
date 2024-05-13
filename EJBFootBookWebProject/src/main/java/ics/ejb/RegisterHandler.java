@@ -63,10 +63,32 @@ public class RegisterHandler implements IPathHandler {
 			System.out.println("Referee added");
 
 			response.sendRedirect(request.getRequestURI());
+
 			}
 			
 			
+
+		}
+		
+		 if (request.getMethod().equalsIgnoreCase("POST")) {
+		        String action = request.getParameter("action");
+
+		        if (action != null && action.equals("remove")) {
+		            String userIdToDelete = request.getParameter("userId");
+		            if (userIdToDelete != null) {
+		                
+						 facade.deleteUser(userIdToDelete);
+		                if (userIdToDelete != null) {
+		                    response.getWriter().write("User deleted successfully");
+		                    return null; // We don't need to forward to any JSP page
+		                } else {
+		                    response.getWriter().write("User not found");
+                        }
+		            }
+		        }
+		    }
 		return request.getRequestDispatcher("/register.jsp");
 
 	}
-}
+	
+	
