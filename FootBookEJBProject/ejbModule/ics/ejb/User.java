@@ -1,7 +1,9 @@
 package ics.ejb;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.Set;
+import java.util.logging.Logger;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -22,11 +24,21 @@ import jakarta.validation.constraints.Size;
 
 	@NamedQuery(name="User.findAll", query="SELECT u FROM User u"),
 	@NamedQuery(name="User.countAll", query="SELECT COUNT(u) FROM User u"), //Namedquery for the stats of users registered
+
+  @NamedQuery(name="User.availableUsers", query="SELECT u FROM User u WHERE u.match IS NULL") // Namedquery for getting all users that are not registered on a match
 	@NamedQuery(name="User.countRegisteredOnMatches", query="SELECT COUNT(u.match) FROM User u WHERE u.match IS NOT NULL") // Namedquery for counting amount of users registered on matches
 })
-@Table(name="[User]")
+@Table(name="[User]") // User is a reserved word in SQL, so it needs to be enclosed in square brackets")
+
+
+	
+})
+
 
 public class User implements Serializable{
+	
+    private static final Logger logger = Logger.getLogger(Match.class.getName());
+
 	private static final long serialVersionUID = 1L;
 
     
@@ -35,15 +47,25 @@ public class User implements Serializable{
     private String email;
     private String gender;
     private String name;
+    private LocalDateTime joined;
 
     private Match match; // Each user participates in exactly one match
     
-	public User(String userId, int age, String email, String gender, String name) {
-    	this.userId = userId;
+	public User(int age, String email, String gender, String name) {
     	this.age = age;
     	this.email = email;
     	this.gender = gender;
     	this.name = name;
+    	this.userId = generateUserId();
+	}
+	
+	public User() {
+	}
+	
+	private String generateUserId() {
+		String userId = "U" + String.format("%02d", (int)(Math.random() * 100));
+		System.out.println("Length of userId: " + userId.length() + " UserId: " + userId);
+		return userId;
 	}
     
     @Id
@@ -104,6 +126,16 @@ public class User implements Serializable{
 
 	public void setMatch(Match match) {
 		this.match = match;
+	}
+	
+	//New fields for auditing purposes
+	@Column(name="joined", updatable=false)
+	public LocalDateTime getJoined() {
+		return joined;
+	}
+	
+	public void setJoined(LocalDateTime joined) {
+		this.joined = joined;
 	}
 }
 

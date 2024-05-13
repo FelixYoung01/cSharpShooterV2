@@ -19,4 +19,6 @@ public interface RefereeLicenseEAOLocal {
 	public void deleteRefereeLicense(String refereeLicenseId);
 
 	public RefereeLicense findRefereeLicenseById(String refereeLicenseId);
+	
+	public List<RefereeLicense> getAllRefereeLicenses();
 }

@@ -1,5 +1,3 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,17 +6,91 @@
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-	<jsp:include page="header.jsp" />
+	<%@ include file="header.jsp"%>
 
-	<section class="box">
-		<h2>Need Help?</h2>
-		<p>Contact our support team for assistance.</p>
-		<!-- Add contact information or support details here -->
+	<!-- Banner section -->
+	<div class="banner">
+		<h1 style="font-size: 60px; text-align: center;">We're here to
+			help.</h1>
+		<p style="font-size: 24px;">If you didn't find what you were
+			looking for or need some help, please check the FAQ below or contact
+			us. We're just one click away.</p>
+	</div>
+
+	<!-- Main content section -->
+	<section class="box" style="width: 600px">
+		<h2>Book a Match</h2>
+		<p>Go to the home page and select your pitch of choice. After
+			choosing the pitch, you are able to book a match at a specific date
+			and time with a referee of your choice.</p>
 	</section>
 
-	<footer>
-		<p>&copy; 2024 FootBook. All rights reserved.</p>
-	</footer>
+	<section class="box" style="width: 600px">
+		<h2>Create a User</h2>
+		<p>Go to the register page and click on the add user button. Fill
+			in the required information and you are ready to go.</p>
+	</section>
+
+	<section class="box" style="width: 600px">
+		<h2>Create a Referee</h2>
+		<p>Go to the register page and click on the add referee button.
+			Fill in the required information and you are ready to go.</p>
+	</section>
+
+
+	<!-- Contact Form -->
+	<section class="box">
+		<h2>Contact Us</h2>
+		<form>
+			<div style="margin-top: 5px">
+				<label for="name">Name:</label><br>
+				<input class="box" style="padding: 5px" type="text" id="name" name="name" required>
+			</div>
+			<div style="margin-top: 2.5px">
+				<label for="email">Email:</label><br>
+				<input class="box" style="padding: 5px" type="email" id="email" name="email" required>
+			</div>
+				<label for="message">Message:</label><br>
+				<textarea class="box" style="padding: 5px" id="message" name="message" rows="4" cols="100" required></textarea>
+			<div style="margin-top: 2.5px">
+				<button value="Send" onclick="validateAndSubmit()">Send</button>
+			</div>
+		</form>
+	</section>
+
+	<script>
+		function validateAndSubmit() {
+			var name = document.getElementById("name").value;
+			var email = document.getElementById("email").value;
+			var message = document.getElementById("message").value;
+
+			// Validate email format using a regular expression
+			var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+			if (!emailPattern.test(email)) {
+				alert("Please enter a valid email address.");
+				return; // Exit function if email format is invalid
+			}
+
+			// If email format is valid, display success message
+			alert("Success! Your message was sent.");
+
+			// Optionally, reset the form fields after displaying the message
+			document.getElementById("name").value = "";
+			document.getElementById("email").value = "";
+			document.getElementById("message").value = "";
+		}
+
+		function showSuccess() {
+			// Show a success message in a popup
+			alert("Success! Your message was sent.");
+
+			// Optionally, you can reset the form fields after displaying the message
+			document.getElementById("name").value = "";
+			document.getElementById("email").value = "";
+			document.getElementById("message").value = "";
+		}
+	</script>
+
 	<script src="Darkmode.js"></script>
 </body>
 </html>

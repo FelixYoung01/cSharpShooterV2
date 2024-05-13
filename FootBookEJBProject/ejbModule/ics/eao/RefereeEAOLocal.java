@@ -2,13 +2,14 @@
 package ics.eao;
 
 import java.util.List;
+import java.util.Set;
 
 import ics.ejb.Referee;
 import jakarta.ejb.Local;
 
 @Local
 public interface RefereeEAOLocal {
-	public List<Referee> getAllReferees();
+	public Set<Referee> getAllReferees();
 
 	public void addReferee(Referee referee);
 
@@ -17,5 +18,7 @@ public interface RefereeEAOLocal {
 	public void deleteReferee(String refereeId);
 
 	public Referee findRefereeById(String refereeId);
+
+	public List<String> findAllRefereeIds();
 }
 
