@@ -92,6 +92,28 @@ public class PitchInfoHandler implements IPathHandler {
 			logger.info("Date: " + date);
 			logger.info("Time: " + time);
 			
+			// parsing date and time
+			LocalDate parsedDate = LocalDate.parse(date);
+			LocalTime parsedTime = LocalTime.parse(time);
+			
+			//Check if a match is unique
+			//boolean matchExists = facade.isMatchUnique(pitchId, parsedDate, parsedTime);
+			
+			/*if(matchExists) {
+				logger.info("A match already exists on this date and time. Please select another date and time.");
+				request.setAttribute("errorMessage", "A match already exists on this date and time. Please select another date and time.");
+				return request.getRequestDispatcher("/pitchInfo.jsp");
+			}*/
+			
+			
+			//Check if referee is booked on other match on same date and time
+			/*boolean isRefereeBooked = facade.isRefereeBooked(refereeId, parsedDate, parsedTime);
+			logger.info("Is referee booked: " + isRefereeBooked);
+			if (!isRefereeBooked) {
+				logger.info("Referee is already booked for this date and time. Please select another date and time.");
+				request.setAttribute("errorMessage", "Referee is already booked for this date and time. Please select another date and time.");
+				return request.getRequestDispatcher("/pitchInfo.jsp");
+			}*/
 			
 			String matchId = generateMatchId();
 			
@@ -103,9 +125,7 @@ public class PitchInfoHandler implements IPathHandler {
 			
 			logger.info("Generated matchId: " + matchId);
 
-			// parsing date and time
-			LocalDate parsedDate = LocalDate.parse(date);
-			LocalTime parsedTime = LocalTime.parse(time);
+
 			
 			Referee refereeForMatch = facade.findRefereeById(refereeId);
 			User user = facade.findUserById(userId);
@@ -127,31 +147,20 @@ public class PitchInfoHandler implements IPathHandler {
 			
 			logger.info("Match created and user update.");
 			
-			response.sendRedirect(request.getContextPath() + "/pitchInfo?pitchId=" + pitchId);
+			response.sendRedirect(request.getContextPath() + "/matchInfo?matchId=" + matchId);
             return null;
 		}
 		
 		return request.getRequestDispatcher("/pitchInfo.jsp");
 	}
 
+
+
 	private String generateMatchId() {
 		Random random = new Random();
 		int number = random.nextInt(100);
 		return String.format("M%02d" , number);
 	}
-
-
 }
 
-
-		return request.getRequestDispatcher("/pitchInfo.jsp");
-	}
-
-	@Override
-	public RequestDispatcher handleRequestDispatcherGet(HttpServletRequest request, HttpServletResponse response,
-			FacadeLocal facade) throws ServletException, IOException {
-		return request.getRequestDispatcher("/pitchInfo.jsp");
-	}
-
-}
 

@@ -2,17 +2,13 @@
 <%@page import="java.util.Map" import="ics.ejb.Pitch"
 	import="java.util.Set" import="ics.ejb.Match"
 	import="java.time.format.DateTimeFormatter"
-	import="java.time.LocalDateTime"%>
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	import="java.time.LocalDateTime"
+	import="ics.ejb.Referee" import="ics.ejb.User"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 
 
-	import="ics.ejb.Pitch" import="java.util.Set" import="ics.ejb.Match" import="ics.ejb.Referee" import="ics.ejb.User"
-	pageEncoding="ISO-8859-1"%>
-
-    import="ics.ejb.Pitch, java.util.Set, ics.ejb.Match"
-    pageEncoding="ISO-8859-1"%>
-
-
+	
+	
 
 <!DOCTYPE html>
 <html>
@@ -20,6 +16,32 @@
 <meta charset="ISO-8859-1">
 <title>Pitch Information</title>
 <link rel="stylesheet" href="styles.css">
+
+    <script>
+    // JavaScript function to ensure the minute part is always set to "00"
+    function validateTimeInput() {
+        var timeInput = document.getElementById("time");
+        var timeValue = timeInput.value;
+
+        if (timeValue) {
+            var parts = timeValue.split(':');
+            if (parts[1] !== "00") {
+                timeInput.value = parts[0] + ":00";
+            }
+        }
+    }
+
+    // JavaScript function to validate form submission
+    function validateForm(event) {
+        validateTimeInput();
+        return true;
+    }
+    
+ // JavaScript function to show alert if error message is present
+    function showErrorAlert(message) {
+        alert(message);
+    }
+</script>
 </head>
 <body>
 	<jsp:include page="header.jsp" />
@@ -32,6 +54,8 @@
 
 	// Format the founded date
 	String foundedDateFormatted = (pitch.getFounded() != null) ? pitch.getFounded().format(formatter) : "Not Available";
+	
+	String errorMessage = (String) request.getAttribute("errorMessage");
 	%>
 	<section class="box colored">
 		<h1>Pitch Information</h1>
@@ -80,9 +104,9 @@
 			}
 			%>
 		</section>
-        <button id="createMatchButton">Create Match</button>
+        <button id="createMatchButton">Book now</button>
         <div id="createMatchForm" class="box popUp" style="display: none;">
-            <h2>Create Match</h2>
+            <h2>Insert Credentials</h2>
             <form id="creatingMatchForm" action="/EJBFootBookWebProject/pitchInfo" method="post">
             	<input type="hidden" name="formType" value="createMatch">
                 <input type="hidden" id="pitchId" name="pitchId" value="<%= pitchId %>">
@@ -124,32 +148,13 @@
                 <input type="date" id="date" name="date" required>
 
                 <label for="time">Time:</label>
-                <input type="time" id="time" name="time" step="3600" required onchange= "validateTimeInput()">
+                <input type="time" id="time" name="time" required onchange= "validateTimeInput()">
 
-                <button type="submit">Create Match</button>
+                <button type="submit">Confirm Booking</button>
             </form>
         </div>
     </section>
-    <script>
-    // JavaScript function to ensure the minute part is always set to "00"
-    function validateTimeInput() {
-        var timeInput = document.getElementById("matchTime");
-        var timeValue = timeInput.value;
 
-        if (timeValue) {
-            var parts = timeValue.split(':');
-            if (parts[1] !== "00") {
-                timeInput.value = parts[0] + ":00";
-            }
-        }
-    }
-
-    // JavaScript function to validate form submission
-    function validateForm(event) {
-        validateTimeInput();
-        return true;
-    }
-</script>
     <script>
         document.getElementById("createMatchButton").addEventListener("click", function() {
             document.getElementById("createMatchForm").style.display = "block";
@@ -158,6 +163,11 @@
         document.getElementById("creatingMatchForm").addEventListener("submit", function(event) {
             document.getElementById("createMatchForm").style.display = "none";
         });
+        
+     // Check if there's an error message and show the alert
+        <% if (errorMessage != null) { %>
+            showErrorAlert("<%= errorMessage %>");
+        <% } %>
     </script>
 	<script src="Darkmode.js"></script>
 </body>
