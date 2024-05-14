@@ -53,6 +53,7 @@ public class RegisterHandler implements IPathHandler {
 
 			if (age >= 18 && age <= 100) {
 
+
 				User user = new User(age, email, gender, name);
 
 				facade.createUser(user);
@@ -64,6 +65,7 @@ public class RegisterHandler implements IPathHandler {
 			} else if (age < 18) {
 				response.getWriter().write("User must be 18 or older");
 				System.out.println("User must be 18 or older");
+
 			}
 			
 			else if (age > 100) {
@@ -132,6 +134,7 @@ public class RegisterHandler implements IPathHandler {
 			}}
 		}
 
+
 		/*
 		 * else if (request.getMethod().equalsIgnoreCase("POST")) { String action1 =
 		 * request.getParameter("action");
@@ -155,6 +158,7 @@ public class RegisterHandler implements IPathHandler {
 		else if ("removeUser".equals(action)) {
 			String userId = request.getParameter("userId");
 
+
 			User user = facade.findUser(userId);
 			if (user != null) {
 				facade.deleteUser(userId);
@@ -168,6 +172,7 @@ public class RegisterHandler implements IPathHandler {
 				return null;
 			}
 		}
+
 
 		// Removing a referee
 		else if ("removeReferee".equals(action)) {
