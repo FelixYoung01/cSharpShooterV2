@@ -11,7 +11,7 @@
 <body>
 	<%@ include file="header.jsp"%>
 
-	<section class="box about-section">
+	<section class="box colored">
 		<h2>About Us</h2>
 		<p>Welcome to FootBook! We are your go-to platform for booking
 			football matches on your favorite pitches. Whether you're organizing
@@ -23,7 +23,7 @@
 			before!</p>
 	</section>
 
-	<section class="box">
+	<section class="box colored">
 		<h2>Our Team</h2>
 		<p>Meet the team behind FootBook:</p>
 

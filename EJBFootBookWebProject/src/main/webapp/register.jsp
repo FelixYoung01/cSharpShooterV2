@@ -6,7 +6,7 @@
 <html>
 <head>
     <meta charset="ISO-8859-1">
-    <title>Register</title>
+    <title>Register - FootBook</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -15,7 +15,7 @@
     <div style="display: flex;">
         <div>
             <h2>Users</h2>
-            <table class="box">
+            <table class="box colored">
                 <thead>
                     <tr>
                         <th>ID</th>
@@ -52,7 +52,7 @@
                 </tbody>
             </table>
             <button id="addUserButton">Add</button>
-            <div id="addUserForm" class="box popUp" style="display: none;">
+            <div id="addUserForm" class="box colored" style="display: none;">
                 <h2>Add User</h2>
                 <form id="addingUserForm" action="/EJBFootBookWebProject/register" name="userFormType" method="post">
                     <label for="userId">User ID will be auto-generated!</label> <br><br>
@@ -80,7 +80,7 @@
                 </form>
             </div>
 
-            <div id="editUserForm" class="popUp" style="display: none;">
+            <div id="editUserForm" class="box colored" style="display: none;">
                 <h2>Edit User</h2>
                 <form id="editingUserForm" action="/EJBFootBookWebProject/register" method="post">
                     <input type="hidden" name="formType" value="editUser">
@@ -129,7 +129,7 @@
 
         <div style="margin-left: 20px;">
             <h2>Referees</h2>
-            <table class="box">
+            <table class="box colored">
                 <thead>
                     <tr>
                         <th>ID</th>
@@ -148,7 +148,7 @@
                         <td><%=referee.getRefereeName()%></td>
                         <td><%=referee.getRefereeLicense().getLicenseId()%></td>
                         <td>
-                            <button onclick="editReferee('<%=referee.getRefereeId()%>', '<%=referee.getRefereeName()%>', '<%=referee.getRefereeLicense().getLicenseId()%>')">RefEdit</button>
+                            <button onclick="editReferee('<%=referee.getRefereeId()%>', '<%=referee.getRefereeName()%>', '<%=referee.getRefereeLicense().getLicenseId()%>')">Edit</button>
                             <form action="/EJBFootBookWebProject/register" method="post" style="display:inline;">
                                 <input type="hidden" name="formType" value="removeReferee">
                                 <input type="hidden" name="refereeId" value="<%=referee.getRefereeId()%>">
@@ -163,7 +163,7 @@
             </table>
 
             <button id="addRefereeButton">Add</button>
-            <div id="addRefereeForm" class="box popUp" style="display: none;">
+            <div id="addRefereeForm" class="box colored" style="display: none;">
                 <h2>Add Referee</h2>
                 <form id="addingRefereeForm" action="/EJBFootBookWebProject/register" name="refereeFormType" method="post">
                     <label for="RefereeId">Referee ID will be auto-generated!</label> <br><br>
@@ -194,7 +194,7 @@
                 </form>
             </div>
 
-            <div id="editRefereeForm" class="popUp" style="display: none;">
+            <div id="editRefereeForm" class="box colored" style="display: none;">
                 <h2>Edit Referee</h2>
                 <form id="editingRefereeForm" action="/EJBFootBookWebProject/register" method="post">
                     <input type="hidden" name="formType" value="editReferee">

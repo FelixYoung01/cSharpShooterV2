@@ -16,7 +16,7 @@
 	Pitch pitch = (Pitch) request.getAttribute("pitch");
 	String pitchId = pitch.getPitchId();
 	%>
-	<section class="box">
+	<section class="box colored">
 		<h1>Information about pitch</h1>
 		<div>
 			<h3>
@@ -35,7 +35,7 @@
 			Set<Match> matches = (Set<Match>) request.getAttribute("matchesOnPitch");
 			for (Match match : matches) {
 			%>
-			<a class="a-button" href="<%=request.getContextPath()%>/matchInfo?matchId=<%=match.getMatchId()%>">
+			<a class="button" href="<%=request.getContextPath()%>/matchInfo?matchId=<%=match.getMatchId()%>">
 				<h3><%=match.getMatchId()%></h3>
 				<p>
 					Match Date:
