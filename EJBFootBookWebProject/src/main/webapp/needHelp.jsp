@@ -15,23 +15,23 @@
 		<p style="font-size: 24px;">If you didn't find what you were
 			looking for or need some help, please check the FAQ below or contact
 			us. We're just one click away.</p>
-	</div>
+	</div><br>
 
 	<!-- Main content section -->
-	<section class="box" style="width: 600px">
+	<section class="box colored" style="width: 600px">
 		<h2>Book a Match</h2>
 		<p>Go to the home page and select your pitch of choice. After
 			choosing the pitch, you are able to book a match at a specific date
 			and time with a referee of your choice.</p>
 	</section>
 
-	<section class="box" style="width: 600px">
+	<section class="box colored" style="width: 600px">
 		<h2>Create a User</h2>
 		<p>Go to the register page and click on the add user button. Fill
 			in the required information and you are ready to go.</p>
 	</section>
 
-	<section class="box" style="width: 600px">
+	<section class="box colored" style="width: 600px">
 		<h2>Create a Referee</h2>
 		<p>Go to the register page and click on the add referee button.
 			Fill in the required information and you are ready to go.</p>
@@ -39,7 +39,7 @@
 
 
 	<!-- Contact Form -->
-	<section class="box">
+	<section class="box colored">
 		<h2>Contact Us</h2>
 		<form>
 			<div style="margin-top: 5px">
@@ -52,7 +52,7 @@
 			</div>
 				<label for="message">Message:</label><br>
 				<textarea class="box" style="padding: 5px" id="message" name="message" rows="4" cols="100" required></textarea>
-			<div style="margin-top: 2.5px">
+			<div style="margin-top: 2.5px; display: flex; justify-content: center; align-items: center;">
 				<button value="Send" onclick="validateAndSubmit()">Send</button>
 			</div>
 		</form>

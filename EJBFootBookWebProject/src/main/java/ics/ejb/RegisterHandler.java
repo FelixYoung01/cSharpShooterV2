@@ -14,18 +14,17 @@ public class RegisterHandler implements IPathHandler {
 
 	@Override
 	public RequestDispatcher handleRequestDispatcherGet(HttpServletRequest request, HttpServletResponse response,
-	        FacadeLocal facade) throws ServletException, IOException {
-	    Set<User> users = facade.getAllUsers();
-	    Set<Referee> referees = facade.getAllReferees();
-	    List<RefereeLicense> licenses = facade.getAllRefereeLicenses();
+			FacadeLocal facade) throws ServletException, IOException {
+		Set<User> users = facade.getAllUsers();
+		Set<Referee> referees = facade.getAllReferees();
+		List<RefereeLicense> licenses = facade.getAllRefereeLicenses();
 
-	    request.setAttribute("users", users);
-	    request.setAttribute("referees", referees);
-	    request.setAttribute("licenses", licenses);
+		request.setAttribute("users", users);
+		request.setAttribute("referees", referees);
+		request.setAttribute("licenses", licenses);
 
-	    return request.getRequestDispatcher("/register.jsp");
+		return request.getRequestDispatcher("/register.jsp");
 	}
-	
 
 	@Override
 	public RequestDispatcher handleRequestDispatcherPost(HttpServletRequest request, HttpServletResponse response,
@@ -41,29 +40,42 @@ public class RegisterHandler implements IPathHandler {
 
 		String action = request.getParameter("formType");
 
-
-	
-			// Kör kodstycket ifall det är en user som ska läggas till //ADD USER CODE
+		// Kör kodstycket ifall det är en user som ska läggas till //ADD USER CODE
 
 		if ("addUser".equals(action)) {// Kör kodstycket ifall metoden är POST
-
+			
 			String tempAge = request.getParameter("userAge");
 			String email = request.getParameter("userEmail");
 			String gender = request.getParameter("userGender");
 			String name = request.getParameter("userName");
+
 			int age = Integer.parseInt(tempAge);
 
-			User user = new User(age, email, gender, name);
-			facade.createUser(user);
+			if (age >= 18 && age <= 100) {
 
-			System.out.println("User added");
-			response.sendRedirect(request.getRequestURI());
-			return null;
+
+				User user = new User(age, email, gender, name);
+
+				facade.createUser(user);
+
+				System.out.println("User added");
+				response.sendRedirect(request.getRequestURI());
+				return null;
+				
+			} else if (age < 18) {
+				response.getWriter().write("User must be 18 or older");
+				System.out.println("User must be 18 or older");
 
 			}
-		
-			// Kör kodstycket ifall det är en dommare som ska läggas till //ADD REFEREE CODE
-			else if ("addReferee".equals(action)){
+			
+			else if (age > 100) {
+				response.getWriter().write("User can not be older than 100 years old");
+				System.out.println("User can not be older than 100 years old");
+			}
+		}
+		// Kör kodstycket ifall det är en dommare som ska läggas till //ADD REFEREE CODE
+		else if ("addReferee".equals(action)) {
+			
 
 			String refName = request.getParameter("refereeName");
 			String licenseId = request.getParameter("licenseId");
@@ -79,6 +91,8 @@ public class RegisterHandler implements IPathHandler {
 
 		// Kör kodstycket ifall metoden är PUT (UPDATE)
 		else if ("editUser".equals(action)) {
+			
+			
 
 			String userId = request.getParameter("userId");
 			String newName = request.getParameter("userName");
@@ -96,8 +110,12 @@ public class RegisterHandler implements IPathHandler {
 			User userToUpdate = facade.findUserById(userId);
 
 			if (userToUpdate != null) {
+				
 				System.out.println("User found, updating...");
 				int age = Integer.parseInt(newAge); // No try-catch block
+				
+				if (age >= 18 && age <= 100) {
+					
 				userToUpdate.setName(newName);
 				userToUpdate.setAge(age);
 				userToUpdate.setEmail(newEmail);
@@ -105,75 +123,77 @@ public class RegisterHandler implements IPathHandler {
 
 				User updateSuccessful = facade.updateUser(userToUpdate);
 
-
 				System.out.println("User updated");
 				response.sendRedirect(request.getRequestURI());
 				return null;
-			} else {
-				response.getWriter().write("User not found");
+				
+			 } else if (age < 18 && age > 100) {
+				response.getWriter().write("User can not be older than 100 or younger than 18.");
+				System.out.println("User can not be older than 100 or younger than 18.");
 				response.setStatus(HttpServletResponse.SC_BAD_REQUEST); // Set appropriate status code on failure.
-			}
-			return null;
-		}
-
-		else if (request.getMethod().equalsIgnoreCase("POST")) {
-			String action1 = request.getParameter("action");
-
-				System.out.println("Update result: " + updateSuccessful); // Debugging
-
-				if (updateSuccessful != null) {
-					System.out.println("User successfully updated.");
-					response.sendRedirect(request.getRequestURI());
-
-				} else {
-					System.out.println("User update failed.");
-					response.getWriter().write("Update failed");
-
-
-				}
-
-			}
+			}}
 		}
 
 
-			
-			//Removing a user
-			else if ("removeUser".equals(action)) {
-		        String userId = request.getParameter("userId");
+		/*
+		 * else if (request.getMethod().equalsIgnoreCase("POST")) { String action1 =
+		 * request.getParameter("action");
+		 * 
+		 * System.out.println("Update result: " + updateSuccessful); // Debugging
+		 * 
+		 * if (updateSuccessful != null) {
+		 * System.out.println("User successfully updated.");
+		 * response.sendRedirect(request.getRequestURI());
+		 * 
+		 * } else { System.out.println("User update failed.");
+		 * response.getWriter().write("Update failed");
+		 * 
+		 * 
+		 * }
+		 * 
+		 * } }
+		 */
 
-		        User user = facade.findUser(userId);
-		        if (user != null) {
-		            facade.deleteUser(userId);
-		            System.out.println("User removed: " + userId);
-		            response.sendRedirect(request.getRequestURI());
-		            return null;
-		        } else {
-		            System.out.println("User not found: " + userId);
-		            response.getWriter().write("User not found");
-		            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-		            return null;
-		        }
+		// Removing a user
+		else if ("removeUser".equals(action)) {
+			String userId = request.getParameter("userId");
+
+
+			User user = facade.findUser(userId);
+			if (user != null) {
+				facade.deleteUser(userId);
+				System.out.println("User removed: " + userId);
+				response.sendRedirect(request.getRequestURI());
+				return null;
+			} else {
+				System.out.println("User not found: " + userId);
+				response.getWriter().write("User not found");
+				response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+				return null;
 			}
-		       //Removing a referee	
-		        else if ("removeReferee".equals(action)) {
-                    String refereeId = request.getParameter("refereeId");
+		}
 
-                    Referee referee = facade.findRefereeById(refereeId);
-                    if (referee != null) {
-                        facade.deleteReferee(refereeId);
-                        System.out.println("Referee removed: " + refereeId);
-                        response.sendRedirect(request.getRequestURI());
-                        return null;
-                    } else {
-                        System.out.println("Referee not found: " + refereeId);
-                        response.getWriter().write("Referee not found");
-                        response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-                        return null;
-                    }
-                }
 
-			return request.getRequestDispatcher("/register.jsp");
+		// Removing a referee
+		else if ("removeReferee".equals(action)) {
+			String refereeId = request.getParameter("refereeId");
 
+			Referee referee = facade.findRefereeById(refereeId);
+			if (referee != null) {
+				facade.deleteReferee(refereeId);
+				System.out.println("Referee removed: " + refereeId);
+				response.sendRedirect(request.getRequestURI());
+				return null;
+			} else{
+				System.out.println("Referee not found: " + refereeId);
+				response.getWriter().write("Referee not found");
+				response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+				return null;
+			}
+
+			// return request.getRequestDispatcher("/register.jsp");
+
+		}
 
 		else if ("editReferee".equals(action)) {
 			String refereeId = request.getParameter("refereeId");
@@ -220,4 +240,3 @@ public class RegisterHandler implements IPathHandler {
 
 	}
 }
-

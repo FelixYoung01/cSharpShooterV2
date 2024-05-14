@@ -36,7 +36,7 @@ public class MatchEAOImpl implements MatchEAOLocal {
 	public Match findMatchById(String matchId) {
 		//Match match = em.find(Match.class, matchId);
 		//return match;
-		
+	
 		try {
             Match match = em.find(Match.class, matchId);
             if (match == null) {
@@ -48,6 +48,7 @@ public class MatchEAOImpl implements MatchEAOLocal {
             return null;
         }
     
+
 	}
 	
 	public List<Match> findAllMatches() {

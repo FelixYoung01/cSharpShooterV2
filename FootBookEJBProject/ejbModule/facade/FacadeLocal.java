@@ -91,6 +91,8 @@ public interface FacadeLocal {
 
 	public List<String> findAllPitchIds();
 
+	public Set<User> getUsersInMatches();
+
 
 
 
