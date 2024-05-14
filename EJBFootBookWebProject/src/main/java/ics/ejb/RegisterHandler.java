@@ -59,7 +59,7 @@ public class RegisterHandler implements IPathHandler {
 
 			System.out.println("User added");
 			response.sendRedirect(request.getRequestURI());
-			
+			return null;
 			}
 		
 			// Kör kodstycket ifall det är en dommare som ska läggas till //ADD REFEREE CODE
@@ -112,7 +112,7 @@ public class RegisterHandler implements IPathHandler {
 			return null;
 		}
 
-	/*	else if (request.getMethod().equalsIgnoreCase("POST")) {
+		else if (request.getMethod().equalsIgnoreCase("POST")) {
 			String action1 = request.getParameter("action");
 
 			if (action1 != null && action1.equals("remove")) {
@@ -129,7 +129,7 @@ public class RegisterHandler implements IPathHandler {
 				}
 			}
 		}
-*/
+
 
 			
 			//Removing a user

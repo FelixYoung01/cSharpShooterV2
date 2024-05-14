@@ -57,11 +57,13 @@ public class Match implements Serializable {
 	public Match() {
 	}
 
-	public Match(String matchId, Pitch pitch, LocalDate date2, LocalTime time2) {
+	public Match(String matchId, Referee referee, Pitch pitch, LocalDate date2, LocalTime time2) {
 		this.matchId = matchId;
 		this.pitch = pitch;
 		this.date = date2;
 		this.time = time2;
+		this.referee = referee;
+		
 	}
 
 	@Id

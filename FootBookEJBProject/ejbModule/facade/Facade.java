@@ -149,7 +149,7 @@ public class Facade implements FacadeLocal {
 	}
 
 	public User findUserById(String userId) {
-		return null;
+		return userEAO.findUserById(userId);
 	}
 
 	public Set<User> getAllUsers() {
