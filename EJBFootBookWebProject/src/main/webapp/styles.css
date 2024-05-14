@@ -498,3 +498,23 @@ input {
 .count {
     font-size: 42px;
 }
+
+.userRegister {
+	 display: block;
+    position: relative;
+    cursor: pointer;
+    background-color: var(--background-color);
+    padding: 5px;
+    border: 5px solid var(--text-color);
+    border-radius: 5px;
+    text-align: center;
+    margin: 10px;
+    color: var(--text-color);
+    box-shadow: 5px 5px 0px rgba(0, 0, 0, 0.5);
+    transition: transform 0.3s ease;
+    text-decoration: none;
+}
+
+.userRegister:hover {
+	transform: scale(1.1);
+}

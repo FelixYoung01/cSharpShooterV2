@@ -148,26 +148,9 @@ public class RegisterHandler implements IPathHandler {
 			}
 		}
 
-
-		       //Removing a referee	
-		        else if ("removeReferee".equals(action)) {
-                    String refereeId = request.getParameter("refereeId");
-
-                    Referee referee = facade.findRefereeById(refereeId);
-                    if (referee != null) {
-                        facade.deleteReferee(refereeId);
-                        System.out.println("Referee removed: " + refereeId);
-                        response.sendRedirect(request.getRequestURI());
-                        return null;
-                    } else {
-                        System.out.println("Referee not found: " + refereeId);
-                        response.getWriter().write("Referee not found");
-                        response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-                        return null;
-                    }
-                }
-
-			//return request.getRequestDispatcher("/register.jsp");
+		// Removing a referee
+		else if ("removeReferee".equals(action)) {
+			String refereeId = request.getParameter("refereeId");
 
 			Referee referee = facade.findRefereeById(refereeId);
 			if (referee != null) {
@@ -181,6 +164,8 @@ public class RegisterHandler implements IPathHandler {
 				response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
 				return null;
 			}
+
+			// return request.getRequestDispatcher("/register.jsp");
 
 		}
 

@@ -62,7 +62,7 @@
 				action="/EJBFootBookWebProject/matchInfo?matchId=<%=match.getMatchId()%>"
 				method="post">
 				<input type="hidden" name="userId" value="<%=user.getUserId()%>">
-				<div onclick="showButton('<%=user.getUserId()%>')">
+				<div class ="userRegister" onclick="showButton('<%=user.getUserId()%>')">
 					<p><%=user.getName()%></p>
 					<p><%=user.getAge()%></p>
 					<p><%=user.getGender()%></p>
@@ -72,15 +72,6 @@
 			<%
 			}
 			%>
-			<form id="addUserToMatchForm"
-				action="/EJBFootBookWebProject/matchInfo?matchId=<%=match.getMatchId()%>"
-				method="post" style="display: none;">
-				<input type="hidden" name="userId" id="selectedUserId"> <input
-					type="hidden" name="matchId" value="<%=match.getMatchId()%>">
-				<button type="submit">
-					Add User <span id="userIdDisplay"></span> to Match
-				</button>
-			</form>
 			<script>
 				function showButton(userId) {
 
@@ -91,6 +82,15 @@
 			</script>
 		</div>
 	</section>
+	<form id="addUserToMatchForm"
+				action="/EJBFootBookWebProject/matchInfo?matchId=<%=match.getMatchId()%>"
+				method="post" style="display: none;">
+				<input type="hidden" name="userId" id="selectedUserId"> <input
+					type="hidden" name="matchId" value="<%=match.getMatchId()%>">
+				<button type="submit">
+					Add User <span id="userIdDisplay"></span> to Match
+				</button>
+			</form>
 	<script src="Darkmode.js">
 		
 	</script>
