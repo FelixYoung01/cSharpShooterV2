@@ -125,10 +125,11 @@ public class RegisterHandler implements IPathHandler {
 				response.sendRedirect(request.getRequestURI());
 				return null;
 				
-			 } else if (age < 18 && age > 100) {
+			 } else {
 				response.getWriter().write("User can not be older than 100 or younger than 18.");
 				System.out.println("User can not be older than 100 or younger than 18.");
 				response.setStatus(HttpServletResponse.SC_BAD_REQUEST); // Set appropriate status code on failure.
+				response.sendRedirect(request.getRequestURI());
 			}}
 		}
 
