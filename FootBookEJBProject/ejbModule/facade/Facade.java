@@ -172,6 +172,10 @@ public class Facade implements FacadeLocal {
 		userEAO.deleteUser(userId);
 	}
 
+	public Set<User> getUsersInMatches() {
+        return userEAO.getUsersInMatches();
+    }
+
 	
 
 }

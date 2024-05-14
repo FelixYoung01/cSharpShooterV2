@@ -225,6 +225,7 @@
                     document.getElementById('editRefereeLicense').value = licenseId;
 
                     document.getElementById('editRefereeForm').style.display = 'block';
+                    document.getElementById('addRefereeForm').style.display = 'none';
                 }
 
                 // Event listener for showing add referee form
