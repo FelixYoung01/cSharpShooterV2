@@ -62,7 +62,7 @@
                     </div>
                     <label for="userAge">Age:</label> 
                     <div style="display: flex; justify-content: center;">
-                        <input type="number" class="bordered-input" id="userAge" name="userAge" required>
+                        <input type="number" class="bordered-input" id="userAge" name="userAge" required min ="18"  max = "100">
                     </div>
                     <label for="userEmail">Email:</label> 
                     <div style="display: flex; justify-content: center;">
@@ -91,7 +91,7 @@
                     <label for="editUserName">Name:</label> 
                     <input type="text" id="editUserName" name="userName" required><br>
                     <label for="editUserAge">Age:</label> 
-                    <input type="number" id="editUserAge" name="userAge" required><br>
+                    <input type="number" id="editUserAge" name="userAge" required min ="18" max ="100"><br>
                     <label for="editUserEmail">Email:</label> 
                     <input type="email" id="editUserEmail" name="userEmail" required><br>
                     <label for="editUserGender">Gender:</label> 
