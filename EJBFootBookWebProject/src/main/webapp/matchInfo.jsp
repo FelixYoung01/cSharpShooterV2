@@ -62,12 +62,12 @@
 				action="/EJBFootBookWebProject/matchInfo?matchId=<%=match.getMatchId()%>"
 				method="post">
 				<input type="hidden" name="userId" value="<%=user.getUserId()%>">
-				<button onclick="showButton('<%=user.getUserId()%>')">
+				<div onclick="showButton('<%=user.getUserId()%>')">
 					<p><%=user.getName()%></p>
 					<p><%=user.getAge()%></p>
 					<p><%=user.getGender()%></p>
 					<p><%=user.getEmail()%></p>
-				</button>
+				</div>
 			</form>
 			<%
 			}
@@ -85,8 +85,7 @@
 				function showButton(userId) {
 
 					document.getElementById("selectedUserId").value = userId;
-					document.getElementById("userIdDisplay").textContent = document
-							.getElementById("selectedUserId").value;
+					document.getElementById("userIdDisplay").textContent = userId;
 					document.getElementById("addUserToMatchForm").style.display = "block";
 				}
 			</script>
