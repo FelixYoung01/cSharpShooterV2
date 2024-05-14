@@ -71,7 +71,7 @@
                     <label for="userGender">Gender:</label> 
                     <div style="display: flex; justify-content: center;">
                         <select id="userGender" name="userGender" required>
-                            <option value="M">Male</option>
+                           <option value="M">Male</option>
                             <option value="F">Female</option>
                         </select>
                     </div><br>
