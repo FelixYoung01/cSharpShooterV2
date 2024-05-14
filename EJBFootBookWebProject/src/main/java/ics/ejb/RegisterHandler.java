@@ -171,7 +171,7 @@ public class RegisterHandler implements IPathHandler {
                     }
                 }
 
-			return request.getRequestDispatcher("/register.jsp");
+			//return request.getRequestDispatcher("/register.jsp");
 
 
 		else if ("editReferee".equals(action)) {
