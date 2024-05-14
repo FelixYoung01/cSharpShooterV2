@@ -162,5 +162,7 @@ public class Match implements Serializable {
 		logger.info("Updating Match (ID: " + matchId + ") - lastUpdatedDate: " + this.lastUpdatedDate);
 
 	}
+	
+	
 
 }
