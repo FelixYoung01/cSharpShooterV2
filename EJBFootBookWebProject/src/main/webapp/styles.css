@@ -74,6 +74,7 @@ button, .button {
     box-shadow: 5px 5px 0px rgba(0, 0, 0, 0.5);
     transition: transform 0.3s ease;
     text-decoration: none;
+    overflow: hidden;
 }
 
 button:hover, .button:hover {
