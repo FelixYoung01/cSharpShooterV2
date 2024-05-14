@@ -51,13 +51,25 @@
 		}
 		%>
 	</section>
-	<section class="box">
-		<h2>Some of our amazing statistics</h2>
-		<p>Matches Registered: ${matchCount}</p>
-		<p>Users Registered: ${userCount}</p>
-		<p>Users Registered in Matches: ${userOnMatchesCount}</p>
-		<p>Session Count: ${sessionCount}</p>
-
+	<section class="colored-box">
+			<div style="display: flex; flex-direction: row;">
+				<div class="colored-box count-box">
+					<h1 class="count">${matchCount}</h1>
+					<p>Matches Registered</p>
+				</div>
+				<div class="colored-box count-box">
+					<h1 class="count">${userCount}</h1>
+					<p>Users Registered</p>
+				</div>
+				<div class="colored-box count-box">
+					<h1 class="count">${userOnMatchesCount}</h1>
+					<p>Users Registered in Matches</p>
+				</div>
+				<div class="colored-box count-box">
+					<h1 class="count">${sessionCount}</h1>
+					<p>Session Count</p>
+				</div>
+			</div>
 	</section>
 	
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
