@@ -27,14 +27,25 @@ public class MatchInfoHandler implements IPathHandler {
 		request.setAttribute("usersOnMatch", usersOnMatch);
 		request.setAttribute("match", match);
 		
+		String action = request.getParameter("formType");
+		String redirectUrl = request.getContextPath() + "/matchInfo?matchId=" + matchId;
+	    
 
-		if (request.getParameter("userId") != null) {
+		if ("addUserToMatch".equals(action)) {
 
 			String userId = request.getParameter("userId");
 			User user = facade.findUser(userId);
 			user.setMatch(match);
 			facade.updateUser(user);
-			
+			response.sendRedirect(redirectUrl);
+		}
+		
+		else if("removeUserFromMatch".equals(action)) {
+			String userId = request.getParameter("removeUserId");
+			User user = facade.findUser(userId);
+			user.setMatch(null);
+			facade.updateUser(user);
+			response.sendRedirect(redirectUrl);
 		}
 
 		return request.getRequestDispatcher("/matchInfo.jsp");
