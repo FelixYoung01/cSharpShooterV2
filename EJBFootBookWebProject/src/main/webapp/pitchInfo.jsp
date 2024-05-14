@@ -18,7 +18,7 @@
 	String pitchId = pitch.getPitchId();
 	%>
 	<section class="box colored">
-		<h1>Information about pitch</h1>
+		<h1>Pitch Information</h1>
 		<div>
 			<h3>
 				Pitch Name:
