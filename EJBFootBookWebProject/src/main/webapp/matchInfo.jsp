@@ -20,8 +20,8 @@
 
 		<p><%=match.getDate()%></p>
 		<p><%=match.getTime()%></p>
+		<h1 class="box rounded">Users Playing</h1>
 		<section class="box">
-			<h1>Users playing this game</h1>
 			<%
 			if (users.isEmpty()) {
 			%>
@@ -45,8 +45,8 @@
 				%>
 			</div>
 		</section><br>
+		<h1 class="box rounded">Available Users</h1>
 		<section class="box">
-			<h1>Available users</h1>
 			<div class="grid-container">
 				<%
 				Set<User> availableUsers = (Set<User>) request.getAttribute("availableUsers");
