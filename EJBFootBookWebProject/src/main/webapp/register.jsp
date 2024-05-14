@@ -62,7 +62,7 @@
                     </div>
                     <label for="userAge">Age:</label> 
                     <div style="display: flex; justify-content: center;">
-                        <input type="number" class="bordered-input" id="userAge" name="userAge" required>
+                        <input type="number" class="bordered-input" id="userAge" name="userAge" required min ="18"  max = "100">
                     </div>
                     <label for="userEmail">Email:</label> 
                     <div style="display: flex; justify-content: center;">
