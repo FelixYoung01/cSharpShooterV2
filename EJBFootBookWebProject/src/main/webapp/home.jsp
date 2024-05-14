@@ -27,7 +27,7 @@
 				String imagePath = "Images/" + pitch.getImageName();
 		%>
 		
-		<a class="a-button" href="<%=request.getContextPath()%>/pitchInfo?pitchId=<%=pitchId%>">
+		<a class="button" href="<%=request.getContextPath()%>/pitchInfo?pitchId=<%=pitchId%>">
 			<div id="pitch-label"><%=pitch.getName()%></div>
 			<img src="<%=imagePath%>" class="pitch-image" alt="Pitch Image"/>
 		</a>
@@ -51,21 +51,21 @@
 		}
 		%>
 	</section>
-	<section class="colored-box">
+	<section class="box colored">
 			<div style="display: flex; flex-direction: row;">
-				<div class="colored-box count-box">
+				<div class="box count-box">
 					<h1 class="count">${matchCount}</h1>
 					<p>Matches Registered</p>
 				</div>
-				<div class="colored-box count-box">
+				<div class="box count-box">
 					<h1 class="count">${userCount}</h1>
 					<p>Users Registered</p>
 				</div>
-				<div class="colored-box count-box">
+				<div class="box count-box">
 					<h1 class="count">${userOnMatchesCount}</h1>
 					<p>Users Registered in Matches</p>
 				</div>
-				<div class="colored-box count-box">
+				<div class="box count-box">
 					<h1 class="count">${sessionCount}</h1>
 					<p>Session Count</p>
 				</div>
