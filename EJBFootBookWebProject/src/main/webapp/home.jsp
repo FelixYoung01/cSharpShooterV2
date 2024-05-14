@@ -20,6 +20,7 @@
     <section class="pitches">
         <h2 class="box rounded">Book from one of these available pitches!</h2>
 
+
         <%
         Set<Pitch> pitches = (Set<Pitch>) request.getAttribute("pitches");
         if (pitches != null && !pitches.isEmpty()) {
@@ -33,6 +34,15 @@
             <div id="pitch-label"><%=pitch.getName()%></div> 
             <img src="<%=imagePath%>" class="pitch-image" alt="Pitch Image" />
         </a>
+
+	<h2 style="font-size: 60px">Welcome to FootBook!</h2>
+	<p>Book your football match on your favorite pitch!</p>
+
+	<section class="pitches">
+
+		<h2>Choose your pitch of choice to book a match!</h2>
+
+
 
         <%
         }
