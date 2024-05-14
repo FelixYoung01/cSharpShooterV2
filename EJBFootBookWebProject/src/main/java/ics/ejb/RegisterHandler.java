@@ -147,45 +147,10 @@ public class RegisterHandler implements IPathHandler {
 				return null;
 			}
 		}
-*/
 
-			
-			//Removing a user
-			else if ("removeUser".equals(action)) {
-		        String userId = request.getParameter("userId");
-
-		        User user = facade.findUser(userId);
-		        if (user != null) {
-		            facade.deleteUser(userId);
-		            System.out.println("User removed: " + userId);
-		            response.sendRedirect(request.getRequestURI());
-		            return null;
-		        } else {
-		            System.out.println("User not found: " + userId);
-		            response.getWriter().write("User not found");
-		            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-		            return null;
-		        }
-			}
-		       //Removing a referee	
-		        else if ("removeReferee".equals(action)) {
-                    String refereeId = request.getParameter("refereeId");
-
-                    Referee referee = facade.findRefereeById(refereeId);
-                    if (referee != null) {
-                        facade.deleteReferee(refereeId);
-                        System.out.println("Referee removed: " + refereeId);
-                        response.sendRedirect(request.getRequestURI());
-                        return null;
-                    } else {
-                        System.out.println("Referee not found: " + refereeId);
-                        response.getWriter().write("Referee not found");
-                        response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-                        return null;
-                    }
-                }
-
-			//return request.getRequestDispatcher("/register.jsp");
+		// Removing a referee
+		else if ("removeReferee".equals(action)) {
+			String refereeId = request.getParameter("refereeId");
 
 			Referee referee = facade.findRefereeById(refereeId);
 			if (referee != null) {
@@ -199,6 +164,9 @@ public class RegisterHandler implements IPathHandler {
 				response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
 				return null;
 			}
+
+			// return request.getRequestDispatcher("/register.jsp");
+
 		}
 
 		else if ("editReferee".equals(action)) {

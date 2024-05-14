@@ -62,17 +62,27 @@
 				action="/EJBFootBookWebProject/matchInfo?matchId=<%=match.getMatchId()%>"
 				method="post">
 				<input type="hidden" name="userId" value="<%=user.getUserId()%>">
-				<button onclick="showButton('<%=user.getUserId()%>')">
+				<div class ="userRegister" onclick="showButton('<%=user.getUserId()%>')">
 					<p><%=user.getName()%></p>
 					<p><%=user.getAge()%></p>
 					<p><%=user.getGender()%></p>
 					<p><%=user.getEmail()%></p>
-				</button>
+				</div>
 			</form>
 			<%
 			}
 			%>
-			<form id="addUserToMatchForm"
+			<script>
+				function showButton(userId) {
+
+					document.getElementById("selectedUserId").value = userId;
+					document.getElementById("userIdDisplay").textContent = userId;
+					document.getElementById("addUserToMatchForm").style.display = "block";
+				}
+			</script>
+		</div>
+	</section>
+	<form id="addUserToMatchForm"
 				action="/EJBFootBookWebProject/matchInfo?matchId=<%=match.getMatchId()%>"
 				method="post" style="display: none;">
 				<input type="hidden" name="userId" id="selectedUserId"> <input
@@ -81,17 +91,6 @@
 					Add User <span id="userIdDisplay"></span> to Match
 				</button>
 			</form>
-			<script>
-				function showButton(userId) {
-
-					document.getElementById("selectedUserId").value = userId;
-					document.getElementById("userIdDisplay").textContent = document
-							.getElementById("selectedUserId").value;
-					document.getElementById("addUserToMatchForm").style.display = "block";
-				}
-			</script>
-		</div>
-	</section>
 	<script src="Darkmode.js">
 		
 	</script>
