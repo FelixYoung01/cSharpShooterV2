@@ -491,5 +491,10 @@ input {
     color: var(--text-color);
 }
 
+.count-box:hover .count {
+    animation: wiggle 0.5s ease-in-out;
+}
 
-
+.count {
+    font-size: 42px;
+}

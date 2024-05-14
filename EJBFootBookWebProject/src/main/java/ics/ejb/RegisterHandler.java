@@ -14,18 +14,17 @@ public class RegisterHandler implements IPathHandler {
 
 	@Override
 	public RequestDispatcher handleRequestDispatcherGet(HttpServletRequest request, HttpServletResponse response,
-	        FacadeLocal facade) throws ServletException, IOException {
-	    Set<User> users = facade.getAllUsers();
-	    Set<Referee> referees = facade.getAllReferees();
-	    List<RefereeLicense> licenses = facade.getAllRefereeLicenses();
+			FacadeLocal facade) throws ServletException, IOException {
+		Set<User> users = facade.getAllUsers();
+		Set<Referee> referees = facade.getAllReferees();
+		List<RefereeLicense> licenses = facade.getAllRefereeLicenses();
 
-	    request.setAttribute("users", users);
-	    request.setAttribute("referees", referees);
-	    request.setAttribute("licenses", licenses);
+		request.setAttribute("users", users);
+		request.setAttribute("referees", referees);
+		request.setAttribute("licenses", licenses);
 
-	    return request.getRequestDispatcher("/register.jsp");
+		return request.getRequestDispatcher("/register.jsp");
 	}
-	
 
 	@Override
 	public RequestDispatcher handleRequestDispatcherPost(HttpServletRequest request, HttpServletResponse response,
@@ -41,9 +40,7 @@ public class RegisterHandler implements IPathHandler {
 
 		String action = request.getParameter("formType");
 
-
-	
-			// Kör kodstycket ifall det är en user som ska läggas till //ADD USER CODE
+		// Kör kodstycket ifall det är en user som ska läggas till //ADD USER CODE
 
 		if ("addUser".equals(action)) {// Kör kodstycket ifall metoden är POST
 
@@ -58,11 +55,11 @@ public class RegisterHandler implements IPathHandler {
 
 			System.out.println("User added");
 			response.sendRedirect(request.getRequestURI());
-      return null;
-			}
-		
-			// Kör kodstycket ifall det är en dommare som ska läggas till //ADD REFEREE CODE
-			else if ("addReferee".equals(action)){
+			return null;
+		}
+
+		// Kör kodstycket ifall det är en dommare som ska läggas till //ADD REFEREE CODE
+		else if ("addReferee".equals(action)) {
 
 			String refName = request.getParameter("refereeName");
 			String licenseId = request.getParameter("licenseId");
@@ -104,7 +101,6 @@ public class RegisterHandler implements IPathHandler {
 
 				User updateSuccessful = facade.updateUser(userToUpdate);
 
-
 				System.out.println("User updated");
 				response.sendRedirect(request.getRequestURI());
 				return null;
@@ -115,22 +111,40 @@ public class RegisterHandler implements IPathHandler {
 			return null;
 		}
 
-	/*	else if (request.getMethod().equalsIgnoreCase("POST")) {
-			String action1 = request.getParameter("action");
+		/*
+		 * else if (request.getMethod().equalsIgnoreCase("POST")) { String action1 =
+		 * request.getParameter("action");
+		 * 
+		 * System.out.println("Update result: " + updateSuccessful); // Debugging
+		 * 
+		 * if (updateSuccessful != null) {
+		 * System.out.println("User successfully updated.");
+		 * response.sendRedirect(request.getRequestURI());
+		 * 
+		 * } else { System.out.println("User update failed.");
+		 * response.getWriter().write("Update failed");
+		 * 
+		 * 
+		 * }
+		 * 
+		 * } }
+		 */
 
-				System.out.println("Update result: " + updateSuccessful); // Debugging
+		// Removing a user
+		else if ("removeUser".equals(action)) {
+			String userId = request.getParameter("userId");
 
-				if (updateSuccessful != null) {
-					System.out.println("User successfully updated.");
-					response.sendRedirect(request.getRequestURI());
-
-				} else {
-					System.out.println("User update failed.");
-					response.getWriter().write("Update failed");
-
-
-				}
-
+			User user = facade.findUser(userId);
+			if (user != null) {
+				facade.deleteUser(userId);
+				System.out.println("User removed: " + userId);
+				response.sendRedirect(request.getRequestURI());
+				return null;
+			} else {
+				System.out.println("User not found: " + userId);
+				response.getWriter().write("User not found");
+				response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+				return null;
 			}
 		}
 */
@@ -173,6 +187,19 @@ public class RegisterHandler implements IPathHandler {
 
 			//return request.getRequestDispatcher("/register.jsp");
 
+			Referee referee = facade.findRefereeById(refereeId);
+			if (referee != null) {
+				facade.deleteReferee(refereeId);
+				System.out.println("Referee removed: " + refereeId);
+				response.sendRedirect(request.getRequestURI());
+				return null;
+			} else {
+				System.out.println("Referee not found: " + refereeId);
+				response.getWriter().write("Referee not found");
+				response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+				return null;
+			}
+		}
 
 		else if ("editReferee".equals(action)) {
 			String refereeId = request.getParameter("refereeId");
@@ -219,4 +246,3 @@ public class RegisterHandler implements IPathHandler {
 
 	}
 }
-
