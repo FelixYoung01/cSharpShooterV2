@@ -22,5 +22,8 @@ public interface UserEAOLocal {
 	public Set<User> getAllUsers();
 
 	public Set<User> getAvailableUsers();
+	
+	public Set<User> getUsersInMatches();
+
 
 }
