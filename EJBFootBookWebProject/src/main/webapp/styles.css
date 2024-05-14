@@ -24,6 +24,7 @@
     border: 5px solid var(--text-color);
     border-radius: 5px;
     margin: 5px;
+    box-shadow: 5px 5px 0px rgba(0, 0, 0, 0.5);
 }
 
 body {
@@ -36,6 +37,7 @@ body {
     justify-content: center;
     width: 100%;
     padding-bottom: 100px;
+    text-align: center;
 }
 
 h2 {
@@ -48,19 +50,24 @@ table, table td, table th {
     text-align: left;
 }
 
-button {
+button, .a-button {
+    display: block;
+    position: relative;
     cursor: pointer;
-    background-color: var(--secondary-color);
+    background-color: var(--background-color);
     padding: 5px;
     border: 5px solid var(--text-color);
     border-radius: 5px;
     text-align: center;
     margin: 10px;
     color: var(--text-color);
+    box-shadow: 5px 5px 0px rgba(0, 0, 0, 0.5);
+    transition: transform 0.3s ease;
+    text-decoration: none;
 }
 
-button:hover {
-    animation: popOut 0.5s ease-in-out;
+button:hover, .a-button:hover {
+    transform: scale(1.1);
 }
 
 table button {
@@ -126,14 +133,31 @@ header {
     justify-content: center;
     align-items: center;
     margin-bottom: 10px;
+    box-shadow: 5px 5px 0px rgba(0, 0, 0, 0.5);
+    position: relative;
+}
+
+header::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 50%;
+    height: 2px;
+    background-color: var(--text-color);
+    z-index: 1;
 }
 
 nav ul {
     list-style: none;
+    position: relative;
+    z-index: 2;
+    background-color: var(--main-color);
 }
 
 nav ul li {
     display: inline-block;
+    margin-left: 20px;
     margin-right: 20px;
     transition: transform 0.3s ease;
 }
@@ -155,7 +179,6 @@ nav ul li:hover {
     top: 10px;
     right: 10px;
     border: none;
-    background: none;
     cursor: pointer;
     width: 50px;
     height: 50px;
@@ -174,7 +197,7 @@ nav ul li:hover {
 
 .logo {
     color: black;
-    font-size: 8vw;
+    font-size: 72px;
     text-transform: uppercase;
     text-align: center;
     line-height: 1;
@@ -185,11 +208,25 @@ nav ul li:hover {
     -webkit-filter: var(--sun-filter);
 }
 
-#logoball {
-    background-image: url('Images/footballpattern.png');
-    background-size: 40%;
-    background-position: center 9vh;
-    background-repeat: no-repeat;
+#logo-o {
+    position: relative;
+}
+
+#logo-o img {
+    position: absolute;
+    width: 40%;
+    top: 10%;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    z-index: 2;
+}
+
+#logo-o::after {
+    content: "o";
+    position: absolute;
+    z-index: 1;
 }
 
 @keyframes wiggle {
@@ -242,7 +279,25 @@ nav ul li:hover {
     border-radius: 5px;
     text-align: center;
     margin: 10px;
+    box-shadow: 5px 5px 0px rgba(0, 0, 0, 0.5);
 }
+
+.colored-box {
+    background-color: var(--secondary-color);
+    padding: 20px;
+    border: 5px solid var(--text-color);
+    border-radius: 5px;
+    text-align: center;
+    margin: 10px;
+    box-shadow: 5px 5px 0px rgba(0, 0, 0, 0.5);
+}
+
+.nullText {
+		color: var(--text-color);
+		font-size: 20px;
+		text-align: center;
+	}
+
 
 #weatherBox {
 	position: absolute;
@@ -308,7 +363,7 @@ footer {
 }
 
 .team-member {
-    width: 300px;
+    width: 15vw;
     flex-grow: 1;
 }
 
@@ -341,68 +396,44 @@ footer {
     padding: 10px;
     margin-bottom: 20px;
     background-color: var(--background-color);
+    box-shadow: 5px 5px 0px rgba(0, 0, 0, 0.5);
 }
 
-.pitch {
-    background-image: url('Images/DefaultPitchImage.jpg');
-    background-size: cover;
-    background-position-y: center;
-    border: 5px solid var(--text-color);
-    border-radius: 5px;
-    margin-bottom: 20px;
-    filter: brightness(1);
-    -webkit-filter: brightness(1);
-    z-index: 2;
-    transition: filter 0.3s ease, transform 0.3s ease;
-    font-weight: bold;
-    color: white;
-    -webkit-text-stroke-width: 2px;
-    -webkit-text-stroke-color: black;
-}
-
-.pitch:hover {
-    transform: scale(1.1);
-}
-
-.pitch h3 {
-    font-size: 36px;
-    padding: 20px;
-    margin-bottom: 10px;
-    filter: var(--sun-filter);
-}
-
-.pitch a {
-    position: absolute;
-    top: 0; 
-    left: 0;
-    width: 100%; 
-    height: 100%; 
-    text-decoration: none; 
-    z-index: 1;
-}
-
-.pitch button {
+.pitch-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
     position: absolute;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
-    border: none;
-    background-color: transparent;
-    padding: 14px 28px;
-    font-size: 16px;
-    cursor: pointer;
-    text-align: center;
-    transition: background-color 0.3s ease;
     z-index: 1;
+    overflow: hidden;
+    filter: brightness(0.5);
+    transition: filter 0.3s ease;
 }
 
-.matches {
+.a-button:hover .pitch-image {
+    filter: brightness(1);
+}
+
+#pitch-label {
+    color: white;
+    font-size: 40px;
+    font-weight: bold;
+    padding: 20px;
+    margin-bottom: 10px;
+    -webkit-text-stroke: 2px black;
+    filter: var(--sun-filter);
+    position: relative;
+    z-index: 2;
+}
+
+.grid-container {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 20px;
+    grid-template-columns: repeat(auto-fill, minmax(10vw, 1fr));
+    gap: 10px;
     justify-content: center;
-    overflow-x: auto;
+    overflow-x: hidden;
     scroll-snap-type: x mandatory;
     scroll-behavior: smooth;
     max-width: 1200px;
@@ -410,78 +441,20 @@ footer {
     padding: 20px;
 }
 
-.match {
-    width: 300px; /* You can remove this line if you want the items to stretch to fill the grid cell */
-    height: 200px;
-    background-color: var(--background-color);
-    background-size: cover;
-    background-position-y: center;
-    border: 5px solid var(--text-color);
-    border-radius: 5px;
-    padding: 20px;
-    filter: blur(0px);
-    transition: filter 0.3s ease, transform 0.3s ease;
-}
-
 @media (max-width: 600px) {
-    .matches {
+    .grid-container {
         grid-template-columns: 1fr;
     }
 }
 
-.match:hover {
-    filter: none;
-    transform: scale(1.1);
-}
-
-.match h3 {
-    font-size: x-large;
-    margin-bottom: 10px;
-}
-
-.match a {
-    position: absolute;
-    top: 0; 
-    left: 0;
-    width: 100%; 
-    height: 100%; 
-    text-decoration: none; 
-    z-index: 1;
-}
-
-.match button {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    border: none;
-    background-color: transparent;
-    padding: 14px 28px;
-    font-size: 16px;
-    cursor: pointer;
-    text-align: center;
-    transition: background-color 0.3s ease;
-    z-index: 1;
-}
-
 .user {
-    background-color: var(--background-color);
-    background-size: cover;
-    background-position-y: center;
-    border: 3px solid var(--text-color);
-    border-radius: 3px;
-    margin-bottom: 20px;
-    filter: hue-rotate(90deg);
-    -webkit-filter: hue-rotate(90deg);
-    z-index: 2;
-    transition: filter 0.3s ease, transform 0.3s ease;
+    width: 500px;
+    transition: transform 0.3s ease;
 }
 
 .user:hover {
-    filter: none;
-    -webkit-filter: none;
     transform: scale(1.1);
+    animation: none;
 }
 
 .user h3 {
@@ -497,22 +470,6 @@ footer {
     width: 100%; 
     height: 100%; 
     text-decoration: none; 
-    z-index: 1;
-}
-
-.user button {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    border: none;
-    background-color: transparent;
-    padding: 14px 28px;
-    font-size: 16px;
-    cursor: pointer;
-    text-align: center;
-    transition: background-color 0.3s ease;
     z-index: 1;
 }
 
@@ -533,3 +490,6 @@ input {
     background-color: var(--main-color);
     color: var(--text-color);
 }
+
+
+
