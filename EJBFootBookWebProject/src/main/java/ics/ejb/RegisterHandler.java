@@ -43,23 +43,37 @@ public class RegisterHandler implements IPathHandler {
 		// Kör kodstycket ifall det är en user som ska läggas till //ADD USER CODE
 
 		if ("addUser".equals(action)) {// Kör kodstycket ifall metoden är POST
-
+			
 			String tempAge = request.getParameter("userAge");
 			String email = request.getParameter("userEmail");
 			String gender = request.getParameter("userGender");
 			String name = request.getParameter("userName");
+
 			int age = Integer.parseInt(tempAge);
 
-			User user = new User(age, email, gender, name);
-			facade.createUser(user);
+			if (age >= 18 && age <= 100) {
 
-			System.out.println("User added");
-			response.sendRedirect(request.getRequestURI());
-			return null;
+				User user = new User(age, email, gender, name);
+
+				facade.createUser(user);
+
+				System.out.println("User added");
+				response.sendRedirect(request.getRequestURI());
+				return null;
+				
+			} else if (age < 18) {
+				response.getWriter().write("User must be 18 or older");
+				System.out.println("User must be 18 or older");
+			}
+			
+			else if (age > 100) {
+				response.getWriter().write("User can not be older than 100 years old");
+				System.out.println("User can not be older than 100 years old");
+			}
 		}
-
 		// Kör kodstycket ifall det är en dommare som ska läggas till //ADD REFEREE CODE
 		else if ("addReferee".equals(action)) {
+			
 
 			String refName = request.getParameter("refereeName");
 			String licenseId = request.getParameter("licenseId");
@@ -75,6 +89,8 @@ public class RegisterHandler implements IPathHandler {
 
 		// Kör kodstycket ifall metoden är PUT (UPDATE)
 		else if ("editUser".equals(action)) {
+			
+			
 
 			String userId = request.getParameter("userId");
 			String newName = request.getParameter("userName");
@@ -92,8 +108,12 @@ public class RegisterHandler implements IPathHandler {
 			User userToUpdate = facade.findUserById(userId);
 
 			if (userToUpdate != null) {
+				
 				System.out.println("User found, updating...");
 				int age = Integer.parseInt(newAge); // No try-catch block
+				
+				if (age >= 18 && age <= 100) {
+					
 				userToUpdate.setName(newName);
 				userToUpdate.setAge(age);
 				userToUpdate.setEmail(newEmail);
@@ -104,11 +124,12 @@ public class RegisterHandler implements IPathHandler {
 				System.out.println("User updated");
 				response.sendRedirect(request.getRequestURI());
 				return null;
-			} else {
-				response.getWriter().write("User not found");
+				
+			 } else if (age < 18 && age > 100) {
+				response.getWriter().write("User can not be older than 100 or younger than 18.");
+				System.out.println("User can not be older than 100 or younger than 18.");
 				response.setStatus(HttpServletResponse.SC_BAD_REQUEST); // Set appropriate status code on failure.
-			}
-			return null;
+			}}
 		}
 
 		/*
@@ -158,7 +179,7 @@ public class RegisterHandler implements IPathHandler {
 				System.out.println("Referee removed: " + refereeId);
 				response.sendRedirect(request.getRequestURI());
 				return null;
-			} else {
+			} else{
 				System.out.println("Referee not found: " + refereeId);
 				response.getWriter().write("Referee not found");
 				response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
