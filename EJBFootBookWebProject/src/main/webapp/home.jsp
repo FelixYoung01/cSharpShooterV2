@@ -17,7 +17,9 @@
 	<p>Book your football match on your favorite pitch!</p>
 
 	<section class="pitches">
+
 		<h2>Choose your pitch of choice to book a match!</h2>
+
 
 		<%
 		Set<Pitch> pitches = (Set<Pitch>) request.getAttribute("pitches");
