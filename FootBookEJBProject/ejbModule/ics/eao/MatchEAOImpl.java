@@ -36,12 +36,19 @@ public class MatchEAOImpl implements MatchEAOLocal {
 	public Match findMatchById(String matchId) {
 		//Match match = em.find(Match.class, matchId);
 		//return match;
-		
-		Match match = em.find(Match.class, matchId);
-	    if (matchId == null) {
-	        System.out.println("Match not found for iD: " + matchId);
-	    }
-	    return match;
+	
+		try {
+            Match match = em.find(Match.class, matchId);
+            if (match == null) {
+                return null;
+            }
+            return match;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    
+
 	}
 	
 	public List<Match> findAllMatches() {
