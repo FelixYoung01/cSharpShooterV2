@@ -1,4 +1,5 @@
 
+<%@page import="java.util.Map"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     import="ics.ejb.Pitch, java.util.Set, ics.ejb.Match"
     pageEncoding="ISO-8859-1"%>
@@ -33,6 +34,7 @@
 		<section class="grid-container">
 			<%
 			Set<Match> matches = (Set<Match>) request.getAttribute("matchesOnPitch");
+		    Map<String, Integer> matchUserCounts = (Map<String, Integer>) request.getAttribute("matchUserCount");
 			for (Match match : matches) {
 			%>
 			<a class="button" href="<%=request.getContextPath()%>/matchInfo?matchId=<%=match.getMatchId()%>">
@@ -44,6 +46,10 @@
 				<p>
 					Match Time:
 					<%=match.getTime()%>
+				</p>
+				<p>
+					Number of players:
+					<%= matchUserCounts.get(match.getMatchId()) %>
 				</p>
 			</a>
 			<%
