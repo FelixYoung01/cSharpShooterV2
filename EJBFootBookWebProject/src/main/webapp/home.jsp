@@ -100,7 +100,7 @@
     <p>Book your football match on your favorite pitches!</p>
 
     <section class="pitches">
-        <h2 class="box colored reduced-padding">Book from one of these available pitches!</h2>
+        <h2 class="box colored reduced-padding">Book from one of these available pitches!</h2><br>
 
         <%
         Set<Pitch> pitches = (Set<Pitch>) request.getAttribute("pitches");
@@ -133,7 +133,7 @@
         <%
         }
         %>
-    </section>
+    </section><br>
 
     <!-- Statistics section -->
     <section class="box colored">
