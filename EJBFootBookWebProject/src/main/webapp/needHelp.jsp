@@ -52,7 +52,7 @@
 			</div>
 				<label for="message">Message:</label><br>
 				<textarea class="box" style="padding: 5px" id="message" name="message" rows="4" cols="100" required></textarea>
-			<div style="margin-top: 2.5px; display: flex; justify-content: center; align-items: center;">
+			<div style="margin-top: 2.5px">
 				<button value="Send" onclick="validateAndSubmit()">Send</button>
 			</div>
 		</form>

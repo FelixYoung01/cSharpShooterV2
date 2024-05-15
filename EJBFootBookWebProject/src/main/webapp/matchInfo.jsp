@@ -51,7 +51,7 @@
 
 	<section class="box colored">
 		<section class="box">
-			<h1 class="box rounded">Users Playing</h1>
+			<h1 class="box colored rounded">Users Playing</h1>
 			<%
 			if (users.isEmpty()) {
 			%>
@@ -83,7 +83,7 @@
 		</section>
 		<br>
 		<section class="box">
-			<h1 class="box rounded">Available Users</h1>
+			<h1 class="box colored rounded">Available Users</h1>
 			<div class="grid-container five-columns">
 				<%
 				Set<User> availableUsers = (Set<User>) request.getAttribute("availableUsers");
