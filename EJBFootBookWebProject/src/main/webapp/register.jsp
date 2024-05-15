@@ -58,7 +58,7 @@
 			<button id="addUserButton">Add</button>
 			<div id="addUserForm" class="overlay" style="display: none;">
 				<div class="modalContainer">
-					<div class="box colored in-front">
+					<div class="box colored">
 						<h2>Add User</h2>
 						<form id="addingUserForm" action="/EJBFootBookWebProject/register"
 							name="userFormType" method="post">
@@ -95,7 +95,7 @@
 
 			<div id="editUserForm" class="overlay" style="display: none;">
 				<div class="modalContainer">
-					<div class="popBox colored">
+					<div class="box colored">
 						<h2>Edit User</h2>
 						<form id="editingUserForm"
 							action="/EJBFootBookWebProject/register" method="post">
@@ -205,7 +205,7 @@
 			<button id="addRefereeButton">Add</button>
 			<div id="addRefereeForm" class="overlay" style="display: none;">
 				<div class="modalContainer">
-					<div class="popBox colored">
+					<div class="box colored">
 						<h2>Add Referee</h2>
 						<form id="addingRefereeForm"
 							action="/EJBFootBookWebProject/register" name="refereeFormType"
@@ -245,7 +245,7 @@
 
 			<div id="editRefereeForm" class="overlay" style="display: none;">
 				<div class="modalContainer">
-					<div class="popBox colored">
+					<div class="box colored">
 						<h2>Edit Referee</h2>
 						<form id="editingRefereeForm"
 							action="/EJBFootBookWebProject/register" method="post">
