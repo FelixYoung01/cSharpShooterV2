@@ -8,7 +8,6 @@ import java.util.Random;
 
 import java.util.HashMap;
 import java.util.Map;
-
 import java.util.Set;
 import java.util.logging.Logger;
 
@@ -20,138 +19,121 @@ import jakarta.servlet.http.HttpServletResponse;
 
 public class PitchInfoHandler implements IPathHandler {
 
-	private static final Logger logger = Logger.getLogger(PitchInfoHandler.class.getName());
-	
-	@Override
-	public RequestDispatcher handleRequestDispatcherGet(HttpServletRequest request, HttpServletResponse response,
+    private static final Logger logger = Logger.getLogger(PitchInfoHandler.class.getName());
+
+    @Override
+    public RequestDispatcher handleRequestDispatcherGet(HttpServletRequest request, HttpServletResponse response,
             FacadeLocal facade) throws ServletException, IOException {
-		
-		String pitchId = request.getParameter("pitchId");
-		Pitch pitch = facade.findPitch(pitchId);
-		
-		Set<User> users = facade.getAvailableUsers();
-		Set<Referee> referees = facade.getAllReferees();
-		Set<Match> matchesOnPitch = facade.getMatchesOnPitch(pitchId);
-		
-		request.setAttribute("matchesOnPitch", matchesOnPitch);
-		request.setAttribute("pitch", pitch);
-		request.setAttribute("users", users);
-		request.setAttribute("referees", referees);
-		
-		return request.getRequestDispatcher("/pitchInfo.jsp");
+
+        String pitchId = request.getParameter("pitchId");
+        Pitch pitch = facade.findPitch(pitchId);
+
+        Set<User> users = facade.getAvailableUsers();
+        Set<Referee> referees = facade.getAllReferees();
+        Set<Match> matchesOnPitch = facade.getMatchesOnPitch(pitchId);
+
+        request.setAttribute("matchesOnPitch", matchesOnPitch);
+        request.setAttribute("pitch", pitch);
+        request.setAttribute("users", users);
+        request.setAttribute("referees", referees);
+
+        return request.getRequestDispatcher("/pitchInfo.jsp");
     }
-	
 
-@Override
-	public RequestDispatcher handleRequestDispatcherPost(HttpServletRequest request, HttpServletResponse response,
-			FacadeLocal facade) throws ServletException, IOException {
+    @Override
+    public RequestDispatcher handleRequestDispatcherPost(HttpServletRequest request, HttpServletResponse response,
+            FacadeLocal facade) throws ServletException, IOException {
 
-		
-		String action = request.getParameter("formType");
-		logger.info("Form action received: " + action);
-		
-		String pitchId = request.getParameter("pitchId");
-		Pitch pitch = facade.findPitch(pitchId);
-		
-		Set<User> users = facade.getAvailableUsers();
-		Set<Referee> referees = facade.getAllReferees();
+        String action = request.getParameter("formType");
+        logger.info("Form action received: " + action);
 
-		Set<Match> matchesOnPitch = facade.getMatchesOnPitch(pitchId);
-		Map<String, Integer> matchUserCount = new HashMap<>();
+        String pitchId = request.getParameter("pitchId");
+        Pitch pitch = facade.findPitch(pitchId);
 
-		for (Match match : matchesOnPitch) {
-			
-			Set<User> usersOnMatch = facade.getUsersOnMatch(match.getMatchId());
-			
-				int userCount = usersOnMatch.size();
-				matchUserCount.put(match.getMatchId(), userCount);
-			}
-		
-			if (matchUserCount.isEmpty()) {
-				System.out.println("No users on pitch");
-			}
+        Set<User> users = facade.getAvailableUsers();
+        Set<Referee> referees = facade.getAllReferees();
+        Set<Match> matchesOnPitch = facade.getMatchesOnPitch(pitchId);
+        Map<String, Integer> matchUserCount = new HashMap<>();
 
-		request.setAttribute("matchUserCount", matchUserCount);
-		request.setAttribute("matchesOnPitch", matchesOnPitch);
-		request.setAttribute("pitch", pitch);
+        for (Match match : matchesOnPitch) {
+            Set<User> usersOnMatch = facade.getUsersOnMatch(match.getMatchId());
+            int userCount = usersOnMatch.size();
+            matchUserCount.put(match.getMatchId(), userCount);
+        }
 
-		request.setAttribute("users", users);
-		request.setAttribute("referees", referees);
-		
-		
-		///Creating a match handling
-		if("createMatch".equals(action)) {
-			
-			String refereeId = request.getParameter("refereeId");
-			String userId = request.getParameter("userId");
-			String date = request.getParameter("date");
-			String time = request.getParameter("time");
-			
-			logger.info("Referee ID: " + refereeId);
-			logger.info("User ID: " + userId);
-			logger.info("Date: " + date);
-			logger.info("Time: " + time);
-			
-			
-			String matchId = generateMatchId();
-			
-			do {
-				//generate matchId until its unique
-               matchId = generateMatchId();
-			}
-			while(facade.findMatch(matchId) != null);
-			
-			logger.info("Generated matchId: " + matchId);
+        if (matchUserCount.isEmpty()) {
+            System.out.println("No users on pitch");
+        }
 
-			// parsing date and time
-			LocalDate parsedDate = LocalDate.parse(date);
-			LocalTime parsedTime = LocalTime.parse(time);
-			
-			Referee refereeForMatch = facade.findRefereeById(refereeId);
-			User user = facade.findUserById(userId);
-			
-			
-			System.out.println("Creating match...");
-		    System.out.println("Pitch ID: " + pitchId);
-		    System.out.println("Referee ID: " + refereeId);
-		    System.out.println("User ID: " + userId);
-		    System.out.println("Match Date: " + date);
-		    System.out.println("Match Time: " + time);
-		    
-			Match match = new Match(matchId, refereeForMatch, pitch, parsedDate, parsedTime);
-			facade.createMatch(match);
-			
-			//Update userid matchid entry
-			user.setMatch(match);
-			facade.updateUser(user);
-			
-			logger.info("Match created and user update.");
-			
-			response.sendRedirect(request.getContextPath() + "/pitchInfo?pitchId=" + pitchId);
+        request.setAttribute("matchUserCount", matchUserCount);
+        request.setAttribute("matchesOnPitch", matchesOnPitch);
+        request.setAttribute("pitch", pitch);
+        request.setAttribute("users", users);
+        request.setAttribute("referees", referees);
+
+        // Creating a match handling
+        if ("createMatch".equals(action)) {
+            String refereeId = request.getParameter("refereeId");
+            String userId = request.getParameter("userId");
+            String date = request.getParameter("date");
+            String time = request.getParameter("time");
+
+            logger.info("Referee ID: " + refereeId);
+            logger.info("User ID: " + userId);
+            logger.info("Date: " + date);
+            logger.info("Time: " + time);
+
+            String matchId;
+            do {
+                // Generate matchId until it's unique
+                matchId = generateMatchId();
+            } while (facade.findMatch(matchId) != null);
+
+            logger.info("Generated matchId: " + matchId);
+
+            // Parsing date and time
+            LocalDate parsedDate = LocalDate.parse(date);
+            LocalTime parsedTime = LocalTime.parse(time);
+
+            Referee refereeForMatch = facade.findRefereeById(refereeId);
+            User user = facade.findUserById(userId);
+
+            System.out.println("Creating match...");
+            System.out.println("Pitch ID: " + pitchId);
+            System.out.println("Referee ID: " + refereeId);
+            System.out.println("User ID: " + userId);
+            System.out.println("Match Date: " + date);
+            System.out.println("Match Time: " + time);
+
+            Match match = new Match(matchId, refereeForMatch, pitch, parsedDate, parsedTime);
+            facade.createMatch(match);
+
+            // Update user with match info
+            user.setMatch(match);
+            facade.updateUser(user);
+
+            logger.info("Match created and user updated.");
+
+            response.sendRedirect(request.getContextPath() + "/pitchInfo?pitchId=" + pitchId);
             return null;
-		}
-		
-		return request.getRequestDispatcher("/pitchInfo.jsp");
-	}
+        }
 
-	private String generateMatchId() {
-		Random random = new Random();
-		int number = random.nextInt(100);
-		return String.format("M%02d" , number);
-	}
+        return request.getRequestDispatcher("/pitchInfo.jsp");
+    }
 
-
+    private String generateMatchId() {
+        Random random = new Random();
+        int number = random.nextInt(100);
+        return String.format("M%02d", number);
+    }
 }
 
 
-		return request.getRequestDispatcher("/pitchInfo.jsp");
-	}
-
-	@Override
+	/*@Override
 	public RequestDispatcher handleRequestDispatcherGet(HttpServletRequest request, HttpServletResponse response,
 			FacadeLocal facade) throws ServletException, IOException {
 		return request.getRequestDispatcher("/pitchInfo.jsp");
-	}
+	}*/
 
-}
+
 
