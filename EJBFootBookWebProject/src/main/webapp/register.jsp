@@ -58,7 +58,7 @@
 			<button id="addUserButton">Add</button>
 			<div id="addUserForm" class="overlay" style="display: none;">
 				<div class="modalContainer">
-					<div class="popBox colored">
+					<div class="box colored in-front">
 						<h2>Add User</h2>
 						<form id="addingUserForm" action="/EJBFootBookWebProject/register"
 							name="userFormType" method="post">
