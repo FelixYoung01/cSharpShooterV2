@@ -61,7 +61,7 @@
 			<button id="addUserButton">Add</button>
 			<div id="addUserForm" class="overlay" style="display: none;">
 				<div class="modalContainer">
-					<div class="box colored">
+					<div class="box colored" id="addUserBox">
 						<h2>Add User</h2>
 						<form id="addingUserForm" action="/EJBFootBookWebProject/register"
 							name="userFormType" method="post">
@@ -98,7 +98,7 @@
 
 			<div id="editUserForm" class="overlay" style="display: none;">
 				<div class="modalContainer">
-					<div class="box colored">
+					<div class="box colored" id="editUserBox">
 						<h2>Edit User</h2>
 						<form id="editingUserForm"
 							action="/EJBFootBookWebProject/register" method="post">
@@ -107,13 +107,17 @@
 							<div>
 								<label>User ID:</label> <span id="displayUserId"></span>
 							</div>
-							<label for="editUserName">Name:</label> <input type="text"
-								id="editUserName" name="userName" required><br> <label
-								for="editUserAge">Age:</label> <input type="number"
+							<label for="editUserName">Name:</label><br>
+                            <input type="text"
+                                class="bordered-input" id="editUserName" name="userName" required><br>
+                                <label for="editUserAge">Age:</label><br>
+                            <input type="number" class="bordered-input" 
 								id="editUserAge" name="userAge" required min="18" max="100"><br>
-							<label for="editUserEmail">Email:</label> <input type="email"
-								id="editUserEmail" name="userEmail" required><br> <label
-								for="editUserGender">Gender:</label> <select id="editUserGender"
+							<label for="editUserEmail">Email:</label><br>
+                            <input type="email" class="bordered-input"
+								id="editUserEmail" name="userEmail" required><br>
+                            <label for="editUserGender">Gender:</label><br>
+                            <select class="bordered-input" id="editUserGender"
 								name="userGender" required>
 								<option value="M">Male</option>
 								<option value="F">Female</option>
@@ -126,6 +130,8 @@
 			</div>
 
 			<script>
+                var currentBox;
+                
 				function editUser(userId, name, age, email, gender) {
 					document.getElementById('editUserId').value = userId;
 					document.getElementById('displayUserId').innerText = userId; // Display user ID but not editable
@@ -135,13 +141,22 @@
 					document.getElementById('editUserGender').value = gender;
 
 					document.getElementById('editUserForm').style.display = 'block';
-
+                    document.getElementById('editUserBox').classList.add('pop-up');
+                    currentBox = document.getElementById('editUserBox');
 				}
+
 				function hideModal() {
-					document.getElementById('addUserForm').style.display = 'none';
-					document.getElementById('editUserForm').style.display = 'none';
-					document.getElementById('addRefereeForm').style.display = 'none';
-					document.getElementById('editRefereeForm').style.display = 'none';
+                    currentBox.classList.remove("pop-up");
+			        currentBox.classList.add("pop-down");
+			        setTimeout(
+					function() {
+                        document.getElementById('addUserForm').style.display = 'none';
+					    document.getElementById('editUserForm').style.display = 'none';
+					    document.getElementById('addRefereeForm').style.display = 'none';
+					    document.getElementById('editRefereeForm').style.display = 'none';
+						currentBox.classList
+								.remove("pop-down");
+					}, 300);
 				}
 
 				// Event listener for showing add user form
@@ -151,6 +166,8 @@
 								"click",
 								function() {
 									document.getElementById("addUserForm").style.display = "block";
+                                    document.getElementById('addUserBox').classList.add('pop-up');
+                                    currentBox = document.getElementById('addUserBox');
 								});
 
 				// Event listener for hiding add user form after submission
@@ -206,7 +223,7 @@
 			<button id="addRefereeButton">Add</button>
 			<div id="addRefereeForm" class="overlay" style="display: none;">
 				<div class="modalContainer">
-					<div class="box colored">
+					<div class="box colored" id="addRefereeBox">
 						<h2>Add Referee</h2>
 						<form id="addingRefereeForm"
 							action="/EJBFootBookWebProject/register" name="refereeFormType"
@@ -246,7 +263,7 @@
 
 			<div id="editRefereeForm" class="overlay" style="display: none;">
 				<div class="modalContainer">
-					<div class="box colored">
+					<div class="box colored" id="editRefereeBox">
 						<h2>Edit Referee</h2>
 						<form id="editingRefereeForm"
 							action="/EJBFootBookWebProject/register" method="post">
@@ -281,7 +298,8 @@
 					document.getElementById('editRefereeLicense').value = licenseId;
 
 					document.getElementById('editRefereeForm').style.display = 'block';
-					document.getElementById('addRefereeForm').style.display = 'none';
+                    document.getElementById('editRefereeBox').classList.add('pop-up');
+                    currentBox = document.getElementById('editRefereeBox');
 				}
 
 				// Event listener for showing add referee form
@@ -291,6 +309,8 @@
 								"click",
 								function() {
 									document.getElementById("addRefereeForm").style.display = "block";
+                                    document.getElementById('addRefereeBox').classList.add('pop-up');
+                                    currentBox = document.getElementById('addRefereeBox');
 								});
 
 				// Event listener for hiding add referee form after submission
