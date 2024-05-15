@@ -47,7 +47,7 @@
 
 		</div>
 
-		<h1>Matches on this pitch</h1>
+		<h1 class="box reduced-padding">Matches</h1>
 		<%
 		Set<Match> matches = (Set<Match>) request.getAttribute("matchesOnPitch");
 		if (matches.isEmpty()) {
@@ -61,7 +61,7 @@
 			Map<String, Integer> matchUserCounts = (Map<String, Integer>) request.getAttribute("matchUserCount");
 			for (Match match : matches) {
 			%>
-			<a class="button"
+			<a class="button extra-padding"
 				href="<%=request.getContextPath()%>/matchInfo?matchId=<%=match.getMatchId()%>">
 				<h3><%=match.getMatchId()%></h3>
 				<p>

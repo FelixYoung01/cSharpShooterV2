@@ -51,7 +51,7 @@
 
 	<section class="box colored">
 		<section class="box">
-			<h1 class="box colored rounded">Users Playing</h1>
+			<h1 class="box colored reduced-padding">Users Playing</h1>
 			<%
 			if (users.isEmpty()) {
 			%>
@@ -69,7 +69,7 @@
 					method="post">
 					<input type="hidden" name="removeUserId"
 						value="<%=user.getUserId()%>">
-					<div class="button colored highlightable" onclick="highlightButton(this); showRemoveButton('<%=user.getUserId()%>')">
+					<div class="button colored extra-padding highlightable" onclick="highlightButton(this); showRemoveButton('<%=user.getUserId()%>')">
 						<h3><%=user.getName()%></h3>
 						<p><%=user.getAge()%></p>
 						<p><%=user.getGender()%></p>
@@ -83,7 +83,7 @@
 		</section>
 		<br>
 		<section class="box">
-			<h1 class="box colored rounded">Available Users</h1>
+			<h1 class="box colored reduced-padding">Available Users</h1>
 			<div class="grid-container">
 				<%
 				Set<User> availableUsers = (Set<User>) request.getAttribute("availableUsers");
@@ -101,7 +101,7 @@
 					action="/EJBFootBookWebProject/matchInfo?matchId=<%=match.getMatchId()%>"
 					method="post">
 					<input type="hidden" name="userId" value="<%=user.getUserId()%>">
-					<div class="button colored highlightable"
+					<div class="button colored extra-padding highlightable"
 						onclick="highlightButton(this); showAddButton('<%=user.getUserId()%>')">
 						<h3><%=user.getName()%></h3>
 						<p><%=user.getAge()%></p>
