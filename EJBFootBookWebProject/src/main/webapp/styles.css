@@ -277,7 +277,7 @@ footer {
     bottom: 0;
     width: 100%;
     border-top: 5px solid var(--text-color);
-    z-index: 10;
+    z-index: 1010;
 }
 
 .upperleftball {
