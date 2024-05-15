@@ -13,7 +13,9 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.persistence.JoinColumn;
 
-@NamedQueries({ @NamedQuery(name = "RefereeLicense.findAll", query = "SELECT rl FROM RefereeLicense rl") })
+@NamedQueries({
+	@NamedQuery(name = "RefereeLicense.findAll", query = "SELECT rl FROM RefereeLicense rl")
+})
 @Table(name = "RefereeLicense")
 
 @Entity
