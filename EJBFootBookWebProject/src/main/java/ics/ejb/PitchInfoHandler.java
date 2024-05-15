@@ -1,13 +1,11 @@
 package ics.ejb;
 
 import java.io.IOException;
-
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.Random;
-
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 import java.util.Set;
 import java.util.logging.Logger;
 
@@ -127,13 +125,4 @@ public class PitchInfoHandler implements IPathHandler {
         return String.format("M%02d", number);
     }
 }
-
-
-	/*@Override
-	public RequestDispatcher handleRequestDispatcherGet(HttpServletRequest request, HttpServletResponse response,
-			FacadeLocal facade) throws ServletException, IOException {
-		return request.getRequestDispatcher("/pitchInfo.jsp");
-	}*/
-
-
 
