@@ -139,8 +139,6 @@
 					document.getElementById('editUserForm').style.display = 'none';
 					document.getElementById('addRefereeForm').style.display = 'none';
 					document.getElementById('editRefereeForm').style.display = 'none';
-					
-
 				}
 
 				// Event listener for showing add user form
