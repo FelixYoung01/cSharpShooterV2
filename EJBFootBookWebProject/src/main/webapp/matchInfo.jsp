@@ -103,7 +103,7 @@
 					<input type="hidden" name="userId" value="<%=user.getUserId()%>">
 					<div class="button colored highlightable"
 						onclick="highlightButton(this); showAddButton('<%=user.getUserId()%>')">
-						<p><%=user.getName()%></p>
+						<h3><%=user.getName()%></h3>
 						<p><%=user.getAge()%></p>
 						<p><%=user.getGender()%></p>
 						<p><%=user.getEmail()%></p>
@@ -148,7 +148,7 @@
 		<input type="hidden" name="formType" value="addUserToMatch">
 		<input type="hidden" name="userId" id="selectedUserId"> <input
 			type="hidden" name="matchId" value="<%=match.getMatchId()%>">
-		<button class="colored" type="submit">
+		<button type="submit">
 			Add User <span id="userIdDisplay"></span> To Match
 		</button>
 	</form>
@@ -158,7 +158,7 @@
 		<input type="hidden" name="formType" value="removeUserFromMatch">
 		<input type="hidden" name="removeUserId" id="selectedRemoveUserId">
 		<input type="hidden" name="matchId" value="<%=match.getMatchId()%>">
-		<button class="colored" type="submit">
+		<button type="submit">
 			Remove User <span id="removeUserDisplay"></span> From Match
 		</button>
 	</form>
