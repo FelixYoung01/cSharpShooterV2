@@ -60,7 +60,7 @@
 			<%
 			}
 			%>
-			<div class="grid-container">
+			<div class="grid-container five-columns">
 				<%
 				for (User user : users) {
 				%>
@@ -84,7 +84,7 @@
 		<br>
 		<section class="box">
 			<h1 class="box rounded">Available Users</h1>
-			<div class="grid-container">
+			<div class="grid-container five-columns">
 				<%
 				Set<User> availableUsers = (Set<User>) request.getAttribute("availableUsers");
 				String selectedUser = null;
