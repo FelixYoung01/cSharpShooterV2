@@ -69,7 +69,7 @@
 					method="post">
 					<input type="hidden" name="removeUserId"
 						value="<%=user.getUserId()%>">
-					<div class="button colored highlightable" onclick="highlightButton(this); showAddButton('<%=user.getUserId()%>')">
+					<div class="button colored highlightable" onclick="highlightButton(this); showRemoveButton('<%=user.getUserId()%>')">
 						<h3><%=user.getName()%></h3>
 						<p><%=user.getAge()%></p>
 						<p><%=user.getGender()%></p>
