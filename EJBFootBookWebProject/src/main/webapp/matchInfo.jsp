@@ -69,7 +69,8 @@
 					method="post">
 					<input type="hidden" name="removeUserId"
 						value="<%=user.getUserId()%>">
-					<div class="button colored extra-padding highlightable" onclick="highlightButton(this); showRemoveButton('<%=user.getUserId()%>')">
+					<div class="button colored extra-padding highlightable"
+						onclick="highlightButton(this); showRemoveButton('<%=user.getUserId()%>')">
 						<h3><%=user.getName()%></h3>
 						<p><%=user.getAge()%></p>
 						<p><%=user.getGender()%></p>
@@ -84,16 +85,17 @@
 		<br>
 		<section class="box">
 			<h1 class="box colored reduced-padding">Available Users</h1>
+			<%
+			Set<User> availableUsers = (Set<User>) request.getAttribute("availableUsers");
+			String selectedUser = null;
+			if (availableUsers.isEmpty()) {
+			%>
+			<p>No users available to add to this match</p>
+			<%
+			}
+			%>
 			<div class="grid-container">
 				<%
-				Set<User> availableUsers = (Set<User>) request.getAttribute("availableUsers");
-				String selectedUser = null;
-				if (availableUsers.isEmpty()) {
-				%>
-				<p>No users available to add to this match</p>
-				<%
-				}
-
 				for (User user : availableUsers) {
 				%>
 
@@ -120,24 +122,25 @@
 						document.getElementById("addUserToMatchForm").style.display = "block";
 						document.getElementById("removeUserFromMatchForm").style.display = "none";
 					}
-					
+
 					function showRemoveButton(userId) {
 						document.getElementById("selectedRemoveUserId").value = userId;
 						document.getElementById("removeUserDisplay").textContent = userId;
 						document.getElementById("removeUserFromMatchForm").style.display = "block";
 						document.getElementById("addUserToMatchForm").style.display = "none";
 					}
-					
-					function highlightButton(clickedButton) {
-    // Remove highlight from all buttons
-    var buttons = document.getElementsByClassName('highlightable');
-    for (var i = 0; i < buttons.length; i++) {
-        buttons[i].classList.remove('button-highlighted');
-    }
 
-    // Highlight the clicked button
-    clickedButton.classList.add('button-highlighted');
-}
+					function highlightButton(clickedButton) {
+						// Remove highlight from all buttons
+						var buttons = document
+								.getElementsByClassName('highlightable');
+						for (var i = 0; i < buttons.length; i++) {
+							buttons[i].classList.remove('button-highlighted');
+						}
+
+						// Highlight the clicked button
+						clickedButton.classList.add('button-highlighted');
+					}
 				</script>
 			</div>
 		</section>
@@ -145,8 +148,8 @@
 	<form id="addUserToMatchForm"
 		action="/EJBFootBookWebProject/matchInfo?matchId=<%=match.getMatchId()%>"
 		method="post" style="display: none;">
-		<input type="hidden" name="formType" value="addUserToMatch">
-		<input type="hidden" name="userId" id="selectedUserId"> <input
+		<input type="hidden" name="formType" value="addUserToMatch"> <input
+			type="hidden" name="userId" id="selectedUserId"> <input
 			type="hidden" name="matchId" value="<%=match.getMatchId()%>">
 		<button type="submit">
 			Add User <span id="userIdDisplay"></span> To Match

@@ -13,8 +13,8 @@
 <body>
 	<jsp:include page="header.jsp" />
 
-    <h1 style="font-size: 60px;">Register</h1>
-    <p>Register users and referees here.</p>
+	<h1 style="font-size: 60px;">Register</h1>
+	<p>Register users and referees here.</p>
 
 	<div style="display: flex;">
 		<div>
@@ -107,18 +107,17 @@
 							<div>
 								<label>User ID:</label> <span id="displayUserId"></span>
 							</div>
-							<label for="editUserName">Name:</label><br>
-                            <input type="text"
-                                class="bordered-input" id="editUserName" name="userName" required><br>
-                                <label for="editUserAge">Age:</label><br>
-                            <input type="number" class="bordered-input" 
-								id="editUserAge" name="userAge" required min="18" max="100"><br>
-							<label for="editUserEmail">Email:</label><br>
-                            <input type="email" class="bordered-input"
-								id="editUserEmail" name="userEmail" required><br>
-                            <label for="editUserGender">Gender:</label><br>
-                            <select class="bordered-input" id="editUserGender"
-								name="userGender" required>
+							<label for="editUserName">Name:</label><br> <input
+								type="text" class="bordered-input" id="editUserName"
+								name="userName" required><br> <label
+								for="editUserAge">Age:</label><br> <input type="number"
+								class="bordered-input" id="editUserAge" name="userAge" required
+								min="18" max="100"><br> <label for="editUserEmail">Email:</label><br>
+							<input type="email" class="bordered-input" id="editUserEmail"
+								name="userEmail" required><br> <label
+								for="editUserGender">Gender:</label><br> <select
+								class="bordered-input" id="editUserGender" name="userGender"
+								required>
 								<option value="M">Male</option>
 								<option value="F">Female</option>
 							</select><br>
@@ -130,8 +129,8 @@
 			</div>
 
 			<script>
-                var currentBox;
-                
+				var currentBox;
+
 				function editUser(userId, name, age, email, gender) {
 					document.getElementById('editUserId').value = userId;
 					document.getElementById('displayUserId').innerText = userId; // Display user ID but not editable
@@ -141,8 +140,9 @@
 					document.getElementById('editUserGender').value = gender;
 
 					document.getElementById('editUserForm').style.display = 'block';
-                    document.getElementById('editUserBox').classList.add('pop-up');
-                    currentBox = document.getElementById('editUserBox');
+					document.getElementById('editUserBox').classList
+							.add('pop-up');
+					currentBox = document.getElementById('editUserBox');
 				}
 
 				// Event listener for showing add user form
@@ -152,8 +152,10 @@
 								"click",
 								function() {
 									document.getElementById("addUserForm").style.display = "block";
-                                    document.getElementById('addUserBox').classList.add('pop-up');
-                                    currentBox = document.getElementById('addUserBox');
+									document.getElementById('addUserBox').classList
+											.add('pop-up');
+									currentBox = document
+											.getElementById('addUserBox');
 								});
 
 				// Event listener for hiding add user form after submission
@@ -188,7 +190,8 @@
 						<td><%=referee.getRefereeName()%></td>
 						<td><%=referee.getRefereeLicense().getLicenseId()%></td>
 						<td>
-							<button onclick="editReferee('<%=referee.getRefereeId()%>', '<%=referee.getRefereeName()%>', '<%=referee.getRefereeLicense().getLicenseId()%>')">Edit</button>
+							<button
+								onclick="editReferee('<%=referee.getRefereeId()%>', '<%=referee.getRefereeName()%>', '<%=referee.getRefereeLicense().getLicenseId()%>')">Edit</button>
 							<form action="/EJBFootBookWebProject/register" method="post"
 								style="display: inline;">
 								<input type="hidden" name="formType" value="removeReferee">
@@ -222,7 +225,7 @@
 							<label for="licenseId">License:</label>
 							<div style="display: flex; justify-content: center;">
 								<select class="bordered-input" name="licenseId" required>
-                                    <option value="" selected disabled>Select License</option>
+									<option value="" selected disabled>Select License</option>
 									<%
 									List<RefereeLicense> licenses = (List<RefereeLicense>) request.getAttribute("licenses");
 									if (licenses == null) {
@@ -254,15 +257,14 @@
 							action="/EJBFootBookWebProject/register" method="post">
 							<input type="hidden" name="formType" value="editReferee">
 							<input type="hidden" id="editRefereeId" name="refereeId" required>
-							<label for="displayRefereeId">Referee ID:</label><br>
-                            <input
-								type="text" class="bordered-input" id="displayRefereeId" value="" disabled><br>
-							<label for="editRefereeName">Name:</label><br>
-                            <input type="text"
-								id="editRefereeName" class="bordered-input" name="refereeName" required><br>
-							<label for="editRefereeLicense">License:</label><br>
-                            <select
-								class="bordered-input" id="editRefereeLicense" name="licenseId" required>
+							<label for="displayRefereeId">Referee ID:</label><br> <input
+								type="text" class="bordered-input" id="displayRefereeId"
+								value="" disabled><br> <label for="editRefereeName">Name:</label><br>
+							<input type="text" id="editRefereeName" class="bordered-input"
+								name="refereeName" required><br> <label
+								for="editRefereeLicense">License:</label><br> <select
+								class="bordered-input" id="editRefereeLicense" name="licenseId"
+								required>
 								<%
 								for (RefereeLicense license : licenses) {
 								%>
@@ -286,8 +288,9 @@
 					document.getElementById('editRefereeLicense').value = licenseId;
 
 					document.getElementById('editRefereeForm').style.display = 'block';
-                    document.getElementById('editRefereeBox').classList.add('pop-up');
-                    currentBox = document.getElementById('editRefereeBox');
+					document.getElementById('editRefereeBox').classList
+							.add('pop-up');
+					currentBox = document.getElementById('editRefereeBox');
 				}
 
 				// Event listener for showing add referee form
@@ -297,8 +300,10 @@
 								"click",
 								function() {
 									document.getElementById("addRefereeForm").style.display = "block";
-                                    document.getElementById('addRefereeBox').classList.add('pop-up');
-                                    currentBox = document.getElementById('addRefereeBox');
+									document.getElementById('addRefereeBox').classList
+											.add('pop-up');
+									currentBox = document
+											.getElementById('addRefereeBox');
 								});
 
 				// Event listener for hiding add referee form after submission
@@ -311,21 +316,20 @@
 								});
 			</script>
 
-            <script>
-                				function hideModal() {
-                    currentBox.classList.remove("pop-up");
-			        currentBox.classList.add("pop-down");
-			        setTimeout(
-					function() {
-                        document.getElementById('addUserForm').style.display = 'none';
-					    document.getElementById('editUserForm').style.display = 'none';
-					    document.getElementById('addRefereeForm').style.display = 'none';
-					    document.getElementById('editRefereeForm').style.display = 'none';
-						currentBox.classList
-								.remove("pop-down");
-					}, 300);
+			<script>
+				function hideModal() {
+					currentBox.classList.remove("pop-up");
+					currentBox.classList.add("pop-down");
+					setTimeout(
+							function() {
+								document.getElementById('addUserForm').style.display = 'none';
+								document.getElementById('editUserForm').style.display = 'none';
+								document.getElementById('addRefereeForm').style.display = 'none';
+								document.getElementById('editRefereeForm').style.display = 'none';
+								currentBox.classList.remove("pop-down");
+							}, 300);
 				}
-            </script>
+			</script>
 		</div>
 	</div>
 	<script src="Darkmode.js"></script>
