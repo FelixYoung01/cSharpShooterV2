@@ -10,16 +10,7 @@
 <meta charset="ISO-8859-1">
 <title>Match Information</title>
 <link rel="stylesheet" href="styles.css">
-<style>
-.left-aligned-text {
-	text-align: left;
-}
 
-.match-info-box {
-	width: 400px;
-	margin-right: 20px; /* Adjust this value as needed */
-}
-</style>
 </head>
 <body>
 	<jsp:include page="header.jsp" />
@@ -76,13 +67,14 @@
 				<form
 					action="/EJBFootBookWebProject/matchInfo?matchId=<%=match.getMatchId()%>"
 					method="post">
-					<input type="hidden" name="removeUserId" value="<%=user.getUserId()%>">
-				<div class="button colored" onclick="showRemoveButton('<%= user.getUserId()%>')">
-					<h3><%=user.getName()%></h3>
-					<p><%=user.getAge()%></p>
-					<p><%=user.getGender()%></p>
-					<p><%=user.getEmail()%></p>
-				</div>
+					<input type="hidden" name="removeUserId"
+						value="<%=user.getUserId()%>">
+					<div class="button colored highlightable" onclick="highlightButton(this); showAddButton('<%=user.getUserId()%>')">
+						<h3><%=user.getName()%></h3>
+						<p><%=user.getAge()%></p>
+						<p><%=user.getGender()%></p>
+						<p><%=user.getEmail()%></p>
+					</div>
 				</form>
 				<%
 				}
@@ -109,7 +101,8 @@
 					action="/EJBFootBookWebProject/matchInfo?matchId=<%=match.getMatchId()%>"
 					method="post">
 					<input type="hidden" name="userId" value="<%=user.getUserId()%>">
-					<div class="button colored" onclick="showAddButton('<%=user.getUserId()%>')">
+					<div class="button colored highlightable"
+						onclick="highlightButton(this); showAddButton('<%=user.getUserId()%>')">
 						<p><%=user.getName()%></p>
 						<p><%=user.getAge()%></p>
 						<p><%=user.getGender()%></p>
@@ -134,6 +127,17 @@
 						document.getElementById("removeUserFromMatchForm").style.display = "block";
 						document.getElementById("addUserToMatchForm").style.display = "none";
 					}
+					
+					function highlightButton(clickedButton) {
+    // Remove highlight from all buttons
+    var buttons = document.getElementsByClassName('highlightable');
+    for (var i = 0; i < buttons.length; i++) {
+        buttons[i].classList.remove('button-highlighted');
+    }
+
+    // Highlight the clicked button
+    clickedButton.classList.add('button-highlighted');
+}
 				</script>
 			</div>
 		</section>
@@ -141,9 +145,9 @@
 	<form id="addUserToMatchForm"
 		action="/EJBFootBookWebProject/matchInfo?matchId=<%=match.getMatchId()%>"
 		method="post" style="display: none;">
-		<input type="hidden" name="formType" value="addUserToMatch" >
-		<input type="hidden" name="userId" id="selectedUserId"> 
-		<input type="hidden" name="matchId" value="<%=match.getMatchId()%>">
+		<input type="hidden" name="formType" value="addUserToMatch">
+		<input type="hidden" name="userId" id="selectedUserId"> <input
+			type="hidden" name="matchId" value="<%=match.getMatchId()%>">
 		<button class="colored" type="submit">
 			Add User <span id="userIdDisplay"></span> To Match
 		</button>
@@ -151,7 +155,7 @@
 	<form id="removeUserFromMatchForm"
 		action="/EJBFootBookWebProject/matchInfo?matchId=<%=match.getMatchId()%>"
 		method="post" style="display: none;">
-		<input type="hidden" name="formType" value="removeUserFromMatch" > 
+		<input type="hidden" name="formType" value="removeUserFromMatch">
 		<input type="hidden" name="removeUserId" id="selectedRemoveUserId">
 		<input type="hidden" name="matchId" value="<%=match.getMatchId()%>">
 		<button class="colored" type="submit">

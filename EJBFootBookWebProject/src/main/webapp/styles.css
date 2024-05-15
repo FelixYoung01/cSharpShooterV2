@@ -110,6 +110,11 @@ button:hover, .button:hover {
     transform: scale(1.1);
 }
 
+.button-highlighted {
+    background-color: var(--text-color);
+    color: var(--secondary-color);
+}
+
 table button {
     min-width: 100px;
 }
