@@ -83,7 +83,7 @@
 							</div>
 							<label for="userGender">Gender:</label>
 							<div style="display: flex; justify-content: center;">
-								<select id="userGender" name="userGender" required>
+								<select class="bordered-input" name="userGender" required>
 									<option value="M">Male</option>
 									<option value="F">Female</option>
 								</select>
@@ -219,8 +219,8 @@
 							</div>
 							<label for="licenseId">License:</label>
 							<div style="display: flex; justify-content: center;">
-								<select id="licenseId" name="licenseId" required>
-									<option value="">Select License</option>
+								<select class="bordered-input" name="licenseId" required>
+                                    <option value="" selected disabled>Select License</option>
 									<%
 									List<RefereeLicense> licenses = (List<RefereeLicense>) request.getAttribute("licenses");
 									if (licenses == null) {
@@ -257,7 +257,7 @@
 							<label for="editRefereeName">Name:</label> <input type="text"
 								id="editRefereeName" name="refereeName" required><br>
 							<label for="editRefereeLicense">License:</label> <select
-								id="editRefereeLicense" name="licenseId" required>
+								class="bordered-input" name="licenseId" required>
 								<%
 								for (RefereeLicense license : licenses) {
 								%>

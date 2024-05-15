@@ -451,7 +451,7 @@ footer {
 
 .bordered-input {
     background-color: var(--background-color);
-    border: 5px solid var(--text-color);
+    outline: 5px solid var(--text-color);
     border-radius: 5px;
     padding: 5px;
     margin: 10px;

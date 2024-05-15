@@ -42,11 +42,9 @@
 
 			<img src="Images/<%=pitch.getImageName()%>" alt="Pitch Image"
 				class="bordered-image" style="width: 800px;" />
-
-
-
 		</div>
-
+    </section>
+    <section class="box colored">
 		<h1 class="box reduced-padding">Matches</h1>
 		<%
 		Set<Match> matches = (Set<Match>) request.getAttribute("matchesOnPitch");
@@ -97,7 +95,8 @@
 							value="<%=pitchId%>">
 
 						<!-- Dropdown for RefereeId -->
-						<label for="refereeId">Referee:</label> <select id="refereeId"
+						<label for="refereeId">Referee:</label><br>
+                        <select class="bordered-input"
 							name="refereeId" required>
 							<option value="">Select Referee</option>
 							<%
@@ -110,10 +109,11 @@
 							}
 							}
 							%>
-						</select>
+						</select><br>
 
 						<!-- Dropdown for UserId -->
-						<label for="userId">User:</label> <select id="userId"
+						<label for="userId">User:</label><br>
+                        <select class="bordered-input"
 							name="userId" required>
 							<option value="">Select User</option>
 							<%
@@ -126,13 +126,15 @@
 							}
 							}
 							%>
-						</select>
+						</select><br>
 
 						<!-- Date and Time Picker -->
-						<label for="date">Date:</label> <input type="date" id="date"
-							name="date" required> <label for="time">Time:</label> <input
-							type="time" id="time" name="time" step="3600" required
-							onchange="validateTimeInput()">
+						<label>Date & Time:</label><br>
+                        <input class="bordered-input" type="date"
+							name="date" required>
+                        <input class="bordered-input" type="time"
+                            name="time" step="3600" required
+							onchange="validateTimeInput()"><br>
 
 						<button type="submit">Create Match</button>
 						<button type="button" onclick="hideModal()">Close</button>
