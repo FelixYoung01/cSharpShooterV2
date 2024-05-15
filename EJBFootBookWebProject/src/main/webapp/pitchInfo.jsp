@@ -43,8 +43,8 @@
 			<img src="Images/<%=pitch.getImageName()%>" alt="Pitch Image"
 				class="bordered-image" style="width: 800px;" />
 		</div>
-    </section>
-    <section class="box colored">
+	</section>
+	<section class="box colored">
 		<h1 class="box reduced-padding">Matches</h1>
 		<%
 		Set<Match> matches = (Set<Match>) request.getAttribute("matchesOnPitch");
@@ -86,7 +86,7 @@
 
 		<div id="createMatchForm" class="overlay" style="display: none;">
 			<div class="modalContainer">
-				<div class="box colored">
+				<div class="box colored" id="overlay-box">
 					<h2>Create Match</h2>
 					<form id="creatingMatchForm"
 						action="/EJBFootBookWebProject/pitchInfo" method="post">
@@ -95,9 +95,8 @@
 							value="<%=pitchId%>">
 
 						<!-- Dropdown for RefereeId -->
-						<label for="refereeId">Referee:</label><br>
-                        <select class="bordered-input"
-							name="refereeId" required>
+						<label for="refereeId">Referee:</label><br> <select
+							class="bordered-input" name="refereeId" required>
 							<option value="">Select Referee</option>
 							<%
 							Set<Referee> referees = (Set<Referee>) request.getAttribute("referees");
@@ -112,9 +111,8 @@
 						</select><br>
 
 						<!-- Dropdown for UserId -->
-						<label for="userId">User:</label><br>
-                        <select class="bordered-input"
-							name="userId" required>
+						<label for="userId">User:</label><br> <select
+							class="bordered-input" name="userId" required>
 							<option value="">Select User</option>
 							<%
 							Set<User> users = (Set<User>) request.getAttribute("users");
@@ -129,12 +127,10 @@
 						</select><br>
 
 						<!-- Date and Time Picker -->
-						<label>Date & Time:</label><br>
-                        <input class="bordered-input" type="date"
-							name="date" required>
-                        <input class="bordered-input" type="time"
-                            name="time" step="3600" required
-							onchange="validateTimeInput()"><br>
+						<label>Date & Time:</label><br> <input class="bordered-input"
+							type="date" name="date" required> <input
+							class="bordered-input" type="time" name="time" step="3600"
+							required onchange="validateTimeInput()"><br>
 
 						<button type="submit">Create Match</button>
 						<button type="button" onclick="hideModal()">Close</button>
@@ -164,8 +160,15 @@
 		}
 
 		function hideModal() {
-			document.getElementById('createMatchForm').style.display = 'none';
-		}
+			document.getElementById("overlay-box").classList.remove("pop-up");
+			document.getElementById("overlay-box").classList.add("pop-down");
+			setTimeout(
+					function() {
+						document.getElementById("createMatchForm").style.display = "none";
+						document.getElementById("overlay-box").classList
+								.remove("pop-down");
+					}, 300);
+		};
 	</script>
 	<script>
 		document
@@ -174,6 +177,8 @@
 						"click",
 						function() {
 							document.getElementById("createMatchForm").style.display = "block";
+							document.getElementById("overlay-box").classList
+									.add("pop-up");
 						});
 
 		document
