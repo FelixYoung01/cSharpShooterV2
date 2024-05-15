@@ -80,6 +80,15 @@ table, table td, table th {
     z-index: 999;
 }
 
+.modalContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%; /* Ensures the container takes full width */
+    height: 100%; /* Ensures the container takes full height */
+}
+
+
 button, .button {
     display: block;
     position: relative;
