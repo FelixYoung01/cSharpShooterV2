@@ -143,6 +143,8 @@ header::before {
 }
 
 nav ul {
+    padding-left: 10px;
+    padding-right: 10px;
     list-style: none;
     position: relative;
     z-index: 2;
@@ -151,8 +153,8 @@ nav ul {
 
 nav ul li {
     display: inline-block;
-    margin-left: 20px;
-    margin-right: 20px;
+    margin-left: 10px;
+    margin-right: 10px;
     transition: transform 0.3s ease;
 }
 
