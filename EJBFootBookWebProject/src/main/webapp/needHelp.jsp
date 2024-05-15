@@ -11,7 +11,7 @@
 	<h1 style="font-size: 60px;">We're here to help.</h1>
 	<p>If you didn't find what you were
 		looking for or need some help, please check the FAQ below or contact
-		us. We're just one click away.</p><br>
+		us.<br>We're just one click away.</p>
 
 	<!-- Main content section -->
 	<section class="box colored" style="width: 600px">

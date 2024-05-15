@@ -12,7 +12,7 @@
 	<%@ include file="header.jsp"%>
 
 	<h1 style="font-size: 60px;">About Us</h1>
-	<p>Learn more about FootBook and the team behind it.</p><br>
+	<p>Learn more about FootBook and the team behind it.</p>
 
 	<section class="box colored" style="max-width: 800px">
 		<p>Welcome to FootBook! We are your go-to platform for booking

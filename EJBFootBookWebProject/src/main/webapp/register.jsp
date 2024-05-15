@@ -14,7 +14,7 @@
 	<jsp:include page="header.jsp" />
 
     <h1 style="font-size: 60px;">Register</h1>
-    <p>Register users and referees here.</p><br>
+    <p>Register users and referees here.</p>
 
 	<div style="display: flex;">
 		<div>

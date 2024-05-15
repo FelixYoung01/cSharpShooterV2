@@ -156,14 +156,15 @@ nav ul li {
     margin-left: 10px;
     margin-right: 10px;
     transition: transform 0.3s ease;
-}
-
-nav ul li a {
     color: var(--text-color);
     text-decoration: none;
     font-size: 20px;
     font-weight: bold;
-    filter: none;
+}
+
+nav ul li .button {
+    padding-left: 15px;
+    padding-right: 15px;
 }
 
 nav ul li:hover {
