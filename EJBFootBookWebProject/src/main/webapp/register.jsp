@@ -90,7 +90,7 @@
 							</div>
 							<br> <input type="hidden" name="formType" value="addUser">
 							<button type="submit">Submit</button>
-							<button onclick="hideModal()">Close</button>
+							<button type="button" onclick="hideModal()">Close</button>
 						</form>
 					</div>
 				</div>
@@ -145,20 +145,6 @@
                     currentBox = document.getElementById('editUserBox');
 				}
 
-				function hideModal() {
-                    currentBox.classList.remove("pop-up");
-			        currentBox.classList.add("pop-down");
-			        setTimeout(
-					function() {
-                        document.getElementById('addUserForm').style.display = 'none';
-					    document.getElementById('editUserForm').style.display = 'none';
-					    document.getElementById('addRefereeForm').style.display = 'none';
-					    document.getElementById('editRefereeForm').style.display = 'none';
-						currentBox.classList
-								.remove("pop-down");
-					}, 300);
-				}
-
 				// Event listener for showing add user form
 				document
 						.getElementById("addUserButton")
@@ -202,8 +188,7 @@
 						<td><%=referee.getRefereeName()%></td>
 						<td><%=referee.getRefereeLicense().getLicenseId()%></td>
 						<td>
-							<button
-								onclick="editReferee('<%=referee.getRefereeId()%>', '<%=referee.getRefereeName()%>', '<%=referee.getRefereeLicense().getLicenseId()%>')">Edit</button>
+							<button onclick="editReferee('<%=referee.getRefereeId()%>', '<%=referee.getRefereeName()%>', '<%=referee.getRefereeLicense().getLicenseId()%>')">Edit</button>
 							<form action="/EJBFootBookWebProject/register" method="post"
 								style="display: inline;">
 								<input type="hidden" name="formType" value="removeReferee">
@@ -269,12 +254,15 @@
 							action="/EJBFootBookWebProject/register" method="post">
 							<input type="hidden" name="formType" value="editReferee">
 							<input type="hidden" id="editRefereeId" name="refereeId" required>
-							<label for="displayRefereeId">Referee ID:</label> <input
-								type="text" id="displayRefereeId" value="" disabled><br>
-							<label for="editRefereeName">Name:</label> <input type="text"
-								id="editRefereeName" name="refereeName" required><br>
-							<label for="editRefereeLicense">License:</label> <select
-								class="bordered-input" name="licenseId" required>
+							<label for="displayRefereeId">Referee ID:</label><br>
+                            <input
+								type="text" class="bordered-input" id="displayRefereeId" value="" disabled><br>
+							<label for="editRefereeName">Name:</label><br>
+                            <input type="text"
+								id="editRefereeName" class="bordered-input" name="refereeName" required><br>
+							<label for="editRefereeLicense">License:</label><br>
+                            <select
+								class="bordered-input" id="editRefereeLicense" name="licenseId" required>
 								<%
 								for (RefereeLicense license : licenses) {
 								%>
@@ -321,25 +309,23 @@
 								function(event) {
 									document.getElementById("addRefereeForm").style.display = "none";
 								});
-
-				// Event listener for showing add user form
-				document
-						.getElementById("addUserButton")
-						.addEventListener(
-								"click",
-								function() {
-									document.getElementById("addUserForm").style.display = "block";
-								});
-
-				// Event listener for hiding add user form after submission
-				document
-						.getElementById("addingUserForm")
-						.addEventListener(
-								"submit",
-								function(event) {
-									document.getElementById("addUserForm").style.display = "none";
-								});
 			</script>
+
+            <script>
+                				function hideModal() {
+                    currentBox.classList.remove("pop-up");
+			        currentBox.classList.add("pop-down");
+			        setTimeout(
+					function() {
+                        document.getElementById('addUserForm').style.display = 'none';
+					    document.getElementById('editUserForm').style.display = 'none';
+					    document.getElementById('addRefereeForm').style.display = 'none';
+					    document.getElementById('editRefereeForm').style.display = 'none';
+						currentBox.classList
+								.remove("pop-down");
+					}, 300);
+				}
+            </script>
 		</div>
 	</div>
 	<script src="Darkmode.js"></script>
