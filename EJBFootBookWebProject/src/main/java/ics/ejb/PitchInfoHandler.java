@@ -71,7 +71,6 @@ public class PitchInfoHandler implements IPathHandler {
 
         // Creating a match handling
         if ("createMatch".equals(action)) {
-
             String refereeId = request.getParameter("refereeId");
             String userId = request.getParameter("userId");
             String date = request.getParameter("date");
@@ -84,12 +83,13 @@ public class PitchInfoHandler implements IPathHandler {
 
             String matchId;
             do {
+                // Generate matchId until it's unique
                 matchId = generateMatchId();
             } while (facade.findMatch(matchId) != null);
 
             logger.info("Generated matchId: " + matchId);
 
-            // parsing date and time
+            // Parsing date and time
             LocalDate parsedDate = LocalDate.parse(date);
             LocalTime parsedTime = LocalTime.parse(time);
 
@@ -106,7 +106,7 @@ public class PitchInfoHandler implements IPathHandler {
             Match match = new Match(matchId, refereeForMatch, pitch, parsedDate, parsedTime);
             facade.createMatch(match);
 
-            // Update user with match
+            // Update user with match info
             user.setMatch(match);
             facade.updateUser(user);
 
@@ -125,3 +125,4 @@ public class PitchInfoHandler implements IPathHandler {
         return String.format("M%02d", number);
     }
 }
+
