@@ -60,6 +60,8 @@ table, table td, table th {
     align-items: center;
     margin: 10px;
     box-shadow: 5px 5px 0px rgba(0, 0, 0, 0.5);
+    word-wrap: break-word;
+    overflow: hidden;
 }
 
 .in-front {
@@ -103,6 +105,7 @@ button, .button {
     box-shadow: 5px 5px 0px rgba(0, 0, 0, 0.5);
     transition: transform 0.3s ease;
     text-decoration: none;
+    word-wrap: break-word;
     overflow: hidden;
 }
 
@@ -400,6 +403,10 @@ footer {
     max-width: 1200px;
     margin: auto;
     padding: 20px;
+}
+
+.five-columns {
+    grid-template-columns: repeat(5, 1fr);
 }
 
 @media (max-width: 600px) {
