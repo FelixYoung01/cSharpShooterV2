@@ -13,6 +13,9 @@
 <body>
 	<jsp:include page="header.jsp" />
 
+    <h1 style="font-size: 60px;">Register</h1>
+    <p>Register users and referees here.</p><br>
+
 	<div style="display: flex;">
 		<div>
 			<h2>Users</h2>
