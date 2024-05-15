@@ -41,6 +41,7 @@ public class MatchInfoHandler implements IPathHandler {
 		request.setAttribute("usersOnMatch", usersOnMatch);
 		request.setAttribute("match", match);
 		
+
 		if ("updateMatch".equals(action)) {
 			String date = request.getParameter("matchDate");
 			String time = request.getParameter("matchTime");
@@ -69,11 +70,27 @@ public class MatchInfoHandler implements IPathHandler {
 			return request.getRequestDispatcher("/pitchInfo?pitchId=" + pitchId); // Redirect to the pitchinfo page of pitch
 			
 		}  else if (request.getParameter("userId") != null) {
+		String redirectUrl = request.getContextPath() + "/matchInfo?matchId=" + matchId;
+	    
+		if ("addUserToMatch".equals(action)) {
+
 
 			String userId = request.getParameter("userId");
 			User user = facade.findUser(userId);
 			user.setMatch(match);
 			facade.updateUser(user);
+
+
+			response.sendRedirect(redirectUrl);
+		}
+		
+		else if("removeUserFromMatch".equals(action)) {
+			String userId = request.getParameter("removeUserId");
+			User user = facade.findUser(userId);
+			user.setMatch(null);
+			facade.updateUser(user);
+			response.sendRedirect(redirectUrl);
+
 		}
 
 		

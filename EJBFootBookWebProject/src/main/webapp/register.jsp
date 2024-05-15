@@ -52,7 +52,9 @@
                 </tbody>
             </table>
             <button id="addUserButton">Add</button>
-            <div id="addUserForm" class="box colored" style="display: none;">
+            
+            <div id="addUserForm" class="overlay" style="display: none;">
+            	<div class="popBox colored">
                 <h2>Add User</h2>
                 <form id="addingUserForm" action="/EJBFootBookWebProject/register" name="userFormType" method="post">
                     <label for="userId">User ID will be auto-generated!</label> <br><br>
@@ -71,13 +73,15 @@
                     <label for="userGender">Gender:</label> 
                     <div style="display: flex; justify-content: center;">
                         <select id="userGender" name="userGender" required>
-                            <option value="M">Male</option>
+                           <option value="M">Male</option>
                             <option value="F">Female</option>
                         </select>
                     </div><br>
                     <input type="hidden" name="formType" value="addUser">
                     <button type="submit">Submit</button>
+                    <button onclick="hideModal()">Close</button>
                 </form>
+                </div>
             </div>
 
             <div id="editUserForm" class="box colored" style="display: none;">
@@ -113,6 +117,9 @@
                     document.getElementById('editUserGender').value = gender;
 
                     document.getElementById('editUserForm').style.display = 'block';
+                }
+                function hideModal() {
+                    document.getElementById('addUserForm').style.display = 'none';
                 }
 
                 // Event listener for showing add user form
