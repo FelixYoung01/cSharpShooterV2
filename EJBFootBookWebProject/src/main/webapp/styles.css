@@ -394,7 +394,7 @@ footer {
 
 .grid-container {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(10vw, 1fr));
+    grid-template-columns: repeat(5, 1fr);
     gap: 10px;
     justify-content: center;
     overflow-x: hidden;
@@ -403,10 +403,6 @@ footer {
     max-width: 1200px;
     margin: auto;
     padding: 20px;
-}
-
-.five-columns {
-    grid-template-columns: repeat(5, 1fr);
 }
 
 @media (max-width: 600px) {
