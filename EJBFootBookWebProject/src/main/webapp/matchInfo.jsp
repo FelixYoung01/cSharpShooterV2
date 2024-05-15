@@ -39,8 +39,7 @@
 
 
 	<div style="display: flex;">
-		<!-- New section for Match Information -->
-		<section class="box colored match-info-box left-aligned-text">
+		<section class="box colored left-aligned-text">
 			<h2>Match Information</h2>
 			<p>
 				Match Date:
@@ -60,10 +59,8 @@
 	</div>
 
 	<section class="box colored">
-
-
-		<section class="box rounded">
-			<h1>Users Playing</h1>
+		<section class="box">
+			<h1 class="box rounded">Users Playing</h1>
 			<%
 			if (users.isEmpty()) {
 			%>
@@ -94,7 +91,7 @@
 		</section>
 		<br>
 		<section class="box">
-			<h1>Available users</h1>
+			<h1 class="box rounded">Available Users</h1>
 			<div class="grid-container">
 				<%
 				Set<User> availableUsers = (Set<User>) request.getAttribute("availableUsers");

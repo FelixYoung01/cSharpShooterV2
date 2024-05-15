@@ -51,41 +51,33 @@ table, table td, table th {
 }
 
 .box {
-    background-color: var(--main-color);
+    background-color: var(--background-color);
     padding: 20px;
     border: 5px solid var(--text-color);
     border-radius: 5px;
     text-align: center;
+    justify-content: center;
+    align-items: center;
     margin: 10px;
     box-shadow: 5px 5px 0px rgba(0, 0, 0, 0.5);
-    z-index: 1001;
 }
 
-.popBox {
-	width: 40%;
-    background-color: var(--main-color);
-    padding: 20px;
-    border: 5px solid var(--text-color);
-    border-radius: 5px;
-    text-align: center;
-    margin: 10px;
-    box-shadow: 5px 5px 0px rgba(0, 0, 0, 0.5);
-    z-index: 1001;
-    align-items: center;
+.in-front {
+    z-index: 1000;
 }
 
 .overlay {
-    position: fixed; /* Ensure it covers the entire viewport */
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black */
-    backdrop-filter: blur(5px); /* Blur effect for the background */
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px);
     display: flex;
     align-items: center;
     justify-content: center;
-    z-index: 1000; /* Ensure it appears above other content */
+    z-index: 999;
 }
 
 button, .button {
@@ -277,7 +269,7 @@ footer {
     bottom: 0;
     width: 100%;
     border-top: 5px solid var(--text-color);
-    z-index: 1010;
+    z-index: 10;
 }
 
 .upperleftball {
@@ -400,6 +392,10 @@ footer {
     .grid-container {
         grid-template-columns: 1fr;
     }
+}
+
+.left-aligned-text {
+    text-align: left;
 }
 
 .user {
