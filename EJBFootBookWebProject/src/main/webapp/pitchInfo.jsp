@@ -1,4 +1,3 @@
-
 <%@page import="java.util.Map" import="ics.ejb.Pitch"
 	import="java.util.Set" import="ics.ejb.Match"
 	import="java.time.format.DateTimeFormatter"
@@ -8,10 +7,6 @@
 
 	import="ics.ejb.Pitch" import="java.util.Set" import="ics.ejb.Match" import="ics.ejb.Referee" import="ics.ejb.User"
 	pageEncoding="ISO-8859-1"%>
-
-    import="ics.ejb.Pitch, java.util.Set, ics.ejb.Match"
-    pageEncoding="ISO-8859-1"%>
-
 
 
 <!DOCTYPE html>
