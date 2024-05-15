@@ -48,9 +48,16 @@
 		</div>
 
 		<h1>Matches on this pitch</h1>
+		<%
+		Set<Match> matches = (Set<Match>) request.getAttribute("matchesOnPitch");
+		if (matches.isEmpty()) {
+		%>
+		<p>No matches on this pitch, please create a match</p>
+		<%
+		} else {
+		%>
 		<section class="grid-container">
 			<%
-			Set<Match> matches = (Set<Match>) request.getAttribute("matchesOnPitch");
 			Map<String, Integer> matchUserCounts = (Map<String, Integer>) request.getAttribute("matchUserCount");
 			for (Match match : matches) {
 			%>
@@ -74,6 +81,9 @@
 			}
 			%>
 		</section>
+		<%
+		}
+		%>
 		<button id="createMatchButton">Create Match</button>
 
 		<div id="createMatchForm" class="overlay" style="display: none;">
@@ -125,7 +135,7 @@
 							onchange="validateTimeInput()">
 
 						<button type="submit">Create Match</button>
-                        <button type="button" onclick="hideModal()">Close</button>
+						<button type="button" onclick="hideModal()">Close</button>
 					</form>
 				</div>
 			</div>
@@ -151,9 +161,9 @@
 			return true;
 		}
 
-        function hideModal() {
-					document.getElementById('createMatchForm').style.display = 'none';
-				}
+		function hideModal() {
+			document.getElementById('createMatchForm').style.display = 'none';
+		}
 	</script>
 	<script>
 		document
