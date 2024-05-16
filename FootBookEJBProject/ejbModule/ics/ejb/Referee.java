@@ -28,17 +28,13 @@ public class Referee implements Serializable {
 	private Set<Match> matches;
 	private RefereeLicense refereeLicense; // Each referee has exactly one referee license
 	
-	public Referee(String refereeName, RefereeLicense refereeLicense) {
-		this.refereeId = generateRefereeId();
+	public Referee(String refereeId, String refereeName, RefereeLicense refereeLicense) {
+		this.refereeId = refereeId;
 		this.refereeName = refereeName;
 		this.refereeLicense = refereeLicense;
 	}
 	
 	public Referee() {
-	}
-	
-	public String generateRefereeId() {
-		return "R" + String.format("%02d", (int)(Math.random() * 100));
 	}
 	
 	@Id

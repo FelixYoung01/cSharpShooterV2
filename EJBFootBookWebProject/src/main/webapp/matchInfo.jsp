@@ -48,7 +48,11 @@
 
 		</section>
 	</div>
-
+	<form id="deleteMatchForm"
+		action="/EJBFootBookWebProject/matchInfo?matchId=<%=match.getMatchId()%>"
+		method="post">
+		<input type="hidden" name="formType" value="deleteMatch">
+		<button style="background-color: red;" type="submit">Delete Match</button>
 	<section class="box colored">
 		<section class="box">
 			<h1 class="box colored reduced-padding">Users Playing</h1>
