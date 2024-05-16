@@ -81,11 +81,7 @@ public class PitchInfoHandler implements IPathHandler {
             logger.info("Date: " + date);
             logger.info("Time: " + time);
 
-            String matchId;
-            do {
-                // Generate matchId until it's unique
-                matchId = generateMatchId();
-            } while (facade.findMatch(matchId) != null);
+            String matchId = generateMatchId(facade);
 
             logger.info("Generated matchId: " + matchId);
 
@@ -118,11 +114,15 @@ public class PitchInfoHandler implements IPathHandler {
 
         return request.getRequestDispatcher("/pitchInfo.jsp");
     }
-
-    private String generateMatchId() {
-        Random random = new Random();
-        int number = random.nextInt(100);
-        return String.format("M%02d", number);
-    }
+    
+	private String generateMatchId(FacadeLocal facade) {
+		for (int i = 1; i < 99; i++) {
+			String matchId = "M" + String.format("%02d", i);
+			if (facade.findMatch(matchId) == null) {
+				return matchId;
+			}
+		}
+		return null;
+	}
 }
 

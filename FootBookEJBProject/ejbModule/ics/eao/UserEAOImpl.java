@@ -76,5 +76,4 @@ public class UserEAOImpl implements UserEAOLocal {
 
 		return usersInMatches;
 	}
-
 }
