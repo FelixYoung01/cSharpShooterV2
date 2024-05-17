@@ -19,6 +19,7 @@
 	<div style="display: flex;">
 		<div>
 			<h2>Users</h2>
+			<button class="bigger-button" id="addUserButton">Add User</button>
 			<table class="box colored">
 				<thead>
 					<tr>
@@ -58,7 +59,6 @@
 					%>
 				</tbody>
 			</table>
-			<button id="addUserButton">Add</button>
 			<div id="addUserForm" class="overlay" style="display: none;">
 				<div class="modalContainer">
 					<div class="box colored" id="addUserBox">
@@ -171,6 +171,7 @@
 
 		<div style="margin-left: 20px;">
 			<h2>Referees</h2>
+			<button class="bigger-button" id="addRefereeButton">Add Referee</button>
 			<table class="box colored">
 				<thead>
 					<tr>
@@ -208,7 +209,6 @@
 				</tbody>
 			</table>
 
-			<button id="addRefereeButton">Add</button>
 			<div id="addRefereeForm" class="overlay" style="display: none;">
 				<div class="modalContainer">
 					<div class="box colored" id="addRefereeBox">

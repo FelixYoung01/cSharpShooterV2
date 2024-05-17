@@ -1,5 +1,7 @@
 package facade;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 import java.util.Set;
 
@@ -10,11 +12,13 @@ import ics.eao.PitchEAOLocal;
 import ics.eao.RefereeEAOLocal;
 import ics.eao.RefereeLicenseEAOLocal;
 import ics.eao.UserEAOLocal;
+import ics.eao.UserMessageEAOLocal;
 import ics.ejb.Match;
 import ics.ejb.Pitch;
 import ics.ejb.Referee;
 import ics.ejb.RefereeLicense;
 import ics.ejb.User;
+import ics.ejb.UserMessage;
 import jakarta.ejb.EJB;
 import jakarta.ejb.Stateless;
 
@@ -35,6 +39,9 @@ public class Facade implements FacadeLocal {
 
 	@EJB
 	private UserEAOLocal userEAO;
+	
+	@EJB
+	private UserMessageEAOLocal userMessageEAO;
 
 	// REFEREE LICENSE METHODS
 	public RefereeLicense findRefereeLicense(String string) {
@@ -130,6 +137,19 @@ public class Facade implements FacadeLocal {
 	public long getMatchCount() {
 		return matchEAO.getMatchCount();
 	}
+	
+	/*public boolean isMatchUnique(String pitchId, LocalDate date, LocalTime time) {
+		return matchEAO.isMatchUnique(pitchId, date, time);
+	}*/
+	
+	//Method to check if referee is on match with same da and time
+	/*public boolean isRefereeBooked(String refereeId, LocalDate date, LocalTime time) {
+		List<Match> matches = matchEAO.findMatchesByRefereeAndDateTime(refereeId, date, time);
+		if (!matches.isEmpty()) {
+			return false;
+		}
+		return true;
+	}*/
 
 	// USER METHODS
 
@@ -161,8 +181,6 @@ public class Facade implements FacadeLocal {
 	public Set<User> getAllUsers() {
 		return userEAO.getAllUsers();
 	}
-	
-
 
 	public void createUser(User user) {
 		userEAO.createUser(user);
@@ -176,6 +194,9 @@ public class Facade implements FacadeLocal {
         return userEAO.getUsersInMatches();
     }
 
+	// USER MESSAGE METHODS
 	
-
+	public void addUserMessage(UserMessage userMessage) {
+		userMessageEAO.addUserMessage(userMessage);
+	}
 }

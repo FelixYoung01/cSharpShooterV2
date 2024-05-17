@@ -1,5 +1,7 @@
 package facade;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 import java.util.Set;
 
@@ -8,6 +10,7 @@ import ics.ejb.Pitch;
 import ics.ejb.Referee;
 import ics.ejb.RefereeLicense;
 import ics.ejb.User;
+import ics.ejb.UserMessage;
 import ics.ejb.Pitch;
 //import ics.ejb.Player;
 //import ics.ejb.Referee;
@@ -39,6 +42,8 @@ public interface FacadeLocal {
 	public void deleteReferee(String refereeId);
 
 	public Referee updateReferee(Referee refereeToUpdate);
+	
+	public boolean isRefereeBooked(String refereeId, LocalDate date, LocalTime time);
 
 
 
@@ -57,10 +62,13 @@ public interface FacadeLocal {
 	public long getMatchCount();
 
 	List<String> findAllMatchIds();
+	
+	public boolean isMatchUnique(String pitchId, LocalDate date, LocalTime time);
+	
 
 	// User Methods
 
-  public long getUserCount();
+	public long getUserCount();
 
 	public long getUsersOnMatchesCount();
 
@@ -94,6 +102,5 @@ public interface FacadeLocal {
 	public Set<User> getUsersInMatches();
 
 
-
-
+	public void addUserMessage(UserMessage userMessage);
 }

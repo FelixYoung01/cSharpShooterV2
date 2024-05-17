@@ -37,22 +37,29 @@
 	<!-- Contact Form -->
 	<section class="box colored">
 		<h2>Contact Us</h2>
-		<form>
+		<form id="contactForm" action="/EJBFootBookWebProject/needHelp" method="post">
+			<input type="hidden" name="formType" value="sendMessage">
 			<div style="margin-top: 5px">
 				<label for="name">Name:</label><br>
-				<input class="bordered-input" type="text" id="name" name="name" required>
+				<input class="bordered-input" type="text" id="name" name="name" required><br>
 			</div>
 			<div style="margin-top: 2.5px">
 				<label for="email">Email:</label><br>
-				<input class="bordered-input" type="email" id="email" name="email" required>
+				<input class="bordered-input" type="email" id="email" name="email" required><br>
 			</div>
-				<label for="message">Message:</label><br>
-				<textarea class="bordered-input" id="message" name="message" rows="4" cols="100" required></textarea>
 			<div style="margin-top: 2.5px">
-				<button value="Send" onclick="validateAndSubmit()">Send</button>
+				<label for="message">Message:</label><br>
+				<textarea class="bordered-input" id="message" name="message" rows="4" cols="100" required></textarea><br>
 			</div>
-		</form>
+			<button class="bigger-button" type="submit">Send</button>
+			</form>
 	</section>
+
+	<div class="overlay" id="successMessage" style="display: none;">
+		<div class="modalContainer">
+			<div class="box">Your message has been sent successfully!</div>
+		</div>
+	</div>
 
 	<script>
 		function validateAndSubmit() {
