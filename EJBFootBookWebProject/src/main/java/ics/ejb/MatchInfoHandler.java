@@ -98,7 +98,7 @@ public class MatchInfoHandler implements IPathHandler {
 			facade.deleteMatch(matchId);
 			return request.getRequestDispatcher("/pitchInfo?pitchId=" + pitchId);
 		}
-
+		}
 		
 		return request.getRequestDispatcher("/matchInfo.jsp");
 	}
