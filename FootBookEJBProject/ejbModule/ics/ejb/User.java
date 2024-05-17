@@ -14,6 +14,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.NamedQueries;
 import jakarta.persistence.NamedQuery;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
@@ -127,6 +128,11 @@ public class User implements Serializable{
 	
 	public void setJoined(LocalDateTime joined) {
 		this.joined = joined;
+	}
+	
+	@PrePersist
+	public void onJoined() {
+		this.joined = LocalDateTime.now();
 	}
 }
 

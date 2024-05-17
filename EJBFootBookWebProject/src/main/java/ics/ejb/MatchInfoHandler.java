@@ -1,6 +1,8 @@
 package ics.ejb;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Set;
 
 import facade.FacadeLocal;
@@ -10,7 +12,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 public class MatchInfoHandler implements IPathHandler {
-
 	@Override
 	public RequestDispatcher handleRequestDispatcherPost(HttpServletRequest request, HttpServletResponse response,
 			FacadeLocal facade) throws ServletException, IOException {
@@ -53,6 +54,19 @@ public class MatchInfoHandler implements IPathHandler {
 			facade.deleteMatch(matchId);
 			return request.getRequestDispatcher("/pitchInfo?pitchId=" + pitchId);
 		}
+		else if ("updateMatch".equals(action)) {
+			String date = request.getParameter("matchDate");
+			String time = request.getParameter("matchTime");
+			
+			LocalDate parsedDate = LocalDate.parse(date);
+			LocalTime parsedTime = LocalTime.parse(time);
+			
+			match.setDate(parsedDate);
+			match.setTime(parsedTime);
+			facade.updateMatch(match);
+			
+			response.sendRedirect(redirectUrl);
+			}
 
 		return request.getRequestDispatcher("/matchInfo.jsp");
 	}
