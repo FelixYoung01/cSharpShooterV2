@@ -46,6 +46,7 @@
 	</section>
 	<section class="box colored">
 		<h1 class="box reduced-padding">Matches</h1>
+		<button class="bigger-button" id="createMatchButton">Create Match</button>
 		<%
 		Set<Match> matches = (Set<Match>) request.getAttribute("matchesOnPitch");
 		if (matches.isEmpty()) {
@@ -82,7 +83,6 @@
 		<%
 		}
 		%>
-		<button id="createMatchButton">Create Match</button>
 
 		<div id="createMatchForm" class="overlay" style="display: none;">
 			<div class="modalContainer">
