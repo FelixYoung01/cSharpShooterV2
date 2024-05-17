@@ -89,7 +89,7 @@
 								</select>
 							</div>
 							<br> <input type="hidden" name="formType" value="addUser">
-							<button type="submit">Submit</button>
+							<button type="submit">Add User</button>
 							<button type="button" onclick="hideModal()">Close</button>
 						</form>
 					</div>

@@ -48,15 +48,19 @@
 
 		</section>
 	</div>
-	<form id="deleteMatchForm"
-		action="/EJBFootBookWebProject/matchInfo?matchId=<%=match.getMatchId()%>"
-		method="post">
-		<input type="hidden" name="formType" value="deleteMatch">
-		<button style="background-color: red;" type="submit">Delete Match</button>
-	</form>
-
-	<button id="updateMatchButton">Update Match</button>
-
+<div class="box reduced-padding team-members" style="gap: 10px">
+	<div>
+		<button class="bigger-button" id="updateMatchButton">Update Match</button>
+	</div>
+	<div>
+		<form id="deleteMatchForm"
+			action="/EJBFootBookWebProject/matchInfo?matchId=<%=match.getMatchId()%>"
+			method="post">
+			<input type="hidden" name="formType" value="deleteMatch">
+			<button class="bigger-button" style="background-color: red;" type="submit">Delete Match</button>
+		</form>
+	</div>
+</div>
 	<section class="box colored">
 		<section class="box">
 			<h1 class="box colored reduced-padding">Users Playing</h1>
@@ -179,7 +183,8 @@
 			<div class="box colored" id="overlay-box">
 				<h2>Update Match</h2>
 				<form id="updatingMatchForm"
-					action="/EJBFootBookWebProject/matchInfo?matchId=<%=match.getMatchId()%>" method="post">
+					action="/EJBFootBookWebProject/matchInfo?matchId=<%=match.getMatchId()%>"
+					method="post">
 					<input type="hidden" name="formType" value="updateMatch">
 
 					<!-- Date and Time Picker -->
