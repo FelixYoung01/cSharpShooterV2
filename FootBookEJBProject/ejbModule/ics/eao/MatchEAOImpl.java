@@ -1,7 +1,5 @@
 package ics.eao;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.List;
 
 //import ics.ejb.Match;
@@ -70,24 +68,8 @@ public class MatchEAOImpl implements MatchEAOLocal {
 	    TypedQuery<String> query = em.createQuery("SELECT m.matchId FROM Match m", String.class);
 	    return query.getResultList();
 	}
-	
-	public List<Match> findMatchesByRefereeAndDateTime(String refereeId, LocalDate date, LocalTime time){
-		TypedQuery <Match> query = em.createNamedQuery("Match.findByRefereeAndDateTime", Match.class);
-                query.setParameter("refereeId", refereeId);
-                query.setParameter("date", date);
-                query.setParameter("timeString", time.toString());
-                
-		return query.getResultList();
-	}
 
-	public boolean isMatchUnique(String pitchId, LocalDate date, LocalTime time) {
-		TypedQuery<Long> query = em.createNamedQuery("Match.isMatchUnique", Long.class);
-		query.setParameter("pitchId", pitchId);
-		query.setParameter("date", date);
-		query.setParameter("timeString", time.toString());
-		
-		return query.getSingleResult() > 0;
-	}
+
 
 	
 
