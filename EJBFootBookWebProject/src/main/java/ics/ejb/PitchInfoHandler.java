@@ -98,7 +98,7 @@ public class PitchInfoHandler implements IPathHandler {
             System.out.println("User ID: " + userId);
             System.out.println("Match Date: " + date);
             System.out.println("Match Time: " + time);
-
+            if (matchId != null) { 
             Match match = new Match(matchId, refereeForMatch, pitch, parsedDate, parsedTime);
             facade.createMatch(match);
 
@@ -107,7 +107,12 @@ public class PitchInfoHandler implements IPathHandler {
             facade.updateUser(user);
 
             logger.info("Match created and user updated.");
-
+            
+            } else {
+            	String errorMessage = "Error creating match. Maximum amount of matches reached.";
+            	request.setAttribute("errorMessage", errorMessage);
+            }
+            
             response.sendRedirect(request.getContextPath() + "/pitchInfo?pitchId=" + pitchId);
             return null;
         }

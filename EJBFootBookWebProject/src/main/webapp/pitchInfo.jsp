@@ -171,6 +171,21 @@
 		};
 	</script>
 	<script>
+	// JavaScript to handle the error message OK button click
+	document.getElementById("error-ok-button").addEventListener("click", function() {
+		document.getElementById("error-message").style.display = "none";
+	});
+</script>
+<script>
+	document
+			.getElementById("createMatchButton")
+			.addEventListener(
+					"click",
+					function() {
+						document.getElementById("createMatchForm").style.display = "block";
+						document.getElementById("overlay-box").classList
+								.add("pop-up");
+					});
 		document
 				.getElementById("createMatchButton")
 				.addEventListener(
