@@ -13,6 +13,9 @@
 <body>
 	<jsp:include page="header.jsp" />
 
+	<h1 style="font-size: 60px;">Register</h1>
+	<p>Register users and referees here.</p>
+
 	<div style="display: flex;">
 		<div>
 			<h2>Users</h2>
@@ -58,7 +61,7 @@
 			<button id="addUserButton">Add</button>
 			<div id="addUserForm" class="overlay" style="display: none;">
 				<div class="modalContainer">
-					<div class="popBox colored">
+					<div class="box colored" id="addUserBox">
 						<h2>Add User</h2>
 						<form id="addingUserForm" action="/EJBFootBookWebProject/register"
 							name="userFormType" method="post">
@@ -80,14 +83,14 @@
 							</div>
 							<label for="userGender">Gender:</label>
 							<div style="display: flex; justify-content: center;">
-								<select id="userGender" name="userGender" required>
+								<select class="bordered-input" name="userGender" required>
 									<option value="M">Male</option>
 									<option value="F">Female</option>
 								</select>
 							</div>
 							<br> <input type="hidden" name="formType" value="addUser">
 							<button type="submit">Submit</button>
-							<button onclick="hideModal()">Close</button>
+							<button type="button" onclick="hideModal()">Close</button>
 						</form>
 					</div>
 				</div>
@@ -95,7 +98,7 @@
 
 			<div id="editUserForm" class="overlay" style="display: none;">
 				<div class="modalContainer">
-					<div class="popBox colored">
+					<div class="box colored" id="editUserBox">
 						<h2>Edit User</h2>
 						<form id="editingUserForm"
 							action="/EJBFootBookWebProject/register" method="post">
@@ -104,14 +107,17 @@
 							<div>
 								<label>User ID:</label> <span id="displayUserId"></span>
 							</div>
-							<label for="editUserName">Name:</label> <input type="text"
-								id="editUserName" name="userName" required><br> <label
-								for="editUserAge">Age:</label> <input type="number"
-								id="editUserAge" name="userAge" required min="18" max="100"><br>
-							<label for="editUserEmail">Email:</label> <input type="email"
-								id="editUserEmail" name="userEmail" required><br> <label
-								for="editUserGender">Gender:</label> <select id="editUserGender"
-								name="userGender" required>
+							<label for="editUserName">Name:</label><br> <input
+								type="text" class="bordered-input" id="editUserName"
+								name="userName" required><br> <label
+								for="editUserAge">Age:</label><br> <input type="number"
+								class="bordered-input" id="editUserAge" name="userAge" required
+								min="18" max="100"><br> <label for="editUserEmail">Email:</label><br>
+							<input type="email" class="bordered-input" id="editUserEmail"
+								name="userEmail" required><br> <label
+								for="editUserGender">Gender:</label><br> <select
+								class="bordered-input" id="editUserGender" name="userGender"
+								required>
 								<option value="M">Male</option>
 								<option value="F">Female</option>
 							</select><br>
@@ -123,6 +129,8 @@
 			</div>
 
 			<script>
+				var currentBox;
+
 				function editUser(userId, name, age, email, gender) {
 					document.getElementById('editUserId').value = userId;
 					document.getElementById('displayUserId').innerText = userId; // Display user ID but not editable
@@ -132,15 +140,9 @@
 					document.getElementById('editUserGender').value = gender;
 
 					document.getElementById('editUserForm').style.display = 'block';
-
-				}
-				function hideModal() {
-					document.getElementById('addUserForm').style.display = 'none';
-					document.getElementById('editUserForm').style.display = 'none';
-					document.getElementById('addRefereeForm').style.display = 'none';
-					document.getElementById('editRefereeForm').style.display = 'none';
-					
-
+					document.getElementById('editUserBox').classList
+							.add('pop-up');
+					currentBox = document.getElementById('editUserBox');
 				}
 
 				// Event listener for showing add user form
@@ -150,6 +152,10 @@
 								"click",
 								function() {
 									document.getElementById("addUserForm").style.display = "block";
+									document.getElementById('addUserBox').classList
+											.add('pop-up');
+									currentBox = document
+											.getElementById('addUserBox');
 								});
 
 				// Event listener for hiding add user form after submission
@@ -205,7 +211,7 @@
 			<button id="addRefereeButton">Add</button>
 			<div id="addRefereeForm" class="overlay" style="display: none;">
 				<div class="modalContainer">
-					<div class="popBox colored">
+					<div class="box colored" id="addRefereeBox">
 						<h2>Add Referee</h2>
 						<form id="addingRefereeForm"
 							action="/EJBFootBookWebProject/register" name="refereeFormType"
@@ -218,8 +224,8 @@
 							</div>
 							<label for="licenseId">License:</label>
 							<div style="display: flex; justify-content: center;">
-								<select id="licenseId" name="licenseId" required>
-									<option value="">Select License</option>
+								<select class="bordered-input" name="licenseId" required>
+									<option value="" selected disabled>Select License</option>
 									<%
 									List<RefereeLicense> licenses = (List<RefereeLicense>) request.getAttribute("licenses");
 									if (licenses == null) {
@@ -245,18 +251,20 @@
 
 			<div id="editRefereeForm" class="overlay" style="display: none;">
 				<div class="modalContainer">
-					<div class="popBox colored">
+					<div class="box colored" id="editRefereeBox">
 						<h2>Edit Referee</h2>
 						<form id="editingRefereeForm"
 							action="/EJBFootBookWebProject/register" method="post">
 							<input type="hidden" name="formType" value="editReferee">
 							<input type="hidden" id="editRefereeId" name="refereeId" required>
-							<label for="displayRefereeId">Referee ID:</label> <input
-								type="text" id="displayRefereeId" value="" disabled><br>
-							<label for="editRefereeName">Name:</label> <input type="text"
-								id="editRefereeName" name="refereeName" required><br>
-							<label for="editRefereeLicense">License:</label> <select
-								id="editRefereeLicense" name="licenseId" required>
+							<label for="displayRefereeId">Referee ID:</label><br> <input
+								type="text" class="bordered-input" id="displayRefereeId"
+								value="" disabled><br> <label for="editRefereeName">Name:</label><br>
+							<input type="text" id="editRefereeName" class="bordered-input"
+								name="refereeName" required><br> <label
+								for="editRefereeLicense">License:</label><br> <select
+								class="bordered-input" id="editRefereeLicense" name="licenseId"
+								required>
 								<%
 								for (RefereeLicense license : licenses) {
 								%>
@@ -280,7 +288,9 @@
 					document.getElementById('editRefereeLicense').value = licenseId;
 
 					document.getElementById('editRefereeForm').style.display = 'block';
-					document.getElementById('addRefereeForm').style.display = 'none';
+					document.getElementById('editRefereeBox').classList
+							.add('pop-up');
+					currentBox = document.getElementById('editRefereeBox');
 				}
 
 				// Event listener for showing add referee form
@@ -290,6 +300,10 @@
 								"click",
 								function() {
 									document.getElementById("addRefereeForm").style.display = "block";
+									document.getElementById('addRefereeBox').classList
+											.add('pop-up');
+									currentBox = document
+											.getElementById('addRefereeBox');
 								});
 
 				// Event listener for hiding add referee form after submission
@@ -300,24 +314,21 @@
 								function(event) {
 									document.getElementById("addRefereeForm").style.display = "none";
 								});
+			</script>
 
-				// Event listener for showing add user form
-				document
-						.getElementById("addUserButton")
-						.addEventListener(
-								"click",
-								function() {
-									document.getElementById("addUserForm").style.display = "block";
-								});
-
-				// Event listener for hiding add user form after submission
-				document
-						.getElementById("addingUserForm")
-						.addEventListener(
-								"submit",
-								function(event) {
-									document.getElementById("addUserForm").style.display = "none";
-								});
+			<script>
+				function hideModal() {
+					currentBox.classList.remove("pop-up");
+					currentBox.classList.add("pop-down");
+					setTimeout(
+							function() {
+								document.getElementById('addUserForm').style.display = 'none';
+								document.getElementById('editUserForm').style.display = 'none';
+								document.getElementById('addRefereeForm').style.display = 'none';
+								document.getElementById('editRefereeForm').style.display = 'none';
+								currentBox.classList.remove("pop-down");
+							}, 300);
+				}
 			</script>
 		</div>
 	</div>

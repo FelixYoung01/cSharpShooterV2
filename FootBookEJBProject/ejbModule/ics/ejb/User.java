@@ -48,21 +48,15 @@ public class User implements Serializable{
 
     private Match match; // Each user participates in exactly one match
     
-	public User(int age, String email, String gender, String name) {
+	public User(String userId, int age, String email, String gender, String name) {
+		this.userId = userId;
     	this.age = age;
     	this.email = email;
     	this.gender = gender;
     	this.name = name;
-    	this.userId = generateUserId();
 	}
 	
 	public User() {
-	}
-	
-	private String generateUserId() {
-		String userId = "U" + String.format("%02d", (int)(Math.random() * 100));
-		System.out.println("Length of userId: " + userId.length() + " UserId: " + userId);
-		return userId;
 	}
     
     @Id
