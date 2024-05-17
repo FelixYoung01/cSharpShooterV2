@@ -76,6 +76,7 @@
 	</section>
 	<section class="box colored">
 		<h1 class="box reduced-padding">Matches</h1>
+		<button class="bigger-button" id="createMatchButton">Create Match</button>
 		<%
 		Set<Match> matches = (Set<Match>) request.getAttribute("matchesOnPitch");
 		if (matches.isEmpty()) {
@@ -109,14 +110,9 @@
 			}
 			%>
 		</section>
-
-        <button id="createMatchButton">Book now</button>
-        <div id="createMatchForm" class="box popUp" style="display: none;">
-            <h2>Insert Credentials</h2>
-            <form id="creatingMatchForm" action="/EJBFootBookWebProject/pitchInfo" method="post">
-            	<input type="hidden" name="formType" value="createMatch">
-                <input type="hidden" id="pitchId" name="pitchId" value="<%= pitchId %>">
-
+		<%
+		}
+		%>
 
 		<div id="createMatchForm" class="overlay" style="display: none;">
 			<div class="modalContainer">

@@ -12,11 +12,13 @@ import ics.eao.PitchEAOLocal;
 import ics.eao.RefereeEAOLocal;
 import ics.eao.RefereeLicenseEAOLocal;
 import ics.eao.UserEAOLocal;
+import ics.eao.UserMessageEAOLocal;
 import ics.ejb.Match;
 import ics.ejb.Pitch;
 import ics.ejb.Referee;
 import ics.ejb.RefereeLicense;
 import ics.ejb.User;
+import ics.ejb.UserMessage;
 import jakarta.ejb.EJB;
 import jakarta.ejb.Stateless;
 
@@ -37,6 +39,9 @@ public class Facade implements FacadeLocal {
 
 	@EJB
 	private UserEAOLocal userEAO;
+	
+	@EJB
+	private UserMessageEAOLocal userMessageEAO;
 
 	// REFEREE LICENSE METHODS
 	public RefereeLicense findRefereeLicense(String string) {
@@ -176,8 +181,6 @@ public class Facade implements FacadeLocal {
 	public Set<User> getAllUsers() {
 		return userEAO.getAllUsers();
 	}
-	
-
 
 	public void createUser(User user) {
 		userEAO.createUser(user);
@@ -191,6 +194,9 @@ public class Facade implements FacadeLocal {
         return userEAO.getUsersInMatches();
     }
 
+	// USER MESSAGE METHODS
 	
-
+	public void addUserMessage(UserMessage userMessage) {
+		userMessageEAO.addUserMessage(userMessage);
+	}
 }

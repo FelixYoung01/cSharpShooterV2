@@ -10,6 +10,7 @@ import ics.ejb.Pitch;
 import ics.ejb.Referee;
 import ics.ejb.RefereeLicense;
 import ics.ejb.User;
+import ics.ejb.UserMessage;
 import ics.ejb.Pitch;
 //import ics.ejb.Player;
 //import ics.ejb.Referee;
@@ -101,6 +102,5 @@ public interface FacadeLocal {
 	public Set<User> getUsersInMatches();
 
 
-
-
+	public void addUserMessage(UserMessage userMessage);
 }
