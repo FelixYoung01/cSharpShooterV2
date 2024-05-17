@@ -42,6 +42,7 @@ public class PitchInfoHandler implements IPathHandler {
     public RequestDispatcher handleRequestDispatcherPost(HttpServletRequest request, HttpServletResponse response,
             FacadeLocal facade) throws ServletException, IOException {
 
+    	
         String action = request.getParameter("formType");
         logger.info("Form action received: " + action);
 
@@ -52,6 +53,13 @@ public class PitchInfoHandler implements IPathHandler {
         Set<Referee> referees = facade.getAllReferees();
         Set<Match> matchesOnPitch = facade.getMatchesOnPitch(pitchId);
         Map<String, Integer> matchUserCount = new HashMap<>();
+        
+        request.setAttribute("matchesOnPitch", matchesOnPitch);
+        request.setAttribute("pitch", pitch);
+        request.setAttribute("users", users);
+        request.setAttribute("referees", referees);
+        request.setAttribute("matchUserCount", matchUserCount);
+        
 
         for (Match match : matchesOnPitch) {
             Set<User> usersOnMatch = facade.getUsersOnMatch(match.getMatchId());
