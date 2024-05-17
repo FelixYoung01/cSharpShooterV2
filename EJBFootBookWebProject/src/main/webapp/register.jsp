@@ -266,7 +266,7 @@
 								%>
 							</select><br>
 							<button type="submit">Update Referee</button>
-							<button type="button" onclick="hideModal()">Close</button>
+							<button type="button"onclick="hideModal()">Close</button>
 						</form>
 					</div>
 				</div>
