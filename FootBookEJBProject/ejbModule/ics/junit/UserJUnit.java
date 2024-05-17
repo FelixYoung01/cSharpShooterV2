@@ -41,8 +41,8 @@ class UserJUnit {
 		gender = "M";
 		match = new Match();
 		
-		user1 = new User( age, email, gender, name);
-		user2 = new User( 22, "insh@gmail.com", "M", "Insh");
+		user1 = new User(userId, age, email, gender, name);
+		user2 = new User("U2", 22, "insh@gmail.com", "M", "Insh");
 		
 		
 

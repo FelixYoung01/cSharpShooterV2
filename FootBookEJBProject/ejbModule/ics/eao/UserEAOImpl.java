@@ -59,16 +59,21 @@ public class UserEAOImpl implements UserEAOLocal {
 		return new HashSet<User>(query.getResultList());
 	}
 
+	
 	public Set<User> getUsersInMatches() {
 		TypedQuery<Match> query = em.createNamedQuery("Match.findAll", Match.class);
 		List<Match> matches = query.getResultList();
 		Set<User> usersInMatches = new HashSet<>();
 
 		for (Match match : matches) {
-			usersInMatches.addAll(match.getUsers()); 
+			usersInMatches.addAll(match.getUsers());
+		}
+
+		// Log the retrieved users
+		for (User user : usersInMatches) {
+			System.out.println("User in match: " + user.getUserId() + ", " + user.getName());
 		}
 
 		return usersInMatches;
 	}
-
 }

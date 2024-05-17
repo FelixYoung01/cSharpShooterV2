@@ -92,6 +92,12 @@ public class MatchInfoHandler implements IPathHandler {
 			response.sendRedirect(redirectUrl);
 
 		}
+		
+		else if("deleteMatch".equals(action)) {
+			String pitchId = match.getPitch().getPitchId();
+			facade.deleteMatch(matchId);
+			return request.getRequestDispatcher("/pitchInfo?pitchId=" + pitchId);
+		}
 
 		
 		return request.getRequestDispatcher("/matchInfo.jsp");

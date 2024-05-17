@@ -47,8 +47,9 @@ class MatchJUnit {
 		time = LocalTime.of(13, 00);
 		time2 = LocalTime.of(14, 00);
 
-		match1 = new Match(matchId, pitch, date, time);
-		match2 = new Match("M2", pitch2, date2, time2);
+
+		//match1 = new Match(matchId, pitch, date, time);
+		//match2 = new Match("M2", pitch2, date2, time2);
 
 	}
 

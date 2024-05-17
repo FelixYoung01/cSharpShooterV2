@@ -7,15 +7,11 @@
 </head>
 <body>
 	<%@ include file="header.jsp"%>
-
-	<!-- Banner section -->
-	<div class="banner">
-		<h1 style="font-size: 60px; text-align: center;">We're here to
-			help.</h1>
-		<p style="font-size: 24px;">If you didn't find what you were
-			looking for or need some help, please check the FAQ below or contact
-			us. We're just one click away.</p>
-	</div><br>
+	
+	<h1 style="font-size: 60px;">We're here to help.</h1>
+	<p>If you didn't find what you were
+		looking for or need some help, please check the FAQ below or contact
+		us.<br>We're just one click away.</p>
 
 	<!-- Main content section -->
 	<section class="box colored" style="width: 600px">
@@ -44,15 +40,15 @@
 		<form>
 			<div style="margin-top: 5px">
 				<label for="name">Name:</label><br>
-				<input class="box" style="padding: 5px" type="text" id="name" name="name" required>
+				<input class="bordered-input" type="text" id="name" name="name" required>
 			</div>
 			<div style="margin-top: 2.5px">
 				<label for="email">Email:</label><br>
-				<input class="box" style="padding: 5px" type="email" id="email" name="email" required>
+				<input class="bordered-input" type="email" id="email" name="email" required>
 			</div>
 				<label for="message">Message:</label><br>
-				<textarea class="box" style="padding: 5px" id="message" name="message" rows="4" cols="100" required></textarea>
-			<div style="margin-top: 2.5px; display: flex; justify-content: center; align-items: center;">
+				<textarea class="bordered-input" id="message" name="message" rows="4" cols="100" required></textarea>
+			<div style="margin-top: 2.5px">
 				<button value="Send" onclick="validateAndSubmit()">Send</button>
 			</div>
 		</form>

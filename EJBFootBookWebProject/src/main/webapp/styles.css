@@ -22,7 +22,7 @@
 
 .bordered-image {
     border: 5px solid var(--text-color);
-    border-radius: 5px;
+    border-radius: 50px;
     margin: 5px;
     box-shadow: 5px 5px 0px rgba(0, 0, 0, 0.5);
 }
@@ -51,42 +51,45 @@ table, table td, table th {
 }
 
 .box {
-    background-color: var(--main-color);
+    background-color: var(--background-color);
     padding: 20px;
     border: 5px solid var(--text-color);
-    border-radius: 5px;
+    border-radius: 50px;
     text-align: center;
+    justify-content: center;
+    align-items: center;
     margin: 10px;
     box-shadow: 5px 5px 0px rgba(0, 0, 0, 0.5);
-    z-index: 1001;
+    word-wrap: break-word;
+    overflow: hidden;
 }
 
-.popBox {
-	width: 40%;
-    background-color: var(--main-color);
-    padding: 20px;
-    border: 5px solid var(--text-color);
-    border-radius: 5px;
-    text-align: center;
-    margin: 10px;
-    box-shadow: 5px 5px 0px rgba(0, 0, 0, 0.5);
-    z-index: 1001;
-    align-items: center;
+.in-front {
+    z-index: 1000;
 }
 
 .overlay {
-    position: fixed; /* Ensure it covers the entire viewport */
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black */
-    backdrop-filter: blur(5px); /* Blur effect for the background */
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px);
     display: flex;
     align-items: center;
     justify-content: center;
-    z-index: 1000; /* Ensure it appears above other content */
+    z-index: 999;
 }
+
+.modalContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%; /* Ensures the container takes full width */
+    height: 100%; /* Ensures the container takes full height */
+}
+
 
 button, .button {
     display: block;
@@ -95,13 +98,14 @@ button, .button {
     background-color: var(--background-color);
     padding: 5px;
     border: 5px solid var(--text-color);
-    border-radius: 5px;
+    border-radius: 50px;
     text-align: center;
-    margin: 10px;
+    margin: 10px auto;
     color: var(--text-color);
     box-shadow: 5px 5px 0px rgba(0, 0, 0, 0.5);
     transition: transform 0.3s ease;
     text-decoration: none;
+    word-wrap: break-word;
     overflow: hidden;
 }
 
@@ -139,6 +143,8 @@ header::before {
 }
 
 nav ul {
+    padding-left: 10px;
+    padding-right: 10px;
     list-style: none;
     position: relative;
     z-index: 2;
@@ -147,17 +153,18 @@ nav ul {
 
 nav ul li {
     display: inline-block;
-    margin-left: 20px;
-    margin-right: 20px;
+    margin-left: 10px;
+    margin-right: 10px;
     transition: transform 0.3s ease;
-}
-
-nav ul li a {
     color: var(--text-color);
     text-decoration: none;
     font-size: 20px;
     font-weight: bold;
-    filter: none;
+}
+
+nav ul li .button {
+    padding-left: 15px;
+    padding-right: 15px;
 }
 
 nav ul li:hover {
@@ -168,12 +175,11 @@ nav ul li:hover {
     position: fixed;
     top: 10px;
     right: 10px;
-    border: none;
     cursor: pointer;
     width: 50px;
     height: 50px;
     border: 5px solid var(--text-color);
-    border-radius: 5px;
+    border-radius: 50px;
     z-index: 2;
 }
 
@@ -253,6 +259,11 @@ nav ul li:hover {
     background-color: var(--main-color);
 }
 
+.button-highlighted {
+    background-color: var(--text-color);
+    color: var(--secondary-color);
+}
+
 .nullText {
 		color: var(--text-color);
 		font-size: 20px;
@@ -324,7 +335,7 @@ footer {
 }
 
 .team-member {
-    width: 15vw;
+    width: 200px;
     flex-grow: 1;
 }
 
@@ -349,9 +360,16 @@ footer {
     padding: 20px;
 }
 
-.rounded {
-    border-radius: 50px;
+.sharpened {
+    border-radius: 5px;
+}
+
+.reduced-padding {
     padding: 10px;
+}
+
+.extra-padding {
+    padding: 25px;
 }
 
 .pitch-image {
@@ -385,7 +403,7 @@ footer {
 
 .grid-container {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(10vw, 1fr));
+    grid-template-columns: repeat(5, 1fr);
     gap: 10px;
     justify-content: center;
     overflow-x: hidden;
@@ -400,6 +418,10 @@ footer {
     .grid-container {
         grid-template-columns: 1fr;
     }
+}
+
+.left-aligned-text {
+    text-align: left;
 }
 
 .user {
@@ -429,8 +451,9 @@ footer {
 }
 
 .bordered-input {
+    color: var(--text-color);
     background-color: var(--background-color);
-    border: 5px solid var(--text-color);
+    outline: 5px solid var(--text-color);
     border-radius: 5px;
     padding: 5px;
     margin: 10px;
@@ -447,6 +470,15 @@ input {
     color: var(--text-color);
 }
 
+.count-box {
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.count-box:hover {
+    transform: scale(1.1);
+}
+
 .count-box:hover .count {
     animation: wiggle 0.5s ease-in-out;
 }
@@ -457,7 +489,7 @@ input {
 }
 
 .userRegister {
-	 display: block;
+	display: block;
     position: relative;
     cursor: pointer;
     background-color: var(--background-color);
@@ -474,4 +506,30 @@ input {
 
 .userRegister:hover {
 	transform: scale(1.1);
+}
+
+.pop-up {
+    animation: pop-up-animation 0.3s ease;
+}
+
+@keyframes pop-up-animation {
+    0% {
+        transform: scale(0);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+.pop-down {
+    animation: pop-down-animation 0.3s ease;
+}
+
+@keyframes pop-down-animation {
+    0% {
+        transform: scale(1);
+    }
+    100% {
+        transform: scale(0);
+    }
 }

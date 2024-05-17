@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.Set;
 import java.util.List;
 
+import facade.Facade;
 import facade.FacadeLocal;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -43,7 +44,7 @@ public class RegisterHandler implements IPathHandler {
 		// Kör kodstycket ifall det är en user som ska läggas till //ADD USER CODE
 
 		if ("addUser".equals(action)) {// Kör kodstycket ifall metoden är POST
-			
+			String userId = generateUserId(facade);
 			String tempAge = request.getParameter("userAge");
 			String email = request.getParameter("userEmail");
 			String gender = request.getParameter("userGender");
@@ -53,21 +54,20 @@ public class RegisterHandler implements IPathHandler {
 
 			if (age >= 18 && age <= 100) {
 
-
-				User user = new User(age, email, gender, name);
+				User user = new User(userId, age, email, gender, name);
 
 				facade.createUser(user);
 
 				System.out.println("User added");
 				response.sendRedirect(request.getRequestURI());
 				return null;
-				
+
 			} else if (age < 18) {
 				response.getWriter().write("User must be 18 or older");
 				System.out.println("User must be 18 or older");
 
 			}
-			
+
 			else if (age > 100) {
 				response.getWriter().write("User can not be older than 100 years old");
 				System.out.println("User can not be older than 100 years old");
@@ -75,13 +75,12 @@ public class RegisterHandler implements IPathHandler {
 		}
 		// Kör kodstycket ifall det är en dommare som ska läggas till //ADD REFEREE CODE
 		else if ("addReferee".equals(action)) {
-			
-
+            String refereeId = generateRefereeId(facade);
 			String refName = request.getParameter("refereeName");
 			String licenseId = request.getParameter("licenseId");
 
 			RefereeLicense tempLicense = facade.findRefereeLicense(licenseId);
-			Referee referee = new Referee(refName, tempLicense);
+			Referee referee = new Referee(refereeId, refName, tempLicense);
 			facade.createReferee(referee);
 
 			System.out.println("Referee added");
@@ -91,8 +90,6 @@ public class RegisterHandler implements IPathHandler {
 
 		// Kör kodstycket ifall metoden är PUT (UPDATE)
 		else if ("editUser".equals(action)) {
-			
-			
 
 			String userId = request.getParameter("userId");
 			String newName = request.getParameter("userName");
@@ -110,55 +107,35 @@ public class RegisterHandler implements IPathHandler {
 			User userToUpdate = facade.findUserById(userId);
 
 			if (userToUpdate != null) {
-				
+
 				System.out.println("User found, updating...");
 				int age = Integer.parseInt(newAge); // No try-catch block
-				
+
 				if (age >= 18 && age <= 100) {
-					
-				userToUpdate.setName(newName);
-				userToUpdate.setAge(age);
-				userToUpdate.setEmail(newEmail);
-				userToUpdate.setGender(newGender);
 
-				User updateSuccessful = facade.updateUser(userToUpdate);
+					userToUpdate.setName(newName);
+					userToUpdate.setAge(age);
+					userToUpdate.setEmail(newEmail);
+					userToUpdate.setGender(newGender);
 
-				System.out.println("User updated");
-				response.sendRedirect(request.getRequestURI());
-				return null;
-				
-			 } else {
-				response.getWriter().write("User can not be older than 100 or younger than 18.");
-				System.out.println("User can not be older than 100 or younger than 18.");
-				response.setStatus(HttpServletResponse.SC_BAD_REQUEST); // Set appropriate status code on failure.
-				response.sendRedirect(request.getRequestURI());
-			}}
+					User updateSuccessful = facade.updateUser(userToUpdate);
+
+					System.out.println("User updated");
+					response.sendRedirect(request.getRequestURI());
+					return null;
+
+				} else {
+					response.getWriter().write("User can not be older than 100 or younger than 18.");
+					System.out.println("User can not be older than 100 or younger than 18.");
+					response.setStatus(HttpServletResponse.SC_BAD_REQUEST); // Set appropriate status code on failure.
+					response.sendRedirect(request.getRequestURI());
+				}
+			}
 		}
-
-
-		/*
-		 * else if (request.getMethod().equalsIgnoreCase("POST")) { String action1 =
-		 * request.getParameter("action");
-		 * 
-		 * System.out.println("Update result: " + updateSuccessful); // Debugging
-		 * 
-		 * if (updateSuccessful != null) {
-		 * System.out.println("User successfully updated.");
-		 * response.sendRedirect(request.getRequestURI());
-		 * 
-		 * } else { System.out.println("User update failed.");
-		 * response.getWriter().write("Update failed");
-		 * 
-		 * 
-		 * }
-		 * 
-		 * } }
-		 */
 
 		// Removing a user
 		else if ("removeUser".equals(action)) {
 			String userId = request.getParameter("userId");
-
 
 			User user = facade.findUser(userId);
 			if (user != null) {
@@ -174,7 +151,6 @@ public class RegisterHandler implements IPathHandler {
 			}
 		}
 
-
 		// Removing a referee
 		else if ("removeReferee".equals(action)) {
 			String refereeId = request.getParameter("refereeId");
@@ -185,7 +161,7 @@ public class RegisterHandler implements IPathHandler {
 				System.out.println("Referee removed: " + refereeId);
 				response.sendRedirect(request.getRequestURI());
 				return null;
-			} else{
+			} else {
 				System.out.println("Referee not found: " + refereeId);
 				response.getWriter().write("Referee not found");
 				response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
@@ -238,6 +214,27 @@ public class RegisterHandler implements IPathHandler {
 		}
 
 		return request.getRequestDispatcher("/register.jsp");
-
+	}
+	
+	private String generateUserId(FacadeLocal facade) {
+		// Check for the first available user ID, in ascending order, starting from U01
+		for (int i = 1; i < 99; i++) {
+			String userId = "U" + String.format("%02d", i);
+			if (facade.findUserById(userId) == null) {
+				return userId;
+			}
+		}
+		return null;
+	}
+	
+	private String generateRefereeId(FacadeLocal facade) {
+		// Check for the first available referee ID, in ascending order, starting from R01
+		for (int i = 1; i < 99; i++) {
+			String refereeId = "R" + String.format("%02d", i);
+			if (facade.findRefereeById(refereeId) == null) {
+				return refereeId;
+			}
+		}
+		return null;
 	}
 }

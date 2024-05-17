@@ -8,6 +8,88 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>FootBook - Football Booking</title>
 <link rel="stylesheet" href="styles.css">
+<style>
+    /* Styles for the modal */
+    .modal {
+        display: none;
+        position: fixed;
+        z-index: 1000;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0,0,0,0.4);
+        padding-top: 60px;
+        pointer-events: auto;
+    }
+
+    .modal-content {
+        background-color: #fefefe;
+        color: #000; /* Set text color to black */
+        margin: 5% auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 80%;
+        max-width: 600px;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        animation-name: animatetop;
+        animation-duration: 0.4s;
+        z-index: 1001;
+        position: relative;
+    }
+
+    @keyframes animatetop {
+        from {top:-300px; opacity:0}
+        to {top:0; opacity:1}
+    }
+
+    .close {
+        color: red; /* Set the close button color to red */
+        position: absolute;
+        top: 10px;
+        right: 20px;
+        font-size: 28px;
+        font-weight: bold;
+        cursor: pointer;
+    }
+
+    .close:hover,
+    .close:focus {
+        color: darkred; /* Darken the color on hover/focus */
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+    /* Additional styles for modal content */
+    .modal-content h2 {
+        margin-top: 0;
+    }
+
+    .modal-content ul {
+        list-style-type: none;
+        padding: 0;
+    }
+
+    .modal-content ul li {
+        padding: 10px 0;
+        border-bottom: 1px solid #ccc;
+    }
+
+    .modal-content ul li:last-child {
+        border-bottom: none;
+    }
+
+    /* Disable pointer events for the background content when modal is open */
+    body.modal-open {
+        pointer-events: none;
+    }
+
+    body.modal-open .modal {
+        pointer-events: auto;
+    }
+</style>
 </head>
 <body>
     <!-- Include the common header, which contains the navigation bar -->
@@ -18,8 +100,7 @@
     <p>Book your football match on your favorite pitches!</p>
 
     <section class="pitches">
-        <h2 class="box rounded">Book from one of these available pitches!</h2>
-
+        <h2 class="box colored reduced-padding">Book from one of these available pitches!</h2><br>
 
         <%
         Set<Pitch> pitches = (Set<Pitch>) request.getAttribute("pitches");
@@ -34,15 +115,6 @@
             <div id="pitch-label"><%=pitch.getName()%></div> 
             <img src="<%=imagePath%>" class="pitch-image" alt="Pitch Image" />
         </a>
-
-	<h2 style="font-size: 60px">Welcome to FootBook!</h2>
-	<p>Book your football match on your favorite pitch!</p>
-
-	<section class="pitches">
-
-		<h2>Choose your pitch of choice to book a match!</h2>
-
-
 
         <%
         }
@@ -61,7 +133,7 @@
         <%
         }
         %>
-    </section>
+    </section><br>
 
     <!-- Statistics section -->
     <section class="box colored">
@@ -86,7 +158,7 @@
     </section>
 
     <!-- Modal for displaying AJAX data -->
-    <div id="modal" class="modal" style="display:none;">
+    <div id="modal" class="modal">
         <div class="modal-content" id="modal-content">
             <span id="modal-close" class="close">&times;</span>
         </div>
@@ -106,20 +178,25 @@
                     data: { type: countType },
                     headers: { "X-Requested-With": "XMLHttpRequest" },
                     success: function(data) {
-                        $("#modal-content").html(data);
+                        
+                        $("#modal-content").html(data + '<span id="modal-close" class="close">&times;</span>');
                         $("#modal").show();
+                        $("body").addClass("modal-open");
                     }
                 });
             });
 
-            $("#modal-close").click(function() {
+            // Close the modal when the close button is clicked
+            $(document).on("click", "#modal-close", function() {
                 $("#modal").hide();
+                $("body").removeClass("modal-open");
             });
 
             // Close the modal when clicking outside of it
             $(window).click(function(event) {
                 if ($(event.target).is("#modal")) {
                     $("#modal").hide();
+                    $("body").removeClass("modal-open");
                 }
             });
         });

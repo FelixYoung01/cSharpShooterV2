@@ -11,10 +11,7 @@
 <meta charset="ISO-8859-1">
 <title>Match Information</title>
 <link rel="stylesheet" href="styles.css">
-<style>
-.left-aligned-text {
-	text-align: left;
-}
+
 
 .match-info-box {
 	width: 400px;
@@ -41,6 +38,7 @@
         return true;
     }
 </script>
+
 </head>
 <body>
 	<jsp:include page="header.jsp" />
@@ -63,8 +61,7 @@
 
 
 	<div style="display: flex;">
-		<!-- New section for Match Information -->
-		<section class="box colored match-info-box left-aligned-text">
+		<section class="box colored left-aligned-text">
 			<h2>Match Information</h2>
 			<p>
 				Match Date:
@@ -104,12 +101,14 @@
 
 		</section>
 	</div>
-
+	<form id="deleteMatchForm"
+		action="/EJBFootBookWebProject/matchInfo?matchId=<%=match.getMatchId()%>"
+		method="post">
+		<input type="hidden" name="formType" value="deleteMatch">
+		<button style="background-color: red;" type="submit">Delete Match</button>
 	<section class="box colored">
-
-
-		<section class="box rounded">
-			<h1>Users Playing</h1>
+		<section class="box">
+			<h1 class="box colored reduced-padding">Users Playing</h1>
 			<%
 			if (users.isEmpty()) {
 			%>
@@ -125,13 +124,15 @@
 				<form
 					action="/EJBFootBookWebProject/matchInfo?matchId=<%=match.getMatchId()%>"
 					method="post">
-					<input type="hidden" name="removeUserId" value="<%=user.getUserId()%>">
-				<div class="button colored" onclick="showRemoveButton('<%= user.getUserId()%>')">
-					<h3><%=user.getName()%></h3>
-					<p><%=user.getAge()%></p>
-					<p><%=user.getGender()%></p>
-					<p><%=user.getEmail()%></p>
-				</div>
+					<input type="hidden" name="removeUserId"
+						value="<%=user.getUserId()%>">
+					<div class="button colored extra-padding highlightable"
+						onclick="highlightButton(this); showRemoveButton('<%=user.getUserId()%>')">
+						<h3><%=user.getName()%></h3>
+						<p><%=user.getAge()%></p>
+						<p><%=user.getGender()%></p>
+						<p><%=user.getEmail()%></p>
+					</div>
 				</form>
 				<%
 				}
@@ -140,17 +141,18 @@
 		</section>
 		<br>
 		<section class="box">
-			<h1>Available users</h1>
+			<h1 class="box colored reduced-padding">Available Users</h1>
+			<%
+			Set<User> availableUsers = (Set<User>) request.getAttribute("availableUsers");
+			String selectedUser = null;
+			if (availableUsers.isEmpty()) {
+			%>
+			<p>No users available to add to this match</p>
+			<%
+			}
+			%>
 			<div class="grid-container">
 				<%
-				Set<User> availableUsers = (Set<User>) request.getAttribute("availableUsers");
-				String selectedUser = null;
-				if (availableUsers.isEmpty()) {
-				%>
-				<p>No users available to add to this match</p>
-				<%
-				}
-
 				for (User user : availableUsers) {
 				%>
 
@@ -158,8 +160,9 @@
 					action="/EJBFootBookWebProject/matchInfo?matchId=<%=match.getMatchId()%>"
 					method="post">
 					<input type="hidden" name="userId" value="<%=user.getUserId()%>">
-					<div class="button colored" onclick="showAddButton('<%=user.getUserId()%>')">
-						<p><%=user.getName()%></p>
+					<div class="button colored extra-padding highlightable"
+						onclick="highlightButton(this); showAddButton('<%=user.getUserId()%>')">
+						<h3><%=user.getName()%></h3>
 						<p><%=user.getAge()%></p>
 						<p><%=user.getGender()%></p>
 						<p><%=user.getEmail()%></p>
@@ -176,12 +179,24 @@
 						document.getElementById("addUserToMatchForm").style.display = "block";
 						document.getElementById("removeUserFromMatchForm").style.display = "none";
 					}
-					
+
 					function showRemoveButton(userId) {
 						document.getElementById("selectedRemoveUserId").value = userId;
 						document.getElementById("removeUserDisplay").textContent = userId;
 						document.getElementById("removeUserFromMatchForm").style.display = "block";
 						document.getElementById("addUserToMatchForm").style.display = "none";
+					}
+
+					function highlightButton(clickedButton) {
+						// Remove highlight from all buttons
+						var buttons = document
+								.getElementsByClassName('highlightable');
+						for (var i = 0; i < buttons.length; i++) {
+							buttons[i].classList.remove('button-highlighted');
+						}
+
+						// Highlight the clicked button
+						clickedButton.classList.add('button-highlighted');
 					}
 				</script>
 			</div>
@@ -190,20 +205,20 @@
 	<form id="addUserToMatchForm"
 		action="/EJBFootBookWebProject/matchInfo?matchId=<%=match.getMatchId()%>"
 		method="post" style="display: none;">
-		<input type="hidden" name="formType" value="addUserToMatch" >
-		<input type="hidden" name="userId" id="selectedUserId"> 
-		<input type="hidden" name="matchId" value="<%=match.getMatchId()%>">
-		<button class="colored" type="submit">
+		<input type="hidden" name="formType" value="addUserToMatch"> <input
+			type="hidden" name="userId" id="selectedUserId"> <input
+			type="hidden" name="matchId" value="<%=match.getMatchId()%>">
+		<button type="submit">
 			Add User <span id="userIdDisplay"></span> To Match
 		</button>
 	</form>
 	<form id="removeUserFromMatchForm"
 		action="/EJBFootBookWebProject/matchInfo?matchId=<%=match.getMatchId()%>"
 		method="post" style="display: none;">
-		<input type="hidden" name="formType" value="removeUserFromMatch" > 
+		<input type="hidden" name="formType" value="removeUserFromMatch">
 		<input type="hidden" name="removeUserId" id="selectedRemoveUserId">
 		<input type="hidden" name="matchId" value="<%=match.getMatchId()%>">
-		<button class="colored" type="submit">
+		<button type="submit">
 			Remove User <span id="removeUserDisplay"></span> From Match
 		</button>
 	</form>
