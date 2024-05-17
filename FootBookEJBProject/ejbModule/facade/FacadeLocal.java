@@ -1,7 +1,5 @@
 package facade;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.List;
 import java.util.Set;
 
@@ -47,6 +45,7 @@ public interface FacadeLocal {
 
 
 
+
 	// Match Methods
 
 	public Match findMatch(String string);
@@ -66,9 +65,10 @@ public interface FacadeLocal {
 	public boolean isMatchUnique(String pitchId, LocalDate date, LocalTime time);
 	
 
+
 	// User Methods
 
-	public long getUserCount();
+  public long getUserCount();
 
 	public long getUsersOnMatchesCount();
 

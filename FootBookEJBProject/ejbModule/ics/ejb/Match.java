@@ -26,13 +26,9 @@ import jakarta.persistence.Table;
 @Entity
 
 @NamedQueries({ @NamedQuery(name = "Match.findAll", query = "SELECT m FROM Match m"),
-@NamedQuery(name = "Match.countAllMatches", query = "SELECT COUNT(m) FROM Match m"), // Query for statistic of
-																					// how many matches are
-																					// registered
-@NamedQuery(name = "Match.findByRefereeAndDateTime", 
-query = "SELECT m FROM Match m WHERE m.referee.refereeId = :refereeId AND m.date = :date AND CAST(m.time AS string) = :timeString"),	//Query for checking
-																																	
-@NamedQuery(name = "Match.isMatchUnique", query = "SELECT COUNT(m) FROM Match m WHERE m.pitch.pitchId = :pitchId AND m.date = :date AND CAST(m.time AS string) = :timeString")
+		@NamedQuery(name = "Match.countAllMatches", query = "SELECT COUNT(m) FROM Match m") // Query for statistic of
+																							// how many matches are
+																							// registered
 })
 
 @Table(name = "Match")
@@ -117,7 +113,7 @@ public class Match implements Serializable {
 		this.users = users;
 	}
 
-	@ManyToOne(fetch = FetchType.EAGER) // Many matches can be officiated by one referee
+	@ManyToOne(fetch = FetchType.LAZY) // Many matches can be officiated by one referee
 	@JoinColumn(name = "refereeId")
 	public Referee getReferee() {
 		return referee;

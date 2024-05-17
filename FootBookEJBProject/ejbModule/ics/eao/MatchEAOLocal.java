@@ -1,8 +1,6 @@
 
 package ics.eao;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.List;
 
 //import ics.ejb.Match;
@@ -28,7 +26,4 @@ public interface MatchEAOLocal {
 
 	public List<String> findAllMatchIds();
 	
-	public List<Match> findMatchesByRefereeAndDateTime(String refereeId, LocalDate date, LocalTime time);
-	
-	public boolean isMatchUnique(String pitchId, LocalDate date, LocalTime time);
 }

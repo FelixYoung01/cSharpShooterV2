@@ -1,9 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
-<%@page 
-	import="ics.ejb.Match" import="java.util.Set"
+<%@page import="ics.ejb.Match" import="java.util.Set"
 	import="ics.ejb.User" import="java.time.format.DateTimeFormatter"
 	import="java.time.LocalDateTime"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
 
 <!DOCTYPE html>
 <html>
@@ -12,33 +11,6 @@
 <title>Match Information</title>
 <link rel="stylesheet" href="styles.css">
 
-
-.match-info-box {
-	width: 400px;
-	margin-right: 20px; /* Adjust this value as needed */
-}
-</style>
-<script>
-    // JavaScript function to ensure the minute part is always set to "00"
-    function validateTimeInput() {
-        var timeInput = document.getElementById("matchTime");
-        var timeValue = timeInput.value;
-
-        if (timeValue) {
-            var parts = timeValue.split(':');
-            if (parts[1] !== "00") {
-                timeInput.value = parts[0] + ":00";
-            }
-        }
-    }
-
-    // JavaScript function to validate form submission
-    function validateForm(event) {
-        validateTimeInput();
-        return true;
-    }
-</script>
-
 </head>
 <body>
 	<jsp:include page="header.jsp" />
@@ -46,10 +18,7 @@
 	Match match = (Match) request.getAttribute("match");
 
 	Set<User> users = (Set<User>) request.getAttribute("usersOnMatch");
-	
-	String refereeName = match.getReferee().getRefereeName();
-	String refereeId = match.getReferee().getRefereeId();
-	
+
 	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd / HH:mm");
 	String createdDateFormatted = match.getCreatedDate().format(formatter);
 	String lastUpdatedDateFormatted = (match.getLastUpdatedDate() != null)
@@ -75,29 +44,7 @@
 			<p>
 				Last Updated:
 				<%=lastUpdatedDateFormatted%></p>
-		        <p>
-		   <p>
-                Referee on match: <%=refereeName%> (ID: <%=refereeId%>)
-            </p>
 
-		    	
-		 <!-- Form to update match date and time -->
-            <form id="updateMatchForm" action="/EJBFootBookWebProject/matchInfo?matchId=<%=match.getMatchId()%>" method="post" onsubmit="return validateForm()">
-                <input type="hidden" name="formType" value="updateMatch">
-                <label for="matchDate">Date:</label>
-                
-                <input type="date" id="matchDate" name="matchDate" required>
-                <label for="matchTime">Time:</label>
-                
-                <input type="time" id="matchTime" name="matchTime" required onchange="validateTimeInput()">
-                <button type="submit">Update Match</button>
-            </form>
-
-            <!-- Form to remove the match -->
-            <form id="removeMatchForm" action="/EJBFootBookWebProject/matchInfo?matchId=<%=match.getMatchId()%>" method="post" onsubmit="return confirmRemoveMatch();">	
-                <input type="hidden" name="formType" value="removeMatch">
-                <button type="submit">Remove Match</button>
-            </form>     
 
 		</section>
 	</div>
@@ -222,11 +169,6 @@
 			Remove User <span id="removeUserDisplay"></span> From Match
 		</button>
 	</form>
-	<script>
-function confirmRemoveMatch() {
-    return confirm("Are you sure you want to remove this match? This action cannot be reversed.");
-}
-</script>
 	<script src="Darkmode.js">
 		
 	</script>
