@@ -1,12 +1,14 @@
 <%@page import="java.util.Map" import="ics.ejb.Pitch"
 	import="java.util.Set" import="ics.ejb.Match"
 	import="java.time.format.DateTimeFormatter"
-	import="java.time.LocalDateTime"%>
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	import="ics.ejb.Pitch" import="java.util.Set" import="ics.ejb.Match"
-	import="ics.ejb.Referee" import="ics.ejb.User"
-	pageEncoding="ISO-8859-1"%>
 
+	import="java.time.LocalDateTime"
+	import="ics.ejb.Referee" import="ics.ejb.User"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+
+
+	
+	
 
 <!DOCTYPE html>
 <html>
@@ -14,6 +16,32 @@
 <meta charset="ISO-8859-1">
 <title>Pitch Information</title>
 <link rel="stylesheet" href="styles.css">
+
+    <script>
+    // JavaScript function to ensure the minute part is always set to "00"
+    function validateTimeInput() {
+        var timeInput = document.getElementById("time");
+        var timeValue = timeInput.value;
+
+        if (timeValue) {
+            var parts = timeValue.split(':');
+            if (parts[1] !== "00") {
+                timeInput.value = parts[0] + ":00";
+            }
+        }
+    }
+
+    // JavaScript function to validate form submission
+    function validateForm(event) {
+        validateTimeInput();
+        return true;
+    }
+    
+ // JavaScript function to show alert if error message is present
+    function showErrorAlert(message) {
+        alert(message);
+    }
+</script>
 </head>
 <body>
 	<jsp:include page="header.jsp" />
@@ -26,6 +54,8 @@
 
 	// Format the founded date
 	String foundedDateFormatted = (pitch.getFounded() != null) ? pitch.getFounded().format(formatter) : "Not Available";
+	
+	String errorMessage = (String) request.getAttribute("errorMessage");
 	%>
 	<section class="box colored">
 		<h1>Pitch Information</h1>
@@ -79,10 +109,14 @@
 			}
 			%>
 		</section>
-		<%
-		}
-		%>
-		<button id="createMatchButton">Create Match</button>
+
+        <button id="createMatchButton">Book now</button>
+        <div id="createMatchForm" class="box popUp" style="display: none;">
+            <h2>Insert Credentials</h2>
+            <form id="creatingMatchForm" action="/EJBFootBookWebProject/pitchInfo" method="post">
+            	<input type="hidden" name="formType" value="createMatch">
+                <input type="hidden" id="pitchId" name="pitchId" value="<%= pitchId %>">
+
 
 		<div id="createMatchForm" class="overlay" style="display: none;">
 			<div class="modalContainer">
@@ -125,6 +159,15 @@
 							}
 							%>
 						</select><br>
+
+
+                <label for="time">Time:</label>
+                <input type="time" id="time" name="time" required onchange= "validateTimeInput()">
+
+                <button type="submit">Confirm Booking</button>
+            </form>
+        </div>
+    </section>
 
 						<!-- Date and Time Picker -->
 						<label>Date & Time:</label><br> <input class="bordered-input"
@@ -189,6 +232,7 @@
 							document.getElementById("createMatchForm").style.display = "none";
 						});
 	</script>
+
 	<script src="Darkmode.js"></script>
 </body>
 </html>

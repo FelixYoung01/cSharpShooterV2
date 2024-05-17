@@ -1,5 +1,7 @@
 package facade;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 import java.util.Set;
 
@@ -130,6 +132,19 @@ public class Facade implements FacadeLocal {
 	public long getMatchCount() {
 		return matchEAO.getMatchCount();
 	}
+	
+	/*public boolean isMatchUnique(String pitchId, LocalDate date, LocalTime time) {
+		return matchEAO.isMatchUnique(pitchId, date, time);
+	}*/
+	
+	//Method to check if referee is on match with same da and time
+	/*public boolean isRefereeBooked(String refereeId, LocalDate date, LocalTime time) {
+		List<Match> matches = matchEAO.findMatchesByRefereeAndDateTime(refereeId, date, time);
+		if (!matches.isEmpty()) {
+			return false;
+		}
+		return true;
+	}*/
 
 	// USER METHODS
 
