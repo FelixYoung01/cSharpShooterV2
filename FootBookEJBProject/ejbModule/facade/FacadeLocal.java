@@ -43,7 +43,7 @@ public interface FacadeLocal {
 
 	public Referee updateReferee(Referee refereeToUpdate);
 	
-	//public boolean isRefereeBooked(String refereeId, LocalDate date, LocalTime time);
+	public boolean isRefereeBooked(String refereeId, LocalDate date, LocalTime time);
 
 
 
@@ -63,7 +63,7 @@ public interface FacadeLocal {
 
 	List<String> findAllMatchIds();
 	
-	//public boolean isMatchUnique(String pitchId, LocalDate date, LocalTime time);
+	public boolean isMatchUnique(String pitchId, LocalDate date, LocalTime time);
 	
 
 	// User Methods
