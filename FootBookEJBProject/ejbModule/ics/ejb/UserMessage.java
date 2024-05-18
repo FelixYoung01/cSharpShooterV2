@@ -15,7 +15,7 @@ public class UserMessage {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ID")
+    @Column(name = "ID", nullable = false)
     private Long id;
 
     @Column(name = "Name", nullable = false, length = 100)
