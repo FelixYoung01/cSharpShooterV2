@@ -47,8 +47,8 @@ class RefereeJUnit {
 		refereeLicense = new RefereeLicense();
 		refereeLicense2 = new RefereeLicense();
 
-		referee1 = new Referee("R98", refereeName, refereeLicense);
-		referee2 = new Referee("R99", "berra", refereeLicense2);
+		referee1 = new Referee("R1", refereeName, refereeLicense);
+		referee2 = new Referee("R2", "berra", refereeLicense2);
 		
 		match1 = new Match();
 		match2 = new Match();

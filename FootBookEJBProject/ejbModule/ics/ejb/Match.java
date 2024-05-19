@@ -147,7 +147,17 @@ public class Match implements Serializable {
 	public void setLastUpdatedDate(LocalDateTime lastUpdatedDate) {
 		this.lastUpdatedDate = lastUpdatedDate;
 	}
-
+	
+	@PrePersist
+	public void onCreate() {
+		this.createdDate = LocalDateTime.now();
+		this.lastUpdatedDate = this.createdDate;
+	}
+	
+	@PreUpdate
+	public void onUpdate() {
+		this.lastUpdatedDate = LocalDateTime.now();
+	}
 	
 	
 

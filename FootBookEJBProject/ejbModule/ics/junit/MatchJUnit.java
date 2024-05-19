@@ -16,18 +16,25 @@ import org.junit.jupiter.api.Test;
 
 import ics.ejb.Match;
 import ics.ejb.Pitch;
+import ics.ejb.Referee;
+import ics.ejb.RefereeLicense;
 
 class MatchJUnit {
-	private String matchId;
+	
 	private Pitch pitch;
 	private Pitch pitch2;
 	private LocalDate date;
 	private LocalDate date2;
 	private LocalTime time2;
 	private LocalTime time;
-
+	private Referee referee1;
+	private Referee referee2;
 	private Match match1;
 	private Match match2;
+	private RefereeLicense refereeLicense;
+	private RefereeLicense refereeLicense2;
+	
+	private String expectedMatchId;
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
@@ -39,7 +46,9 @@ class MatchJUnit {
 
 	@BeforeEach
 	void setUp() throws Exception {
-		matchId = "M1";
+		expectedMatchId = "M1";
+		referee1 = new Referee("R1", "Referee1", refereeLicense );
+		referee2 = new Referee("R2", "Referee2", refereeLicense2);
 		pitch = new Pitch("P1", "Pitch1");
 		pitch2 = new Pitch("P2", "Pitch2");
 		date = LocalDate.of(2021, 12, 31);
@@ -48,8 +57,8 @@ class MatchJUnit {
 		time2 = LocalTime.of(14, 00);
 
 
-		//match1 = new Match(matchId, pitch, date, time);
-		//match2 = new Match("M2", pitch2, date2, time2);
+		match1 = new Match(expectedMatchId, referee1, pitch, date, time);
+		match2 = new Match("M3", referee2, pitch2, date2, time2);
 
 	}
 
@@ -61,7 +70,7 @@ class MatchJUnit {
 
 	@Test
 	final void testGetMatchId() {
-		assertEquals("M1", match1.getMatchId());
+		assertEquals("M3", match2.getMatchId());
 	}
 
 	@Test
@@ -104,13 +113,24 @@ class MatchJUnit {
 		match1.setTime(time2);
 		assertEquals(time2, match1.getTime());
 	}
-
+	
+	@Test
+	final void testGetReferee() {
+		assertEquals(referee1, match1.getReferee());
+	}
+			
+	@Test
+	final void testSetReferee() {
+		match1.setReferee(referee2);
+		assertEquals(referee2, match1.getReferee());
+	}
+	
 	// Test for callback methods
 
 	@Test
 	final void testPrePersist() {
 	    // Simulate persisting the entity
-	  //  match1.onCreate();
+	    match1.onCreate();
 
 	    // Check that the createdDate and lastUpdatedDate were set
 	    assertNotNull(match1.getCreatedDate(), "createdDate should not be null");
@@ -127,14 +147,15 @@ class MatchJUnit {
 
 	@Test
 	final void testPreUpdate() {
-		// Simulate persisting the entity first
-		//match1.onCreate();
+		
+		
 		LocalDateTime initialCreatedDate = match1.getCreatedDate();
 		LocalDateTime initialLastUpdatedDate = match1.getLastUpdatedDate();
-
+		
+		
 		// Simulate updating the entity
 		match1.setTime(LocalTime.of(15, 0)); // Change time
-		//match1.onUpdate(); // Simulate the update callback
+		match1.onUpdate(); // Simulate the update callback
 
 		// Verify the createdDate remains the same, but lastUpdatedDate changes
 		assertEquals(initialCreatedDate, match1.getCreatedDate());
