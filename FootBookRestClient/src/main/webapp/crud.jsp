@@ -8,99 +8,8 @@
 <link
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
 	rel="stylesheet">
-<!-- Include jQuery -->
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<!-- Include Bootstrap JS -->
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
-<!-- Include FootBook.js -->
-<script src="js/FootBook.js"></script>
-<style>
-/* Custom Emerald Green (Primary) and Gunmetal Grey (Secondary) colors */
-:root {
-	--primary-color: #50C878; /* Emerald Green */
-	--secondary-color: #8C92AC; /* Gunmetal Grey */
-}
-
-/* Apply primary color to header, footer, and buttons */
-header, footer {
-	background-color: var(--primary-color);
-	color: white;
-	text-align: center;
-	padding: 15px 0;
-}
-
-.btn-primary {
-	background-color: var(--primary-color);
-	border-color: var(--primary-color);
-}
-
-.btn-primary:hover {
-	background-color: #45B069; /* Slightly darker shade for hover */
-	border-color: #45B069;
-}
-
-/* Set the body background to secondary color */
-body {
-	background-color: var(--secondary-color);
-	margin: 0; /* Remove default margin */
-	font-family: Arial, sans-serif; /* Improves font consistency */
-}
-
-.navbar {
-	background-color: var(--primary-color);
-	color: white;
-	display: flex;
-	justify-content: center; /* Centers the navbar content horizontally */
-	padding: 0.5rem;
-}
-
-.navbar .nav-link {
-	color: white;
-	margin: 0 15px;
-}
-
-.container-main {
-	margin-top: 20px;
-	background-color: transparent;
-	padding: 15px;
-	border-radius: 10px; /* Optional, to soften corners */
-}
-
-.match-card, #matchDisplayBox {
-	background-color: white;
-	margin-bottom: 20px;
-	padding: 10px;
-	border: 1px solid #dee2e6;
-	/* Optional, gives a light border for better distinction */
-}
-
-/* Main application link box styling */
-.main-application-box {
-	display: inline-block; /* Centers the box inline with the header */
-	padding: 15px 20px;
-	background-color: white;
-	/* Ensure visibility by adding a background color */
-	border: 2px solid #50C878; /* Light green border color */
-	border-radius: 8px;
-	text-decoration: none;
-	color: #50C878; /* Light green text */
-	font-size: 1.2em;
-	font-weight: bold;
-	margin-top: 10px;
-	transition: all 0.3s ease; /* Adds smooth transitions */
-}
-
-/* Hover effect to expand the box */
-.main-application-box:hover {
-	background-color: #50C878; /* Fill with light green */
-	color: white; /* Make text white when hovered */
-	transform: scale(1.1); /* Expands the box on hover */
-	box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
-	/* Adds a shadow for emphasis */
-}
-</style>
+<!-- Include Custom CSS -->
+<link href="css/footbook.css" rel="stylesheet">
 </head>
 <body>
 	<header>
@@ -111,14 +20,12 @@ body {
 				Application</a>
 		</p>
 	</header>
-
 	<nav class="navbar navbar-expand-lg">
-    <ul class="navbar-nav">
-      <li class="nav-item active">
-        <a class="nav-link text-white" href="#">Detailed Search</a>
-      </li>
-    </ul>
-  </nav>
+		<ul class="navbar-nav">
+			<li class="nav-item active"><a class="nav-link text-white"
+				href="#">User</a></li>
+		</ul>
+	</nav>
 
 	<div class="container container-main">
 		<!-- Weather, City, and IP Section -->
@@ -126,8 +33,8 @@ body {
 			<div class="col-md-12 match-card">
 				<div class="card">
 					<div class="card-header"
-						style="background-color: var(--primary-color); color: white;">
-						Location and Weather Information</div>
+						style="background-color: var(--primary-color); color: white;">Location
+						and Weather Information</div>
 					<div class="card-body">
 						<table class="table table-bordered">
 							<tr>
@@ -152,35 +59,32 @@ body {
 			<div class="col-md-6 match-card">
 				<div class="card">
 					<div class="card-header"
-						style="background-color: var(--primary-color); color: white;">
-						Create New Match</div>
+						style="background-color: var(--primary-color); color: white;">Create
+						New User</div>
 					<div class="card-body">
 						<form>
 							<fieldset id="PersonalFS">
-								<legend>Create New Match:</legend>
+								<legend>Create New User:</legend>
 								<div class="form-group">
-									<label for="id">Match ID</label> <input type="text"
-										class="form-control" name="matchId" id="id" value="">
+									<label for="userId">User ID</label> <input type="text"
+										class="form-control" name="userId" id="userId" value="">
 								</div>
 								<div class="form-group">
-									<label for="pitchIdSelect">Pitch ID</label> <select
-										class="form-control" id="pitchIdSelect">
-										<option value="">Select Pitch ID</option>
-									</select>
+									<label for="userName">Name</label> <input type="text"
+										class="form-control" name="userName" id="userName" value="">
 								</div>
 								<div class="form-group">
-									<label for="refereeIdSelect">Referee ID</label> <select
-										class="form-control" id="refereeIdSelect">
-										<option value="">Select Referee ID</option>
-									</select>
+									<label for="userAge">Age</label> <input type="number"
+										class="form-control" name="userAge" id="userAge" value="">
 								</div>
 								<div class="form-group">
-									<label for="date">Date</label> <input type="date"
-										class="form-control" name="date" id="date" value="">
+									<label for="userEmail">Email</label> <input type="email"
+										class="form-control" name="userEmail" id="userEmail" value="">
 								</div>
 								<div class="form-group">
-									<label for="time">Time</label> <input type="time"
-										class="form-control" name="time" id="time" value="">
+									<label for="userGender">Gender (M/F)</label> <input type="text"
+										class="form-control" name="userGender" id="userGender"
+										value="">
 								</div>
 								<button type="button" class="btn btn-primary" name="submitBtn"
 									value="Add" id="AddBtn">Add</button>
@@ -193,37 +97,33 @@ body {
 			<div class="col-md-6 match-card">
 				<div class="card">
 					<div class="card-header"
-						style="background-color: var(--primary-color); color: white;">
-						Find, Update, and Delete</div>
+						style="background-color: var(--primary-color); color: white;">Find,
+						Update, and Delete User</div>
 					<div class="card-body">
 						<form>
 							<fieldset id="FindUpdateFS">
 								<legend>Find, Update, and Delete:</legend>
 								<div class="form-group">
-									<label for="findMatchIdSelect">Match ID</label> <select
-										class="form-control" id="findMatchIdSelect">
-										<option value="">Select Match ID</option>
+									<label for="findUserIdSelect">User ID</label> <select
+										class="form-control" id="findUserIdSelect">
+										<option value="">Select User ID</option>
 									</select>
 								</div>
 								<div class="form-group">
-									<label for="findPitchIdSelect">Pitch ID</label> <select
-										class="form-control" id="findPitchIdSelect">
-										<option value="">Select Pitch ID</option>
-									</select>
+									<label for="findUserName">Name</label> <input type="text"
+										class="form-control" id="findUserName">
 								</div>
 								<div class="form-group">
-									<label for="findRefereeIdSelect">Referee ID</label> <select
-										class="form-control" id="findRefereeIdSelect">
-										<option value="">Select Referee ID</option>
-									</select>
+									<label for="findUserAge">Age</label> <input type="number"
+										class="form-control" id="findUserAge">
 								</div>
 								<div class="form-group">
-									<label for="findDate">Date</label> <input type="date"
-										class="form-control" name="findDate" id="findDate" value="">
+									<label for="findUserEmail">Email</label> <input type="email"
+										class="form-control" id="findUserEmail">
 								</div>
 								<div class="form-group">
-									<label for="findTime">Time</label> <input type="time"
-										class="form-control" name="findTime" id="findTime" value="">
+									<label for="findUserGender">Gender (M/F)</label> <input
+										type="text" class="form-control" id="findUserGender">
 								</div>
 								<button type="button" class="btn btn-primary" name="submitBtn"
 									value="Find" id="FindBtn">Find</button>
@@ -242,22 +142,26 @@ body {
 			<div class="col-md-12 match-card">
 				<div class="card">
 					<div class="card-header"
-						style="background-color: var(--primary-color); color: white;">
-						Match Details</div>
-					<div class="card-body" id="matchDisplayBox">
-						<p id="displayMatchId">Match ID:</p>
-						<p id="displayPitchId">Pitch ID:</p>
-						<p id="displayRefereeId">Referee ID:</p>
-						<p id="displayMatchDate">Date:</p>
-						<p id="displayMatchTime">Time:</p>
+						style="background-color: var(--primary-color); color: white;">User
+						Details</div>
+					<div class="card-body" id="userDisplayBox">
+						<p id="displayUserId">User ID:</p>
+						<p id="displayUserName">Name:</p>
+						<p id="displayUserAge">Age:</p>
+						<p id="displayUserEmail">Email:</p>
+						<p id="displayUserGender">Gender:</p>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-
-	<footer>
-		<p>&copy; CSharpShooters</p>
-	</footer>
+	<!-- Include jQuery -->
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<!-- Include Bootstrap JS -->
+	<script
+		src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+	<!-- Include Custom JS -->
+	<script src="js/FootBook.js"></script>
 </body>
 </html>

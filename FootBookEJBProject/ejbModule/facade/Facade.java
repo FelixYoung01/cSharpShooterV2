@@ -167,8 +167,9 @@ public class Facade implements FacadeLocal {
 		return userEAO.getAllUsers();
 	}
 
-	public void createUser(User user) {
+	public User createUser(User user) {
 		userEAO.createUser(user);
+		return user;
 	}
 
 	public void deleteUser(String userId) {
