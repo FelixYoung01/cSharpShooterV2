@@ -50,7 +50,7 @@
 								<input type="hidden" name="formType" value="removeUser">
 								<input type="hidden" name="userId" value="<%=user.getUserId()%>">
 								<button type="submit"
-									onclick="return confirm('Are you sure you want to remove this user?')">Remove</button>
+									onclick="return confirm('Are you sure you want to remove this user? This action can not be undone.')">Remove</button>
 							</form>
 						</td>
 					</tr>

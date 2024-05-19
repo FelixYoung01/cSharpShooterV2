@@ -12,12 +12,12 @@ import ics.ejb.Match;
 import ics.ejb.User;
 
 class UserJUnit {
-	private String userId;
-	private int age;
-	private String email;
-	private String name;
-	private String gender;
-	private Match match;
+	private String expectedUserId;
+	private int exptectedAge;
+	private String expectedEmail;
+	private String expectedName;
+	private String expectedGender;
+	private Match expectedMatch;
 	
 	private User user1;
 	private User user2;
@@ -34,14 +34,14 @@ class UserJUnit {
 	@BeforeEach
 	void setUp() throws Exception {
 		
-		userId = "U1";
-		age = 21;
-		email = "alex@gmail.com";
-		name = "alex";
-		gender = "M";
-		match = new Match();
+		expectedUserId = "U1";
+		exptectedAge = 21;
+		expectedEmail = "alex@gmail.com";
+		expectedName = "alex";
+		expectedGender = "M";
+		expectedMatch = new Match();
 		
-		user1 = new User(userId, age, email, gender, name);
+		user1 = new User(expectedUserId, exptectedAge, expectedEmail, expectedGender, expectedName);
 		user2 = new User("U2", 22, "insh@gmail.com", "M", "Insh");
 		
 		
@@ -81,7 +81,7 @@ class UserJUnit {
 
 	@Test
 	final void testSetEmail() {
-		user2.setEmail(email);
+		user2.setEmail(expectedEmail);
 		assertEquals(user1.getEmail(), user2.getEmail());
 	}
 
@@ -115,10 +115,10 @@ class UserJUnit {
 
 	@Test
 	final void testSetMatch() {
-		user1.setMatch(match);
-		user2.setMatch(match);
-		assertEquals(match, user1.getMatch());
-		assertEquals(match, user2.getMatch());
+		user1.setMatch(expectedMatch);
+		user2.setMatch(expectedMatch);
+		assertEquals(expectedMatch, user1.getMatch());
+		assertEquals(expectedMatch, user2.getMatch());
 	}
 
 }

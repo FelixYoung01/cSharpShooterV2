@@ -76,4 +76,10 @@ public class UserEAOImpl implements UserEAOLocal {
 
 		return usersInMatches;
 	}
+	
+	public User findUserWithMatch(String userId) {
+		TypedQuery<User> query = em.createNamedQuery("User.findUserWithMatch", User.class);
+		query.setParameter("userId", userId);
+		return query.getSingleResult();
+	}
 }

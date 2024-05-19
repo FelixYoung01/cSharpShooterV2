@@ -57,7 +57,7 @@
 			action="/EJBFootBookWebProject/matchInfo?matchId=<%=match.getMatchId()%>"
 			method="post">
 			<input type="hidden" name="formType" value="deleteMatch">
-			<button class="bigger-button" style="background-color: red;" type="submit">Delete Match</button>
+			<button class="bigger-button" style="background-color: red;" type="submit" onclick="return confirm('Are you sure you want to remove this match? This action can not be undone.?')">Delete Match</button>
 		</form>
 	</div>
 </div>

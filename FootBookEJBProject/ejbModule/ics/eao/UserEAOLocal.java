@@ -24,6 +24,7 @@ public interface UserEAOLocal {
 	public Set<User> getAvailableUsers();
 	
 	public Set<User> getUsersInMatches();
-
+	
+	public User findUserWithMatch(String userId);
 
 }
