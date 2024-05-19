@@ -55,43 +55,8 @@
 			</form>
 	</section>
 
-	<div class="overlay" id="successMessage" style="display: none;">
-		<div class="modalContainer">
-			<div class="box">Your message has been sent successfully!</div>
-		</div>
-	</div>
-
 	<script>
-		function validateAndSubmit() {
-			var name = document.getElementById("name").value;
-			var email = document.getElementById("email").value;
-			var message = document.getElementById("message").value;
 
-			// Validate email format using a regular expression
-			var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-			if (!emailPattern.test(email)) {
-				alert("Please enter a valid email address.");
-				return; // Exit function if email format is invalid
-			}
-
-			// If email format is valid, display success message
-			alert("Success! Your message was sent.");
-
-			// Optionally, reset the form fields after displaying the message
-			document.getElementById("name").value = "";
-			document.getElementById("email").value = "";
-			document.getElementById("message").value = "";
-		}
-
-		function showSuccess() {
-			// Show a success message in a popup
-			alert("Success! Your message was sent.");
-
-			// Optionally, you can reset the form fields after displaying the message
-			document.getElementById("name").value = "";
-			document.getElementById("email").value = "";
-			document.getElementById("message").value = "";
-		}
 	</script>
 
 	<script src="Darkmode.js"></script>

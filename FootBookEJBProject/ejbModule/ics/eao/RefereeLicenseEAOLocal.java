@@ -4,7 +4,7 @@ package ics.eao;
 import java.util.List;
 
 import ics.ejb.RefereeLicense;
-
+import ics.exceptions.FootBookException;
 import jakarta.ejb.Local;
 
 @Local
@@ -12,13 +12,13 @@ import jakarta.ejb.Local;
 public interface RefereeLicenseEAOLocal {
 
 
-	public void addRefereeLicense(RefereeLicense refereeLicense);
+	public void addRefereeLicense(RefereeLicense refereeLicense) throws FootBookException;
 
-	public void updateRefereeLicense(RefereeLicense refereeLicense);
+	public void updateRefereeLicense(RefereeLicense refereeLicense) throws FootBookException;
 
-	public void deleteRefereeLicense(String refereeLicenseId);
+	public void deleteRefereeLicense(String refereeLicenseId) throws FootBookException;
 
-	public RefereeLicense findRefereeLicenseById(String refereeLicenseId);
+	public RefereeLicense findRefereeLicenseById(String refereeLicenseId) throws FootBookException;
 	
-	public List<RefereeLicense> getAllRefereeLicenses();
+	public List<RefereeLicense> getAllRefereeLicenses() throws FootBookException;
 }

@@ -57,7 +57,7 @@
 		%>
 		<section class="grid-container">
 			<%
-			Map<String, Integer> matchUserCounts = (Map<String, Integer>) request.getAttribute("matchUserCount");
+			Map<String, Integer> matchUserCounts = (Map<String, Integer>) request.getAttribute("matchUserCounts");
 			for (Match match : matches) {
 			%>
 			<a class="button extra-padding"

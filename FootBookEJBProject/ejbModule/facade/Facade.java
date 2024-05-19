@@ -3,8 +3,6 @@ package facade;
 import java.util.List;
 import java.util.Set;
 
-import org.junit.jupiter.migrationsupport.EnableJUnit4MigrationSupport;
-
 import ics.eao.MatchEAOLocal;
 import ics.eao.PitchEAOLocal;
 import ics.eao.RefereeEAOLocal;
@@ -17,6 +15,7 @@ import ics.ejb.Referee;
 import ics.ejb.RefereeLicense;
 import ics.ejb.User;
 import ics.ejb.UserMessage;
+import ics.exceptions.FootBookException;
 import jakarta.ejb.EJB;
 import jakarta.ejb.Stateless;
 
@@ -42,151 +41,133 @@ public class Facade implements FacadeLocal {
 	private UserMessageEAOLocal userMessageEAO;
 
 	// REFEREE LICENSE METHODS
-	public RefereeLicense findRefereeLicense(String string) {
+	
+	public RefereeLicense findRefereeLicense(String string) throws FootBookException {
 		return refereeLicenseEAO.findRefereeLicenseById(string);
 	}
 
-	public List<RefereeLicense> getAllRefereeLicenses() {
+	public List<RefereeLicense> getAllRefereeLicenses() throws FootBookException {
 		return refereeLicenseEAO.getAllRefereeLicenses();
 	}
-	
-	
-	// REFEREE METHODS
 
-	public List<String> findAllRefereeIds() {
+	public List<String> findAllRefereeIds() throws FootBookException {
 		return refereeEAO.findAllRefereeIds();
 	}
 
-	public Referee findRefereeById(String refereeId) {
+	public Referee findRefereeById(String refereeId) throws FootBookException {
 		return refereeEAO.findRefereeById(refereeId);
 	}
 
-	public void createReferee(Referee referee) {
+	public void createReferee(Referee referee) throws FootBookException {
 		refereeEAO.addReferee(referee);
 	}
-	
-	public Set<Referee> getAllReferees() {
+
+	public Set<Referee> getAllReferees() throws FootBookException {
 		return refereeEAO.getAllReferees();
 	}
-	
-	public void deleteReferee(String refereeId) {
+
+	public void deleteReferee(String refereeId) throws FootBookException {
 		refereeEAO.deleteReferee(refereeId);
 	}
 
-
-	public Referee updateReferee(Referee refereeToUpdate) {
+	public Referee updateReferee(Referee refereeToUpdate) throws FootBookException {
 		return refereeEAO.updateReferee(refereeToUpdate);
-
 	}
 
-	// PITCH METHODS
-	public Set<Pitch> getAllPitches() {
+	public Set<Pitch> getAllPitches() throws FootBookException {
 		return pitchEAO.getAllPitches();
 	}
 
-	public List<String> findAllPitchIds() {
+	public List<String> findAllPitchIds() throws FootBookException {
 		return pitchEAO.findAllPitchIds();
 	}
-	
-	
-	public Pitch findPitch(String pitchId) {
-        return pitchEAO.findPitchById(pitchId);
+
+	public Pitch findPitch(String pitchId) throws FootBookException {
+		return pitchEAO.findPitchById(pitchId);
 	}
-	
-	public Set<Match> getMatchesOnPitch(String pitchId) {
+
+	public Set<Match> getMatchesOnPitch(String pitchId) throws FootBookException {
 		return pitchEAO.findPitchById(pitchId).getMatches();
 	}
 
-	// MATCH METHODS
-	public Match findMatch(String string) {
-
-		if (string == null) {
-			System.out.println("Match not found for ID: " + string);
-		}
+	public Match findMatch(String string) throws FootBookException {
 		return matchEAO.findMatchById(string);
-	};
+	}
 
-	public List<Match> findAllMatches() {
+	public List<Match> findAllMatches() throws FootBookException {
 		return matchEAO.findAllMatches();
-	};
+	}
 
-	public Match createMatch(Match match) {
+	public Match createMatch(Match match) throws FootBookException {
 		matchEAO.addMatch(match);
 		return match;
 	}
 
-	public void deleteMatch(String id) {
+	public void deleteMatch(String id) throws FootBookException {
 		matchEAO.deleteMatch(id);
 	}
 
-	public Match updateMatch(Match match) {
+	public Match updateMatch(Match match) throws FootBookException {
 		return matchEAO.updateMatch(match);
 	}
 
-	public List<String> findAllMatchIds() {
+	public List<String> findAllMatchIds() throws FootBookException {
 		return matchEAO.findAllMatchIds();
 	}
 
-	
-	public Set<User> getUsersOnMatch(String matchId) {
+	public Set<User> getUsersOnMatch(String matchId) throws FootBookException {
 		return matchEAO.findMatchById(matchId).getUsers();
 	}
-	
-	public long getMatchCount() {
+
+	public long getMatchCount() throws FootBookException {
 		return matchEAO.getMatchCount();
 	}
 
-	// USER METHODS
-
-	public User findUser(String userId) {
+	public User findUser(String userId) throws FootBookException {
 		return userEAO.findUserById(userId);
 	}
 
-
-	public long getUserCount() {
+	public long getUserCount() throws FootBookException {
 		return userEAO.getUserCount();
 	}
 
-	public long getUsersOnMatchesCount() {
+	public long getUsersOnMatchesCount() throws FootBookException {
 		return userEAO.getUsersOnMatchesCount();
 	}
 
-	public Set<User> getAvailableUsers() {
+	public Set<User> getAvailableUsers() throws FootBookException {
 		return userEAO.getAvailableUsers();
 	}
 
-	public User updateUser(User userToUpdate) {
+	public User updateUser(User userToUpdate) throws FootBookException {
 		return userEAO.updateUser(userToUpdate);
 	}
 
-	public User findUserById(String userId) {
+	public User findUserById(String userId) throws FootBookException {
 		return userEAO.findUserById(userId);
 	}
 
-	public Set<User> getAllUsers() {
+	public Set<User> getAllUsers() throws FootBookException {
 		return userEAO.getAllUsers();
 	}
 
-	public User createUser(User user) {
+	public void createUser(User user) throws FootBookException {
 		userEAO.createUser(user);
-		return user;
 	}
 
-	public void deleteUser(String userId) {
+	public void deleteUser(String userId) throws FootBookException {
 		userEAO.deleteUser(userId);
 	}
 
-	public Set<User> getUsersInMatches() {
-        return userEAO.getUsersInMatches();
-    }
-	
-	public User findUserWithMatch(String userId) {
+	public Set<User> getUsersInMatches() throws FootBookException {
+		return userEAO.getUsersInMatches();
+  }
+  
+	public User findUserWithMatch(String userId) throws FootBookException {
 		return userEAO.findUserWithMatch(userId);
 	}
 
-	// USER MESSAGE METHODS
-	
-	public void addUserMessage(UserMessage userMessage) {
+	public void addUserMessage(UserMessage userMessage) throws FootBookException {
 		userMessageEAO.addUserMessage(userMessage);
 	}
 }
