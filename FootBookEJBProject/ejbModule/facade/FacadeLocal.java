@@ -79,6 +79,8 @@ public interface FacadeLocal {
 
 	public User findUser(String userId);
 	
+	public User findUserWithMatch(String userId);
+	
   
 	//Pitch Methods
   

@@ -179,6 +179,10 @@ public class Facade implements FacadeLocal {
 	public Set<User> getUsersInMatches() {
         return userEAO.getUsersInMatches();
     }
+	
+	public User findUserWithMatch(String userId) {
+		return userEAO.findUserWithMatch(userId);
+	}
 
 	// USER MESSAGE METHODS
 	

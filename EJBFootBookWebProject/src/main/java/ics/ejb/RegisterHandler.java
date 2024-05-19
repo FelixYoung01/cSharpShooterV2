@@ -135,20 +135,30 @@ public class RegisterHandler implements IPathHandler {
 
 		// Removing a user
 		else if ("removeUser".equals(action)) {
-			String userId = request.getParameter("userId");
+		    String userId = request.getParameter("userId");
 
-			User user = facade.findUser(userId);
-			if (user != null) {
-				facade.deleteUser(userId);
-				System.out.println("User removed: " + userId);
-				response.sendRedirect(request.getRequestURI());
-				return null;
-			} else {
-				System.out.println("User not found: " + userId);
-				response.getWriter().write("User not found");
-				response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-				return null;
-			}
+		    User user = facade.findUserWithMatch(userId);
+		    if (user != null) {
+		        Match match = user.getMatch(); // Get the match associated with the user
+		        if (match != null) {
+		            Set<User> usersOnMatch = match.getUsers(); // Get all users associated with the match
+		            if (usersOnMatch.size() == 1 && usersOnMatch.contains(user)) {
+		                // If the match only has this user, delete the match
+		                facade.deleteMatch(match.getMatchId());
+		                System.out.println("Match removed: " + match.getMatchId());
+		            }
+		        }
+
+		        facade.deleteUser(userId);
+		        System.out.println("User removed: " + userId);
+		        response.sendRedirect(request.getRequestURI());
+		        return null;
+		    } else {
+		        System.out.println("User not found: " + userId);
+		        response.getWriter().write("User not found");
+		        response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+		        return null;
+		    }
 		}
 
 		// Removing a referee
