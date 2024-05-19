@@ -5,8 +5,10 @@ import java.time.LocalDateTime;
 import java.util.Set;
 import java.util.logging.Logger;
 
+import ics.listeners.UserAuditor;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EntityListeners;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
@@ -21,6 +23,7 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 @Entity
+@EntityListeners(UserAuditor.class)
 @NamedQueries({
 
 	@NamedQuery(name="User.findAll", query="SELECT u FROM User u"),
@@ -35,8 +38,6 @@ import jakarta.validation.constraints.Size;
 
 public class User implements Serializable{
 	
-    private static final Logger logger = Logger.getLogger(Match.class.getName());
-
 	private static final long serialVersionUID = 1L;
 
     
@@ -130,10 +131,7 @@ public class User implements Serializable{
 		this.joined = joined;
 	}
 	
-	@PrePersist
-	public void onJoined() {
-		this.joined = LocalDateTime.now();
-	}
+	
 }
 
 

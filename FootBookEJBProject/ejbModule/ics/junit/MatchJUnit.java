@@ -110,7 +110,7 @@ class MatchJUnit {
 	@Test
 	final void testPrePersist() {
 	    // Simulate persisting the entity
-	    match1.onCreate();
+	  //  match1.onCreate();
 
 	    // Check that the createdDate and lastUpdatedDate were set
 	    assertNotNull(match1.getCreatedDate(), "createdDate should not be null");
@@ -128,13 +128,13 @@ class MatchJUnit {
 	@Test
 	final void testPreUpdate() {
 		// Simulate persisting the entity first
-		match1.onCreate();
+		//match1.onCreate();
 		LocalDateTime initialCreatedDate = match1.getCreatedDate();
 		LocalDateTime initialLastUpdatedDate = match1.getLastUpdatedDate();
 
 		// Simulate updating the entity
 		match1.setTime(LocalTime.of(15, 0)); // Change time
-		match1.onUpdate(); // Simulate the update callback
+		//match1.onUpdate(); // Simulate the update callback
 
 		// Verify the createdDate remains the same, but lastUpdatedDate changes
 		assertEquals(initialCreatedDate, match1.getCreatedDate());
