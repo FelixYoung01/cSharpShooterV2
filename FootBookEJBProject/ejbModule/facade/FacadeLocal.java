@@ -64,7 +64,7 @@ public interface FacadeLocal {
 
 	public long getUsersOnMatchesCount();
 
-	public void createUser(User user);
+	public User createUser(User user);
 
 	public Set<User> getAllUsers();
   
