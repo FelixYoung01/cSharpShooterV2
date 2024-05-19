@@ -118,7 +118,7 @@ public class PitchInfoHandler implements IPathHandler {
 	private String generateMatchId(FacadeLocal facade) throws FootBookException {
 		for (int i = 1; i < 99; i++) {
 			String matchId = "M" + String.format("%02d", i);
-			if (facade.findMatch(matchId) == null) {
+			if (facade.findAllMatches().stream().noneMatch(match -> match.getMatchId().equals(matchId))) {
 				return matchId;
 			}
 		}

@@ -77,6 +77,13 @@ public class RegisterHandler implements IPathHandler {
 		// Kör kodstycket ifall det är en dommare som ska läggas till //ADD REFEREE CODE
 		else if ("addReferee".equals(action)) {
             String refereeId = generateRefereeId(facade);
+            
+			if (refereeId == null) {
+				response.getWriter().write("No available referee ID found.");
+				response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+				return null;
+			}
+            
 			String refName = request.getParameter("refereeName");
 			String licenseId = request.getParameter("licenseId");
 
@@ -118,8 +125,6 @@ public class RegisterHandler implements IPathHandler {
 					userToUpdate.setAge(age);
 					userToUpdate.setEmail(newEmail);
 					userToUpdate.setGender(newGender);
-
-					User updateSuccessful = facade.updateUser(userToUpdate);
 
 					System.out.println("User updated");
 					response.sendRedirect(request.getRequestURI());
@@ -221,7 +226,7 @@ public class RegisterHandler implements IPathHandler {
 		// Check for the first available user ID, in ascending order, starting from U01
 		for (int i = 1; i < 99; i++) {
 			String userId = "U" + String.format("%02d", i);
-			if (facade.findUserById(userId) == null) {
+			if (facade.getAllUsers().stream().noneMatch(u -> u.getUserId().equals(userId))) {
 				return userId;
 			}
 		}
@@ -232,7 +237,7 @@ public class RegisterHandler implements IPathHandler {
 		// Check for the first available referee ID, in ascending order, starting from R01
 		for (int i = 1; i < 99; i++) {
 			String refereeId = "R" + String.format("%02d", i);
-			if (facade.findRefereeById(refereeId) == null) {
+			if (facade.getAllReferees().stream().noneMatch(r -> r.getRefereeId().equals(refereeId))) {
 				return refereeId;
 			}
 		}

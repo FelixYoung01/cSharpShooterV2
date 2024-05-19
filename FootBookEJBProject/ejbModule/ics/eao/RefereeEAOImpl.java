@@ -76,7 +76,11 @@ public class RefereeEAOImpl implements RefereeEAOLocal {
 			throw new FootBookException("Referee ID is null");
 		}
 		try {
-			return em.find(Referee.class, refereeId);
+			Referee referee = em.find(Referee.class, refereeId);
+			if (referee == null) {
+				throw new FootBookException("Referee not found");
+			}
+			return referee;
 		} catch (PersistenceException e) {
 			throw new FootBookException("Error finding referee by ID", e);
 		}

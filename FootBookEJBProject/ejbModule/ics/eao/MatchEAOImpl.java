@@ -62,6 +62,9 @@ public class MatchEAOImpl implements MatchEAOLocal {
 		}
 		try {
             Match match = em.find(Match.class, matchId);
+			if (match == null) {
+				throw new FootBookException("Match not found with ID: " + matchId);
+			}
             return match;
         } catch (PersistenceException e) {
             throw new FootBookException("Error finding match by ID", e);

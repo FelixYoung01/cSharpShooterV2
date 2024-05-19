@@ -48,7 +48,7 @@ public class FootBookServlet extends HttpServlet {
 	                requestDispatcher.forward(request, response);
 	            }
 			} catch (ServletException | IOException | FootBookException e) {
-				System.out.println("Error: " + e.getMessage());
+				e.printStackTrace();
 				// Redirect to error.jsp and show error message
 		        request.setAttribute("errorMessage", e.getMessage());
 		        RequestDispatcher errorDispatcher = request.getRequestDispatcher("/error.jsp");
@@ -82,7 +82,7 @@ public class FootBookServlet extends HttpServlet {
 	            requestDispatcher.forward(request, response);
 	        }
 		} catch (ServletException | IOException | FootBookException e) {
-			System.out.println("Error: " + e.getMessage());
+			e.printStackTrace();
 			// Redirect to error.jsp and show error message
 	        request.setAttribute("errorMessage", e.getMessage());
 	        RequestDispatcher errorDispatcher = request.getRequestDispatcher("/error.jsp");
