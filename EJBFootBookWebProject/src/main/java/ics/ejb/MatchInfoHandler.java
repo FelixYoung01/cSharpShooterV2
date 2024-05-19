@@ -6,6 +6,7 @@ import java.time.LocalTime;
 import java.util.Set;
 
 import facade.FacadeLocal;
+import ics.exceptions.FootBookException;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -14,7 +15,7 @@ import jakarta.servlet.http.HttpServletResponse;
 public class MatchInfoHandler implements IPathHandler {
 	@Override
 	public RequestDispatcher handleRequestDispatcherPost(HttpServletRequest request, HttpServletResponse response,
-			FacadeLocal facade) throws ServletException, IOException {
+			FacadeLocal facade) throws ServletException, IOException, FootBookException {
 		// TODO Auto-generated method stub
 		String matchId = request.getParameter("matchId");
 		Match match = facade.findMatch(matchId);

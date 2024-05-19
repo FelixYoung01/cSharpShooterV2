@@ -6,6 +6,7 @@ import java.util.List;
 
 import facade.Facade;
 import facade.FacadeLocal;
+import ics.exceptions.FootBookException;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -15,7 +16,7 @@ public class RegisterHandler implements IPathHandler {
 
 	@Override
 	public RequestDispatcher handleRequestDispatcherGet(HttpServletRequest request, HttpServletResponse response,
-			FacadeLocal facade) throws ServletException, IOException {
+			FacadeLocal facade) throws ServletException, IOException, FootBookException {
 		Set<User> users = facade.getAllUsers();
 		Set<Referee> referees = facade.getAllReferees();
 		List<RefereeLicense> licenses = facade.getAllRefereeLicenses();
@@ -29,7 +30,7 @@ public class RegisterHandler implements IPathHandler {
 
 	@Override
 	public RequestDispatcher handleRequestDispatcherPost(HttpServletRequest request, HttpServletResponse response,
-			FacadeLocal facade) throws ServletException, IOException {
+			FacadeLocal facade) throws ServletException, IOException, FootBookException {
 
 		Set<User> users = facade.getAllUsers();
 		Set<Referee> referees = facade.getAllReferees();
@@ -216,7 +217,7 @@ public class RegisterHandler implements IPathHandler {
 		return request.getRequestDispatcher("/register.jsp");
 	}
 	
-	private String generateUserId(FacadeLocal facade) {
+	private String generateUserId(FacadeLocal facade) throws FootBookException {
 		// Check for the first available user ID, in ascending order, starting from U01
 		for (int i = 1; i < 99; i++) {
 			String userId = "U" + String.format("%02d", i);
@@ -227,7 +228,7 @@ public class RegisterHandler implements IPathHandler {
 		return null;
 	}
 	
-	private String generateRefereeId(FacadeLocal facade) {
+	private String generateRefereeId(FacadeLocal facade) throws FootBookException {
 		// Check for the first available referee ID, in ascending order, starting from R01
 		for (int i = 1; i < 99; i++) {
 			String refereeId = "R" + String.format("%02d", i);

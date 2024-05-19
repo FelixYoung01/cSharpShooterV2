@@ -9,6 +9,7 @@ import ics.ejb.Referee;
 import ics.ejb.RefereeLicense;
 import ics.ejb.User;
 import ics.ejb.UserMessage;
+import ics.exceptions.FootBookException;
 import ics.ejb.Pitch;
 //import ics.ejb.Player;
 //import ics.ejb.Referee;
@@ -17,83 +18,75 @@ import jakarta.ejb.Local;
 
 @Local
 public interface FacadeLocal {
-
 	// RefereeLicense Methods
 
-	public RefereeLicense findRefereeLicense(String string);
+	public RefereeLicense findRefereeLicense(String string) throws FootBookException;
 
-	public List<RefereeLicense> getAllRefereeLicenses();
-	
-
+	public List<RefereeLicense> getAllRefereeLicenses() throws FootBookException;
 
 	// Referee Methods
 
-	public List<String> findAllRefereeIds();
+	public List<String> findAllRefereeIds() throws FootBookException;
 
-	public Set<Referee> getAllReferees();
+	public Set<Referee> getAllReferees() throws FootBookException;
 
-	public Referee findRefereeById(String refereeId);
+	public Referee findRefereeById(String refereeId) throws FootBookException;
 
-	public void createReferee(Referee referee);
-	
+	public void createReferee(Referee referee) throws FootBookException;
 
-	public void deleteReferee(String refereeId);
+	public void deleteReferee(String refereeId) throws FootBookException;
 
-	public Referee updateReferee(Referee refereeToUpdate);
-
-
+	public Referee updateReferee(Referee refereeToUpdate) throws FootBookException;
 
 	// Match Methods
 
-	public Match findMatch(String string);
+	public Match findMatch(String string) throws FootBookException;
 
-	public Match createMatch(Match match);
+	public Match createMatch(Match match) throws FootBookException;
 
-	public Match updateMatch(Match match);
+	public Match updateMatch(Match match) throws FootBookException;
 
-	public List<Match> findAllMatches();
+	public List<Match> findAllMatches() throws FootBookException;
 
-	public void deleteMatch(String id);
+	public void deleteMatch(String id) throws FootBookException;
 
-	public long getMatchCount();
+	public long getMatchCount() throws FootBookException;
 
-	List<String> findAllMatchIds();
+	public List<String> findAllMatchIds() throws FootBookException;
 
 	// User Methods
 
-  public long getUserCount();
+	public long getUserCount() throws FootBookException;
 
-	public long getUsersOnMatchesCount();
+	public long getUsersOnMatchesCount() throws FootBookException;
 
-	public void createUser(User user);
+	public void createUser(User user) throws FootBookException;
 
-	public Set<User> getAllUsers();
-  
-	public User findUserById(String userId);
-	
-	public User updateUser(User userToUpdate);
+	public Set<User> getAllUsers() throws FootBookException;
 
-	public void deleteUser(String userId);
+	public User findUserById(String userId) throws FootBookException;
 
-	public Set<User> getAvailableUsers();
+	public User updateUser(User userToUpdate) throws FootBookException;
 
-	public User findUser(String userId);
-	
-  
-	//Pitch Methods
-  
-	public Pitch findPitch(String pitchId);
+	public void deleteUser(String userId) throws FootBookException;
 
-	public Set<Pitch> getAllPitches();
+	public Set<User> getAvailableUsers() throws FootBookException;
 
-	public Set<Match> getMatchesOnPitch(String pitchId);
+	public User findUser(String userId) throws FootBookException;
 
-	public Set<User> getUsersOnMatch(String matchId);
+	// Pitch Methods
 
-	public List<String> findAllPitchIds();
+	public Pitch findPitch(String pitchId) throws FootBookException;
 
-	public Set<User> getUsersInMatches();
+	public Set<Pitch> getAllPitches() throws FootBookException;
 
+	public Set<Match> getMatchesOnPitch(String pitchId) throws FootBookException;
 
-	public void addUserMessage(UserMessage userMessage);
+	public Set<User> getUsersOnMatch(String matchId) throws FootBookException;
+
+	public List<String> findAllPitchIds() throws FootBookException;
+
+	public Set<User> getUsersInMatches() throws FootBookException;
+
+	public void addUserMessage(UserMessage userMessage) throws FootBookException;
 }

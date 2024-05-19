@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Set;
 
 import facade.FacadeLocal;
+import ics.exceptions.FootBookException;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -21,7 +22,7 @@ public class HomeHandler implements IPathHandler {
 
     @Override
     public RequestDispatcher handleRequestDispatcherGet(HttpServletRequest request, HttpServletResponse response,
-            FacadeLocal facade) throws ServletException, IOException {
+            FacadeLocal facade) throws ServletException, IOException, FootBookException {
 
         String type = request.getParameter("type");
         if (type != null && !type.isEmpty()) {
@@ -53,7 +54,7 @@ public class HomeHandler implements IPathHandler {
         return request.getRequestDispatcher("/home.jsp");
     }
 
-    private void handleAjaxRequest(HttpServletRequest request, HttpServletResponse response, FacadeLocal facade, String type) throws IOException {
+    private void handleAjaxRequest(HttpServletRequest request, HttpServletResponse response, FacadeLocal facade, String type) throws IOException, FootBookException {
         StringBuilder data = new StringBuilder();
 
         if ("matches".equals(type)) {

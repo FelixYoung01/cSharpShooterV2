@@ -13,6 +13,7 @@ import java.util.Map;
 
 import jakarta.ejb.EJB;
 import facade.FacadeLocal;
+import ics.exceptions.FootBookException;
 
 @WebServlet("/home")
 public class FootBookServlet extends HttpServlet {
@@ -37,13 +38,23 @@ public class FootBookServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String pathInfo = request.getRequestURI().substring(request.getContextPath().length());
-
+        System.out.println("$doGetPath: " + pathInfo);
+        IPathHandler handler = handlerMap.get(pathInfo);
+        RequestDispatcher requestDispatcher;
         if (pathInfo.equals("/home")) {
-            IPathHandler handler = handlerMap.get(pathInfo);
-            RequestDispatcher requestDispatcher = handler.handleRequestDispatcherGet(request, response, facade);
-            if (requestDispatcher != null) {
-                requestDispatcher.forward(request, response);
-            }
+			try {
+				requestDispatcher = handler.handleRequestDispatcherGet(request, response, facade);
+	            if (requestDispatcher != null) {
+	                requestDispatcher.forward(request, response);
+	            }
+			} catch (ServletException | IOException | FootBookException e) {
+				System.out.println("Error: " + e.getMessage());
+				// Redirect to error.jsp and show error message
+		        request.setAttribute("errorMessage", e.getMessage());
+		        RequestDispatcher errorDispatcher = request.getRequestDispatcher("/error.jsp");
+		        errorDispatcher.forward(request, response);
+                
+			}
         } else {
             doPost(request, response);
         }
@@ -60,16 +71,23 @@ public class FootBookServlet extends HttpServlet {
         System.out.println("$doPostPath: " + pathInfo);
 
         IPathHandler handler = handlerMap.get(pathInfo);
-        RequestDispatcher requestDispatcher = handler.handleRequestDispatcherPost(request, response, facade);
-        // If-sats För att lösa nullpointerexception ifall requestdispatcher är null (Typ när man raderar en referee och sidan uppdateras)
-        if (response.isCommitted()) {
-            return;
-        }
-        if (requestDispatcher != null) {
-            requestDispatcher.forward(request, response);
-        } else {
-            response.sendError(HttpServletResponse.SC_NOT_FOUND, "Handler not found for path: " + pathInfo);
-        }
+
+        RequestDispatcher requestDispatcher;
+		try {
+			requestDispatcher = handler.handleRequestDispatcherPost(request, response, facade);
+	        if (response.isCommitted()) {
+	            return;
+	        }
+	        if (requestDispatcher != null) {
+	            requestDispatcher.forward(request, response);
+	        }
+		} catch (ServletException | IOException | FootBookException e) {
+			System.out.println("Error: " + e.getMessage());
+			// Redirect to error.jsp and show error message
+	        request.setAttribute("errorMessage", e.getMessage());
+	        RequestDispatcher errorDispatcher = request.getRequestDispatcher("/error.jsp");
+	        errorDispatcher.forward(request, response);
+		}
     }
 
     public void init() throws ServletException {
