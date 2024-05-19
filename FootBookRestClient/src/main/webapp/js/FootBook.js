@@ -52,7 +52,7 @@ $(document).ready(function() {
 		// Make the AJAX request to the OpenWeatherMap API
 		$.ajax({
 			method: "GET",
-			url: `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&units=metric&APPID=ce3e097846c8e55864481f37b93db22f`,
+			//url: `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&units=metric&APPID=ce3e097846c8e55864481f37b93db22f`,
 			error: ajaxWeatherReturn_Error,
 			success: ajaxWeatherReturn_Success
 		});
@@ -83,7 +83,7 @@ $(document).ready(function() {
 	function fetchIPAddress() {
 		$.ajax({
 			method: "GET",
-			url: `https://ipinfo.io/?token=7b10316367bd0b`,
+			//url: `https://ipinfo.io/?token=7b10316367bd0b`,
 			error: logAjaxError,
 			success: function(result) {
 				$("#ipNbr").text(result.ip);
@@ -92,8 +92,8 @@ $(document).ready(function() {
 	}
 
 	// Fetch the location and weather data when the page loads
-	getLocation();
-	fetchIPAddress();
+	//getLocation();
+	//fetchIPAddress();
 
 	// Add User event handler
 	$("#AddBtn").click(function() {
@@ -275,7 +275,7 @@ $(document).ready(function() {
 
 	// Error function for update user
 	function ajaxUpdateReturnError(result, status, xhr) {
-		alert("Error updating user");
+		alert("Make sure to select a USER ID");
 		console.log("Ajax-update user: " + status);
 	}
 
@@ -289,10 +289,15 @@ $(document).ready(function() {
 	}
 
 	// Error function for add user
-	function ajaxAddReturnError(result, status, xhr) {
-		alert("User ID already exists. Please enter a different User ID.");
-		console.log("Ajax-add user: " + status);
+	function ajaxAddReturnError(xhr, status, error) {
+		if (xhr.status === 409) { // 409 Conflict
+			alert("User ID already exists. Please enter a different User ID.");
+		} else {
+			alert("An error occurred while adding the user. Please try again.");
+		}
+		console.log("Ajax-add user error:", status, error);
 	}
+
 
 	// Success function for find user
 	function ajaxFindReturnSuccess(result, status, xhr) {

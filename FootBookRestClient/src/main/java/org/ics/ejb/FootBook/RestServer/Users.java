@@ -61,24 +61,23 @@ public class Users extends HttpServlet {
 		sendAsJson(response, user);
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String pathInfo = request.getPathInfo();
 		if (pathInfo == null || pathInfo.equals("/")) {
-			BufferedReader reader = request.getReader();// Läs data Json
+			BufferedReader reader = request.getReader();
 
 			User u = parseJsonUser(reader);
 
 			try {
 				u = facade.createUser(u);
+				sendAsJson(response, u); // send successful response
 			} catch (Exception e) {
+				response.setStatus(HttpServletResponse.SC_CONFLICT); // 409 Conflict
+				response.getWriter().write("{\"error\": \"User ID already exists.\"}");
+				response.getWriter().flush();
 				System.out.println("duplicate key");
 			}
-			sendAsJson(response, u);
 		}
 	}
 
@@ -219,7 +218,7 @@ public class Users extends HttpServlet {
 		User user = new User();
 		user.setUserId(jsonRoot.getString("User ID", null));
 		user.setName(jsonRoot.getString("Name", null));
-		
+
 		// Handle Age field separately to avoid NumberFormatException
 		String ageStr = jsonRoot.getString("Age", null);
 		if (ageStr != null) {
@@ -229,7 +228,7 @@ public class Users extends HttpServlet {
 				user.setAge(0); // Set to a default value or handle as needed
 			}
 		}
-		
+
 		user.setEmail(jsonRoot.getString("Email", null));
 		user.setGender(jsonRoot.getString("Gender", null));
 		return user;
