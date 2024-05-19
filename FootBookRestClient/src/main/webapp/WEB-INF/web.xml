@@ -11,32 +11,12 @@
   </welcome-file-list>
   <servlet>
     <description></description>
-    <display-name>Matches</display-name>
-    <servlet-name>Matches</servlet-name>
-    <servlet-class>org.ics.ejb.FootBook.RestServer.Matches</servlet-class>
+    <display-name>Users</display-name>
+    <servlet-name>Users</servlet-name>
+    <servlet-class>org.ics.ejb.FootBook.RestServer.Users</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>Matches</servlet-name>
-    <url-pattern>/Matches</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <description></description>
-    <display-name>Pitches</display-name>
-    <servlet-name>Pitches</servlet-name>
-    <servlet-class>org.ics.ejb.FootBook.RestServer.Pitches</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>Pitches</servlet-name>
-    <url-pattern>/Pitches</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <description></description>
-    <display-name>Referees</display-name>
-    <servlet-name>Referees</servlet-name>
-    <servlet-class>org.ics.ejb.FootBook.RestServer.Referees</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>Referees</servlet-name>
-    <url-pattern>/Referees</url-pattern>
+    <servlet-name>Users</servlet-name>
+    <url-pattern>/Users</url-pattern>
   </servlet-mapping>
 </web-app>

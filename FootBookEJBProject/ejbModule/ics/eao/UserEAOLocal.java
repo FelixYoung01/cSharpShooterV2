@@ -25,6 +25,6 @@ public interface UserEAOLocal {
 	public Set<User> getAvailableUsers() throws FootBookException;
 	
 	public Set<User> getUsersInMatches() throws FootBookException;
-
-
+	
+	public User findUserWithMatch(String userId) throws FootBookException;
 }

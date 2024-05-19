@@ -134,4 +134,10 @@ public class UserEAOImpl implements UserEAOLocal {
 			throw new FootBookException("Error getting users in matches", e);
 		}
 	}
+	
+	public User findUserWithMatch(String userId) {
+		TypedQuery<User> query = em.createNamedQuery("User.findUserWithMatch", User.class);
+		query.setParameter("userId", userId);
+		return query.getSingleResult();
+	}
 }

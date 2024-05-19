@@ -9,8 +9,10 @@ import java.util.Date;
 import java.util.Set;
 import java.util.logging.Logger;
 
+import ics.listeners.MatchAuditor;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EntityListeners;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
@@ -24,6 +26,7 @@ import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
 
 @Entity
+@EntityListeners(MatchAuditor.class)
 
 @NamedQueries({ @NamedQuery(name = "Match.findAll", query = "SELECT m FROM Match m"),
 		@NamedQuery(name = "Match.countAllMatches", query = "SELECT COUNT(m) FROM Match m") // Query for statistic of
@@ -144,25 +147,16 @@ public class Match implements Serializable {
 	public void setLastUpdatedDate(LocalDateTime lastUpdatedDate) {
 		this.lastUpdatedDate = lastUpdatedDate;
 	}
-
-	// Callback method to set createdDate before the entity is persisted
-
-	@PrePersist // Sets the creation timestamp when the entity is first saved to the database
+	
+	@PrePersist
 	public void onCreate() {
-		createdDate = LocalDateTime.now();
-		this.lastUpdatedDate = LocalDateTime.now();
-	    //System.out.println("Creating new Match (ID: " + matchId + ") - createdDate: " + this.createdDate);
-        logger.info("Creating new Match (ID: " + matchId + ") - createdDate: " + this.createdDate);
-
+		this.createdDate = LocalDateTime.now();
+		this.lastUpdatedDate = this.createdDate;
 	}
-
-	// Callback method to set lastUpdatedDate before the entity is updated
-	@PreUpdate // Updates the last modified timestamp when the entity is updated
+	
+	@PreUpdate
 	public void onUpdate() {
-		lastUpdatedDate = LocalDateTime.now();
-	   // System.out.println("Updating Match (ID: " + matchId + ") - lastUpdatedDate: " + this.lastUpdatedDate);
-		logger.info("Updating Match (ID: " + matchId + ") - lastUpdatedDate: " + this.lastUpdatedDate);
-
+		this.lastUpdatedDate = LocalDateTime.now();
 	}
 	
 	

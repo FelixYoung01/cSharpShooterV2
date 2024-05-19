@@ -161,6 +161,10 @@ public class Facade implements FacadeLocal {
 
 	public Set<User> getUsersInMatches() throws FootBookException {
 		return userEAO.getUsersInMatches();
+  }
+  
+	public User findUserWithMatch(String userId) throws FootBookException {
+		return userEAO.findUserWithMatch(userId);
 	}
 
 	public void addUserMessage(UserMessage userMessage) throws FootBookException {

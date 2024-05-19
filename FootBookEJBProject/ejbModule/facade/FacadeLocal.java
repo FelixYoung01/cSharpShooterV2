@@ -73,6 +73,8 @@ public interface FacadeLocal {
 	public Set<User> getAvailableUsers() throws FootBookException;
 
 	public User findUser(String userId) throws FootBookException;
+  
+  public User findUserWithMatch(String userId) throws FootBookException;
 
 	// Pitch Methods
 

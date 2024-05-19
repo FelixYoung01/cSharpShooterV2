@@ -16,8 +16,8 @@ import ics.ejb.Pitch;
 
 class PitchJUnit {
 	
-	private String pitchId;
-	private String name;
+	private String expectedPitchId;
+	private String expectedName;
 	private Match match;
 	
 	private Pitch pitch1;
@@ -34,10 +34,10 @@ class PitchJUnit {
 
 	@BeforeEach
 	void setUp() throws Exception {
-		pitchId = "P1";
-		name = "Pitch1";
+		expectedPitchId = "P1";
+		expectedName = "Pitch1";
 		
-		pitch1 = new Pitch(pitchId, name);
+		pitch1 = new Pitch(expectedPitchId, expectedName);
 		pitch2 = new Pitch("P2", "Pitch2");
 	}
 
@@ -49,18 +49,18 @@ class PitchJUnit {
 
 	@Test
 	final void testGetPitchId() {
-		assertEquals("P1", pitch1.getPitchId());
+		assertEquals(expectedPitchId, pitch1.getPitchId());
 	}
 
 	@Test
 	final void testSetPitchId() {
-		pitch1.setPitchId("P3");
-		assertEquals("P3", pitch1.getPitchId());
+		pitch2.setPitchId("P3");
+		assertEquals("P3", pitch2.getPitchId());
 	}
 
 	@Test
 	final void testGetName() {
-		assertEquals("Pitch1", pitch1.getName());
+		assertEquals(expectedName, pitch1.getName());
 	}
 
 	@Test
