@@ -4,27 +4,25 @@ $(document).ready(function() {
 		console.log("Ajax Error:", status, error);
 	}
 
-	// Fetch and populate user IDs on page load
-	function populateUserIds() {
+	// Fetch and populate user list on page load
+	function populateUserList() {
 		$.ajax({
 			method: "GET",
-			url: "http://localhost:8080/FootBookRestClient/Users/", // Fetch all users
-			dataType: "json", // Expect JSON response
+			url: "http://localhost:8080/FootBookRestClient/Users/",
+			dataType: "json",
 			success: function(users) {
-				let userSelect = $("#findUserIdSelect");
-				userSelect.empty(); // Clear current options
-				userSelect.append(new Option("Select User ID", "")); // Default option
+				let userList = $("#userList");
+				userList.empty(); // Clear current list
 				users.forEach(function(user) {
-					console.log("Adding user to dropdown:", user.userId); // Log user ID being added
-					userSelect.append(new Option(user.Id, user.Id));
+					console.log("Adding user to list:", user.userId); // Log user ID being added
+					userList.append(`<li class="list-group-item" data-id="${user.Id}">${user.Id}: ${user.Name}</li>`);
 				});
 			},
 			error: logAjaxError
 		});
 	}
 
-	populateUserIds();
-
+	populateUserList();
 
 	// Geolocation functions
 	function getLocation() {
@@ -36,7 +34,6 @@ $(document).ready(function() {
 	}
 
 	function showPosition(position) {
-		// Call ParseJsonFile with the obtained coordinates
 		ParseJsonFile(position);
 	}
 
@@ -49,10 +46,9 @@ $(document).ready(function() {
 		var lat = position.coords.latitude;
 		var long = position.coords.longitude;
 
-		// Make the AJAX request to the OpenWeatherMap API
 		$.ajax({
 			method: "GET",
-			//url: `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&units=metric&APPID=ce3e097846c8e55864481f37b93db22f`,
+			url: `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&units=metric&APPID=ce3e097846c8e55864481f37b93db22f`,
 			error: ajaxWeatherReturn_Error,
 			success: ajaxWeatherReturn_Success
 		});
@@ -83,17 +79,19 @@ $(document).ready(function() {
 	function fetchIPAddress() {
 		$.ajax({
 			method: "GET",
-			//url: `https://ipinfo.io/?token=7b10316367bd0b`,
+			url: `https://ipinfo.io/?token=7b10316367bd0b`,
 			error: logAjaxError,
 			success: function(result) {
 				$("#ipNbr").text(result.ip);
 			}
 		});
 	}
-
-	// Fetch the location and weather data when the page loads
-	//getLocation();
-	//fetchIPAddress();
+	
+	//display ip address
+	fetchIPAddress();
+	
+	//display weather
+	getLocation();
 
 	// Add User event handler
 	$("#AddBtn").click(function() {
@@ -101,7 +99,7 @@ $(document).ready(function() {
 		var strUserName = $("#userName").val();
 		var strUserAge = $("#userAge").val();
 		var strUserEmail = $("#userEmail").val();
-		var strUserGender = $("#userGender").val().toUpperCase(); // Convert to uppercase
+		var strUserGender = $("#userGender").val().toUpperCase();
 
 		// Validate user ID format
 		var userIdPattern = /^U\d{2}$/;
@@ -122,7 +120,6 @@ $(document).ready(function() {
 			alert("Age must be a number between 18 and 99.");
 			return;
 		}
-
 
 		// Validate email format
 		var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -145,56 +142,33 @@ $(document).ready(function() {
 			"Gender": strUserGender
 		};
 
-		var jsonString = JSON.stringify(userObj); // Serialize the object to JSON string
+		var jsonString = JSON.stringify(userObj);
 
-		if (strUserId && strUserName && strUserAge && strUserEmail && strUserGender) {
-			$.ajax({
-				method: "POST", // POST is used to add new data
-				url: "http://localhost:8080/FootBookRestClient/Users/", // Update with your endpoint
-				data: jsonString, // Data being sent to the server
-				dataType: "json", // Specifies the content type of the request body
-
-				error: ajaxAddReturnError,
-				success: ajaxAddReturnSuccess
-			});
-		} else {
-			alert("Please provide all required fields");
-		}
+		$.ajax({
+			method: "POST",
+			url: "http://localhost:8080/FootBookRestClient/Users/",
+			data: jsonString,
+			dataType: "json",
+			success: function(result) {
+				ajaxAddReturnSuccess(result);
+				populateUserList(); // Refresh the user list
+			},
+			error: ajaxAddReturnError
+		});
 	});
 
-
-
-	// Fetch Users event handler
-	$("#FindBtn").click(function() {
-		var strValue = $("#findUserIdSelect").val();// Get the selected user ID from the dropdown
-
-		if (strValue != "") {
-			$.ajax({
-				method: "GET",
-				url: `http://localhost:8080/FootBookRestClient/Users/` + strValue, // Update with your endpoint
-				error: ajaxFindReturnError,
-				success: ajaxFindReturnSuccess
-			});
-		} else {
-			alert("Please enter a valid User ID");
-		}
-
-	});
-
-	// Update User event handler
 	// Update User event handler
 	$("#UpdateBtn").click(function() {
-		var strUserId = $("#findUserIdSelect").val().toUpperCase();
-		var strUserName = $("#findUserName").val();
-		var strUserAge = $("#findUserAge").val();
-		var strUserEmail = $("#findUserEmail").val();
-		var strUserGender = $("#findUserGender").val().toUpperCase();
+		var strUserId = $("#userId").val().toUpperCase();
+		var strUserName = $("#userName").val();
+		var strUserAge = $("#userAge").val();
+		var strUserEmail = $("#userEmail").val();
+		var strUserGender = $("#userGender").val().toUpperCase();
 
 		var userObj = {
 			"User ID": strUserId
 		};
 
-		// Validate and include name if provided
 		if (strUserName) {
 			var namePattern = /^[A-Za-z\s]+$/;
 			if (!namePattern.test(strUserName)) {
@@ -204,7 +178,6 @@ $(document).ready(function() {
 			userObj["Name"] = strUserName;
 		}
 
-		// Validate and include age if provided
 		if (strUserAge) {
 			if (isNaN(strUserAge) || strUserAge < 18 || strUserAge > 99) {
 				alert("Age must be a number between 18 and 99.");
@@ -213,7 +186,6 @@ $(document).ready(function() {
 			userObj["Age"] = strUserAge;
 		}
 
-		// Validate and include email if provided
 		if (strUserEmail) {
 			var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 			if (!emailPattern.test(strUserEmail)) {
@@ -223,7 +195,6 @@ $(document).ready(function() {
 			userObj["Email"] = strUserEmail;
 		}
 
-		// Validate and include gender if provided
 		if (strUserGender) {
 			if (strUserGender !== "M" && strUserGender !== "F") {
 				alert("Please enter 'M' or 'F' for gender.");
@@ -232,63 +203,47 @@ $(document).ready(function() {
 			userObj["Gender"] = strUserGender;
 		}
 
-		var jsonString = JSON.stringify(userObj); // Serialize the object to JSON string
+		var jsonString = JSON.stringify(userObj);
 
 		$.ajax({
-			method: "PUT", // PUT is used to update data
-			url: `http://localhost:8080/FootBookRestClient/Users/` + strUserId, // Update with your endpoint
-			data: jsonString, // Data being sent to the server
-			contentType: "application/json", // Specifies the content type of the request body
-			error: ajaxUpdateReturnError,
-			success: function(result, status, xhr) {
-				ajaxUpdateReturnSuccess(result, status, xhr);
-				ParseJsonFileUser(result); // Refresh display with updated user info
-			}
+			method: "PUT",
+			url: `http://localhost:8080/FootBookRestClient/Users/` + strUserId,
+			data: jsonString,
+			contentType: "application/json",
+			success: function(result) {
+				ajaxUpdateReturnSuccess(result);
+				populateUserList(); // Refresh the user list
+			},
+			error: ajaxUpdateReturnError
 		});
 	});
 
-
 	// Delete User event handler
 	$("#DeleteBtn").click(function() {
+		var strUserId = $("#userId").val().toUpperCase();
 
-		var strValue = $("#findUserIdSelect").val();
-		if (strValue != "") {
+		if (strUserId !== "") {
 			$.ajax({
-				method: "DELETE", // DELETE is used to delete data
-				url: `http://localhost:8080/FootBookRestClient/Users/` + strValue, // Update with your endpoint
-				error: ajaxDelReturnError,
-				success: ajaxDelReturnSuccess
+				method: "DELETE",
+				url: `http://localhost:8080/FootBookRestClient/Users/` + strUserId,
+				success: function(result) {
+					ajaxDelReturnSuccess(result);
+					populateUserList(); // Refresh the user list
+				},
+				error: ajaxDelReturnError
 			});
 		} else {
 			alert("Please enter a valid User ID");
 		}
-
 	});
 
-	// Success function for update user
-	function ajaxUpdateReturnSuccess(result, status, xhr) {
-		clearFindUpdateFields();
-		clearDisplayFields();
-		alert("User successfully updated");
-	}
-
-
-	// Error function for update user
-	function ajaxUpdateReturnError(result, status, xhr) {
-		alert("Make sure to select a USER ID");
-		console.log("Ajax-update user: " + status);
-	}
-
-	// Success function for add user
-	function ajaxAddReturnSuccess(result, status, xhr) {
-		clearAddUserFields();
-		clearDisplayFields();
-		populateUserIds(); // Refresh the user list in the dropdown
-
+	// Success function for adding user
+	function ajaxAddReturnSuccess(result) {
+		clearUserFormFields();
 		alert("User successfully added");
 	}
 
-	// Error function for add user
+	// Error function for adding user
 	function ajaxAddReturnError(xhr, status, error) {
 		if (xhr.status === 409) { // 409 Conflict
 			alert("User ID already exists. Please enter a different User ID.");
@@ -298,6 +253,75 @@ $(document).ready(function() {
 		console.log("Ajax-add user error:", status, error);
 	}
 
+	// Success function for updating user
+	function ajaxUpdateReturnSuccess(result) {
+		clearUserFormFields();
+		alert("User successfully updated");
+		ParseJsonFileUser(result); // Refresh the user details box with the updated user details
+	}
+
+	// Error function for updating user
+	function ajaxUpdateReturnError(xhr, status, error) {
+		alert("Make sure to select a USER ID");
+		console.log("Ajax-update user error:", status, error);
+	}
+
+	// Success function for deleting user
+	function ajaxDelReturnSuccess(result) {
+		clearUserFormFields();
+		alert("User successfully deleted");
+	}
+
+	// Error function for deleting user
+	function ajaxDelReturnError(xhr, status, error) {
+		alert("Error deleting user");
+		console.log("Ajax-delete user error:", status, error);
+	}
+
+	// Clear input fields for user form
+	function clearUserFormFields() {
+		$("#userId").val("");
+		$("#userName").val("");
+		$("#userAge").val("");
+		$("#userEmail").val("");
+		$("#userGender").val("");
+	}
+
+	// Function to display user details
+	function ParseJsonFileUser(result) {
+		$("#displayUserId").text("User ID: " + result["User ID"]);
+		$("#displayUserName").text("Name: " + result.Name);
+		$("#displayUserAge").text("Age: " + result.Age);
+		$("#displayUserEmail").text("Email: " + result.Email);
+		$("#displayUserGender").text("Gender: " + result.Gender);
+	}
+
+	// Handle user list click to display details
+	$("#userList").on("click", "li", function() {
+		var userId = $(this).data("id");
+		$.ajax({
+			method: "GET",
+			url: `http://localhost:8080/FootBookRestClient/Users/` + userId,
+			success: ajaxFindReturnSuccess,
+			error: ajaxFindReturnError
+		});
+	});
+
+	// Fetch and display user details based on user ID
+	$("#FindBtn").click(function() {
+		var strUserId = $("#userId").val().toUpperCase(); // Get the user ID from the input field
+
+		if (strUserId != "") {
+			$.ajax({
+				method: "GET",
+				url: `http://localhost:8080/FootBookRestClient/Users/` + strUserId, // Update with your endpoint
+				success: ajaxFindReturnSuccess,
+				error: ajaxFindReturnError
+			});
+		} else {
+			alert("Please enter a valid User ID");
+		}
+	});
 
 	// Success function for find user
 	function ajaxFindReturnSuccess(result, status, xhr) {
@@ -313,62 +337,4 @@ $(document).ready(function() {
 		alert("Error");
 		console.log("Ajax-find user: " + status);
 	}
-
-	// Success function for delete user
-	function ajaxDelReturnSuccess(result, status, xhr) {
-		clearFindUpdateFields();
-		clearDisplayFields();
-		populateUserIds(); // Refresh the user list in the dropdown
-
-		alert("User successfully deleted");
-	}
-
-
-	// Error function for delete user
-	function ajaxDelReturnError(result, status, xhr) {
-		alert("Error deleting user");
-		console.log("Ajax-delete user: " + status);
-	}
-
-
-
-
-	// Clear input fields for adding a new user:
-	function clearAddUserFields() {
-		$("#userId").val("");
-		$("#userName").val("");
-		$("#userAge").val("");
-		$("#userEmail").val("");
-		$("#userGender").val("");
-	}
-
-	//Clear Input Fields for Finding/Updating a User:
-	function clearFindUpdateFields() {
-		$("#findUserIdSelect").val("");
-		$("#findUserName").val("");
-		$("#findUserAge").val("");
-		$("#findUserEmail").val("");
-		$("#findUserGender").val("");
-	}
-
-	//Clear Display Fields:
-	function clearDisplayFields() {
-		$("#displayUserId").text("User ID:");
-		$("#displayUserName").text("Name:");
-		$("#displayUserAge").text("Age:");
-		$("#displayUserEmail").text("Email:");
-		$("#displayUserGender").text("Gender:");
-	}
-
-
-	function ParseJsonFileUser(result) {
-		$("#displayUserId").text("User ID: " + result["User ID"]);
-		$("#displayUserName").text("Name: " + result.Name);
-		$("#displayUserAge").text("Age: " + result.Age);
-		$("#displayUserEmail").text("Email: " + result.Email);
-		$("#displayUserGender").text("Gender: " + result.Gender);
-	}
-
 });
-
-
