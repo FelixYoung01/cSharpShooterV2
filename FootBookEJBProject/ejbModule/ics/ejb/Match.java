@@ -97,7 +97,7 @@ public class Match implements Serializable {
 		this.time = time;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY) // Many matches can be played in one pitch
+	@ManyToOne(fetch = FetchType.EAGER) // Many matches can be played in one pitch
 	@JoinColumn(name = "pitchId")
 	public Pitch getPitch() {
 		return pitch;

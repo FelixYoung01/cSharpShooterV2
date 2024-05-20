@@ -59,7 +59,7 @@ public class Referee implements Serializable {
 		this.refereeName = refereeName;
 	}
 
-	@OneToMany(mappedBy = "referee", fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "referee", fetch = FetchType.EAGER)
 	public Set<Match> getMatches() {
         return matches;
     }
