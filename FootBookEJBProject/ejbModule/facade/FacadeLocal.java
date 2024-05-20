@@ -50,7 +50,7 @@ public interface FacadeLocal {
 
 	public Match updateMatch(Match match) throws FootBookException;
 
-	public List<Match> findAllMatches() throws FootBookException;
+	public Set<Match> findAllMatches() throws FootBookException;
 
 	public void deleteMatch(String id) throws FootBookException;
 
@@ -64,7 +64,7 @@ public interface FacadeLocal {
 
 	public long getUsersOnMatchesCount() throws FootBookException;
 
-	public void createUser(User user) throws FootBookException;
+	public User createUser(User user) throws FootBookException;
 
 	public Set<User> getAllUsers() throws FootBookException;
 

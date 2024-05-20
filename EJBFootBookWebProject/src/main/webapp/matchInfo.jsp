@@ -35,6 +35,10 @@
 		<section class="box colored left-aligned-text">
 			<h2>Match Information</h2>
 			<p>
+				Referee:
+				<%=match.getReferee().getRefereeName()%>
+			</p>
+			<p>
 				Match Date:
 				<%=match.getDate()%></p>
 			<p>
@@ -64,7 +68,7 @@
 				<input type="hidden" name="formType" value="deleteMatch">
 				<button class="bigger-button" style="background-color: red;"
 					type="submit"
-					onclick="return confirm('Are you sure you want to remove this match? This action can not be undone.?')">Delete
+					onclick="return confirm('Are you sure you want to remove this match? This action cannot be undone.')">Delete
 					Match</button>
 			</form>
 		</div>
@@ -135,19 +139,25 @@
 				}
 				%>
 				<script>
+					var numUsers = <%=users.size()%>;
 					function showAddButton(userId) {
-
+						document.getElementById("removeUserFromMatchForm").style.display = "none";
+						if (numUsers >= 10) {
+							return;
+						}
 						document.getElementById("selectedUserId").value = userId;
 						document.getElementById("userIdDisplay").textContent = userId;
 						document.getElementById("addUserToMatchForm").style.display = "block";
-						document.getElementById("removeUserFromMatchForm").style.display = "none";
 					}
 
 					function showRemoveButton(userId) {
+						document.getElementById("addUserToMatchForm").style.display = "none";
+						if (numUsers <= 1) {
+							return;
+						}
 						document.getElementById("selectedRemoveUserId").value = userId;
 						document.getElementById("removeUserDisplay").textContent = userId;
 						document.getElementById("removeUserFromMatchForm").style.display = "block";
-						document.getElementById("addUserToMatchForm").style.display = "none";
 					}
 
 					function highlightButton(clickedButton) {
