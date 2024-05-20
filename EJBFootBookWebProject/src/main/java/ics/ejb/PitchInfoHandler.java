@@ -97,7 +97,14 @@ public class PitchInfoHandler implements IPathHandler {
             System.out.println("User ID: " + userId);
             System.out.println("Match Date: " + date);
             System.out.println("Match Time: " + time);
-
+            
+            String errorMessage;
+            
+			if (matchId == null) {
+				errorMessage = "Could not generate unique match ID. Please try again later.";
+				request.setAttribute("errorMessage", errorMessage);
+			}
+			
             Match match = new Match(matchId, refereeForMatch, pitch, parsedDate, parsedTime);
             facade.createMatch(match);
 

@@ -38,6 +38,7 @@ public class RegisterHandler implements IPathHandler {
 		request.setAttribute("users", users);
 		request.setAttribute("referees", referees);
 		request.setAttribute("licenses", licenses);
+		
 
 		String action = request.getParameter("formType");
 
@@ -58,13 +59,13 @@ public class RegisterHandler implements IPathHandler {
 
 				facade.createUser(user);
 
-				System.out.println("User added");
 				response.sendRedirect(request.getRequestURI());
 				return null;
 
 			} else if (age < 18) {
 				response.getWriter().write("User must be 18 or older");
 				System.out.println("User must be 18 or older");
+				
 
 			}
 
@@ -83,7 +84,6 @@ public class RegisterHandler implements IPathHandler {
 			Referee referee = new Referee(refereeId, refName, tempLicense);
 			facade.createReferee(referee);
 
-			System.out.println("Referee added");
 			response.sendRedirect(request.getRequestURI());
 			return null;
 		}

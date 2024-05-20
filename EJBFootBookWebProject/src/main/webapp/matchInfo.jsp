@@ -16,6 +16,9 @@
 	<jsp:include page="header.jsp" />
 	<%
 	Match match = (Match) request.getAttribute("match");
+	
+	String message = (String)request.getAttribute("errorMessage");
+	
 
 	Set<User> users = (Set<User>) request.getAttribute("usersOnMatch");
 
@@ -44,6 +47,9 @@
 			<p>
 				Last Updated:
 				<%=lastUpdatedDateFormatted%></p>
+				<p>
+				message
+				<%=message%></p>
 
 
 		</section>
@@ -169,6 +175,28 @@
 			Remove User <span id="removeUserDisplay"></span> From Match
 		</button>
 	</form>
+	
+	<div id="lastUserMessage" class="overlay" style="display: ${displayStyle};">
+				<div class="modalContainer">
+					<div class="box colored">
+						<p id="errorText" >${errorMessage}</p>
+						<button onclick="closePopUp()">Close</button>
+					</div>
+				</div>
+			</div>
+			<script>
+	
+				function showPopup() {
+					document.getElementById("errorMessage").style.display = "block";
+					
+				}
+				function closePopUp() {
+					document.getElementById("lastUserMessage").style.display = "none";
+				}
+				
+			 
+			</script>
+	
 	<script src="Darkmode.js">
 		
 	</script>
