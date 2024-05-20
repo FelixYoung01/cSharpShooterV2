@@ -22,6 +22,7 @@ import java.util.Set;
 
 import facade.FacadeLocal;
 import ics.ejb.User;
+import ics.exceptions.FootBookException;
 
 @WebServlet("/Users/*")
 public class Users extends HttpServlet {
@@ -43,7 +44,13 @@ public class Users extends HttpServlet {
 			System.out.println(pathInfo);
 
 			// Get the set of users from the facade and convert it to a list
-			Set<User> userSet = facade.getAllUsers();
+			Set<User> userSet = null;
+			try {
+				userSet = facade.getAllUsers();
+			} catch (FootBookException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			List<User> allUsers = new ArrayList<>(userSet);
 
 			sendAsJson(response, allUsers);
@@ -57,7 +64,13 @@ public class Users extends HttpServlet {
 			return;
 		}
 		String id = splits[1];
-		User user = facade.findUserById((id));
+		User user = null;
+		try {
+			user = facade.findUserById((id));
+		} catch (FootBookException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		sendAsJson(response, user);
 	}
 
@@ -77,6 +90,7 @@ public class Users extends HttpServlet {
 				response.getWriter().write("{\"error\": \"User ID already exists.\"}");
 				response.getWriter().flush();
 				System.out.println("duplicate key");
+				return;
 			}
 		}
 	}
@@ -100,7 +114,13 @@ public class Users extends HttpServlet {
 
 		BufferedReader reader = request.getReader();
 
-		User existingUser = facade.findUserById(id);
+		User existingUser = null;
+		try {
+			existingUser = facade.findUserById(id);
+		} catch (FootBookException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		User updatedUser = parseJsonUser(reader); // parse the json
 
 		// check if user exists using the existingUser
@@ -147,9 +167,20 @@ public class Users extends HttpServlet {
 			return;
 		}
 		String id = splits[1];
-		User user = facade.findUserById(id);
+		User user = null;
+		try {
+			user = facade.findUserById(id);
+		} catch (FootBookException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		if (user != null) {
-			facade.deleteUser(id);
+			try {
+				facade.deleteUser(id);
+			} catch (FootBookException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		sendAsJson(response, user);
 	}

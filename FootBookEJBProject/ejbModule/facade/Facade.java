@@ -3,6 +3,9 @@ package facade;
 import java.util.List;
 import java.util.Set;
 
+import ics.Interceptors.MatchLogger;
+import ics.Interceptors.RefereeLogger;
+import ics.Interceptors.UserLogger;
 import ics.eao.MatchEAOLocal;
 import ics.eao.PitchEAOLocal;
 import ics.eao.RefereeEAOLocal;
@@ -18,6 +21,7 @@ import ics.ejb.UserMessage;
 import ics.exceptions.FootBookException;
 import jakarta.ejb.EJB;
 import jakarta.ejb.Stateless;
+import jakarta.interceptor.Interceptors;
 
 @Stateless
 public class Facade implements FacadeLocal {
@@ -49,6 +53,8 @@ public class Facade implements FacadeLocal {
 	public List<RefereeLicense> getAllRefereeLicenses() throws FootBookException {
 		return refereeLicenseEAO.getAllRefereeLicenses();
 	}
+	
+	// REFEREE METHODS
 
 	public List<String> findAllRefereeIds() throws FootBookException {
 		return refereeEAO.findAllRefereeIds();
@@ -57,7 +63,8 @@ public class Facade implements FacadeLocal {
 	public Referee findRefereeById(String refereeId) throws FootBookException {
 		return refereeEAO.findRefereeById(refereeId);
 	}
-
+	
+	@Interceptors(RefereeLogger.class)
 	public void createReferee(Referee referee) throws FootBookException {
 		refereeEAO.addReferee(referee);
 	}
@@ -66,14 +73,18 @@ public class Facade implements FacadeLocal {
 		return refereeEAO.getAllReferees();
 	}
 
+	@Interceptors(RefereeLogger.class)
 	public void deleteReferee(String refereeId) throws FootBookException {
 		refereeEAO.deleteReferee(refereeId);
 	}
 
+	@Interceptors(RefereeLogger.class)
 	public Referee updateReferee(Referee refereeToUpdate) throws FootBookException {
 		return refereeEAO.updateReferee(refereeToUpdate);
 	}
 
+	// PITCH METHODS
+	
 	public Set<Pitch> getAllPitches() throws FootBookException {
 		return pitchEAO.getAllPitches();
 	}
@@ -89,6 +100,8 @@ public class Facade implements FacadeLocal {
 	public Set<Match> getMatchesOnPitch(String pitchId) throws FootBookException {
 		return pitchEAO.findPitchById(pitchId).getMatches();
 	}
+	
+	// MATCH METHODS
 
 	public Match findMatch(String string) throws FootBookException {
 		return matchEAO.findMatchById(string);
@@ -98,15 +111,18 @@ public class Facade implements FacadeLocal {
 		return matchEAO.findAllMatches();
 	}
 
+	@Interceptors(MatchLogger.class)
 	public Match createMatch(Match match) throws FootBookException {
 		matchEAO.addMatch(match);
 		return match;
 	}
 
+	@Interceptors(MatchLogger.class)
 	public void deleteMatch(String id) throws FootBookException {
 		matchEAO.deleteMatch(id);
 	}
-
+	
+	@Interceptors(MatchLogger.class)
 	public Match updateMatch(Match match) throws FootBookException {
 		return matchEAO.updateMatch(match);
 	}
@@ -122,6 +138,8 @@ public class Facade implements FacadeLocal {
 	public long getMatchCount() throws FootBookException {
 		return matchEAO.getMatchCount();
 	}
+	
+	// USER METHODS
 
 	public User findUser(String userId) throws FootBookException {
 		return userEAO.findUserById(userId);
@@ -139,6 +157,7 @@ public class Facade implements FacadeLocal {
 		return userEAO.getAvailableUsers();
 	}
 
+	@Interceptors(UserLogger.class)
 	public User updateUser(User userToUpdate) throws FootBookException {
 		return userEAO.updateUser(userToUpdate);
 	}
@@ -151,10 +170,13 @@ public class Facade implements FacadeLocal {
 		return userEAO.getAllUsers();
 	}
 
-	public void createUser(User user) throws FootBookException {
+	@Interceptors(UserLogger.class)
+	public User createUser(User user) throws FootBookException {
 		userEAO.createUser(user);
+		return user;
 	}
 
+	@Interceptors(UserLogger.class)
 	public void deleteUser(String userId) throws FootBookException {
 		userEAO.deleteUser(userId);
 	}

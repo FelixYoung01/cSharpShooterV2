@@ -18,9 +18,30 @@ import ics.ejb.Referee;
 public class RefereeAuditor {
 	private static final Logger logger = Logger.getLogger(RefereeAuditor.class.getName());
 
+	// every time a referee is created, the createdDate and lastUpdatedDate will be set to the current date and time
 	@PrePersist
 	public void prePersist(Referee referee) {
 		logger.info("PREPERSIST LOGGER: Creating new Referee (ID: " + referee.getRefereeId() + ") - Name: "
+				+ referee.getRefereeName());
+	}
+	
+	// every time a referee is updated, the lastUpdatedDate will be set to the current date and time
+	@PreUpdate
+	public void preUpdate(Referee referee) {
+		logger.info("PREUPDATE LOGGER: Updating Referee (ID: " + referee.getRefereeId() + ") - Name: "
+				+ referee.getRefereeName());
+	}
+	// every time a referee is deleted, the referee will be logged as deleted
+	@PreRemove
+	public void preRemove(Referee referee) {
+		logger.info("PREREMOVE LOGGER: Deleting Referee (ID: " + referee.getRefereeId() + ") - Name: "
+				+ referee.getRefereeName());
+	}
+
+	
+	/*@PostLoad
+	public void postLoad(Referee referee) {
+		logger.info("POSTLOAD LOGGER: Loaded Referee (ID: " + referee.getRefereeId() + ") - Name: "
 				+ referee.getRefereeName());
 	}
 
@@ -30,21 +51,9 @@ public class RefereeAuditor {
 				+ referee.getRefereeName());
 	}
 
-	@PreUpdate
-	public void preUpdate(Referee referee) {
-		logger.info("PREUPDATE LOGGER: Updating Referee (ID: " + referee.getRefereeId() + ") - Name: "
-				+ referee.getRefereeName());
-	}
-
 	@PostUpdate
 	public void postUpdate(Referee referee) {
 		logger.info("POSTUPDATE LOGGER: Updated Referee (ID: " + referee.getRefereeId() + ") - Name: "
-				+ referee.getRefereeName());
-	}
-
-	@PreRemove
-	public void preRemove(Referee referee) {
-		logger.info("PREREMOVE LOGGER: Deleting Referee (ID: " + referee.getRefereeId() + ") - Name: "
 				+ referee.getRefereeName());
 	}
 
@@ -52,12 +61,6 @@ public class RefereeAuditor {
 	public void postRemove(Referee referee) {
 		logger.info("POSTREMOVE LOGGER: Deleted Referee (ID: " + referee.getRefereeId() + ") - Name: "
 				+ referee.getRefereeName());
-	}
-
-	@PostLoad
-	public void postLoad(Referee referee) {
-		logger.info(
-				"POSTLOAD LOGGER: Loaded Referee (ID: " + referee.getRefereeId() + ") - Name: " + referee.getRefereeName());
-	}
+	}*/
 
 }

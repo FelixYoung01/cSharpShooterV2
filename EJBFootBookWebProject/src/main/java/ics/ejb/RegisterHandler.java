@@ -125,6 +125,9 @@ public class RegisterHandler implements IPathHandler {
 					userToUpdate.setAge(age);
 					userToUpdate.setEmail(newEmail);
 					userToUpdate.setGender(newGender);
+					
+					// Call facade to update the user in the database
+		            facade.updateUser(userToUpdate);
 
 					System.out.println("User updated");
 					response.sendRedirect(request.getRequestURI());

@@ -1,4 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ejb-jar version="3.2" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/ejb-jar_3_2.xsd">
-  <display-name>FootBookEJBProject </display-name> 
- </ejb-jar>
+<ejb-jar version="3.2" xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/ejb-jar_3_2.xsd">
+	<display-name>FootBookEJBProject </display-name>
+	<!-- Declare Interceptors -->
+	<interceptors>
+		<interceptor>
+			<interceptor-class>ics.Interceptors.MatchLogger</interceptor-class>
+		</interceptor>
+		<interceptor>
+			<interceptor-class>ics.Interceptors.RefereeLogger</interceptor-class>
+		</interceptor>
+		<interceptor>
+			<interceptor-class>ics.Interceptors.UserLogger</interceptor-class>
+		</interceptor>
+	</interceptors>
+
+
+</ejb-jar>

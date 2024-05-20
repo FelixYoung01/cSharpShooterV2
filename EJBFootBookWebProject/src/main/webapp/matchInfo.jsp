@@ -52,7 +52,7 @@
 				<%=lastUpdatedDateFormatted%></p>
 
 			<p>GameType: 5 A-Side</p>
-			<p>Capacity: 10 Players </p>
+			<p>Capacity: 10 Players</p>
 
 		</section>
 	</div>
@@ -139,7 +139,9 @@
 				}
 				%>
 				<script>
-					var numUsers = <%=users.size()%>;
+					var numUsers =
+				<%=users.size()%>
+					;
 					function showAddButton(userId) {
 						document.getElementById("removeUserFromMatchForm").style.display = "none";
 						if (numUsers >= 10) {
@@ -338,8 +340,9 @@
 			return true; // allow form submission
 		}
 	</script>
-	<script src="Darkmode.js">
-		
-	</script>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script src="Darkmode.js"></script>
+	<script src="weatherInfo.js"></script>
+
 </body>
 </html>
