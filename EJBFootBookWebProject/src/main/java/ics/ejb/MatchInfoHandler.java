@@ -24,11 +24,14 @@ public class MatchInfoHandler implements IPathHandler {
 
 		Set<User> usersOnMatch = facade.getUsersOnMatch(matchId);
 		Set<User> availableUsers = facade.getAvailableUsers();
+		
+		Set<Match> allMatches = facade.findAllMatches();
 
 		request.setAttribute("availableUsers", availableUsers);
 		request.setAttribute("usersOnMatch", usersOnMatch);
 		request.setAttribute("match", match);
 		
+		request.setAttribute("allMatches", allMatches);
 
 		String errorMessage = null;
         String displayStyle = "none"; // Default to not displaying the popup
@@ -77,8 +80,8 @@ public class MatchInfoHandler implements IPathHandler {
 			return request.getRequestDispatcher("/pitchInfo?pitchId=" + pitchId);
 		}
 		else if ("updateMatch".equals(action)) {
-			String date = request.getParameter("matchDate");
-			String time = request.getParameter("matchTime");
+			String date = request.getParameter("date");
+			String time = request.getParameter("time");
 			
 			LocalDate parsedDate = LocalDate.parse(date);
 			LocalTime parsedTime = LocalTime.parse(time);

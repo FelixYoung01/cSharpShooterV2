@@ -221,14 +221,14 @@
 				<h2>Update Match</h2>
 				<form id="updatingMatchForm"
 					action="/EJBFootBookWebProject/matchInfo?matchId=<%=match.getMatchId()%>"
-					method="post">
+					method="post" onsubmit="return validateForm();">
 					<input type="hidden" name="formType" value="updateMatch">
 
 					<!-- Date and Time Picker -->
 					<label>Date & Time:</label><br> <input class="bordered-input"
-						type="date" name="matchDate" required> <input
-						class="bordered-input" type="time" name="matchTime" step="3600"
-						required onchange="validateTimeInput()"><br>
+							type="date" name="date" required> <input
+							class="bordered-input" type="time" name="time" step="3600"
+							required><br>
 
 					<button type="submit">Update Match</button>
 					<button type="button" onclick="hideModal()">Close</button>
@@ -236,6 +236,30 @@
 			</div>
 		</div>
 	</div>
+
+	<script>
+		var matchesOnPitch = [
+			<% 
+				for (Match matchOnPitch : match.getPitch().getMatches()) {
+					// Output the match as a JavaScript object
+					// This assumes that Match has getId(), getDate(), and getTime() methods
+					out.print("{ id: '" + matchOnPitch.getMatchId() + "', date: '" + matchOnPitch.getDate() + "', time: '" + matchOnPitch.getTime() + "' },");
+				}
+			%>
+			];
+		</script>
+		
+		<script>
+		var allMatches = [
+			<%Set<Match> allMatches = (Set<Match>) request.getAttribute("allMatches");
+				for (Match matchInSet : allMatches) {
+					// Output the match as a JavaScript object
+					// This assumes that Match has getId(), getDate(), and getTime() methods
+					out.print("{ id: '" + matchInSet.getMatchId() + "', date: '" + matchInSet.getDate() + "', time: '"
+							+ matchInSet.getTime() + "', refereeId: '" + matchInSet.getReferee().getRefereeId() + "' },");
+				}%>
+				];
+		</script>
 
 	<script>
 		document
@@ -258,6 +282,59 @@
 								.remove("pop-down");
 					}, 300);
 		};
+
+		function validateTimeInput() {
+			var timeInput = document.querySelector("input[name='time']");
+			var timeValue = timeInput.value;
+
+			if (timeValue) {
+				var parts = timeValue.split(':');
+				if (parts[1] !== "00") {
+					timeInput.value = parts[0] + ":00";
+				}
+			}
+			if (new Date().getTime() > new Date(document
+					.querySelector("input[name='date']").value
+					+ "T" + timeValue).getTime()) {
+				alert("Match time cannot be in the past");
+				timeInput.value = "";
+				return false; // time is in the past
+			}
+			var date = document.querySelector("input[name='date']").value;
+			var time = timeValue;
+			for (var i = 0; i < matchesOnPitch.length; i++) {
+			    if (matchesOnPitch[i].date === date && matchesOnPitch[i].time === time) {
+			        alert("Match already exists at this time");
+			        timeInput.value = "";
+			        return false; // match already exists at this time
+			    }
+			}
+			return true; // time is not in the past
+		}
+		
+		//Function that returns true if the referee has no other matches at the same time, going through all matches on all pitches
+		
+		function validateReferee() {
+			var refereeId = document.querySelector("select[name='refereeId']").value;
+			var date = document.querySelector("input[name='date']").value;
+			var time = document.querySelector("input[name='time']").value;
+			for (var i = 0; i < allMatches.length; i++) {
+				if (allMatches[i].date === date && allMatches[i].time === time) {
+					if (allMatches[i].refereeId === refereeId) {
+						alert("Referee already has a match at this time");
+						return false; // referee already has a match at this time
+					}
+				}
+			}
+   			return true
+		}
+
+		function validateForm() {
+			if (!validateTimeInput() || !validateReferee()) {
+				return false; // prevent form submission
+			}
+			return true; // allow form submission
+		}
 	</script>
 	<script src="Darkmode.js">
 		
