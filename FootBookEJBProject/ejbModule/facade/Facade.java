@@ -94,7 +94,7 @@ public class Facade implements FacadeLocal {
 		return matchEAO.findMatchById(string);
 	}
 
-	public List<Match> findAllMatches() throws FootBookException {
+	public Set<Match> findAllMatches() throws FootBookException {
 		return matchEAO.findAllMatches();
 	}
 

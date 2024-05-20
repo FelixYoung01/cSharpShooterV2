@@ -35,6 +35,10 @@
 		<section class="box colored left-aligned-text">
 			<h2>Match Information</h2>
 			<p>
+				Referee:
+				<%=match.getReferee().getRefereeName()%>
+			</p>
+			<p>
 				Match Date:
 				<%=match.getDate()%></p>
 			<p>
@@ -64,7 +68,7 @@
 				<input type="hidden" name="formType" value="deleteMatch">
 				<button class="bigger-button" style="background-color: red;"
 					type="submit"
-					onclick="return confirm('Are you sure you want to remove this match? This action can not be undone.?')">Delete
+					onclick="return confirm('Are you sure you want to remove this match? This action cannot be undone.')">Delete
 					Match</button>
 			</form>
 		</div>

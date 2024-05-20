@@ -116,7 +116,7 @@ public class Match implements Serializable {
 		this.users = users;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY) // Many matches can be officiated by one referee
+	@ManyToOne(fetch = FetchType.EAGER) // Many matches can be officiated by one referee
 	@JoinColumn(name = "refereeId")
 	public Referee getReferee() {
 		return referee;

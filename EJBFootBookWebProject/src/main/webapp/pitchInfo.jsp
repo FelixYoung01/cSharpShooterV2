@@ -3,7 +3,7 @@
 	import="java.time.format.DateTimeFormatter"
 	import="java.time.LocalDateTime"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	import="ics.ejb.Pitch" import="java.util.Set" import="ics.ejb.Match"
+	import="ics.ejb.Pitch" import="java.util.Set" import="java.util.List" import="ics.ejb.Match"
 	import="ics.ejb.Referee" import="ics.ejb.User"
 	pageEncoding="ISO-8859-1"%>
 
@@ -64,6 +64,10 @@
 			<a class="button extra-padding"
 				href="<%=request.getContextPath()%>/matchInfo?matchId=<%=match.getMatchId()%>">
 				<h3><%=match.getMatchId()%></h3>
+				<p>
+					Referee:
+					<%=match.getReferee().getRefereeName()%></p>
+				</p>
 				<p>
 					Match Date:
 					<%=match.getDate()%>
@@ -153,6 +157,18 @@
         %>
 		];
 	</script>
+	
+	<script>
+    var allMatches = [
+        <%Set<Match> allMatches = (Set<Match>) request.getAttribute("allMatches");
+			for (Match match : allMatches) {
+				// Output the match as a JavaScript object
+				// This assumes that Match has getId(), getDate(), and getTime() methods
+				out.print("{ id: '" + match.getMatchId() + "', date: '" + match.getDate() + "', time: '"
+						+ match.getTime() + "', refereeId: '" + match.getReferee().getRefereeId() + "' },");
+			}%>
+			];
+	</script>
 
 	<script>
 		// JavaScript function to ensure the minute part is always set to "00"
@@ -184,9 +200,26 @@
 			}
 			return true; // time is not in the past
 		}
+		
+		//Function that returns true if the referee has no other matches at the same time, going through all matches on all pitches
+		
+		function validateReferee() {
+			var refereeId = document.querySelector("select[name='refereeId']").value;
+			var date = document.querySelector("input[name='date']").value;
+			var time = document.querySelector("input[name='time']").value;
+			for (var i = 0; i < allMatches.length; i++) {
+				if (allMatches[i].date === date
+						&& allMatches[i].time === time
+						&& allMatches[i].refereeId === refereeId) {
+					alert("Referee already has a match at this time");
+					return false; // referee already has a match at this time
+				}
+			}
+			return true; // referee has no other matches at the same time
+		}
 
 		function validateForm() {
-			if (!validateTimeInput()) {
+			if (!validateTimeInput() || !validateReferee()) {
 				return false; // prevent form submission
 			}
 			return true; // allow form submission
