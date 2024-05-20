@@ -135,22 +135,25 @@
 				}
 				%>
 				<script>
+					var numUsers = <%=users.size()%>;
 					function showAddButton(userId) {
+						document.getElementById("removeUserFromMatchForm").style.display = "none";
+						if (numUsers >= 10) {
+							return;
+						}
 						document.getElementById("selectedUserId").value = userId;
 						document.getElementById("userIdDisplay").textContent = userId;
 						document.getElementById("addUserToMatchForm").style.display = "block";
-						document.getElementById("removeUserFromMatchForm").style.display = "none";
 					}
 
 					function showRemoveButton(userId) {
-						var numUsers = <%=users.size()%>;
+						document.getElementById("addUserToMatchForm").style.display = "none";
 						if (numUsers <= 1) {
 							return;
 						}
 						document.getElementById("selectedRemoveUserId").value = userId;
 						document.getElementById("removeUserDisplay").textContent = userId;
 						document.getElementById("removeUserFromMatchForm").style.display = "block";
-						document.getElementById("addUserToMatchForm").style.display = "none";
 					}
 
 					function highlightButton(clickedButton) {
