@@ -26,22 +26,10 @@ public class MatchAuditor {
 				+ match.getCreatedDate());
 	}
 
-	@PostPersist
-	public void postPersist(Match match) {
-		logger.info("POSTPERSIST LOGGER: Created new Match (ID: " + match.getMatchId() + ") - createdDate: "
-				+ match.getCreatedDate());
-	}
-
 	@PreUpdate
 	public void preUpdate(Match match) {
 		match.setLastUpdatedDate(LocalDateTime.now());
 		logger.info("PREUPDATE LOGGER: Updating Match (ID: " + match.getMatchId() + ") - lastUpdatedDate: "
-				+ match.getLastUpdatedDate());
-	}
-
-	@PostUpdate
-	public void postUpdate(Match match) {
-		logger.info("POSTUPDATE LOGGER: Updated Match (ID: " + match.getMatchId() + ") - lastUpdatedDate: "
 				+ match.getLastUpdatedDate());
 	}
 
@@ -50,14 +38,27 @@ public class MatchAuditor {
 		logger.info("PREREMOVE LOGGER: Deleting Match (ID: " + match.getMatchId());
 	}
 
-	@PostRemove
-	public void postRemove(Match match) {
-		logger.info("POSTREMOVE LOGGER: Deleted Match (ID: " + match.getMatchId());
-	}
-
+	/*
 	@PostLoad
 	public void postLoad(Match match) {
 		logger.info("POSTLOAD LOGGER: Loaded Match (ID: " + match.getMatchId());
 	}
+
+	@PostPersist
+	public void postPersist(Match match) {
+		logger.info("POSTPERSIST LOGGER: Created new Match (ID: " + match.getMatchId() + ") - createdDate: "
+				+ match.getCreatedDate());
+	}
+
+	@PostUpdate
+	public void postUpdate(Match match) {
+		logger.info("POSTUPDATE LOGGER: Updated Match (ID: " + match.getMatchId() + ") - lastUpdatedDate: "
+				+ match.getLastUpdatedDate());
+	}
+	
+	@PostRemove
+	public void postRemove(Match match) {
+		logger.info("POSTREMOVE LOGGER: Deleted Match (ID: " + match.getMatchId());
+	}*/
 
 }

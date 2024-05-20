@@ -60,7 +60,7 @@ public interface FacadeLocal {
 
 	public long getUsersOnMatchesCount() throws FootBookException;
 
-	public void createUser(User user) throws FootBookException;
+	public User createUser(User user) throws FootBookException;
 
 	public Set<User> getAllUsers() throws FootBookException;
 

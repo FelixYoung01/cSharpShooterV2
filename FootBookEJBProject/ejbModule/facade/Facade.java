@@ -151,8 +151,9 @@ public class Facade implements FacadeLocal {
 		return userEAO.getAllUsers();
 	}
 
-	public void createUser(User user) throws FootBookException {
+	public User createUser(User user) throws FootBookException {
 		userEAO.createUser(user);
+		return user;
 	}
 
 	public void deleteUser(String userId) throws FootBookException {
