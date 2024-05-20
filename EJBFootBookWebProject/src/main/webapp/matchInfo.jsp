@@ -207,6 +207,8 @@
 			</div>
 		</div>
 	</div>
+
+	<body data-referee-id="<%=match.getReferee().getRefereeId()%>"></body>
 	<script>
 		function showPopup() {
 			document.getElementById("errorMessage").style.display = "block";
@@ -317,7 +319,7 @@
 		//Function that returns true if the referee has no other matches at the same time, going through all matches on all pitches
 		
 		function validateReferee() {
-			var refereeId = document.querySelector("select[name='refereeId']").value;
+			var refereeId = document.body.getAttribute('data-referee-id');
 			var date = document.querySelector("input[name='date']").value;
 			var time = document.querySelector("input[name='time']").value;
 			for (var i = 0; i < allMatches.length; i++) {
