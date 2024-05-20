@@ -90,6 +90,7 @@ public class Users extends HttpServlet {
 				response.getWriter().write("{\"error\": \"User ID already exists.\"}");
 				response.getWriter().flush();
 				System.out.println("duplicate key");
+				return;
 			}
 		}
 	}
