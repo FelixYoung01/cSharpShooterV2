@@ -39,12 +39,19 @@ public class MatchInfoHandler implements IPathHandler {
 	    
 
 		if ("addUserToMatch".equals(action)) {
-
+			
+			if(usersOnMatch.size() < 10) {
 			String userId = request.getParameter("userId");
 			User user = facade.findUser(userId);
 			user.setMatch(match);
 			facade.updateUser(user);
 			response.sendRedirect(redirectUrl);
+			} else {
+				errorMessage = "This 5 A-Side Game Is At Its Capacity Of 10 Users!";
+				request.setAttribute("errorMessage", errorMessage);
+				displayStyle = "block"; // Set to display the popup
+				request.setAttribute("displayStyle", displayStyle);
+			}
 		}
 		
 		else if("removeUserFromMatch".equals(action)) {
@@ -61,7 +68,6 @@ public class MatchInfoHandler implements IPathHandler {
 			request.setAttribute("errorMessage", errorMessage);
             displayStyle = "block"; // Set to display the popup
             request.setAttribute("displayStyle", displayStyle);
-			System.out.println("Cannot remove the last user from the match!");
 		}
 		}
 		
