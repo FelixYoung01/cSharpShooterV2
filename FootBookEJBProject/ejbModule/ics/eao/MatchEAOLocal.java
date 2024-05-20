@@ -8,22 +8,23 @@ import java.util.List;
 import jakarta.ejb.Local;
 
 import ics.ejb.Match;
+import ics.exceptions.FootBookException;
 
 @Local
 public interface MatchEAOLocal {
 
-	public void addMatch(Match match);
+	public void addMatch(Match match) throws FootBookException;
 
-	public Match updateMatch(Match match);
+	public Match updateMatch(Match match) throws FootBookException;
 
-	public void deleteMatch(String matchId);
+	public void deleteMatch(String matchId) throws FootBookException;
 
-	public Match findMatchById(String matchId);
+	public Match findMatchById(String matchId) throws FootBookException;
 
-	public List<Match> findAllMatches();
+	public List<Match> findAllMatches() throws FootBookException;
 	
-	public long getMatchCount();
+	public long getMatchCount() throws FootBookException;
 
-	public List<String> findAllMatchIds();
+	public List<String> findAllMatchIds() throws FootBookException;
 	
 }

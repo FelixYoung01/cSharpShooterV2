@@ -3,27 +3,28 @@ package ics.eao;
 import java.util.Set;
 
 import ics.ejb.User;
+import ics.exceptions.FootBookException;
 import jakarta.ejb.Local;
 
 @Local
 public interface UserEAOLocal {
 
-	public void createUser(User user);
+	public void createUser(User user) throws FootBookException;
 
-	public User updateUser(User user);
+	public User updateUser(User user) throws FootBookException;
 
-	public void deleteUser(String userId);
+	public void deleteUser(String userId) throws FootBookException;
 
-	public User findUserById(String userId);
+	public User findUserById(String userId) throws FootBookException;
 
-	public long getUserCount(); // For statistics of how many users are registered
-	public long getUsersOnMatchesCount(); //Stats on how many users are registered on matches
+	public long getUserCount() throws FootBookException; // For statistics of how many users are registered
+	public long getUsersOnMatchesCount() throws FootBookException; //Stats on how many users are registered on matches
 
-	public Set<User> getAllUsers();
+	public Set<User> getAllUsers() throws FootBookException;
 
-	public Set<User> getAvailableUsers();
+	public Set<User> getAvailableUsers() throws FootBookException;
 	
-	public Set<User> getUsersInMatches();
-
-
+	public Set<User> getUsersInMatches() throws FootBookException;
+	
+	public User findUserWithMatch(String userId) throws FootBookException;
 }

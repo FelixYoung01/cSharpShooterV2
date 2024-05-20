@@ -6,9 +6,11 @@ import java.util.Set;
 
 import ics.ejb.Match;
 import ics.ejb.User;
+import ics.exceptions.FootBookException;
 import jakarta.ejb.Stateless;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
+import jakarta.persistence.PersistenceException;
 import jakarta.persistence.TypedQuery;
 
 @Stateless
@@ -17,63 +19,125 @@ public class UserEAOImpl implements UserEAOLocal {
 	private EntityManager em;
 
 	public UserEAOImpl() {
-		// TODO Auto-generated constructor stub
+		
 	}
 
-	public User findUserById(String userId) {
-		return em.find(User.class, userId);
-	}
-
-	public void createUser(User user) {
-		em.persist(user);
-	}
-
-	public User updateUser(User user) {
-		em.merge(user);
-		em.flush();
-		return user;
-	}
-
-	public void deleteUser(String userId) {
-		User user = this.findUserById(userId);
-		if (user != null) {
-			em.remove(user);
+	public User findUserById(String userId) throws FootBookException {
+		if (userId == null) {
+			throw new FootBookException("User ID is null");
+		}
+		try {
+			User user = em.find(User.class, userId);
+			if (user == null) {
+				throw new FootBookException("User not found");
+			}
+			return user;
+		} catch (PersistenceException e) {
+			throw new FootBookException("Error finding user by ID", e);
 		}
 	}
 
-	public long getUserCount() {
-		return em.createNamedQuery("User.countAll", Long.class).getSingleResult();
+	public void createUser(User user) throws FootBookException {
+		if (user == null) {
+			throw new FootBookException("User is null");
+		}
+		try {
+			em.persist(user);
+		} catch (PersistenceException e) {
+			throw new FootBookException("Error creating user", e);
+		}
 	}
 
-	public long getUsersOnMatchesCount() {
-		return em.createNamedQuery("User.countRegisteredOnMatches", Long.class).getSingleResult();
+	public User updateUser(User user) throws FootBookException {
+		if (user == null) {
+			throw new FootBookException("User is null");
+		}
+		try {
+			if (em.find(User.class, user.getUserId()) == null) {
+				throw new FootBookException("User not found");
+			}
+			em.merge(user);
+			em.flush();
+			return user;
+		} catch (PersistenceException e) {
+			throw new FootBookException("Error updating user", e);
+		}
 	}
 
-	public Set<User> getAllUsers() {
-		TypedQuery<User> query = em.createNamedQuery("User.findAll", User.class);
-		return new HashSet<User>(query.getResultList());
+	public void deleteUser(String userId) throws FootBookException {
+		if (userId == null) {
+			throw new FootBookException("User ID is null");
+		}
+		try {
+			User user = em.find(User.class, userId);
+			if (user == null) {
+				throw new FootBookException("User not found");
+			}
+			em.remove(user);
+		} catch (PersistenceException e) {
+			throw new FootBookException("Error deleting user", e);
+		}
 	}
 
-	public Set<User> getAvailableUsers() {
-		TypedQuery<User> query = em.createNamedQuery("User.availableUsers", User.class);
-		return new HashSet<User>(query.getResultList());
+	public long getUserCount() throws FootBookException {
+		try {
+			return em.createNamedQuery("User.countAll", Long.class).getSingleResult();
+		} catch (PersistenceException e) {
+			throw new FootBookException("Error getting user count", e);
+		}
+	}
+
+	public long getUsersOnMatchesCount() throws FootBookException {
+		try {
+			return em.createNamedQuery("User.countRegisteredOnMatches", Long.class).getSingleResult();
+		} catch (PersistenceException e) {
+			throw new FootBookException("Error getting user count on matches", e);
+		}
+	}
+
+	public Set<User> getAllUsers() throws FootBookException {
+		try {
+			TypedQuery<User> query = em.createNamedQuery("User.findAll", User.class);
+			return new HashSet<User>(query.getResultList());
+		} catch (PersistenceException e) {
+			throw new FootBookException("Error getting all users", e);
+		}
+	}
+
+	public Set<User> getAvailableUsers() throws FootBookException {
+		try {
+			TypedQuery<User> query = em.createNamedQuery("User.availableUsers", User.class);
+			return new HashSet<User>(query.getResultList());
+		} catch (PersistenceException e) {
+			throw new FootBookException("Error getting available users", e);
+		}
 	}
 
 	
-	public Set<User> getUsersInMatches() {
-		TypedQuery<Match> query = em.createNamedQuery("Match.findAll", Match.class);
-		List<Match> matches = query.getResultList();
-		Set<User> usersInMatches = new HashSet<>();
+	public Set<User> getUsersInMatches() throws FootBookException {
+		try {
+			TypedQuery<Match> query = em.createNamedQuery("Match.findAll", Match.class);
+			List<Match> matches = query.getResultList();
+			Set<User> usersInMatches = new HashSet<>();
 
-		for (Match match : matches) {
-			usersInMatches.addAll(match.getUsers());
+			for (Match match : matches) {
+				usersInMatches.addAll(match.getUsers());
+			}
+
+			// Log the retrieved users
+			for (User user : usersInMatches) {
+				System.out.println("User in match: " + user.getUserId() + ", " + user.getName());
+			}
+
+			return usersInMatches;
+		} catch (PersistenceException e) {
+			throw new FootBookException("Error getting users in matches", e);
 		}
-
-		// Log the retrieved users
-		for (User user : usersInMatches) {
-			System.out.println("User in match: " + user.getUserId() + ", " + user.getName());
-		}
-
-		return usersInMatches;
+	}
+	
+	public User findUserWithMatch(String userId) {
+		TypedQuery<User> query = em.createNamedQuery("User.findUserWithMatch", User.class);
+		query.setParameter("userId", userId);
+		return query.getSingleResult();
 	}
 }

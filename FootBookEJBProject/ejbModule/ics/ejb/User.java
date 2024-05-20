@@ -5,8 +5,10 @@ import java.time.LocalDateTime;
 import java.util.Set;
 import java.util.logging.Logger;
 
+import ics.listeners.UserAuditor;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EntityListeners;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
@@ -14,19 +16,22 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.NamedQueries;
 import jakarta.persistence.NamedQuery;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 @Entity
+@EntityListeners(UserAuditor.class)
 @NamedQueries({
 
 	@NamedQuery(name="User.findAll", query="SELECT u FROM User u"),
 	@NamedQuery(name="User.countAll", query="SELECT COUNT(u) FROM User u"), //Namedquery for the stats of users registered
 	@NamedQuery(name="User.findUsersOnMatch", query="SELECT u FROM User u WHERE u.match.matchId = :matchId"), // Namedquery for getting all users registered on a specific match
 	@NamedQuery(name="User.availableUsers", query="SELECT u FROM User u WHERE u.match IS NULL"), // Namedquery for getting all users that are not registered on a match
-	@NamedQuery(name="User.countRegisteredOnMatches", query="SELECT COUNT(u.match) FROM User u WHERE u.match IS NOT NULL") // Namedquery for counting amount of users registered on matches
+	@NamedQuery(name="User.countRegisteredOnMatches", query="SELECT COUNT(u.match) FROM User u WHERE u.match IS NOT NULL"), // Namedquery for counting amount of users registered on matches
+	@NamedQuery(name="User.findUserWithMatch", query="SELECT u FROM User u LEFT JOIN FETCH u.match WHERE u.userId = :userId") // Namedquery for getting the match entity for a certain user"
 	
 	})
 @Table(name="[User]") // User is a reserved word in SQL, so it needs to be enclosed in square brackets")
@@ -34,8 +39,6 @@ import jakarta.validation.constraints.Size;
 
 public class User implements Serializable{
 	
-    private static final Logger logger = Logger.getLogger(Match.class.getName());
-
 	private static final long serialVersionUID = 1L;
 
     
@@ -128,6 +131,8 @@ public class User implements Serializable{
 	public void setJoined(LocalDateTime joined) {
 		this.joined = joined;
 	}
+	
+	
 }
 
 

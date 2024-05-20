@@ -4,6 +4,28 @@ $(document).ready(function() {
 		console.log("Ajax Error:", status, error);
 	}
 
+	// Fetch and populate user IDs on page load
+	function populateUserIds() {
+		$.ajax({
+			method: "GET",
+			url: "http://localhost:8080/FootBookRestClient/Users/", // Fetch all users
+			dataType: "json", // Expect JSON response
+			success: function(users) {
+				let userSelect = $("#findUserIdSelect");
+				userSelect.empty(); // Clear current options
+				userSelect.append(new Option("Select User ID", "")); // Default option
+				users.forEach(function(user) {
+					console.log("Adding user to dropdown:", user.userId); // Log user ID being added
+					userSelect.append(new Option(user.Id, user.Id));
+				});
+			},
+			error: logAjaxError
+		});
+	}
+
+	populateUserIds();
+
+
 	// Geolocation functions
 	function getLocation() {
 		if (navigator.geolocation) {
@@ -30,7 +52,7 @@ $(document).ready(function() {
 		// Make the AJAX request to the OpenWeatherMap API
 		$.ajax({
 			method: "GET",
-			//url: `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&units=metric&APPID=ce3e097846c8e55864481f37b93db22f`, // Replace with your new API key
+			//url: `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&units=metric&APPID=ce3e097846c8e55864481f37b93db22f`,
 			error: ajaxWeatherReturn_Error,
 			success: ajaxWeatherReturn_Success
 		});
@@ -68,274 +90,285 @@ $(document).ready(function() {
 			}
 		});
 	}
-	$("#UpdateBtn").click(function() {
-		// Retrieve the selected Match ID
-		var selectedMatchId = $("#findMatchIdSelect").val();
-		if (selectedMatchId !== "") {
-			// Retrieve updated data from section two
-			var pitchId = $("#findPitchIdSelect").val();
-			var refereeId = $("#findRefereeIdSelect").val();
-			var dateValue = $("#findDate").val(); // In the format DD/MM/YYYY
-			var timeValue = $("#findTime").val(); // In the format HH:MM
 
-			// Create the object for updating
-			var matchObj = { "Match ID": selectedMatchId };
+	// Fetch the location and weather data when the page loads
+	//getLocation();
+	//fetchIPAddress();
 
-			// Check if each field has a value and add it to the object only if non-empty
-			if (pitchId !== "") matchObj["Pitch ID"] = pitchId;
-			if (refereeId !== "") matchObj["Referee ID"] = refereeId;
-			if (dateValue !== "") {
-				let dateParts = dateValue.split("/");
-				let formattedDate = `${dateParts[2]}-${dateParts[1]}-${dateParts[0]}`; // Convert to YYYY-MM-DD
-				matchObj["Match Date"] = formattedDate;
-			}
-			if (timeValue !== "") matchObj["Match Time"] = timeValue;
-
-			// Convert to JSON string
-			var jsonString = JSON.stringify(matchObj);
-
-			// Send the PUT request to update the match
-			$.ajax({
-				method: "PUT",
-				url: `http://localhost:8080/FootBookRestClient/Matches/${selectedMatchId}`,
-				data: jsonString,
-				contentType: "application/json",
-				error: function(xhr, status, error) {
-					console.log("Error updating match:", error);
-					alert("Error updating match: " + error);
-				},
-				success: function(result, status, xhr) {
-					alert(`Match ID: ${selectedMatchId} updated successfully.`);
-
-					// Clear and refresh section two
-					clearAndRefreshSectionTwo();
-
-					// Fetch and display the updated match details
-					$.ajax({
-						method: "GET",
-						url: `http://localhost:8080/FootBookRestClient/Matches/${selectedMatchId}`,
-						error: logAjaxError,
-						success: function(result) {
-							// Adjust date format (from yyyy-mm-dd to dd/mm/yyyy)
-							let matchDate = result["Match Date"].split("-");
-							let formattedDate = `${matchDate[2]}/${matchDate[1]}/${matchDate[0]}`;
-
-							// Update the display with all the current match details
-							$("#displayMatchId").text("Match ID: " + result["Match ID"]);
-							$("#displayPitchId").text("Pitch ID: " + result["Pitch ID"]);
-							$("#displayRefereeId").text("Referee ID: " + result["Referee ID"]);
-							$("#displayMatchDate").text("Date: " + formattedDate);
-							$("#displayMatchTime").text("Time: " + result["Match Time"]);
-						}
-					});
-				}
-			});
-		} else {
-			alert("Please select a valid Match ID to update.");
-		}
-	});
-
-	function clearAndRefreshSectionTwo() {
-		// Clear all dropdowns and inputs in section two
-		$("#findMatchIdSelect").val("");
-		$("#findPitchIdSelect").val("");
-		$("#findRefereeIdSelect").val("");
-		$("#findDate").val("");
-		$("#findTime").val("");
-
-		// Repopulate the dropdowns with the latest data
-		populatePitchIds();
-		populateRefereeIds();
-		populateMatchIds();
-	}
-
-
-
-
-
-
-
-
-
-
-
-	// Find operation handler
-	$("#FindBtn").click(function() {
-		// Get the selected value from the dropdown
-		var selectedMatchId = $("#findMatchIdSelect").val();
-		if (selectedMatchId !== "") {
-			$.ajax({
-				method: "GET",
-				url: `http://localhost:8080/FootBookRestClient/Matches/${selectedMatchId}`,
-				error: logAjaxError,
-				success: function(result) {
-					// Adjust date format (from yyyy-mm-dd to dd/mm/yyyy)
-					let matchDate = result["Match Date"].split("-");
-					let formattedDate = `${matchDate[2]}/${matchDate[1]}/${matchDate[0]}`;
-
-					// Update the text display fields
-					$("#displayMatchId").text("Match ID: " + result["Match ID"]);
-					$("#displayPitchId").text("Pitch ID: " + result["Pitch ID"]);
-					$("#displayRefereeId").text("Referee ID: " + result["Referee ID"]);
-					$("#displayMatchDate").text("Date: " + formattedDate);
-					$("#displayMatchTime").text("Time: " + result["Match Time"]);
-				}
-			});
-		} else {
-			alert("Please select a valid Match ID");
-		}
-	});
-
-	// Delete button click event handler
-	$("#DeleteBtn").click(function() {
-		var selectedMatchId = $("#findMatchIdSelect").val();
-		if (selectedMatchId !== "") {
-			// Confirm with the user before deleting
-			if (confirm(`Are you sure you want to delete Match ID: ${selectedMatchId}?`)) {
-				// Send DELETE request to the server
-				$.ajax({
-					method: "DELETE",
-					url: `http://localhost:8080/FootBookRestClient/Matches/${selectedMatchId}`,
-					error: logAjaxError,
-					success: function() {
-						alert(`Match ID: ${selectedMatchId} successfully deleted.`);
-						// Clear text display fields after successful deletion
-						$("#displayMatchId").text("");
-						$("#displayPitchId").text("");
-						$("#displayRefereeId").text("");
-						$("#displayMatchDate").text("");
-						$("#displayMatchTime").text("");
-
-						// Refresh the Match dropdown
-						populateMatchIds();
-					}
-				});
-			}
-		} else {
-			alert("Please select a valid Match ID");
-		}
-	});
-
-	// Add operation handler
+	// Add User event handler
 	$("#AddBtn").click(function() {
-		var matchId = $("#id").val();
-		var matchDate = $("#date").val();
-		var matchTime = $("#time").val();
-		var pitchId = $("#pitchIdSelect").val();
-		var refereeId = $("#refereeIdSelect").val();
+		var strUserId = $("#userId").val().toUpperCase();
+		var strUserName = $("#userName").val();
+		var strUserAge = $("#userAge").val();
+		var strUserEmail = $("#userEmail").val();
+		var strUserGender = $("#userGender").val().toUpperCase(); // Convert to uppercase
 
-		var matchObj = {
-			"Match ID": matchId,
-			"Match Date": matchDate,
-			"Match Time": matchTime,
-			"Pitch ID": pitchId,
-			"Referee ID": refereeId
+		// Validate user ID format
+		var userIdPattern = /^U\d{2}$/;
+		if (!userIdPattern.test(strUserId)) {
+			alert("User ID must be in the format 'U00'");
+			return;
+		}
+
+		// Validate name format (only letters)
+		var namePattern = /^[A-Za-z\s]+$/;
+		if (!namePattern.test(strUserName)) {
+			alert("Name can only contain letters and spaces.");
+			return;
+		}
+
+		// Validate age (must be a number between 18 and 99)
+		if (isNaN(strUserAge) || strUserAge < 18 || strUserAge > 99) {
+			alert("Age must be a number between 18 and 99.");
+			return;
+		}
+
+
+		// Validate email format
+		var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+		if (!emailPattern.test(strUserEmail)) {
+			alert("Please enter a valid email address.");
+			return;
+		}
+
+		// Validate gender format
+		if (strUserGender !== "M" && strUserGender !== "F") {
+			alert("Please enter 'M' or 'F' for gender.");
+			return;
+		}
+
+		var userObj = {
+			"User ID": strUserId,
+			"Name": strUserName,
+			"Age": strUserAge,
+			"Email": strUserEmail,
+			"Gender": strUserGender
 		};
 
-		var jsonString = JSON.stringify(matchObj);
+		var jsonString = JSON.stringify(userObj); // Serialize the object to JSON string
 
-		if (matchId && matchDate && matchTime && pitchId && refereeId) {
+		if (strUserId && strUserName && strUserAge && strUserEmail && strUserGender) {
 			$.ajax({
-				method: "POST",
-				url: "http://localhost:8080/FootBookRestClient/Matches/",
-				data: jsonString,
-				contentType: "application/json",
-				error: function(xhr, status, error) {
-					console.log("Error in Add Ajax:", error);
-					alert("Error adding match: " + error);
-				},
-				success: function(result, status, xhr) {
-					alert("Match added successfully!");
-					// Clear input fields after adding a match
-					clearSectionOneFields();
-					// Refresh the match dropdown in section 2
-					populateMatchIds();
-				}
+				method: "POST", // POST is used to add new data
+				url: "http://localhost:8080/FootBookRestClient/Users/", // Update with your endpoint
+				data: jsonString, // Data being sent to the server
+				dataType: "json", // Specifies the content type of the request body
+
+				error: ajaxAddReturnError,
+				success: ajaxAddReturnSuccess
 			});
 		} else {
 			alert("Please provide all required fields");
 		}
 	});
 
-	// Function to clear section one input fields
-	function clearSectionOneFields() {
-		$("#id").val("");
-		$("#date").val("");
-		$("#time").val("");
-		$("#pitchIdSelect").val("");
-		$("#refereeIdSelect").val("");
-	}
 
-	// Populate Match IDs
-	function populateMatchIds() {
+
+	// Fetch Users event handler
+	$("#FindBtn").click(function() {
+		var strValue = $("#findUserIdSelect").val();// Get the selected user ID from the dropdown
+
+		if (strValue != "") {
+			$.ajax({
+				method: "GET",
+				url: `http://localhost:8080/FootBookRestClient/Users/` + strValue, // Update with your endpoint
+				error: ajaxFindReturnError,
+				success: ajaxFindReturnSuccess
+			});
+		} else {
+			alert("Please enter a valid User ID");
+		}
+
+	});
+
+	// Update User event handler
+	// Update User event handler
+	$("#UpdateBtn").click(function() {
+		var strUserId = $("#findUserIdSelect").val().toUpperCase();
+		var strUserName = $("#findUserName").val();
+		var strUserAge = $("#findUserAge").val();
+		var strUserEmail = $("#findUserEmail").val();
+		var strUserGender = $("#findUserGender").val().toUpperCase();
+
+		var userObj = {
+			"User ID": strUserId
+		};
+
+		// Validate and include name if provided
+		if (strUserName) {
+			var namePattern = /^[A-Za-z\s]+$/;
+			if (!namePattern.test(strUserName)) {
+				alert("Name can only contain letters and spaces.");
+				return;
+			}
+			userObj["Name"] = strUserName;
+		}
+
+		// Validate and include age if provided
+		if (strUserAge) {
+			if (isNaN(strUserAge) || strUserAge < 18 || strUserAge > 99) {
+				alert("Age must be a number between 18 and 99.");
+				return;
+			}
+			userObj["Age"] = strUserAge;
+		}
+
+		// Validate and include email if provided
+		if (strUserEmail) {
+			var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+			if (!emailPattern.test(strUserEmail)) {
+				alert("Please enter a valid email address.");
+				return;
+			}
+			userObj["Email"] = strUserEmail;
+		}
+
+		// Validate and include gender if provided
+		if (strUserGender) {
+			if (strUserGender !== "M" && strUserGender !== "F") {
+				alert("Please enter 'M' or 'F' for gender.");
+				return;
+			}
+			userObj["Gender"] = strUserGender;
+		}
+
+		var jsonString = JSON.stringify(userObj); // Serialize the object to JSON string
+
 		$.ajax({
-			method: "GET",
-			url: "http://localhost:8080/FootBookRestClient/Matches/ids",
-			success: function(data) {
-				let matchSelect = $("#findMatchIdSelect");
-				matchSelect.empty(); // Clear current options
-				matchSelect.append(new Option("Select Match ID", "")); // Default option
-				data.forEach(function(item) {
-					matchSelect.append(new Option(item, item));
-				});
-			},
-			error: logAjaxError
+			method: "PUT", // PUT is used to update data
+			url: `http://localhost:8080/FootBookRestClient/Users/` + strUserId, // Update with your endpoint
+			data: jsonString, // Data being sent to the server
+			contentType: "application/json", // Specifies the content type of the request body
+			error: ajaxUpdateReturnError,
+			success: function(result, status, xhr) {
+				ajaxUpdateReturnSuccess(result, status, xhr);
+				ParseJsonFileUser(result); // Refresh display with updated user info
+			}
 		});
+	});
+
+
+	// Delete User event handler
+	$("#DeleteBtn").click(function() {
+
+		var strValue = $("#findUserIdSelect").val();
+		if (strValue != "") {
+			$.ajax({
+				method: "DELETE", // DELETE is used to delete data
+				url: `http://localhost:8080/FootBookRestClient/Users/` + strValue, // Update with your endpoint
+				error: ajaxDelReturnError,
+				success: ajaxDelReturnSuccess
+			});
+		} else {
+			alert("Please enter a valid User ID");
+		}
+
+	});
+
+	// Success function for update user
+	function ajaxUpdateReturnSuccess(result, status, xhr) {
+		clearFindUpdateFields();
+		clearDisplayFields();
+		alert("User successfully updated");
 	}
 
-	// Populate Pitch IDs
-	function populatePitchIds() {
-		$.ajax({
-			method: "GET",
-			url: "http://localhost:8080/FootBookRestClient/Pitches/ids",
-			success: function(data) {
-				let pitchSelect1 = $("#pitchIdSelect");
-				let pitchSelect2 = $("#findPitchIdSelect");
 
-				// Clear previous options
-				pitchSelect1.empty().append(new Option("Select Pitch ID", ""));
-				pitchSelect2.empty().append(new Option("Select Pitch ID", ""));
-
-				// Populate both dropdowns with options
-				data.forEach(function(item) {
-					pitchSelect1.append(new Option(item, item));
-					pitchSelect2.append(new Option(item, item));
-				});
-			},
-			error: logAjaxError
-		});
+	// Error function for update user
+	function ajaxUpdateReturnError(result, status, xhr) {
+		alert("Make sure to select a USER ID");
+		console.log("Ajax-update user: " + status);
 	}
 
-	// Populate Referee IDs
-	function populateRefereeIds() {
-		$.ajax({
-			method: "GET",
-			url: "http://localhost:8080/FootBookRestClient/Referees/ids",
-			success: function(data) {
-				let refereeSelect1 = $("#refereeIdSelect");
-				let refereeSelect2 = $("#findRefereeIdSelect");
+	// Success function for add user
+	function ajaxAddReturnSuccess(result, status, xhr) {
+		clearAddUserFields();
+		clearDisplayFields();
+		populateUserIds(); // Refresh the user list in the dropdown
 
-				// Clear previous options
-				refereeSelect1.empty().append(new Option("Select Referee ID", ""));
-				refereeSelect2.empty().append(new Option("Select Referee ID", ""));
-
-				// Populate both dropdowns with options
-				data.forEach(function(item) {
-					refereeSelect1.append(new Option(item, item));
-					refereeSelect2.append(new Option(item, item));
-				});
-			},
-			error: logAjaxError
-		});
+		alert("User successfully added");
 	}
 
-	// Call functions to populate dropdowns
-	populatePitchIds();
-	populateRefereeIds();
-	populateMatchIds();
+	// Error function for add user
+	function ajaxAddReturnError(xhr, status, error) {
+		if (xhr.status === 409) { // 409 Conflict
+			alert("User ID already exists. Please enter a different User ID.");
+		} else {
+			alert("An error occurred while adding the user. Please try again.");
+		}
+		console.log("Ajax-add user error:", status, error);
+	}
 
-	// Fetch the location and weather data when the page loads
-	getLocation();
-	fetchIPAddress();
+
+	// Success function for find user
+	function ajaxFindReturnSuccess(result, status, xhr) {
+		if ($.isEmptyObject(result)) {
+			alert("User not found.");
+		} else {
+			ParseJsonFileUser(result);
+		}
+	}
+
+	// Error function for find user
+	function ajaxFindReturnError(result, status, xhr) {
+		alert("Error");
+		console.log("Ajax-find user: " + status);
+	}
+
+	// Success function for delete user
+	function ajaxDelReturnSuccess(result, status, xhr) {
+		clearFindUpdateFields();
+		clearDisplayFields();
+		populateUserIds(); // Refresh the user list in the dropdown
+
+		alert("User successfully deleted");
+	}
+
+
+	// Error function for delete user
+	function ajaxDelReturnError(result, status, xhr) {
+		alert("Error deleting user");
+		console.log("Ajax-delete user: " + status);
+	}
+
+
+
+
+	// Clear input fields for adding a new user:
+	function clearAddUserFields() {
+		$("#userId").val("");
+		$("#userName").val("");
+		$("#userAge").val("");
+		$("#userEmail").val("");
+		$("#userGender").val("");
+	}
+
+	//Clear Input Fields for Finding/Updating a User:
+	function clearFindUpdateFields() {
+		$("#findUserIdSelect").val("");
+		$("#findUserName").val("");
+		$("#findUserAge").val("");
+		$("#findUserEmail").val("");
+		$("#findUserGender").val("");
+	}
+
+	//Clear Display Fields:
+	function clearDisplayFields() {
+		$("#displayUserId").text("User ID:");
+		$("#displayUserName").text("Name:");
+		$("#displayUserAge").text("Age:");
+		$("#displayUserEmail").text("Email:");
+		$("#displayUserGender").text("Gender:");
+	}
+
+
+	function ParseJsonFileUser(result) {
+		$("#displayUserId").text("User ID: " + result["User ID"]);
+		$("#displayUserName").text("Name: " + result.Name);
+		$("#displayUserAge").text("Age: " + result.Age);
+		$("#displayUserEmail").text("Email: " + result.Email);
+		$("#displayUserGender").text("Gender: " + result.Gender);
+	}
 
 });
+
+

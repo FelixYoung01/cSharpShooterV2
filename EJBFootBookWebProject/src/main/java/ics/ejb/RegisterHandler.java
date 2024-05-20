@@ -6,6 +6,7 @@ import java.util.List;
 
 import facade.Facade;
 import facade.FacadeLocal;
+import ics.exceptions.FootBookException;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -15,7 +16,7 @@ public class RegisterHandler implements IPathHandler {
 
 	@Override
 	public RequestDispatcher handleRequestDispatcherGet(HttpServletRequest request, HttpServletResponse response,
-			FacadeLocal facade) throws ServletException, IOException {
+			FacadeLocal facade) throws ServletException, IOException, FootBookException {
 		Set<User> users = facade.getAllUsers();
 		Set<Referee> referees = facade.getAllReferees();
 		List<RefereeLicense> licenses = facade.getAllRefereeLicenses();
@@ -29,7 +30,7 @@ public class RegisterHandler implements IPathHandler {
 
 	@Override
 	public RequestDispatcher handleRequestDispatcherPost(HttpServletRequest request, HttpServletResponse response,
-			FacadeLocal facade) throws ServletException, IOException {
+			FacadeLocal facade) throws ServletException, IOException, FootBookException {
 
 		Set<User> users = facade.getAllUsers();
 		Set<Referee> referees = facade.getAllReferees();
@@ -77,6 +78,13 @@ public class RegisterHandler implements IPathHandler {
 		// Kör kodstycket ifall det är en dommare som ska läggas till //ADD REFEREE CODE
 		else if ("addReferee".equals(action)) {
             String refereeId = generateRefereeId(facade);
+            
+			if (refereeId == null) {
+				response.getWriter().write("No available referee ID found.");
+				response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+				return null;
+			}
+            
 			String refName = request.getParameter("refereeName");
 			String licenseId = request.getParameter("licenseId");
 
@@ -118,8 +126,6 @@ public class RegisterHandler implements IPathHandler {
 					userToUpdate.setEmail(newEmail);
 					userToUpdate.setGender(newGender);
 
-					User updateSuccessful = facade.updateUser(userToUpdate);
-
 					System.out.println("User updated");
 					response.sendRedirect(request.getRequestURI());
 					return null;
@@ -135,20 +141,30 @@ public class RegisterHandler implements IPathHandler {
 
 		// Removing a user
 		else if ("removeUser".equals(action)) {
-			String userId = request.getParameter("userId");
+		    String userId = request.getParameter("userId");
 
-			User user = facade.findUser(userId);
-			if (user != null) {
-				facade.deleteUser(userId);
-				System.out.println("User removed: " + userId);
-				response.sendRedirect(request.getRequestURI());
-				return null;
-			} else {
-				System.out.println("User not found: " + userId);
-				response.getWriter().write("User not found");
-				response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-				return null;
-			}
+		    User user = facade.findUserWithMatch(userId);
+		    if (user != null) {
+		        Match match = user.getMatch(); // Get the match associated with the user
+		        if (match != null) {
+		            Set<User> usersOnMatch = match.getUsers(); // Get all users associated with the match
+		            if (usersOnMatch.size() == 1 && usersOnMatch.contains(user)) {
+		                // If the match only has this user, delete the match
+		                facade.deleteMatch(match.getMatchId());
+		                System.out.println("Match removed: " + match.getMatchId());
+		            }
+		        }
+
+		        facade.deleteUser(userId);
+		        System.out.println("User removed: " + userId);
+		        response.sendRedirect(request.getRequestURI());
+		        return null;
+		    } else {
+		        System.out.println("User not found: " + userId);
+		        response.getWriter().write("User not found");
+		        response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+		        return null;
+		    }
 		}
 
 		// Removing a referee
@@ -216,22 +232,22 @@ public class RegisterHandler implements IPathHandler {
 		return request.getRequestDispatcher("/register.jsp");
 	}
 	
-	private String generateUserId(FacadeLocal facade) {
+	private String generateUserId(FacadeLocal facade) throws FootBookException {
 		// Check for the first available user ID, in ascending order, starting from U01
 		for (int i = 1; i < 99; i++) {
 			String userId = "U" + String.format("%02d", i);
-			if (facade.findUserById(userId) == null) {
+			if (facade.getAllUsers().stream().noneMatch(u -> u.getUserId().equals(userId))) {
 				return userId;
 			}
 		}
 		return null;
 	}
 	
-	private String generateRefereeId(FacadeLocal facade) {
+	private String generateRefereeId(FacadeLocal facade) throws FootBookException {
 		// Check for the first available referee ID, in ascending order, starting from R01
 		for (int i = 1; i < 99; i++) {
 			String refereeId = "R" + String.format("%02d", i);
-			if (facade.findRefereeById(refereeId) == null) {
+			if (facade.getAllReferees().stream().noneMatch(r -> r.getRefereeId().equals(refereeId))) {
 				return refereeId;
 			}
 		}

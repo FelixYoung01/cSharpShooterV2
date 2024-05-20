@@ -1,9 +1,11 @@
 package ics.eao;
 
 import ics.ejb.UserMessage;
+import ics.exceptions.FootBookException;
 import jakarta.ejb.Stateless;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
+import jakarta.persistence.PersistenceException;
 
 /**
  * Session Bean implementation class UserMessageEAOImpl
@@ -17,7 +19,14 @@ public class UserMessageEAOImpl implements UserMessageEAOLocal {
     public UserMessageEAOImpl() {
     }
 
-    public void addUserMessage(UserMessage userMessage) {
-    	em.persist(userMessage);
+    public void addUserMessage(UserMessage userMessage) throws FootBookException {
+		if (userMessage == null) {
+			throw new FootBookException("User message is null");
+		}
+        try {
+            em.persist(userMessage);
+        } catch (PersistenceException e) {
+            throw new FootBookException("Error adding user message", e);
+        }
     }
 }

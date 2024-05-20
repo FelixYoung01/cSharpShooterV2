@@ -54,11 +54,19 @@
 
 		</section>
 	</div>
-	<form id="deleteMatchForm"
-		action="/EJBFootBookWebProject/matchInfo?matchId=<%=match.getMatchId()%>"
-		method="post">
-		<input type="hidden" name="formType" value="deleteMatch">
-		<button style="background-color: red;" type="submit">Delete Match</button>
+<div class="box reduced-padding team-members" style="gap: 10px">
+	<div>
+		<button class="bigger-button" id="updateMatchButton">Update Match</button>
+	</div>
+	<div>
+		<form id="deleteMatchForm"
+			action="/EJBFootBookWebProject/matchInfo?matchId=<%=match.getMatchId()%>"
+			method="post">
+			<input type="hidden" name="formType" value="deleteMatch">
+			<button class="bigger-button" style="background-color: red;" type="submit" onclick="return confirm('Are you sure you want to remove this match? This action can not be undone.?')">Delete Match</button>
+		</form>
+	</div>
+</div>
 	<section class="box colored">
 		<section class="box">
 			<h1 class="box colored reduced-padding">Users Playing</h1>
@@ -196,7 +204,51 @@
 				
 			 
 			</script>
-	
+
+	<div id="updateMatchForm" class="overlay" style="display: none;">
+		<div class="modalContainer">
+			<div class="box colored" id="overlay-box">
+				<h2>Update Match</h2>
+				<form id="updatingMatchForm"
+					action="/EJBFootBookWebProject/matchInfo?matchId=<%=match.getMatchId()%>"
+					method="post">
+					<input type="hidden" name="formType" value="updateMatch">
+
+					<!-- Date and Time Picker -->
+					<label>Date & Time:</label><br> <input class="bordered-input"
+						type="date" name="matchDate" required> <input
+						class="bordered-input" type="time" name="matchTime" step="3600"
+						required onchange="validateTimeInput()"><br>
+
+					<button type="submit">Update Match</button>
+					<button type="button" onclick="hideModal()">Close</button>
+				</form>
+			</div>
+		</div>
+	</div>
+
+	<script>
+		document
+				.getElementById("updateMatchButton")
+				.addEventListener(
+						"click",
+						function() {
+							document.getElementById("updateMatchForm").style.display = "block";
+							document.getElementById("overlay-box").classList
+									.add("pop-up");
+						});
+
+			function hideModal() {
+			document.getElementById("overlay-box").classList.remove("pop-up");
+			document.getElementById("overlay-box").classList.add("pop-down");
+			setTimeout(
+					function() {
+						document.getElementById("updateMatchForm").style.display = "none";
+						document.getElementById("overlay-box").classList
+								.remove("pop-down");
+					}, 300);
+		};
+	</script>
 	<script src="Darkmode.js">
 		
 	</script>

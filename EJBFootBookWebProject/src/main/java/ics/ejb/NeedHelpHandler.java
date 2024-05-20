@@ -3,6 +3,7 @@ package ics.ejb;
 import java.io.IOException;
 
 import facade.FacadeLocal;
+import ics.exceptions.FootBookException;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -18,7 +19,7 @@ public class NeedHelpHandler implements IPathHandler {
 	
 	@Override
 	public RequestDispatcher handleRequestDispatcherPost(HttpServletRequest request, HttpServletResponse response,
-            FacadeLocal facade) throws ServletException, IOException {
+            FacadeLocal facade) throws ServletException, IOException, FootBookException {
 		// If send message button was pressed, add message to database using facade
 		
 		String action = request.getParameter("formType");
