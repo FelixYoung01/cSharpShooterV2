@@ -23,10 +23,12 @@
 			organizing games as seamless and enjoyable as possible. Get started
 			today and experience the thrill of playing football like never
 			before!</p>
-		<p>With our user-friendly interface and extensive database of football pitches,
-			FootBook makes it easy for players to find and book the perfect match.
-			Whether you're a casual player or a seasoned pro, FootBook has something for everyone.</p>
-		<h3 class="box reduced-padding">Join our community today and start booking football matches with ease!</h3>
+		<p>With our user-friendly interface and extensive database of
+			football pitches, FootBook makes it easy for players to find and book
+			the perfect match. Whether you're a casual player or a seasoned pro,
+			FootBook has something for everyone.</p>
+		<h3 class="box reduced-padding">Join our community today and
+			start booking football matches with ease!</h3>
 	</section>
 
 	<section class="box colored">
@@ -89,6 +91,9 @@
 			</div>
 		</section>
 	</section>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script src="Darkmode.js"></script>
+	<script src="weatherInfo.js"></script>
+
 </body>
 </html>

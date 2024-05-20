@@ -171,7 +171,8 @@
 
 		<div style="margin-left: 20px;">
 			<h2>Referees</h2>
-			<button class="bigger-button" id="addRefereeButton">Add Referee</button>
+			<button class="bigger-button" id="addRefereeButton">Add
+				Referee</button>
 			<table class="box colored">
 				<thead>
 					<tr>
@@ -332,6 +333,10 @@
 			</script>
 		</div>
 	</div>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 	<script src="Darkmode.js"></script>
+	<script src="weatherInfo.js"></script>
+
 </body>
 </html>
