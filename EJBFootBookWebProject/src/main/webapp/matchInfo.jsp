@@ -17,6 +17,8 @@
 	<%
 	Match match = (Match) request.getAttribute("match");
 
+	String message = (String) request.getAttribute("errorMessage");
+
 	Set<User> users = (Set<User>) request.getAttribute("usersOnMatch");
 
 	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd / HH:mm");
@@ -45,22 +47,28 @@
 				Last Updated:
 				<%=lastUpdatedDateFormatted%></p>
 
+			<p>GameType: 5 A-Side</p>
+			<p>Capacity: 10 Players </p>
 
 		</section>
 	</div>
-<div class="box reduced-padding team-members" style="gap: 10px">
-	<div>
-		<button class="bigger-button" id="updateMatchButton">Update Match</button>
+	<div class="box reduced-padding team-members" style="gap: 10px">
+		<div>
+			<button class="bigger-button" id="updateMatchButton">Update
+				Match</button>
+		</div>
+		<div>
+			<form id="deleteMatchForm"
+				action="/EJBFootBookWebProject/matchInfo?matchId=<%=match.getMatchId()%>"
+				method="post">
+				<input type="hidden" name="formType" value="deleteMatch">
+				<button class="bigger-button" style="background-color: red;"
+					type="submit"
+					onclick="return confirm('Are you sure you want to remove this match? This action can not be undone.?')">Delete
+					Match</button>
+			</form>
+		</div>
 	</div>
-	<div>
-		<form id="deleteMatchForm"
-			action="/EJBFootBookWebProject/matchInfo?matchId=<%=match.getMatchId()%>"
-			method="post">
-			<input type="hidden" name="formType" value="deleteMatch">
-			<button class="bigger-button" style="background-color: red;" type="submit" onclick="return confirm('Are you sure you want to remove this match? This action can not be undone.?')">Delete Match</button>
-		</form>
-	</div>
-</div>
 	<section class="box colored">
 		<section class="box">
 			<h1 class="box colored reduced-padding">Users Playing</h1>
@@ -178,6 +186,25 @@
 		</button>
 	</form>
 
+	<div id="lastUserMessage" class="overlay"
+		style="display: ${displayStyle};">
+		<div class="modalContainer">
+			<div class="box colored">
+				<p id="errorText">${errorMessage}</p>
+				<button onclick="closePopUp()">Close</button>
+			</div>
+		</div>
+	</div>
+	<script>
+		function showPopup() {
+			document.getElementById("errorMessage").style.display = "block";
+
+		}
+		function closePopUp() {
+			document.getElementById("lastUserMessage").style.display = "none";
+		}
+	</script>
+
 	<div id="updateMatchForm" class="overlay" style="display: none;">
 		<div class="modalContainer">
 			<div class="box colored" id="overlay-box">
@@ -211,7 +238,7 @@
 									.add("pop-up");
 						});
 
-			function hideModal() {
+		function hideModal() {
 			document.getElementById("overlay-box").classList.remove("pop-up");
 			document.getElementById("overlay-box").classList.add("pop-down");
 			setTimeout(
