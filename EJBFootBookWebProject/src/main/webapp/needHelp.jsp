@@ -66,10 +66,10 @@
 			<button class="bigger-button" type="submit">Send</button>
 		</form>
 	</section>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-	<script>
-		
-	</script>
+	<script src="weatherInfo.js"></script>
+
 
 	<script src="Darkmode.js"></script>
 </body>
