@@ -136,7 +136,6 @@
 				%>
 				<script>
 					function showAddButton(userId) {
-
 						document.getElementById("selectedUserId").value = userId;
 						document.getElementById("userIdDisplay").textContent = userId;
 						document.getElementById("addUserToMatchForm").style.display = "block";
@@ -144,6 +143,10 @@
 					}
 
 					function showRemoveButton(userId) {
+						var numUsers = <%=users.size()%>;
+						if (numUsers <= 1) {
+							return;
+						}
 						document.getElementById("selectedRemoveUserId").value = userId;
 						document.getElementById("removeUserDisplay").textContent = userId;
 						document.getElementById("removeUserFromMatchForm").style.display = "block";

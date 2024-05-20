@@ -46,7 +46,8 @@
 	</section>
 	<section class="box colored">
 		<h1 class="box reduced-padding">Matches</h1>
-		<button class="bigger-button" id="createMatchButton">Create Match</button>
+		<button class="bigger-button" id="createMatchButton">Create
+			Match</button>
 		<%
 		Set<Match> matches = (Set<Match>) request.getAttribute("matchesOnPitch");
 		if (matches.isEmpty()) {
@@ -89,7 +90,8 @@
 				<div class="box colored" id="overlay-box">
 					<h2>Create Match</h2>
 					<form id="creatingMatchForm"
-						action="/EJBFootBookWebProject/pitchInfo" method="post">
+						action="/EJBFootBookWebProject/pitchInfo" method="post"
+						onsubmit="return validateForm();">
 						<input type="hidden" name="formType" value="createMatch">
 						<input type="hidden" id="pitchId" name="pitchId"
 							value="<%=pitchId%>">
@@ -130,7 +132,7 @@
 						<label>Date & Time:</label><br> <input class="bordered-input"
 							type="date" name="date" required> <input
 							class="bordered-input" type="time" name="time" step="3600"
-							required onchange="validateTimeInput()"><br>
+							required><br>
 
 						<button type="submit">Create Match</button>
 						<button type="button" onclick="hideModal()">Close</button>
@@ -139,10 +141,23 @@
 			</div>
 		</div>
 	</section>
+
+	<script>
+    var matchesOnPitch = [
+        <% 
+            for (Match match : matches) {
+                // Output the match as a JavaScript object
+                // This assumes that Match has getId(), getDate(), and getTime() methods
+                out.print("{ id: '" + match.getMatchId() + "', date: '" + match.getDate() + "', time: '" + match.getTime() + "' },");
+            }
+        %>
+		];
+	</script>
+
 	<script>
 		// JavaScript function to ensure the minute part is always set to "00"
 		function validateTimeInput() {
-			var timeInput = document.getElementById("matchTime");
+			var timeInput = document.querySelector("input[name='time']");
 			var timeValue = timeInput.value;
 
 			if (timeValue) {
@@ -151,12 +166,30 @@
 					timeInput.value = parts[0] + ":00";
 				}
 			}
+			if (new Date().getTime() > new Date(document
+					.querySelector("input[name='date']").value
+					+ "T" + timeValue).getTime()) {
+				alert("Match time cannot be in the past");
+				timeInput.value = "";
+				return false; // time is in the past
+			}
+			var date = document.querySelector("input[name='date']").value;
+			var time = timeValue;
+			for (var i = 0; i < matchesOnPitch.length; i++) {
+			    if (matchesOnPitch[i].date === date && matchesOnPitch[i].time === time) {
+			        alert("Match already exists at this time");
+			        timeInput.value = "";
+			        return false; // match already exists at this time
+			    }
+			}
+			return true; // time is not in the past
 		}
 
-		// JavaScript function to validate form submission
-		function validateForm(event) {
-			validateTimeInput();
-			return true;
+		function validateForm() {
+			if (!validateTimeInput()) {
+				return false; // prevent form submission
+			}
+			return true; // allow form submission
 		}
 
 		function hideModal() {
