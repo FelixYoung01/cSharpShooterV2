@@ -24,21 +24,9 @@ public class RefereeAuditor {
 				+ referee.getRefereeName());
 	}
 
-	@PostPersist
-	public void postPersist(Referee referee) {
-		logger.info("POSTPERSIST LOGGER: Created new Referee (ID: " + referee.getRefereeId() + ") - Name: "
-				+ referee.getRefereeName());
-	}
-
 	@PreUpdate
 	public void preUpdate(Referee referee) {
 		logger.info("PREUPDATE LOGGER: Updating Referee (ID: " + referee.getRefereeId() + ") - Name: "
-				+ referee.getRefereeName());
-	}
-
-	@PostUpdate
-	public void postUpdate(Referee referee) {
-		logger.info("POSTUPDATE LOGGER: Updated Referee (ID: " + referee.getRefereeId() + ") - Name: "
 				+ referee.getRefereeName());
 	}
 
@@ -48,16 +36,29 @@ public class RefereeAuditor {
 				+ referee.getRefereeName());
 	}
 
+	
+	/*@PostLoad
+	public void postLoad(Referee referee) {
+		logger.info("POSTLOAD LOGGER: Loaded Referee (ID: " + referee.getRefereeId() + ") - Name: "
+				+ referee.getRefereeName());
+	}
+
+	@PostPersist
+	public void postPersist(Referee referee) {
+		logger.info("POSTPERSIST LOGGER: Created new Referee (ID: " + referee.getRefereeId() + ") - Name: "
+				+ referee.getRefereeName());
+	}
+
+	@PostUpdate
+	public void postUpdate(Referee referee) {
+		logger.info("POSTUPDATE LOGGER: Updated Referee (ID: " + referee.getRefereeId() + ") - Name: "
+				+ referee.getRefereeName());
+	}
+
 	@PostRemove
 	public void postRemove(Referee referee) {
 		logger.info("POSTREMOVE LOGGER: Deleted Referee (ID: " + referee.getRefereeId() + ") - Name: "
 				+ referee.getRefereeName());
-	}
-
-	@PostLoad
-	public void postLoad(Referee referee) {
-		logger.info(
-				"POSTLOAD LOGGER: Loaded Referee (ID: " + referee.getRefereeId() + ") - Name: " + referee.getRefereeName());
-	}
+	}*/
 
 }
