@@ -58,7 +58,7 @@ public class HomeHandler implements IPathHandler {
         StringBuilder data = new StringBuilder();
 
         if ("matches".equals(type)) {
-            List<Match> matches = facade.findAllMatches();
+            Set<Match> matches = facade.findAllMatches();
             data.append("<h2>Matches Registered</h2><ul>");
             for (Match match : matches) {
                 data.append("<li>").append(match.getMatchId()).append(": ").append(match.getDate()).append("</li>");
