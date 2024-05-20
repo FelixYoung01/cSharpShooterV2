@@ -18,6 +18,8 @@ import ics.ejb.Match;
 public class MatchAuditor {
 	private static final Logger logger = Logger.getLogger(MatchAuditor.class.getName());
 
+	
+	//every time a match is created, the createdDate and lastUpdatedDate will be set to the current date and time
 	@PrePersist
 	public void prePersist(Match match) {
 		match.setCreatedDate(LocalDateTime.now());
@@ -26,6 +28,7 @@ public class MatchAuditor {
 				+ match.getCreatedDate());
 	}
 
+	//every time a match is updated, the lastUpdatedDate will be set to the current date and time
 	@PreUpdate
 	public void preUpdate(Match match) {
 		match.setLastUpdatedDate(LocalDateTime.now());
@@ -33,6 +36,7 @@ public class MatchAuditor {
 				+ match.getLastUpdatedDate());
 	}
 
+	//every time a match is deleted, the match will be logged as deleted
 	@PreRemove
 	public void preRemove(Match match) {
 		logger.info("PREREMOVE LOGGER: Deleting Match (ID: " + match.getMatchId());

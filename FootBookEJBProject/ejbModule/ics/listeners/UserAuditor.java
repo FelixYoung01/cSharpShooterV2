@@ -14,17 +14,20 @@ import ics.ejb.User;
 public class UserAuditor {
 	private static final Logger logger = Logger.getLogger(UserAuditor.class.getName());
 
+	// every time a user is created, the user will be logged as created with the user's ID and name
 	@PrePersist
 	public void prePersist(User user) {
 		logger.info(
 				"PREPERSIST LOGGER:" + "Creating new User (ID: " + user.getUserId() + ") - Name: " + user.getName());
 	}
 
+	// every time a user is updated, the user will be logged as updated with the user's ID and name
 	@PreUpdate
 	public void preUpdate(User user) {
 		logger.info("PREUPDATE LOGGER: Updating User (ID: " + user.getUserId() + ") - Name: " + user.getName());
 	}
 
+	// every time a user is deleted, the user will be logged as deleted with the user's ID and name
 	@PreRemove
 	public void preRemove(User user) {
 		logger.info("PREREMOVE LOGGER: Deleting User (ID: " + user.getUserId() + ") - Name: " + user.getName());

@@ -6,20 +6,15 @@
 	<!-- Declare Interceptors -->
 	<interceptors>
 		<interceptor>
-			<interceptor-class>ics.Interceptors.DefaultInterceptor</interceptor-class>
-			<around-invoke>
-				<method-name>defaultLogg</method-name>
-			</around-invoke>
+			<interceptor-class>ics.Interceptors.MatchLogger</interceptor-class>
+		</interceptor>
+		<interceptor>
+			<interceptor-class>ics.Interceptors.RefereeLogger</interceptor-class>
+		</interceptor>
+		<interceptor>
+			<interceptor-class>ics.Interceptors.UserLogger</interceptor-class>
 		</interceptor>
 	</interceptors>
-
-	<!-- Apply Interceptors Globally -->
-	<assembly-descriptor>
-		<interceptor-binding>
-			<ejb-name>*</ejb-name>
-			<interceptor-class>ics.Interceptors.DefaultInterceptor</interceptor-class>
-		</interceptor-binding>
-	</assembly-descriptor>
 
 
 </ejb-jar>
