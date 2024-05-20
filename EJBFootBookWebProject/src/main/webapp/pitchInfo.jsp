@@ -246,14 +246,6 @@
 							document.getElementById("overlay-box").classList
 									.add("pop-up");
 						});
-
-		document
-				.getElementById("creatingMatchForm")
-				.addEventListener(
-						"submit",
-						function(event) {
-							document.getElementById("createMatchForm").style.display = "none";
-						});
 	</script>
 	<script src="Darkmode.js"></script>
 </body>
