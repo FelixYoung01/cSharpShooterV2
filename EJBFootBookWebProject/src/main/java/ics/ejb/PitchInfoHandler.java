@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.logging.Logger;
@@ -30,11 +31,14 @@ public class PitchInfoHandler implements IPathHandler {
         Set<User> users = facade.getAvailableUsers();
         Set<Referee> referees = facade.getAllReferees();
         Set<Match> matchesOnPitch = facade.getMatchesOnPitch(pitchId);
+        
+        Set<Match> allMatches = facade.findAllMatches();
 
         request.setAttribute("matchesOnPitch", matchesOnPitch);
         request.setAttribute("pitch", pitch);
         request.setAttribute("users", users);
         request.setAttribute("referees", referees);
+        request.setAttribute("allMatches", allMatches);
 
         return request.getRequestDispatcher("/pitchInfo.jsp");
     }
@@ -53,6 +57,8 @@ public class PitchInfoHandler implements IPathHandler {
         Set<Referee> referees = facade.getAllReferees();
         Set<Match> matchesOnPitch = facade.getMatchesOnPitch(pitchId);
         Map<String, Integer> matchUserCounts = new HashMap<>();
+        
+        Set<Match> allMatches = facade.findAllMatches();
 
         for (Match match : matchesOnPitch) {
             Set<User> usersOnMatch = facade.getUsersOnMatch(match.getMatchId());
@@ -69,6 +75,7 @@ public class PitchInfoHandler implements IPathHandler {
         request.setAttribute("pitch", pitch);
         request.setAttribute("users", users);
         request.setAttribute("referees", referees);
+        request.setAttribute("allMatches", allMatches);
 
         // Creating a match handling
         if ("createMatch".equals(action)) {

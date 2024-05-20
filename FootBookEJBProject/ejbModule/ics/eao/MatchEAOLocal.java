@@ -2,6 +2,7 @@
 package ics.eao;
 
 import java.util.List;
+import java.util.Set;
 
 //import ics.ejb.Match;
 //import ics.ejb.Pitch;
@@ -21,7 +22,7 @@ public interface MatchEAOLocal {
 
 	public Match findMatchById(String matchId) throws FootBookException;
 
-	public List<Match> findAllMatches() throws FootBookException;
+	public Set<Match> findAllMatches() throws FootBookException;
 	
 	public long getMatchCount() throws FootBookException;
 

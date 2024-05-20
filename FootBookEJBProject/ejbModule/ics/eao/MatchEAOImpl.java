@@ -1,6 +1,8 @@
 package ics.eao;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 //import ics.ejb.Match;
 //import ics.ejb.Pitch;
@@ -71,10 +73,10 @@ public class MatchEAOImpl implements MatchEAOLocal {
         }
 	}
 	
-	public List<Match> findAllMatches() throws FootBookException {
+	public Set<Match> findAllMatches() throws FootBookException {
 		try {
 			TypedQuery<Match> query = em.createNamedQuery("Match.findAll", Match.class);
-			List<Match> results = query.getResultList();
+			Set<Match> results = new HashSet<Match>(query.getResultList());
 			return results;
 		} catch (PersistenceException e) {
 			throw new FootBookException("Error finding all matches", e);
