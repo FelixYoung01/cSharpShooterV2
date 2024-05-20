@@ -17,6 +17,8 @@
 	<%
 	Match match = (Match) request.getAttribute("match");
 
+	String message = (String) request.getAttribute("errorMessage");
+
 	Set<User> users = (Set<User>) request.getAttribute("usersOnMatch");
 
 	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd / HH:mm");
@@ -45,6 +47,8 @@
 				Last Updated:
 				<%=lastUpdatedDateFormatted%></p>
 
+			<p>GameType: 5 A-Side</p>
+			<p>Capacity: 10 Players </p>
 
 		</section>
 	</div>
@@ -184,6 +188,25 @@
 			Remove User <span id="removeUserDisplay"></span> From Match
 		</button>
 	</form>
+
+	<div id="lastUserMessage" class="overlay"
+		style="display: ${displayStyle};">
+		<div class="modalContainer">
+			<div class="box colored">
+				<p id="errorText">${errorMessage}</p>
+				<button onclick="closePopUp()">Close</button>
+			</div>
+		</div>
+	</div>
+	<script>
+		function showPopup() {
+			document.getElementById("errorMessage").style.display = "block";
+
+		}
+		function closePopUp() {
+			document.getElementById("lastUserMessage").style.display = "none";
+		}
+	</script>
 
 	<div id="updateMatchForm" class="overlay" style="display: none;">
 		<div class="modalContainer">

@@ -29,25 +29,46 @@ public class MatchInfoHandler implements IPathHandler {
 		request.setAttribute("usersOnMatch", usersOnMatch);
 		request.setAttribute("match", match);
 		
+
+		String errorMessage = null;
+        String displayStyle = "none"; // Default to not displaying the popup
+        request.setAttribute("displayStyle", displayStyle);
+
 		String action = request.getParameter("formType");
 		String redirectUrl = request.getContextPath() + "/matchInfo?matchId=" + matchId;
 	    
 
 		if ("addUserToMatch".equals(action)) {
-
+			
+			if(usersOnMatch.size() < 10) {
 			String userId = request.getParameter("userId");
 			User user = facade.findUser(userId);
 			user.setMatch(match);
 			facade.updateUser(user);
 			response.sendRedirect(redirectUrl);
+			} else {
+				errorMessage = "This 5 A-Side Game Is At Its Capacity Of 10 Users!";
+				request.setAttribute("errorMessage", errorMessage);
+				displayStyle = "block"; // Set to display the popup
+				request.setAttribute("displayStyle", displayStyle);
+			}
 		}
 		
 		else if("removeUserFromMatch".equals(action)) {
+			
+			if(usersOnMatch.size() > 1) {
 			String userId = request.getParameter("removeUserId");
 			User user = facade.findUser(userId);
 			user.setMatch(null);
+			
 			facade.updateUser(user);
 			response.sendRedirect(redirectUrl);
+		} else {
+			errorMessage = "Cannot remove the last user from the match!";
+			request.setAttribute("errorMessage", errorMessage);
+            displayStyle = "block"; // Set to display the popup
+            request.setAttribute("displayStyle", displayStyle);
+		}
 		}
 		
 		else if("deleteMatch".equals(action)) {
@@ -68,6 +89,7 @@ public class MatchInfoHandler implements IPathHandler {
 			
 			response.sendRedirect(redirectUrl);
 			}
+
 
 		return request.getRequestDispatcher("/matchInfo.jsp");
 	}

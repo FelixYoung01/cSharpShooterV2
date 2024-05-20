@@ -4,9 +4,6 @@
 	<jta-data-source>java:jboss/datasources/jdbc/t4project</jta-data-source>
 	<non-jta-data-source>java:jboss/datasources/jdbc/t4project</non-jta-data-source>
 	<properties>
-		<property name="hibernate.dialect"
-				value="org.hibernate.dialect.SQLServerDialect"/>
-				<property name="hibernate.hbm2ddl.auto" value="update"/>
 				</properties>
 				</persistence-unit>
 				</persistence>

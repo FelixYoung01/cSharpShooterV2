@@ -32,6 +32,10 @@ public interface FacadeLocal {
 
 	public Referee findRefereeById(String refereeId) throws FootBookException;
 
+
+	
+	//public boolean isRefereeBooked(String refereeId, LocalDate date, LocalTime time);
+
 	public void createReferee(Referee referee) throws FootBookException;
 
 	public void deleteReferee(String refereeId) throws FootBookException;
