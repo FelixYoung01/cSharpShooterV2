@@ -7,7 +7,7 @@ import jakarta.interceptor.InvocationContext;
 @Interceptor
 public class RefereeLogger {
 
-    @AroundInvoke
+    @AroundInvoke // This annotation is used to specify the method that will be called before and after the method that is intercepted. Defined in the facade/Facade.java file
     public Object logRefereeMethods(InvocationContext iCtx) throws Exception {
         System.out.println("*********************************");
         System.out.println("Entering method: " + iCtx.getMethod().getName());

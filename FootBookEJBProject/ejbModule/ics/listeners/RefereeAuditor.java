@@ -19,20 +19,20 @@ public class RefereeAuditor {
 	private static final Logger logger = Logger.getLogger(RefereeAuditor.class.getName());
 
 	// every time a referee is created, the createdDate and lastUpdatedDate will be set to the current date and time
-	@PrePersist
+	@PrePersist // pre-persist is called before the entity is persisted, meaning before it is saved to the database
 	public void prePersist(Referee referee) {
 		logger.info("PREPERSIST LOGGER: Creating new Referee (ID: " + referee.getRefereeId() + ") - Name: "
 				+ referee.getRefereeName());
 	}
 	
 	// every time a referee is updated, the lastUpdatedDate will be set to the current date and time
-	@PreUpdate
+	@PreUpdate // pre-update is called before the entity is updated, meaning before it is saved to the database
 	public void preUpdate(Referee referee) {
 		logger.info("PREUPDATE LOGGER: Updating Referee (ID: " + referee.getRefereeId() + ") - Name: "
 				+ referee.getRefereeName());
 	}
 	// every time a referee is deleted, the referee will be logged as deleted
-	@PreRemove
+	@PreRemove // pre-remove is called before the entity is removed, meaning before it is deleted from the database
 	public void preRemove(Referee referee) {
 		logger.info("PREREMOVE LOGGER: Deleting Referee (ID: " + referee.getRefereeId() + ") - Name: "
 				+ referee.getRefereeName());

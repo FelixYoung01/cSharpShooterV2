@@ -1,4 +1,4 @@
-$(document).ready(function() {
+$(document).ready(function() { //Wait for the DOM to be ready then run the code
 	// General AJAX error logging function
 	function logAjaxError(xhr, status, error) {
 		console.log("Ajax Error:", status, error);
@@ -7,15 +7,14 @@ $(document).ready(function() {
 	// Fetch and populate user list on page load
 	function populateUserList() {
 		$.ajax({
-			method: "GET",
-			url: "http://localhost:8080/FootBookRestClient/Users/",
-			dataType: "json",
-			success: function(users) {
-				let userList = $("#userList");
+			method: "GET", // Use the GET method on the endpoint
+			url: "http://localhost:8080/FootBookRestClient/Users/", //The endpoint URL (We look for a servlet that matches the URL pattern "/Users/*" ,which is decla)
+			dataType: "json", // The data type we expect back. this means that the endpoint data will be converted to a JSON object
+			success: function(users) { //the success function will be called when the AJAX request is successful, with users being the data returned from the endpoint
+				let userList = $("#userList"); // Get the user list element, defined in the HTML 
 				userList.empty(); // Clear current list
 				users.forEach(function(user) {
-					console.log("Adding user to list:", user.userId); // Log user ID being added
-					userList.append(`<li class="list-group-item" data-id="${user.Id}">${user.Id}: ${user.Name}</li>`);
+					userList.append(`<li class="list-group-item" data-id="${user.Id}">${user.Id}: ${user.Name}</li>`); //Add each user to the list element... Accessthe Id property of the user object and the Name property
 				});
 			},
 			error: logAjaxError
@@ -26,15 +25,15 @@ $(document).ready(function() {
 
 	// Geolocation functions
 	function getLocation() {
-		if (navigator.geolocation) {
+		if (navigator.geolocation) {//Check if the browser supports geolocation (Allow Google Chrome to access your location)
 			navigator.geolocation.getCurrentPosition(showPosition, handleGeolocationError);
 		} else {
 			alert("Geolocation is not supported by this browser.");
 		}
 	}
 
-	function showPosition(position) {
-		ParseJsonFile(position);
+	function showPosition(position) {//If the browser supports geolocation, get the current position of the user, and pass it to the ParseJsonFile function
+		ParseJsonFile(position);//The position object contains the latitude and longitude of the user's current location
 	}
 
 	function handleGeolocationError(error) {
@@ -42,32 +41,32 @@ $(document).ready(function() {
 	}
 
 	// Fetch and process weather data using OpenWeatherMap API
-	function ParseJsonFile(position) {
-		var lat = position.coords.latitude;
-		var long = position.coords.longitude;
+	function ParseJsonFile(position) {//The position object contains the latitude and longitude of the user's current location
+		var lat = position.coords.latitude;//Get the latitude and longitude of the user's current location
+		var long = position.coords.longitude;//Get the latitude and longitude of the user's current location
 
 		$.ajax({
-			method: "GET",
-			url: `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&units=metric&APPID=ce3e097846c8e55864481f37b93db22f`,
+			method: "GET",//Use the GET method on the endpoint
+			url: `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&units=metric&APPID=ce3e097846c8e55864481f37b93db22f`,//The endpoint URL. The latitude and longitude of the user's current location are passed as parameters to the endpoint
 			error: ajaxWeatherReturn_Error,
 			success: ajaxWeatherReturn_Success
 		});
 	}
 
-	function ajaxWeatherReturn_Success(result, status, xhr) {
-		var sunrise = result.sys.sunrise;
+	function ajaxWeatherReturn_Success(result, status, xhr) {//The success function will be called when the AJAX request is successful, with result being the data returned from the endpoint
+		var sunrise = result.sys.sunrise;//Get the sunrise and sunset times from the result object
 		var sunset = result.sys.sunset;
-		var sunriseDate = new Date(sunrise * 1000);
+		var sunriseDate = new Date(sunrise * 1000);//Convert the sunrise and sunset times to Date objects
 		var sunsetDate = new Date(sunset * 1000);
-		var timeStrSunrise = sunriseDate.toLocaleTimeString("sv-SE");
+		var timeStrSunrise = sunriseDate.toLocaleTimeString("sv-SE");//Convert the Date objects to a string in the format "HH:MM:SS"
 		var timeStrSunset = sunsetDate.toLocaleTimeString("sv-SE");
-		var city = result.name;
+		var city = result.name;//Get the city name from the result object
 
-		$("#city").text(city);
+		$("#city").text(city);//Display the city name, sunrise and sunset times, weather, and temperature on the page with HTML  elements
 		$("#sunrise").text("Sunrise: " + timeStrSunrise);
 		$("#sunset").text("Sunset: " + timeStrSunset);
 		$("#weather").text(result.weather[0].main);
-		$("#degree").text(result.main.temp + " \u2103");
+		$("#degree").text(result.main.temp + " \u2103");//The temperature is displayed in degrees Celsius
 	}
 
 	function ajaxWeatherReturn_Error(result, status, xhr) {
@@ -86,15 +85,15 @@ $(document).ready(function() {
 			}
 		});
 	}
-	
+
 	//display ip address
 	fetchIPAddress();
-	
+
 	//display weather
 	getLocation();
 
 	// Add User event handler
-	$("#AddBtn").click(function() {
+	$("#AddBtn").click(function() {//When the Add User button is clicked, get the values of the user ID, name, age, etc... from the input fields (HTML elements)
 		var strUserId = $("#userId").val().toUpperCase();
 		var strUserName = $("#userName").val();
 		var strUserAge = $("#userAge").val();
@@ -134,7 +133,7 @@ $(document).ready(function() {
 			return;
 		}
 
-		var userObj = {
+		var userObj = {//Create a user object with the user ID, name, age, email, and gender. taken from the input fields
 			"User ID": strUserId,
 			"Name": strUserName,
 			"Age": strUserAge,
@@ -142,14 +141,14 @@ $(document).ready(function() {
 			"Gender": strUserGender
 		};
 
-		var jsonString = JSON.stringify(userObj);
+		var jsonString = JSON.stringify(userObj);//Convert the user object to a JSON string. This is done because the endpoint expects JSON data as the data type.
 
 		$.ajax({
-			method: "POST",
-			url: "http://localhost:8080/FootBookRestClient/Users/",
-			data: jsonString,
-			dataType: "json",
-			success: function(result) {
+			method: "POST", // Use the POST method on the endpoint
+			url: "http://localhost:8080/FootBookRestClient/Users/",//The endpoint URL
+			data: jsonString,//The user object as a JSON string that was created earlier
+			dataType: "json",//The data type we expect back. this means that the endpoint data will be converted to a JSON object
+			success: function(result) {//The success function will be called when the AJAX request is successful, with result being the data returned from the endpoint
 				ajaxAddReturnSuccess(result);
 				populateUserList(); // Refresh the user list
 			},
