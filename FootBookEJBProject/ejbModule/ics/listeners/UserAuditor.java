@@ -17,7 +17,7 @@ public class UserAuditor {
 
 	// every time a user is created, the user will be logged as created with the
 	// user's ID and name
-	@PrePersist
+	@PrePersist //PrePersist is called before the entity is persisted, meaning before it is saved to the database
 	public void prePersist(User user) {
 		if (user.getJoined() == null) {
 			user.setJoined(LocalDateTime.now());
@@ -28,14 +28,14 @@ public class UserAuditor {
 
 	// every time a user is updated, the user will be logged as updated with the
 	// user's ID and name
-	@PreUpdate
+	@PreUpdate //PreUpdate is called before the entity is updated, meaning before it is saved to the database
 	public void preUpdate(User user) {
 		logger.info("PREUPDATE LOGGER: Updating User (ID: " + user.getUserId() + ") - Name: " + user.getName());
 	}
 
 	// every time a user is deleted, the user will be logged as deleted with the
 	// user's ID and name
-	@PreRemove
+	@PreRemove //PreRemove is called before the entity is removed, meaning before it is deleted from the database
 	public void preRemove(User user) {
 		logger.info("PREREMOVE LOGGER: Deleting User (ID: " + user.getUserId() + ") - Name: " + user.getName());
 	}
