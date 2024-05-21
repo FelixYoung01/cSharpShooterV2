@@ -20,7 +20,7 @@ public class MatchAuditor {
 
 	
 	//every time a match is created, the createdDate and lastUpdatedDate will be set to the current date and time
-	@PrePersist
+	@PrePersist //pre-persist is called before the entity is persisted, meaning before it is saved to the database
 	public void prePersist(Match match) {
 		match.setCreatedDate(LocalDateTime.now());
 		match.setLastUpdatedDate(LocalDateTime.now());
@@ -29,7 +29,7 @@ public class MatchAuditor {
 	}
 
 	//every time a match is updated, the lastUpdatedDate will be set to the current date and time
-	@PreUpdate
+	@PreUpdate //pre-update is called before the entity is updated, meaning before it is saved to the database
 	public void preUpdate(Match match) {
 		match.setLastUpdatedDate(LocalDateTime.now());
 		logger.info("PREUPDATE LOGGER: Updating Match (ID: " + match.getMatchId() + ") - lastUpdatedDate: "
@@ -37,7 +37,7 @@ public class MatchAuditor {
 	}
 
 	//every time a match is deleted, the match will be logged as deleted
-	@PreRemove
+	@PreRemove //pre-remove is called before the entity is removed, meaning before it is deleted from the database
 	public void preRemove(Match match) {
 		logger.info("PREREMOVE LOGGER: Deleting Match (ID: " + match.getMatchId());
 	}
