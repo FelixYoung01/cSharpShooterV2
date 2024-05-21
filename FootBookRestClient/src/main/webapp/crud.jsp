@@ -133,8 +133,7 @@ legend, .card-header {
 
 	<nav class="navbar navbar-expand-lg">
 		<ul class="navbar-nav">
-			<li class="nav-item active"><a class="nav-link text-white"
-				href="#"></a></li>
+			<li class="active"><a>User</a></li>
 		</ul>
 	</nav>
 
